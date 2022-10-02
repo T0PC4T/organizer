@@ -1,0 +1,52 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+
+@immutable
+class Person {
+  const Person({
+    required this.firstName,
+    required this.lastName,
+    required this.year,
+    required this.jobs,
+  });
+
+  Person.fromJson(Map<String, Object?> json)
+      : this(
+          firstName: json['firstName']! as String,
+          lastName: json['lastName']! as String,
+          year: json['year']! as int,
+          jobs: ((json['jobs'] ?? "") as String)
+              .replaceAll(RegExp(r"\s+"), "")
+              .split(",")
+            ..removeWhere((element) => element.isEmpty),
+        );
+
+  final String firstName;
+  final String lastName;
+  final int year;
+  final List<String> jobs;
+
+  Map<String, Object?> toJson() {
+    return {
+      'firstName': firstName,
+      'lastName': lastName,
+      'year': year,
+      'jobs': jobs.join(","),
+    };
+  }
+}
+
+Future<List<QueryDocumentSnapshot<Person>>> getPeople() async {
+  final peopleRef =
+      FirebaseFirestore.instance.collection('people').withConverter<Person>(
+            fromFirestore: (snapshots, _) => Person.fromJson(snapshots.data()!),
+            toFirestore: (movie, _) => movie.toJson(),
+          );
+
+  final response = await peopleRef.get();
+  return response.docs;
+}
+
+void addPerson(Map<String, dynamic> data) {
+  FirebaseFirestore.instance.collection('people').add(data);
+}

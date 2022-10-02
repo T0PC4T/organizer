@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "organizer",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "organizer (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "organizer windows preview",
+            "request": "launch",
+            "type": "dart",
+            "args": ["flutter", "run", "-d", "windows"]
+        },
+
+        {
+            "name": "organizer (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
