@@ -26,6 +26,8 @@ class Person {
   final int year;
   final List<String> jobs;
 
+  String get name => "$lastName, $firstName";
+
   Map<String, Object?> toJson() {
     return {
       'firstName': firstName,
@@ -36,15 +38,16 @@ class Person {
   }
 }
 
-Future<List<QueryDocumentSnapshot<Person>>> getPeople() async {
+Future<List<DocumentSnapshot<Person>>> getPeople() async {
   final peopleRef =
       FirebaseFirestore.instance.collection('people').withConverter<Person>(
             fromFirestore: (snapshots, _) => Person.fromJson(snapshots.data()!),
-            toFirestore: (movie, _) => movie.toJson(),
+            toFirestore: (person, _) => person.toJson(),
           );
 
   final response = await peopleRef.get();
-  return response.docs;
+  return response.docs
+    ..sort((a, b) => a.data().lastName.compareTo(b.data().lastName));
 }
 
 void addPerson(Map<String, dynamic> data) {

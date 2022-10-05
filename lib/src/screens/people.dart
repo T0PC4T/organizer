@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../services/firestore_service.dart';
@@ -35,42 +36,54 @@ class PeoplePage extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.primary,
         child: const Icon(Icons.add),
       ),
-      body: PeopleListing(
-        actions: [
-          ListingAction(
-            title: "Lunch Dishcrew",
-            icon: Icons.wash,
-            func: updatePersonKey("Lunch Dishcrew"),
-          ),
-          ListingAction(
-            title: "Supper Dishcrew",
-            icon: Icons.wash_outlined,
-            func: updatePersonKey("Supper Dishcrew"),
-          ),
-          ListingAction(
-            title: "Waiter",
-            icon: Icons.man,
-            func: updatePersonKey("Waiter"),
-          )
-        ],
-      ),
+      body: const PeopleBody(),
     );
   }
 }
 
-PeopleFunction updatePersonKey(String key) {
-  return (person) {
-    List<String> newJobs = person.data().jobs;
-    if (newJobs.contains(key)) {
-      newJobs.remove(key);
+class PeopleBody extends StatefulWidget {
+  const PeopleBody({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<PeopleBody> createState() => _PeopleBodyState();
+}
+
+class _PeopleBodyState extends State<PeopleBody> {
+  List<DocumentSnapshot<Person>>? peopleData;
+
+  @override
+  void initState() {
+    () async {
+      final response = await getPeople();
+      setState(() {
+        peopleData = response;
+      });
+    }();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (peopleData == null) {
+      return const Center(child: CircularProgressIndicator());
     } else {
-      newJobs.add(key);
+      return PeopleListing(
+        peopleData: peopleData!,
+        editFunc: ((person, job, add) async {
+          final ref = peopleData!
+              .firstWhere((element) => element.data()!.name == person.name);
+          DocumentSnapshot<Person> newDoc =
+              await changeJob(ref, person, job, add);
+          setState(() {
+            final oldDoc = peopleData!
+                .firstWhere((element) => element.data()?.name == person.name);
+            print(peopleData!.indexOf(oldDoc));
+            peopleData![peopleData!.indexOf(oldDoc)] = newDoc;
+          });
+        }),
+      );
     }
-    person.reference.set(Person(
-      firstName: person.data().firstName,
-      lastName: person.data().lastName,
-      year: person.data().year,
-      jobs: newJobs,
-    ));
-  };
+  }
 }

@@ -2,51 +2,32 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:organizer/src/services/firestore_service.dart';
 
-typedef PeopleFunction = void Function(QueryDocumentSnapshot<Person>);
+import 'cards.dart';
 
-class ListingAction {
-  final String title;
-  final IconData icon;
-  final PeopleFunction func;
-  ListingAction({
-    required this.title,
-    required this.icon,
-    required this.func,
-  });
+enum Jobs {
+  // weakly
+  lunchDishCrew("Lunch Dish Crew"),
+  supperDishCrew("Supper Dish Crew"),
+  waiter("Waiter");
+
+  const Jobs(this.pretty);
+
+  final String pretty;
 }
 
-class PeopleListing extends StatefulWidget {
-  final List<ListingAction> actions;
+class PeopleListing extends StatelessWidget {
+  final List<DocumentSnapshot<Person>> peopleData;
+  final bool tappable;
+  final void Function(Person, String, bool)? editFunc;
   const PeopleListing({
     super.key,
-    this.actions = const [],
+    required this.peopleData,
+    this.tappable = false,
+    this.editFunc,
   });
 
-  @override
-  State<PeopleListing> createState() => PeopleListingState();
-}
-
-class PeopleListingState extends State<PeopleListing> {
-  List<DocumentSnapshot<Person>> peopleData;
-  List<Person> data;
-
-  PeopleListingState()
-      : peopleData = [],
-        data = [];
-
-  @override
-  void initState() {
-    super.initState();
-    getData();
-  }
-
-  void getData() async {
-    final rawData = await getPeople();
-    setState(() {
-      peopleData = rawData;
-      data = rawData.map<Person>((e) => e.data()).toList()
-        ..sort((a, b) => a.lastName.compareTo(b.lastName));
-    });
+  List<Person> get data {
+    return peopleData.map<Person>((e) => e.data()!).toList();
   }
 
   @override
@@ -56,133 +37,86 @@ class PeopleListingState extends State<PeopleListing> {
     Color onPrimary = Theme.of(context).colorScheme.onPrimary;
 
     return ListView(
-      padding: EdgeInsets.fromLTRB(
-        16 + (size.width / 40),
-        16,
-        16 + (size.width / 40),
-        16,
-      ),
+      padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
       scrollDirection: Axis.vertical,
       children: [
         for (var person in data)
-          Card(
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              height: 80,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Icon(Icons.person),
-                    ),
-                    Container(
-                      width: 200,
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("${person.lastName}, ${person.firstName}"),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text((person.year).toString()),
-                    ),
-                    for (String job in person.jobs)
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        margin: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: primary,
-                        ),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                job,
-                                style: TextStyle(
-                                  color: onPrimary,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              child: Icon(
-                                Icons.delete,
-                                size: 16,
-                                color: onPrimary,
-                              ),
-                              onTap: () async {
-                                final ref = peopleData[data.indexOf(person)];
-                                final result =
-                                    await changeJob(ref, person, job, false);
-                                setState(() {
-                                  data[data.indexOf(person)] = result;
-                                });
-                              },
-                            )
-                          ],
-                        ),
-                      ),
-                    IconButton(
-                        onPressed: () async {
-                          final response = await Navigator.of(
-                            context,
-                            rootNavigator: true,
-                          ).push<String>(
-                            DialogRoute<String>(
-                                context: context,
-                                builder: (context) {
-                                  return Container(
-                                    padding: const EdgeInsets.all(16),
-                                    margin: EdgeInsets.all(size.width / 8),
-                                    child: Card(
-                                      child: ListView(children: [
-                                        ListTile(
-                                          leading: const Icon(Icons.wash),
-                                          title: const Text("Lunch Dish Crew"),
-                                          onTap: () => Navigator.pop(
-                                            context,
-                                            "Lunch Dish Crew",
-                                          ),
-                                        ),
-                                        ListTile(
-                                          leading: const Icon(Icons.wash),
-                                          title: const Text("Supper Dish Crew"),
-                                          onTap: () => Navigator.pop(
-                                            context,
-                                            "Supper Dish Crew",
-                                          ),
-                                        ),
-                                        ListTile(
-                                          leading: const Icon(Icons.wash),
-                                          title: const Text("Waiter"),
-                                          onTap: () => Navigator.pop(
-                                            context,
-                                            "Waiter",
-                                          ),
-                                        ),
-                                      ]),
-                                    ),
-                                  );
-                                }),
-                          );
-
-                          if (response != null) {
-                            final ref = peopleData[data.indexOf(person)];
-                            final result =
-                                await changeJob(ref, person, response, true);
-                            setState(() {
-                              data[data.indexOf(person)] = result;
-                            });
-                          }
-                        },
-                        icon: const Icon(Icons.add))
-                  ],
+          GestureDetector(
+            onTap: tappable ? () => Navigator.of(context).pop(person) : null,
+            child: ListCard(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Icon(Icons.person),
                 ),
-              ),
+                Container(
+                  width: 200,
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(person.name),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text((person.year).toString()),
+                ),
+                for (String job in person.jobs)
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    margin: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: primary,
+                    ),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            job,
+                            style: TextStyle(
+                              color: onPrimary,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                        if (!tappable)
+                          GestureDetector(
+                            child: Icon(
+                              Icons.clear,
+                              size: 16,
+                              color: onPrimary,
+                            ),
+                            onTap: () {
+                              if (editFunc != null) {
+                                editFunc!(person, job, false);
+                              }
+                            },
+                          )
+                      ],
+                    ),
+                  ),
+                if (!tappable)
+                  IconButton(
+                      onPressed: () async {
+                        final job = await Navigator.of(
+                          context,
+                          rootNavigator: true,
+                        ).push<String>(
+                          DialogRoute<String>(
+                              context: context,
+                              builder: (context) {
+                                return const JobsModal();
+                              }),
+                        );
+
+                        if (job != null) {
+                          if (editFunc != null) {
+                            editFunc!(person, job, true);
+                          }
+                        }
+                      },
+                      icon: const Icon(Icons.add))
+              ],
             ),
           ),
       ],
@@ -190,7 +124,50 @@ class PeopleListingState extends State<PeopleListing> {
   }
 }
 
-Future<Person> changeJob(
+class JobsModal extends StatelessWidget {
+  const JobsModal({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return Container(
+      padding: const EdgeInsets.all(16),
+      margin: EdgeInsets.all(size.width / 8),
+      child: Card(
+        child: ListView(children: [
+          ListTile(
+            leading: const Icon(Icons.wash),
+            title: Text(Jobs.lunchDishCrew.pretty),
+            onTap: () => Navigator.pop(
+              context,
+              Jobs.lunchDishCrew.pretty,
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.wash),
+            title: Text(Jobs.supperDishCrew.pretty),
+            onTap: () => Navigator.pop(
+              context,
+              Jobs.supperDishCrew.pretty,
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.wash),
+            title: Text(Jobs.waiter.pretty),
+            onTap: () => Navigator.pop(
+              context,
+              Jobs.waiter.pretty,
+            ),
+          ),
+        ]),
+      ),
+    );
+  }
+}
+
+Future<DocumentSnapshot<Person>> changeJob(
   DocumentSnapshot<Person> ref,
   Person person,
   String key,
@@ -209,6 +186,85 @@ Future<Person> changeJob(
     jobs: newJobs,
   );
   ref.reference.set(newPerson);
+  final newRef = FirebaseFirestore.instance
+      .collection('people')
+      .where("lastName", isEqualTo: newPerson.lastName)
+      .withConverter<Person>(
+        fromFirestore: (snapshots, _) => Person.fromJson(snapshots.data()!),
+        toFirestore: (person, _) => person.toJson(),
+      );
 
-  return newPerson;
+  final results = await newRef.get();
+
+  return results.docs[0];
+}
+
+class PeopleListingModal extends StatefulWidget {
+  final List<DocumentSnapshot<Person>> peopleData;
+
+  const PeopleListingModal({
+    super.key,
+    required this.peopleData,
+  });
+
+  @override
+  State<PeopleListingModal> createState() => _PeopleListingModalState();
+}
+
+class _PeopleListingModalState extends State<PeopleListingModal> {
+  String? filter;
+
+  List<DocumentSnapshot<Person>> filteredPeople() {
+    final localFilter = filter;
+    if (localFilter != null && localFilter.isNotEmpty) {
+      return widget.peopleData
+          .where((element) => element
+              .data()!
+              .lastName
+              .toLowerCase()
+              .startsWith(localFilter.toLowerCase()))
+          .toList();
+    }
+    return widget.peopleData;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return Padding(
+      padding: const EdgeInsets.all(64),
+      child: Card(
+        child: Container(
+          margin: const EdgeInsets.all(32),
+          child: Flex(
+            direction: Axis.vertical,
+            children: [
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(64, 32, 64, 16),
+                  child: TextField(
+                      decoration: const InputDecoration(
+                        hintText: "Seminarian Name",
+                        label: Text("Search"),
+                      ),
+                      style: const TextStyle(fontSize: 24),
+                      onChanged: (value) {
+                        setState(() {
+                          filter = value;
+                        });
+                      }),
+                ),
+              ),
+              Expanded(
+                child: PeopleListing(
+                  tappable: true,
+                  peopleData: filteredPeople(),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
