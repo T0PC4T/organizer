@@ -79,7 +79,6 @@ class _PeopleBodyState extends State<PeopleBody> {
           setState(() {
             final oldDoc = peopleData!
                 .firstWhere((element) => element.data()?.name == person.name);
-            print(peopleData!.indexOf(oldDoc));
             peopleData![peopleData!.indexOf(oldDoc)] = newDoc;
           });
         }),

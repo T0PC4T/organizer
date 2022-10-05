@@ -4,14 +4,14 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
-Iterable<Map<String, String>> getDataFromTable(Map table) sync* {
+Iterable<List<String>> getDataFromTable(Map table) sync* {
   for (var seat = 1; seat < 7; seat++) {
     if (table.containsKey(seat.toString()) && table[seat.toString()] != null) {
-      yield {
-        "name": table[seat.toString()],
-        "table": table["name"],
-        "seat": seat.toString(),
-      };
+      yield [
+        table[seat.toString()],
+        table["name"].toString().toUpperCase(),
+        seat.toString(),
+      ];
     }
   }
 }
@@ -20,60 +20,56 @@ Future<Uint8List> generateSeetingPdf(String title, List<Map> tables) async {
   final pdf = pw.Document(version: PdfVersion.pdf_1_5, compress: true);
   final font = await PdfGoogleFonts.nunitoExtraLight();
   final people = tables.expand((element) => getDataFromTable(element)).toList()
-    ..sort((a, b) => (a["name"] as String).compareTo((b["name"] as String)));
+    ..sort((a, b) => (a[0]).compareTo(b[0]));
+
+  // makes it into three columns
+  final third = people.length ~/ 3;
+  List<List<List<String>>> sections = [
+    people.sublist(0, third),
+    people.sublist(third, third * 2),
+    people.sublist(third * 2),
+  ];
+  List<String> sectionsLetters = [
+    "A-${people[third - 1][0][0]}",
+    "${people[third][0][0]}-${people[(third * 2) - 2][0][0]}",
+    "${people[third * 2][0][0]}-Z",
+  ];
+
+  for (var i = 0; i < sections.length; i++) {
+    sections[i].insert(0, ["Name (${sectionsLetters[i]})", "Table", "Seat"]);
+  }
+
   pdf.addPage(
     pw.Page(
       pageFormat: PdfPageFormat.a4,
       build: (context) {
         return pw.Column(
           children: [
-            // pw.SizedBox(
-            //   width: double.infinity,
-            //   child: pw.Center(
-            //       child: pw.Text(title,
-            //           style: pw.TextStyle(font: font, fontSize: 24))),
-            // ),
             pw.SizedBox(
-                width: double.infinity,
-                child: pw.Table(
-                  tableWidth: pw.TableWidth.min,
-                  border: pw.TableBorder.all(),
-                  children: [
-                    for (var person in people)
-                      pw.TableRow(children: [
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(2),
-                          child: pw.Text(
-                            person["name"]!,
-                            style: pw.TextStyle(
-                              font: font,
-                              fontSize: 7,
-                            ),
-                          ),
-                        ),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(2),
-                          child: pw.Text(
-                            person["table"]!.toUpperCase(),
-                            style: pw.TextStyle(
-                              font: font,
-                              fontSize: 7,
-                            ),
-                          ),
-                        ),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(2),
-                          child: pw.Text(
-                            person["seat"]!.toUpperCase(),
-                            style: pw.TextStyle(
-                              font: font,
-                              fontSize: 7,
-                            ),
-                          ),
-                        )
-                      ])
-                  ],
-                )),
+              width: double.infinity,
+              child: pw.Center(
+                  child: pw.Text(title,
+                      style: pw.TextStyle(font: font, fontSize: 24))),
+            ),
+            pw.SizedBox(height: 20),
+            pw.Row(
+              mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
+              children: [
+                for (var personSection in sections)
+                  pw.Table(
+                      tableWidth: pw.TableWidth.min,
+                      border: pw.TableBorder.all(),
+                      children: [
+                        for (var person in personSection)
+                          pw.TableRow(children: [
+                            TableEntry(person[0]),
+                            pw.Center(child: TableEntry(person[1])),
+                            pw.Center(child: TableEntry(person[2])),
+                          ])
+                      ]),
+              ],
+            ),
           ],
         );
       },
@@ -81,6 +77,25 @@ Future<Uint8List> generateSeetingPdf(String title, List<Map> tables) async {
   );
 
   return pdf.save();
+}
+
+class TableEntry extends pw.StatelessWidget {
+  final String data;
+  TableEntry(this.data);
+
+  @override
+  pw.Widget build(context) {
+    return pw.Padding(
+      padding: const pw.EdgeInsets.fromLTRB(3, 5, 3, 5),
+      child: pw.Text(
+        data,
+        style: const pw.TextStyle(
+          // font: font,
+          fontSize: 9,
+        ),
+      ),
+    );
+  }
 }
 
 

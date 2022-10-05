@@ -131,38 +131,39 @@ class JobsModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Container(
-      padding: const EdgeInsets.all(16),
-      margin: EdgeInsets.all(size.width / 8),
-      child: Card(
-        child: ListView(children: [
-          ListTile(
-            leading: const Icon(Icons.wash),
-            title: Text(Jobs.lunchDishCrew.pretty),
-            onTap: () => Navigator.pop(
-              context,
-              Jobs.lunchDishCrew.pretty,
-            ),
+    return ModalCard(
+      child: ListView(children: [
+        const Center(
+          child: Text(
+            "Choose a job",
+            style: TextStyle(fontSize: 24),
           ),
-          ListTile(
-            leading: const Icon(Icons.wash),
-            title: Text(Jobs.supperDishCrew.pretty),
-            onTap: () => Navigator.pop(
-              context,
-              Jobs.supperDishCrew.pretty,
-            ),
+        ),
+        ListTile(
+          leading: const Icon(Icons.lunch_dining_sharp),
+          title: Text(Jobs.lunchDishCrew.pretty),
+          onTap: () => Navigator.pop(
+            context,
+            Jobs.lunchDishCrew.pretty,
           ),
-          ListTile(
-            leading: const Icon(Icons.wash),
-            title: Text(Jobs.waiter.pretty),
-            onTap: () => Navigator.pop(
-              context,
-              Jobs.waiter.pretty,
-            ),
+        ),
+        ListTile(
+          leading: const Icon(Icons.nightlight),
+          title: Text(Jobs.supperDishCrew.pretty),
+          onTap: () => Navigator.pop(
+            context,
+            Jobs.supperDishCrew.pretty,
           ),
-        ]),
-      ),
+        ),
+        ListTile(
+          leading: const Icon(Icons.food_bank),
+          title: Text(Jobs.waiter.pretty),
+          onTap: () => Navigator.pop(
+            context,
+            Jobs.waiter.pretty,
+          ),
+        ),
+      ]),
     );
   }
 }
@@ -230,40 +231,33 @@ class _PeopleListingModalState extends State<PeopleListingModal> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.all(64),
-      child: Card(
-        child: Container(
-          margin: const EdgeInsets.all(32),
-          child: Flex(
-            direction: Axis.vertical,
-            children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(64, 32, 64, 16),
-                  child: TextField(
-                      decoration: const InputDecoration(
-                        hintText: "Seminarian Name",
-                        label: Text("Search"),
-                      ),
-                      style: const TextStyle(fontSize: 24),
-                      onChanged: (value) {
-                        setState(() {
-                          filter = value;
-                        });
-                      }),
-                ),
-              ),
-              Expanded(
-                child: PeopleListing(
-                  tappable: true,
-                  peopleData: filteredPeople(),
-                ),
-              ),
-            ],
+    return ModalCard(
+      child: Flex(
+        direction: Axis.vertical,
+        children: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(32, 32, 32, 16),
+              child: TextField(
+                  decoration: const InputDecoration(
+                    hintText: "Seminarian Name",
+                    label: Text("Search"),
+                  ),
+                  style: const TextStyle(fontSize: 24),
+                  onChanged: (value) {
+                    setState(() {
+                      filter = value;
+                    });
+                  }),
+            ),
           ),
-        ),
+          Expanded(
+            child: PeopleListing(
+              tappable: true,
+              peopleData: filteredPeople(),
+            ),
+          ),
+        ],
       ),
     );
   }

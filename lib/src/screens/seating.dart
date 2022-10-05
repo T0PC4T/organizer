@@ -274,66 +274,25 @@ class SetSeatModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
-        padding: const EdgeInsets.all(32),
-        margin: const EdgeInsets.all(32),
-        width: 500,
-        child: Card(
-          child: Flex(
-            direction: Axis.horizontal,
-            children: [
-              for (var i = 0; i < 3; i++)
-                Expanded(
-                  child: BigButton<int>(
-                    icon: icons[i],
-                    title: titles[i],
-                    value: values[i],
-                  ),
-                )
-            ],
+    return ModalCard(
+      child: ListView(
+        children: [
+          const Center(
+            child: Text(
+              "Seminarian Type",
+              style: TextStyle(fontSize: 24),
+            ),
           ),
-        ));
-  }
-}
-
-class BigButton<T> extends StatelessWidget {
-  final T value;
-  final IconData icon;
-  final String title;
-  const BigButton({
-    super.key,
-    required this.value,
-    required this.icon,
-    required this.title,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => Navigator.pop(context, value),
-      child: Container(
-        margin: const EdgeInsets.all(32),
-        decoration: BoxDecoration(
-          border: Border.all(
-              width: 2, color: Theme.of(context).colorScheme.primary),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        height: double.infinity,
-        child: Center(
-          child: Column(children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(12, 12, 12, 48),
-              child: Icon(
-                icon,
-                size: 64,
+          for (var i = 0; i < 3; i++)
+            ListTile(
+              leading: Icon(icons[i]),
+              title: Text(titles[i]),
+              onTap: () => Navigator.pop(
+                context,
+                values[i],
               ),
             ),
-            Text(
-              title,
-              style: const TextStyle(fontSize: 24),
-            ),
-          ]),
-        ),
+        ],
       ),
     );
   }

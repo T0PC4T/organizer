@@ -18,3 +18,21 @@ class ListCard extends StatelessWidget {
     ));
   }
 }
+
+class ModalCard extends StatelessWidget {
+  final Widget child;
+  const ModalCard({super.key, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(64),
+      child: Card(
+        child: Container(
+          padding: const EdgeInsets.all(32),
+          child: child,
+        ),
+      ),
+    );
+  }
+}
