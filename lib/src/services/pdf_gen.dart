@@ -7,11 +7,13 @@ import 'package:printing/printing.dart';
 Iterable<List<String>> getDataFromTable(Map table) sync* {
   for (var seat = 1; seat < 7; seat++) {
     if (table.containsKey(seat.toString()) && table[seat.toString()] != null) {
-      yield [
-        table[seat.toString()],
-        table["name"].toString().toUpperCase(),
-        seat.toString(),
-      ];
+      for (var personName in table[seat.toString()].split(";")) {
+        yield [
+          personName,
+          table["name"].toString().toUpperCase(),
+          seat.toString(),
+        ];
+      }
     }
   }
 }

@@ -135,23 +135,56 @@ class SeatingListingState extends State<SeatingListing> {
         }
       }
     }
+
+    bool fitsFilter(Map t, Person p) {
+      return (t["filter"] as List<int>).contains(p.year);
+    }
+
     localPeopleData.removeWhere(
         (element) => alreadyAssigned.contains(element.data()!.name));
 
     // Remove people with waiter crew
     localPeopleData.removeWhere(
-        (element) => element.data()!.jobs.contains(Jobs.waiter.pretty));
+        (element) => element.data()!.jobs.contains(Jobs.waiter.name));
 
-    while (localPeopleData.isNotEmpty) {
-      final curPerson = localPeopleData.removeLast().data()!;
+    // Remove people with waiter crew
+    final supperDishCrew = localPeopleData
+        .where((element) =>
+            element.data()!.jobs.contains(Jobs.supperDishCrew.name))
+        .toList();
+
+    localPeopleData.removeWhere(
+        (element) => element.data()!.jobs.contains(Jobs.supperDishCrew.name));
+
+    while (localPeopleData.isNotEmpty && supperDishCrew.isNotEmpty) {
+      late Person curPerson;
+      if (localPeopleData.isNotEmpty) {
+        curPerson = localPeopleData.removeLast().data()!;
+      } else {
+        curPerson = supperDishCrew.removeLast().data()!;
+      }
+
       () {
         for (var table in moreLocalTableData) {
           for (var seat = 1; seat < 7; seat++) {
             if (table.containsKey(seat.toString())) {
               continue;
             }
-            if ((table["filter"] as List<int>).contains(curPerson.year)) {
+            if (fitsFilter(table, curPerson)) {
               table[seat.toString()] = curPerson.name;
+
+              // Dish Crew Check
+              if (curPerson.jobs.contains(Jobs.lunchDishCrew.name)) {
+                final i = supperDishCrew.indexWhere(
+                    (element) => fitsFilter(table, element.data()!));
+                if (i != -1) {
+                  table[seat.toString()] =
+                      "${table[seat.toString()]};${supperDishCrew[i].data()!.name}";
+                  supperDishCrew.removeAt(i);
+                }
+              }
+              // End Dish Crew Check
+
               return;
             }
           }
@@ -201,7 +234,8 @@ class SeatingListingState extends State<SeatingListing> {
                     final response = await showDialog<int>(
                       context: context,
                       builder: (context) {
-                        return const SetSeatModal();
+                        return SetSeatModal(
+                            current: table[i.toString()] as String?);
                       },
                     );
 
@@ -261,7 +295,8 @@ class SeatingListingState extends State<SeatingListing> {
 }
 
 class SetSeatModal extends StatelessWidget {
-  const SetSeatModal({super.key});
+  final String? current;
+  const SetSeatModal({super.key, this.current});
 
   static const icons = [
     Icons.person,
@@ -277,11 +312,19 @@ class SetSeatModal extends StatelessWidget {
     return ModalCard(
       child: ListView(
         children: [
-          const Center(
-            child: Text(
-              "Seminarian Type",
+          if (current != null) ...[
+            const Text(
+              "Occupied",
               style: TextStyle(fontSize: 24),
             ),
+            ListTile(
+              leading: const Icon(Icons.person),
+              title: Text(current!),
+            ),
+          ],
+          const Text(
+            "Choose new occupier",
+            style: TextStyle(fontSize: 24),
           ),
           for (var i = 0; i < 3; i++)
             ListTile(

@@ -144,7 +144,7 @@ class JobsModal extends StatelessWidget {
           title: Text(Jobs.lunchDishCrew.pretty),
           onTap: () => Navigator.pop(
             context,
-            Jobs.lunchDishCrew.pretty,
+            Jobs.lunchDishCrew.name,
           ),
         ),
         ListTile(
@@ -152,7 +152,7 @@ class JobsModal extends StatelessWidget {
           title: Text(Jobs.supperDishCrew.pretty),
           onTap: () => Navigator.pop(
             context,
-            Jobs.supperDishCrew.pretty,
+            Jobs.supperDishCrew.name,
           ),
         ),
         ListTile(
@@ -160,7 +160,7 @@ class JobsModal extends StatelessWidget {
           title: Text(Jobs.waiter.pretty),
           onTap: () => Navigator.pop(
             context,
-            Jobs.waiter.pretty,
+            Jobs.waiter.name,
           ),
         ),
       ]),
