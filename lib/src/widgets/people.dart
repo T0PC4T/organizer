@@ -32,10 +32,6 @@ class PeopleListing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    Color primary = Theme.of(context).colorScheme.primary;
-    Color onPrimary = Theme.of(context).colorScheme.onPrimary;
-
     return ListView(
       padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
       scrollDirection: Axis.vertical,
@@ -58,64 +54,31 @@ class PeopleListing extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Text((person.year).toString()),
                 ),
-                for (String job in person.jobs)
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    margin: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: primary,
-                    ),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            job,
-                            style: TextStyle(
-                              color: onPrimary,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ),
-                        if (!tappable)
-                          GestureDetector(
-                            child: Icon(
-                              Icons.clear,
-                              size: 16,
-                              color: onPrimary,
-                            ),
-                            onTap: () {
-                              if (editFunc != null) {
-                                editFunc!(person, job, false);
-                              }
-                            },
-                          )
-                      ],
-                    ),
-                  ),
-                if (!tappable)
-                  IconButton(
-                      onPressed: () async {
-                        final job = await Navigator.of(
-                          context,
-                          rootNavigator: true,
-                        ).push<String>(
-                          DialogRoute<String>(
-                              context: context,
-                              builder: (context) {
-                                return const JobsModal();
-                              }),
-                        );
+                AddableBlockWidget(
+                    blocks: person.jobs.map((e) => BlockRecord(e, e)),
+                    addCallback: () async {
+                      final job = await Navigator.of(
+                        context,
+                        rootNavigator: true,
+                      ).push<String>(
+                        DialogRoute<String>(
+                            context: context,
+                            builder: (context) {
+                              return const JobsModal();
+                            }),
+                      );
 
-                        if (job != null) {
-                          if (editFunc != null) {
-                            editFunc!(person, job, true);
-                          }
+                      if (job != null) {
+                        if (editFunc != null) {
+                          editFunc!(person, job, true);
                         }
-                      },
-                      icon: const Icon(Icons.add))
+                      }
+                    },
+                    deleteCallback: (b) {
+                      if (editFunc != null) {
+                        editFunc!(person, b.value, false);
+                      }
+                    })
               ],
             ),
           ),
