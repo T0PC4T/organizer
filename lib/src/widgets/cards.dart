@@ -1,37 +1,80 @@
 import 'package:flutter/material.dart';
 
 class ListCard extends StatelessWidget {
+  final IconData icon;
   final List<Widget> children;
-  const ListCard({super.key, required this.children});
+  final bool alt;
+  const ListCard(
+      {super.key,
+      required this.children,
+      required this.icon,
+      this.alt = false});
 
   @override
   Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
+    final onPrimary = Theme.of(context).colorScheme.onPrimary;
     return Card(
+      child: DefaultTextStyle(
+        style: TextStyle(
+          color: alt ? onPrimary : primary,
+        ),
         child: Container(
-      padding: const EdgeInsets.all(16),
-      height: 80,
-      child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
+          padding: const EdgeInsets.all(16),
+          color: alt ? primary : onPrimary,
+          height: 80,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: children)),
-    ));
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    icon,
+                    color: alt ? onPrimary : primary,
+                  ),
+                ),
+                ...children
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 
 class ModalCard extends StatelessWidget {
   final Widget child;
-  const ModalCard({super.key, required this.child});
+  final String? title;
+  const ModalCard({super.key, required this.child, this.title});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(64),
       child: Card(
-        child: Container(
-          padding: const EdgeInsets.all(32),
-          child: child,
-        ),
+        child: Column(children: [
+          if (title != null)
+            Container(
+              padding: const EdgeInsets.all(16),
+              width: double.infinity,
+              color: Theme.of(context).colorScheme.primary,
+              child: Text(
+                title!,
+                style: TextStyle(
+                    fontSize: 24,
+                    color: Theme.of(context).colorScheme.onPrimary),
+              ),
+            ),
+          Container(
+            width: double.infinity,
+            constraints: const BoxConstraints(maxHeight: 500),
+            padding: const EdgeInsets.all(16),
+            child: child,
+          )
+        ]),
       ),
     );
   }
@@ -59,7 +102,6 @@ class AddableBlockWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     Color primary = Theme.of(context).colorScheme.primary;
     Color onPrimary = Theme.of(context).colorScheme.onPrimary;
 
@@ -101,7 +143,11 @@ class AddableBlockWidget extends StatelessWidget {
             ),
           ),
         if (editable)
-          IconButton(onPressed: addCallback, icon: const Icon(Icons.add))
+          IconButton(
+            onPressed: addCallback,
+            icon: const Icon(Icons.add_circle),
+            color: primary,
+          )
       ],
     );
   }

@@ -40,11 +40,8 @@ class PeopleListing extends StatelessWidget {
           GestureDetector(
             onTap: tappable ? () => Navigator.of(context).pop(person) : null,
             child: ListCard(
+              icon: Icons.person,
               children: [
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(Icons.person),
-                ),
                 Container(
                   width: 200,
                   padding: const EdgeInsets.all(8.0),
@@ -149,7 +146,7 @@ Future<DocumentSnapshot<Person>> changeJob(
     year: person.year,
     jobs: newJobs,
   );
-  ref.reference.set(newPerson);
+  await ref.reference.set(newPerson);
   final newRef = FirebaseFirestore.instance
       .collection('people')
       .where("lastName", isEqualTo: newPerson.lastName)
@@ -159,7 +156,6 @@ Future<DocumentSnapshot<Person>> changeJob(
       );
 
   final results = await newRef.get();
-
   return results.docs[0];
 }
 

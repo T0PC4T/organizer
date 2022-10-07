@@ -49,6 +49,13 @@ class _LoginWidgetState extends State<LoginWidget> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                Container(
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.only(bottom: 32),
+                    child: Image.asset(
+                      "assets/images/fssplogo.png",
+                      width: 100,
+                    )),
                 TextFormField(
                   decoration: const InputDecoration(
                     hintText: 'Enter your email',
@@ -79,17 +86,23 @@ class _LoginWidgetState extends State<LoginWidget> {
                   },
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        _formKey.currentState?.save();
-                        FirebaseAuth.instance.signInWithEmailAndPassword(
-                            email: data!["email"]!,
-                            password: data!["password"]!);
-                      }
-                    },
-                    child: const Text('Submit'),
+                  padding: const EdgeInsets.only(top: 32.0),
+                  child: ConstrainedBox(
+                    constraints:
+                        BoxConstraints.tight(const Size(double.infinity, 40)),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          _formKey.currentState?.save();
+                          FirebaseAuth.instance.signInWithEmailAndPassword(
+                              email: data!["email"]!,
+                              password: data!["password"]!);
+                        }
+                      },
+                      child: const Center(
+                        child: Text('Login'),
+                      ),
+                    ),
                   ),
                 ),
               ],

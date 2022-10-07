@@ -4,7 +4,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 // WEB
 
-import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:organizer/src/screens/home.dart';
 import 'package:organizer/src/screens/login.dart';
 import 'package:organizer/src/screens/people.dart';
@@ -14,7 +13,6 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  setUrlStrategy(PathUrlStrategy());
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

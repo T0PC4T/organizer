@@ -1,16 +1,17 @@
 import 'dart:typed_data';
 
+import 'package:organizer/src/screens/seating.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
-Iterable<List<String>> getDataFromTable(Map table) sync* {
-  for (var seat = 1; seat < 7; seat++) {
-    if (table.containsKey(seat.toString()) && table[seat.toString()] != null) {
-      for (var personName in table[seat.toString()].split(";")) {
+Iterable<List<String>> getDataFromTable(TableData table) sync* {
+  for (var seat in table.seats) {
+    if (table.seminarianSeat(seat)) {
+      for (var personName in table.seatPeople(seat)) {
         yield [
           personName,
-          table["name"].toString().toUpperCase(),
+          table.name,
           seat.toString(),
         ];
       }
@@ -18,7 +19,8 @@ Iterable<List<String>> getDataFromTable(Map table) sync* {
   }
 }
 
-Future<Uint8List> generateSeetingPdf(String title, List<Map> tables) async {
+Future<Uint8List> generateSeetingPdf(
+    String title, List<TableData> tables) async {
   final pdf = pw.Document(version: PdfVersion.pdf_1_5, compress: true);
   final font = await PdfGoogleFonts.nunitoExtraLight();
   final people = tables.expand((element) => getDataFromTable(element)).toList()

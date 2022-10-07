@@ -97,10 +97,10 @@ class SeatingListing extends StatefulWidget {
 
 class SeatingListingState extends State<SeatingListing> {
   List<DocumentSnapshot<Person>> peopleData;
-  List<Map> localTableData;
+  List<TableData> localTableData;
   SeatingListingState()
       : peopleData = [],
-        localTableData = List.from(tablesData.map((e) => Map.from(e)));
+        localTableData = TableData.getTables();
 
   @override
   void initState() {
@@ -115,29 +115,28 @@ class SeatingListingState extends State<SeatingListing> {
   reset() {
     setState(() {
       for (var element in localTableData) {
-        element.removeWhere((key, value) => !["name", "filter"].contains(key));
+        element.data
+            .removeWhere((key, value) => !["name", "filter"].contains(key));
       }
     });
   }
 
   generate() {
     final localPeopleData = List<DocumentSnapshot<Person>>.from(peopleData);
-    final moreLocalTableData = List<Map>.from(localTableData);
+    final moreLocalTableData = TableData.fromTableData(localTableData);
     localPeopleData.shuffle();
     List<String> alreadyAssigned = [];
     // Remove people who have already been placed
     for (var table in moreLocalTableData) {
-      final keys = table.keys.where((key) => !["name", "filter"].contains(key));
-      for (var key in keys) {
-        final value = table[key];
-        if (value is String) {
-          alreadyAssigned.add(table[key]);
+      for (var seat in table.seats) {
+        if (table.seminarianSeat(seat)) {
+          alreadyAssigned.addAll(table.seatPeople(seat));
         }
       }
     }
 
-    bool fitsFilter(Map t, Person p) {
-      return (t["filter"] as List<int>).contains(p.year);
+    bool fitsFilter(TableData t, Person p) {
+      return (t.filter).contains(p.year);
     }
 
     localPeopleData.removeWhere(
@@ -166,20 +165,19 @@ class SeatingListingState extends State<SeatingListing> {
 
       () {
         for (var table in moreLocalTableData) {
-          for (var seat = 1; seat < 7; seat++) {
-            if (table.containsKey(seat.toString())) {
+          for (var seat in table.seats) {
+            if (table.seatOccupied(seat)) {
               continue;
             }
             if (fitsFilter(table, curPerson)) {
-              table[seat.toString()] = curPerson.name;
+              table.addPerson(seat, curPerson.name);
 
               // Dish Crew Check
               if (curPerson.jobs.contains(Jobs.lunchDishCrew.name)) {
                 final i = supperDishCrew.indexWhere(
                     (element) => fitsFilter(table, element.data()!));
                 if (i != -1) {
-                  table[seat.toString()] =
-                      "${table[seat.toString()]};${supperDishCrew[i].data()!.name}";
+                  table.addPerson(seat, supperDishCrew[i].data()!.name);
                   supperDishCrew.removeAt(i);
                 }
               }
@@ -199,43 +197,39 @@ class SeatingListingState extends State<SeatingListing> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    final primary = Theme.of(context).colorScheme.primary;
-    final onPrimary = Theme.of(context).colorScheme.onPrimary;
     return ListView(
-      padding: EdgeInsets.fromLTRB(
-        16 + (size.width / 40),
-        16,
-        16 + (size.width / 40),
-        16,
-      ),
+      padding: const EdgeInsets.all(32),
       scrollDirection: Axis.vertical,
       children: [
-        for (Map table in localTableData)
-          ListCard(
-            children: [
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Icon(Icons.table_restaurant),
-              ),
-              Container(
-                width: 50,
-                padding: const EdgeInsets.all(8.0),
-                child: Text(table["name"].toString().toUpperCase()),
-              ),
-              Container(
-                width: 120,
-                padding: const EdgeInsets.all(8.0),
-                child: Text("${table["filter"]}"),
-              ),
-              for (var i = 1; i < 7; i++)
-                GestureDetector(
-                  onTap: () async {
+        for (TableData table in localTableData) ...[
+          ListCard(icon: Icons.table_restaurant, alt: true, children: [
+            Container(
+              width: 50,
+              padding: const EdgeInsets.all(8.0),
+              child: Text(table.name),
+            ),
+            Container(
+              width: 120,
+              padding: const EdgeInsets.all(8.0),
+              child: Text(table.filter.toString()),
+            ),
+          ]),
+          for (var seat in table.seats)
+            ListCard(
+              icon: Icons.chair,
+              children: [
+                Container(
+                  width: 50,
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(seat),
+                ),
+                AddableBlockWidget(
+                  blocks: table.block(seat),
+                  addCallback: () async {
                     final response = await showDialog<int>(
                       context: context,
                       builder: (context) {
-                        return SetSeatModal(
-                            current: table[i.toString()] as String?);
+                        return const SetSeatModal();
                       },
                     );
 
@@ -251,82 +245,57 @@ class SeatingListingState extends State<SeatingListing> {
                         );
                         if (chosenPerson != null) {
                           setState(() {
-                            table[i.toString()] = chosenPerson.name;
+                            table.addPerson(seat, chosenPerson.name);
                           });
                         }
                       } else if (response == 2) {
                         setState(() {
-                          table[i.toString()] = null;
-                        });
-                      } else if (response == 3) {
-                        setState(() {
-                          table.remove(i.toString());
+                          table.makeGuestSeat(seat);
                         });
                       }
                     }
                   },
-                  child: Container(
-                    height: 50,
-                    width: 50,
-                    margin: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: table.containsKey(i.toString())
-                          ? table[i.toString()] is String
-                              ? Colors.red
-                              : Colors.cyan
-                          : primary,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: FittedBox(
-                      fit: BoxFit.contain,
-                      child: Text(
-                        i.toString(),
-                        style: TextStyle(color: onPrimary),
-                      ),
-                    ),
-                  ),
-                ),
-            ],
-          ),
+                  deleteCallback: (b) {
+                    setState(() {
+                      if (b.value.isEmpty) {
+                        // Its a guest
+                        table.remove(seat);
+                      } else {
+                        // Its a seminarian
+                        table.removePerson(seat, b.value);
+                      }
+                    });
+                  },
+                )
+              ],
+            ),
+        ]
       ],
     );
   }
 }
 
 class SetSeatModal extends StatelessWidget {
-  final String? current;
-  const SetSeatModal({super.key, this.current});
+  const SetSeatModal({super.key});
 
   static const icons = [
     Icons.person,
     Icons.person_outline,
     Icons.lock_open_sharp
   ];
-  static const titles = ["Seminarian", "Guest", "Empty"];
-  static const values = [1, 2, 3];
+  static const titles = ["Seminarian", "Guest"];
+  static const values = [1, 2];
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return ModalCard(
+      title: "Choose new occupier",
       child: ListView(
         children: [
-          if (current != null) ...[
-            const Text(
-              "Occupied",
-              style: TextStyle(fontSize: 24),
-            ),
-            ListTile(
-              leading: const Icon(Icons.person),
-              title: Text(current!),
-            ),
-          ],
-          const Text(
-            "Choose new occupier",
-            style: TextStyle(fontSize: 24),
+          const SizedBox(
+            height: 50,
           ),
-          for (var i = 0; i < 3; i++)
+          for (var i = 0; i < titles.length; i++)
             ListTile(
               leading: Icon(icons[i]),
               title: Text(titles[i]),
@@ -338,5 +307,71 @@ class SetSeatModal extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class TableData {
+  Map<String, dynamic> data;
+  TableData(this.data);
+
+  static List<TableData> fromTableData(List<TableData> d) {
+    return List.from(d.map((e) => TableData(Map.from(e.data))));
+  }
+
+  static List<TableData> getTables() {
+    return List.from(tablesData.map((e) => TableData(Map.from(e))));
+  }
+
+  Iterable<String> get seats sync* {
+    for (var i = 1; i < 7; i++) {
+      yield i.toString();
+    }
+  }
+
+  List<BlockRecord> block(String seat) {
+    if (seatOccupied(seat)) {
+      if (seminarianSeat(seat)) {
+        return seatPeople(seat).map((e) => BlockRecord(e, e)).toList();
+      } else {
+        return [BlockRecord("Guest", "")];
+      }
+    }
+    return [];
+  }
+
+  String get name => data["name"].toString().toUpperCase();
+  List<int> get filter => data["filter"];
+
+  void remove(String key) {
+    data.remove(key);
+  }
+
+  void removePerson(String seat, String person) {
+    if (seminarianSeat(seat)) {
+      (data[seat] as List<String>).remove(person);
+      if ((data[seat] as List).isEmpty) {
+        remove(seat);
+      }
+    }
+  }
+
+  void addPerson(String seat, String person) {
+    data[seat] ??= <String>[];
+    data[seat].add(person);
+  }
+
+  void makeGuestSeat(String seat) {
+    data[seat] = null;
+  }
+
+  bool seatOccupied(String seat) => data.containsKey(seat);
+  bool guestSeat(String seat) => data.containsKey(seat) && data[seat] == null;
+  bool seminarianSeat(String seat) =>
+      data.containsKey(seat) && data[seat] is List;
+
+  List<String> seatPeople(String seat) {
+    final d = data[seat];
+    assert(d is List<String>, "Invalid call of seat People");
+    return d;
   }
 }
