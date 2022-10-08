@@ -33,7 +33,6 @@ class PeopleListing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
       scrollDirection: Axis.vertical,
       children: [
         for (var person in data)
@@ -191,25 +190,20 @@ class _PeopleListingModalState extends State<PeopleListingModal> {
   @override
   Widget build(BuildContext context) {
     return ModalCard(
-      child: Flex(
-        direction: Axis.vertical,
-        children: [
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(32, 32, 32, 16),
-              child: TextField(
-                  decoration: const InputDecoration(
-                    hintText: "Seminarian Name",
-                    label: Text("Search"),
-                  ),
-                  style: const TextStyle(fontSize: 24),
-                  onChanged: (value) {
-                    setState(() {
-                      filter = value;
-                    });
-                  }),
-            ),
+      title: TextField(
+          decoration: const InputDecoration(
+            hintText: "Search",
+            hintStyle: ModalCard.titleTheme,
+            border: InputBorder.none,
           ),
+          style: ModalCard.titleTheme,
+          onChanged: (value) {
+            setState(() {
+              filter = value;
+            });
+          }),
+      child: Column(
+        children: [
           Expanded(
             child: PeopleListing(
               tappable: true,

@@ -289,12 +289,9 @@ class SetSeatModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ModalCard(
-      title: "Choose new occupier",
+      title: const Text("Choose new occupier"),
       child: ListView(
         children: [
-          const SizedBox(
-            height: 50,
-          ),
           for (var i = 0; i < titles.length; i++)
             ListTile(
               leading: Icon(icons[i]),

@@ -1,0 +1,19 @@
+{
+  "projects": {
+    "default": "fsspolgs"
+  },
+  "targets": {
+    "fsspolgs": {
+      "hosting": {
+        "fsspolgs": [
+          "deploy",
+          "olgsfssp"
+        ],
+        "olgsfssp": [
+          "fsspolgs"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

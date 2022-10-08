@@ -47,8 +47,13 @@ class ListCard extends StatelessWidget {
 
 class ModalCard extends StatelessWidget {
   final Widget child;
-  final String? title;
+  final Widget? title;
   const ModalCard({super.key, required this.child, this.title});
+
+  static const titleTheme = TextStyle(
+    fontSize: 24,
+    color: Colors.white,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -57,22 +62,22 @@ class ModalCard extends StatelessWidget {
       child: Card(
         child: Column(children: [
           if (title != null)
-            Container(
-              padding: const EdgeInsets.all(16),
-              width: double.infinity,
-              color: Theme.of(context).colorScheme.primary,
-              child: Text(
-                title!,
-                style: TextStyle(
-                    fontSize: 24,
-                    color: Theme.of(context).colorScheme.onPrimary),
+            DefaultTextStyle(
+              style: titleTheme,
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                width: double.infinity,
+                color: Theme.of(context).colorScheme.primary,
+                child: title,
               ),
             ),
-          Container(
-            width: double.infinity,
-            constraints: const BoxConstraints(maxHeight: 500),
-            padding: const EdgeInsets.all(16),
-            child: child,
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              // constraints: const BoxConstraints(maxHeight: 500),
+              padding: const EdgeInsets.all(16),
+              child: child,
+            ),
           )
         ]),
       ),
