@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'package:organizer/src/screens/seating.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:printing/printing.dart';
 
 Iterable<List<String>> getDataFromTable(TableData table) sync* {
   for (var seat in table.seats) {
@@ -22,7 +21,7 @@ Iterable<List<String>> getDataFromTable(TableData table) sync* {
 Future<Uint8List> generateSeetingPdf(
     String title, List<TableData> tables) async {
   final pdf = pw.Document(version: PdfVersion.pdf_1_5, compress: true);
-  final font = await PdfGoogleFonts.nunitoExtraLight();
+  // final font = await PdfGoogleFonts.nunitoExtraLight();
   final people = tables.expand((element) => getDataFromTable(element)).toList()
     ..sort((a, b) => (a[0]).compareTo(b[0]));
 
@@ -34,9 +33,9 @@ Future<Uint8List> generateSeetingPdf(
     people.sublist(third * 2),
   ];
   List<String> sectionsLetters = [
-    "A-${people[third - 1][0][0]}",
-    "${people[third][0][0]}-${people[(third * 2) - 2][0][0]}",
-    "${people[third * 2][0][0]}-Z",
+    "${sections[0].first.first[0]}-${sections[0].last.first[0]}",
+    "${sections[1].first.first[0]}-${sections[1].last.first[0]}",
+    "${sections[2].first.first[0]}-${sections[2].last.first[0]}",
   ];
 
   for (var i = 0; i < sections.length; i++) {
@@ -52,8 +51,8 @@ Future<Uint8List> generateSeetingPdf(
             pw.SizedBox(
               width: double.infinity,
               child: pw.Center(
-                  child: pw.Text(title,
-                      style: pw.TextStyle(font: font, fontSize: 24))),
+                  child:
+                      pw.Text(title, style: const pw.TextStyle(fontSize: 24))),
             ),
             pw.SizedBox(height: 20),
             pw.Row(

@@ -1,3 +1,5 @@
+import 'dart:html' as html;
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:printing/printing.dart';
@@ -20,11 +22,11 @@ class SeatingPage extends StatelessWidget {
           title: const Text('Seating'),
           actions: <Widget>[
             IconButton(
-              icon: const Icon(Icons.add_alert),
-              tooltip: 'Show Snackbar',
+              icon: const Icon(Icons.map),
+              tooltip: 'Download map',
               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('This is a snackbar')));
+                html.window
+                    .open("/assets/assets/files/seatingMap.pdf", 'SeatMap.pdf');
               },
             ),
           ],
@@ -142,11 +144,11 @@ class SeatingListingState extends State<SeatingListing> {
     localPeopleData.removeWhere(
         (element) => alreadyAssigned.contains(element.data()!.name));
 
-    // Remove people with waiter crew
+    // ? Remove people on waiter crew
     localPeopleData.removeWhere(
         (element) => element.data()!.jobs.contains(Jobs.waiter.name));
 
-    // Remove people with waiter crew
+    // ? Remove people with supper crew
     final supperDishCrew = localPeopleData
         .where((element) =>
             element.data()!.jobs.contains(Jobs.supperDishCrew.name))
@@ -155,7 +157,7 @@ class SeatingListingState extends State<SeatingListing> {
     localPeopleData.removeWhere(
         (element) => element.data()!.jobs.contains(Jobs.supperDishCrew.name));
 
-    while (localPeopleData.isNotEmpty && supperDishCrew.isNotEmpty) {
+    while (localPeopleData.isNotEmpty || supperDishCrew.isNotEmpty) {
       late Person curPerson;
       if (localPeopleData.isNotEmpty) {
         curPerson = localPeopleData.removeLast().data()!;
