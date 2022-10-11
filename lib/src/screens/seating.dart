@@ -4,8 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:printing/printing.dart';
 
-import '../services/firestore_service.dart';
 import '../services/pdf_gen.dart';
+import '../services/people.dart';
 import '../services/seating_data.dart';
 import '../widgets/cards.dart';
 import '../widgets/people.dart';
@@ -17,6 +17,7 @@ class SeatingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final peopleData = PeopleService.of(context)!.peopleData;
     return Scaffold(
         appBar: AppBar(
           title: const Text('Seating'),
@@ -41,7 +42,7 @@ class SeatingPage extends StatelessWidget {
                   key: const ValueKey(1),
                   heroTag: const ValueKey(1),
                   onPressed: () {
-                    seatKey.currentState?.generate();
+                    seatKey.currentState?.generate(peopleData);
                   },
                   label: const Text('Generate'),
                   icon: const Icon(Icons.settings),
@@ -98,20 +99,12 @@ class SeatingListing extends StatefulWidget {
 }
 
 class SeatingListingState extends State<SeatingListing> {
-  List<DocumentSnapshot<Person>> peopleData;
   List<TableData> localTableData;
-  SeatingListingState()
-      : peopleData = [],
-        localTableData = TableData.getTables();
+  SeatingListingState() : localTableData = TableData.getTables();
 
   @override
   void initState() {
     super.initState();
-    getPeople().then((value) {
-      setState(() {
-        peopleData = value;
-      });
-    });
   }
 
   reset() {
@@ -123,7 +116,7 @@ class SeatingListingState extends State<SeatingListing> {
     });
   }
 
-  generate() {
+  generate(peopleData) {
     final localPeopleData = List<DocumentSnapshot<Person>>.from(peopleData);
     final moreLocalTableData = TableData.fromTableData(localTableData);
     localPeopleData.shuffle();
@@ -240,9 +233,7 @@ class SeatingListingState extends State<SeatingListing> {
                         final chosenPerson = await showDialog<Person>(
                           context: context,
                           builder: (innerContext) {
-                            return PeopleListingModal(
-                              peopleData: peopleData,
-                            );
+                            return const PeopleListingModal();
                           },
                         );
                         if (chosenPerson != null) {

@@ -8,6 +8,7 @@ import 'package:organizer/src/screens/home.dart';
 import 'package:organizer/src/screens/login.dart';
 import 'package:organizer/src/screens/people.dart';
 import 'package:organizer/src/screens/seating.dart';
+import 'package:organizer/src/services/people.dart';
 
 import 'firebase_options.dart';
 
@@ -57,29 +58,31 @@ class _MyAppState extends State<MyApp> {
             home: const LoginPage(),
           );
         }
-        return MaterialApp(
-          title: 'Organizer',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(
-                seedColor: const Color.fromARGB(255, 14, 44, 142),
-                secondary: const Color.fromARGB(255, 255, 194, 13)),
+        return PeopleServiceParent(
+          child: MaterialApp(
+            title: 'Organizer',
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(
+                  seedColor: const Color.fromARGB(255, 14, 44, 142),
+                  secondary: const Color.fromARGB(255, 255, 194, 13)),
+            ),
+            home: const HomePage(),
+            onGenerateRoute: (settings) {
+              Widget? widget;
+              Map routeMap = {
+                '/people': (context) => const PeoplePage(),
+                '/seating': (context) => const SeatingPage(),
+              };
+              if (routeMap.containsKey(settings.name)) {
+                widget = routeMap[settings.name](context);
+              }
+              widget ??= const HomePage();
+              return MaterialPageRoute(
+                settings: settings,
+                builder: (context) => widget!,
+              );
+            },
           ),
-          home: const HomePage(),
-          onGenerateRoute: (settings) {
-            Widget? widget;
-            Map routeMap = {
-              '/people': (context) => const PeoplePage(),
-              '/seating': (context) => const SeatingPage(),
-            };
-            if (routeMap.containsKey(settings.name)) {
-              widget = routeMap[settings.name](context);
-            }
-            widget ??= const HomePage();
-            return MaterialPageRoute(
-              settings: settings,
-              builder: (context) => widget!,
-            );
-          },
         );
       },
     );

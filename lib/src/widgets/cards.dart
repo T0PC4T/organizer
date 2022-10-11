@@ -22,22 +22,21 @@ class ListCard extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(16),
           color: alt ? primary : onPrimary,
-          height: 80,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    icon,
-                    color: alt ? onPrimary : primary,
-                  ),
+          constraints:
+              const BoxConstraints(maxHeight: 80, minWidth: double.infinity),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  icon,
+                  color: alt ? onPrimary : primary,
                 ),
-                ...children
-              ],
-            ),
+              ),
+              ...children
+            ],
           ),
         ),
       ),

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:organizer/src/services/firestore_service.dart';
 
+import '../services/people.dart';
 import 'cards.dart';
 
 enum Jobs {
@@ -16,42 +16,42 @@ enum Jobs {
 }
 
 class PeopleListing extends StatelessWidget {
-  final List<DocumentSnapshot<Person>> peopleData;
+  final List<DocumentSnapshot<Person>>? subsetPeopleData;
   final bool tappable;
-  final void Function(Person, String, bool)? editFunc;
+  final bool editable;
   const PeopleListing({
     super.key,
-    required this.peopleData,
+    this.subsetPeopleData,
     this.tappable = false,
-    this.editFunc,
+    this.editable = false,
   });
-
-  List<Person> get data {
-    return peopleData.map<Person>((e) => e.data()!).toList();
-  }
 
   @override
   Widget build(BuildContext context) {
+    final peopleData =
+        subsetPeopleData ?? PeopleService.of(context)!.peopleData;
+    List<Person> localData = peopleData.map<Person>((e) => e.data()!).toList();
     return ListView(
       scrollDirection: Axis.vertical,
       children: [
-        for (var person in data)
+        for (var i = 0; i < localData.length; i++)
           GestureDetector(
-            onTap: tappable ? () => Navigator.of(context).pop(person) : null,
+            onTap:
+                tappable ? () => Navigator.of(context).pop(localData[i]) : null,
             child: ListCard(
               icon: Icons.person,
               children: [
                 Container(
                   width: 200,
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(person.name),
+                  child: Text(localData[i].name),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text((person.year).toString()),
+                  child: Text("Year ${(localData[i].year).toString()}"),
                 ),
                 AddableBlockWidget(
-                    blocks: person.jobs.map((e) => BlockRecord(e, e)),
+                    blocks: localData[i].jobs.map((e) => BlockRecord(e, e)),
                     addCallback: () async {
                       final job = await Navigator.of(
                         context,
@@ -65,16 +65,49 @@ class PeopleListing extends StatelessWidget {
                       );
 
                       if (job != null) {
-                        if (editFunc != null) {
-                          editFunc!(person, job, true);
+                        if (editable) {
+                          List<String> newJobs = List.from(localData[i].jobs);
+                          newJobs.add(job);
+                          final newPerson = Person(
+                            firstName: localData[i].firstName,
+                            lastName: localData[i].lastName,
+                            year: localData[i].year,
+                            jobs: newJobs,
+                          );
+                          PeopleService.of(context)
+                              ?.updatePerson(peopleData[i], newPerson);
                         }
                       }
                     },
                     deleteCallback: (b) {
-                      if (editFunc != null) {
-                        editFunc!(person, b.value, false);
-                      }
-                    })
+                      List<String> newJobs = List.from(localData[i].jobs);
+                      newJobs.remove(b.value);
+                      final newPerson = Person(
+                        firstName: localData[i].firstName,
+                        lastName: localData[i].lastName,
+                        year: localData[i].year,
+                        jobs: newJobs,
+                      );
+                      PeopleService.of(context)
+                          ?.updatePerson(peopleData[i], newPerson);
+                    }),
+                // TODO make people service inherited widget to whom you can refer all people getting.
+                if (!tappable)
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: IconButton(
+                        onPressed: () {
+                          PeopleService.of(context)
+                              ?.deletePerson(peopleData[i]);
+                        },
+                        icon: const Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ),
+                  )
               ],
             ),
           ),
@@ -127,43 +160,9 @@ class JobsModal extends StatelessWidget {
   }
 }
 
-Future<DocumentSnapshot<Person>> changeJob(
-  DocumentSnapshot<Person> ref,
-  Person person,
-  String key,
-  bool add,
-) async {
-  List<String> newJobs = List.from(person.jobs);
-  if (add) {
-    newJobs.add(key);
-  } else {
-    newJobs.remove(key);
-  }
-  final newPerson = Person(
-    firstName: person.firstName,
-    lastName: person.lastName,
-    year: person.year,
-    jobs: newJobs,
-  );
-  await ref.reference.set(newPerson);
-  final newRef = FirebaseFirestore.instance
-      .collection('people')
-      .where("lastName", isEqualTo: newPerson.lastName)
-      .withConverter<Person>(
-        fromFirestore: (snapshots, _) => Person.fromJson(snapshots.data()!),
-        toFirestore: (person, _) => person.toJson(),
-      );
-
-  final results = await newRef.get();
-  return results.docs[0];
-}
-
 class PeopleListingModal extends StatefulWidget {
-  final List<DocumentSnapshot<Person>> peopleData;
-
   const PeopleListingModal({
     super.key,
-    required this.peopleData,
   });
 
   @override
@@ -173,10 +172,11 @@ class PeopleListingModal extends StatefulWidget {
 class _PeopleListingModalState extends State<PeopleListingModal> {
   String? filter;
 
-  List<DocumentSnapshot<Person>> filteredPeople() {
+  List<DocumentSnapshot<Person>> filteredPeople(BuildContext context) {
+    final peopleData = PeopleService.of(context)!.peopleData;
     final localFilter = filter;
     if (localFilter != null && localFilter.isNotEmpty) {
-      return widget.peopleData
+      return peopleData
           .where((element) => element
               .data()!
               .lastName
@@ -184,7 +184,7 @@ class _PeopleListingModalState extends State<PeopleListingModal> {
               .startsWith(localFilter.toLowerCase()))
           .toList();
     }
-    return widget.peopleData;
+    return peopleData;
   }
 
   @override
@@ -207,7 +207,7 @@ class _PeopleListingModalState extends State<PeopleListingModal> {
           Expanded(
             child: PeopleListing(
               tappable: true,
-              peopleData: filteredPeople(),
+              subsetPeopleData: filteredPeople(context),
             ),
           ),
         ],

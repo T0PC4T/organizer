@@ -48,11 +48,11 @@ final tablesData = [
   },
   {
     "name": "l",
-    "filter": [1],
+    "filter": [2, 3, 4, 5, 6, 7],
   },
   {
     "name": "m",
-    "filter": [2, 3, 4, 5, 6, 7],
+    "filter": [1],
   },
   {
     "name": "n",
