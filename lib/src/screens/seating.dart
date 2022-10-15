@@ -133,7 +133,8 @@ class SeatingListingState extends State<SeatingListing> {
       return (t.filter).contains(p.year);
     }
 
-    localPeopleData.removeWhere((element) => alreadyAssigned.contains(element));
+    localPeopleData
+        .removeWhere((element) => alreadyAssigned.contains(element.name));
 
     // ? Remove people on waiter crew
     localPeopleData
