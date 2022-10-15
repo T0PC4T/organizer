@@ -58,7 +58,7 @@ class _MyAppState extends State<MyApp> {
             home: const LoginPage(),
           );
         }
-        return PeopleServiceParent(
+        return PeopleServiceWidget(
           child: MaterialApp(
             title: 'Organizer',
             theme: ThemeData(

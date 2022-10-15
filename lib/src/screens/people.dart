@@ -34,7 +34,9 @@ class PeoplePage extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.primary,
         child: const Icon(Icons.add),
       ),
-      body: const PeopleListing(),
+      body: const PeopleListing(
+        editable: true,
+      ),
     );
   }
 }

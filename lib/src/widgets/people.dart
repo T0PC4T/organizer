@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../services/people.dart';
@@ -16,7 +15,7 @@ enum Jobs {
 }
 
 class PeopleListing extends StatelessWidget {
-  final List<DocumentSnapshot<Person>>? subsetPeopleData;
+  final List<Person>? subsetPeopleData;
   final bool tappable;
   final bool editable;
   const PeopleListing({
@@ -30,28 +29,27 @@ class PeopleListing extends StatelessWidget {
   Widget build(BuildContext context) {
     final peopleData =
         subsetPeopleData ?? PeopleService.of(context)!.peopleData;
-    List<Person> localData = peopleData.map<Person>((e) => e.data()!).toList();
     return ListView(
       scrollDirection: Axis.vertical,
       children: [
-        for (var i = 0; i < localData.length; i++)
+        for (var person in peopleData)
           GestureDetector(
-            onTap:
-                tappable ? () => Navigator.of(context).pop(localData[i]) : null,
+            onTap: tappable ? () => Navigator.of(context).pop(person) : null,
             child: ListCard(
               icon: Icons.person,
               children: [
                 Container(
                   width: 200,
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(localData[i].name),
+                  child: Text(person.name),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("Year ${(localData[i].year).toString()}"),
+                  child: Text("Year ${(person.year).toString()}"),
                 ),
                 AddableBlockWidget(
-                    blocks: localData[i].jobs.map((e) => BlockRecord(e, e)),
+                    editable: editable,
+                    blocks: person.jobs.map((e) => BlockRecord(e, e)),
                     addCallback: () async {
                       final job = await Navigator.of(
                         context,
@@ -66,45 +64,51 @@ class PeopleListing extends StatelessWidget {
 
                       if (job != null) {
                         if (editable) {
-                          List<String> newJobs = List.from(localData[i].jobs);
+                          List<String> newJobs = List.from(person.jobs);
                           newJobs.add(job);
                           final newPerson = Person(
-                            firstName: localData[i].firstName,
-                            lastName: localData[i].lastName,
-                            year: localData[i].year,
+                            path: person.path,
+                            firstName: person.firstName,
+                            lastName: person.lastName,
+                            year: person.year,
                             jobs: newJobs,
                           );
-                          PeopleService.of(context)
-                              ?.updatePerson(peopleData[i], newPerson);
+
+                          PeopleService.of(context)?.updatePerson(newPerson);
                         }
                       }
                     },
                     deleteCallback: (b) {
-                      List<String> newJobs = List.from(localData[i].jobs);
+                      List<String> newJobs = List.from(person.jobs);
                       newJobs.remove(b.value);
                       final newPerson = Person(
-                        firstName: localData[i].firstName,
-                        lastName: localData[i].lastName,
-                        year: localData[i].year,
+                        path: person.path,
+                        firstName: person.firstName,
+                        lastName: person.lastName,
+                        year: person.year,
                         jobs: newJobs,
                       );
-                      PeopleService.of(context)
-                          ?.updatePerson(peopleData[i], newPerson);
+                      PeopleService.of(context)?.updatePerson(newPerson);
                     }),
                 // TODO make people service inherited widget to whom you can refer all people getting.
                 if (!tappable)
                   Expanded(
                     child: Align(
                       alignment: Alignment.centerRight,
-                      child: IconButton(
-                        onPressed: () {
-                          PeopleService.of(context)
-                              ?.deletePerson(peopleData[i]);
+                      child: PopupMenuButton<String>(
+                        onSelected: (value) {
+                          if (value == "Delete") {
+                            PeopleService.of(context)?.deletePerson(person);
+                          }
                         },
-                        icon: const Icon(
-                          Icons.delete,
-                          color: Colors.red,
-                        ),
+                        itemBuilder: (BuildContext context) {
+                          return {'Delete'}.map((String choice) {
+                            return PopupMenuItem<String>(
+                              value: choice,
+                              child: Text(choice),
+                            );
+                          }).toList();
+                        },
                       ),
                     ),
                   )
@@ -172,14 +176,12 @@ class PeopleListingModal extends StatefulWidget {
 class _PeopleListingModalState extends State<PeopleListingModal> {
   String? filter;
 
-  List<DocumentSnapshot<Person>> filteredPeople(BuildContext context) {
+  List<Person> filteredPeople(BuildContext context) {
     final peopleData = PeopleService.of(context)!.peopleData;
     final localFilter = filter;
     if (localFilter != null && localFilter.isNotEmpty) {
       return peopleData
-          .where((element) => element
-              .data()!
-              .lastName
+          .where((element) => element.lastName
               .toLowerCase()
               .startsWith(localFilter.toLowerCase()))
           .toList();
@@ -192,10 +194,12 @@ class _PeopleListingModalState extends State<PeopleListingModal> {
     return ModalCard(
       title: TextField(
           decoration: const InputDecoration(
+            counterStyle: ModalCard.titleTheme,
             hintText: "Search",
             hintStyle: ModalCard.titleTheme,
             border: InputBorder.none,
           ),
+          cursorColor: ModalCard.titleTheme.color,
           style: ModalCard.titleTheme,
           onChanged: (value) {
             setState(() {
@@ -208,6 +212,80 @@ class _PeopleListingModalState extends State<PeopleListingModal> {
             child: PeopleListing(
               tappable: true,
               subsetPeopleData: filteredPeople(context),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CreatePersonModal extends StatelessWidget {
+  const CreatePersonModal({super.key});
+
+  static const icons = [
+    Icons.person,
+    Icons.person_outline,
+    Icons.lock_open_sharp
+  ];
+  static const titles = ["Seminarian", "Guest"];
+  static const values = [1, 2];
+
+  @override
+  Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
+    return ModalCard(
+      title: const Text("Create new seminarian"),
+      child: ListView(
+        children: [
+          Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                TextFormField(
+                  decoration: const InputDecoration(
+                    hintText: 'First name',
+                  ),
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    hintText: 'Last name',
+                  ),
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    hintText: 'Year',
+                  ),
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {}
+                    },
+                    child: const Text('Submit'),
+                  ),
+                ),
+              ],
             ),
           ),
         ],

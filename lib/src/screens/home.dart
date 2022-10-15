@@ -20,8 +20,8 @@ class HomePage extends StatelessWidget {
               child: Image.asset("assets/images/fssplogo.png"),
             ),
             ListTile(
-              leading: const Icon(Icons.people),
-              title: const Text('People'),
+              leading: const Icon(Icons.work),
+              title: const Text('Weekly Jobs'),
               onTap: () {
                 Navigator.of(context).pushNamed("/people");
               },

@@ -1,6 +1,5 @@
 import 'dart:html' as html;
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:printing/printing.dart';
 
@@ -117,7 +116,7 @@ class SeatingListingState extends State<SeatingListing> {
   }
 
   generate(peopleData) {
-    final localPeopleData = List<DocumentSnapshot<Person>>.from(peopleData);
+    final localPeopleData = List<Person>.from(peopleData);
     final moreLocalTableData = TableData.fromTableData(localTableData);
     localPeopleData.shuffle();
     List<String> alreadyAssigned = [];
@@ -134,28 +133,26 @@ class SeatingListingState extends State<SeatingListing> {
       return (t.filter).contains(p.year);
     }
 
-    localPeopleData.removeWhere(
-        (element) => alreadyAssigned.contains(element.data()!.name));
+    localPeopleData.removeWhere((element) => alreadyAssigned.contains(element));
 
     // ? Remove people on waiter crew
-    localPeopleData.removeWhere(
-        (element) => element.data()!.jobs.contains(Jobs.waiter.name));
+    localPeopleData
+        .removeWhere((element) => element.jobs.contains(Jobs.waiter.name));
 
     // ? Remove people with supper crew
     final supperDishCrew = localPeopleData
-        .where((element) =>
-            element.data()!.jobs.contains(Jobs.supperDishCrew.name))
+        .where((element) => element.jobs.contains(Jobs.supperDishCrew.name))
         .toList();
 
     localPeopleData.removeWhere(
-        (element) => element.data()!.jobs.contains(Jobs.supperDishCrew.name));
+        (element) => element.jobs.contains(Jobs.supperDishCrew.name));
 
     while (localPeopleData.isNotEmpty || supperDishCrew.isNotEmpty) {
       late Person curPerson;
       if (localPeopleData.isNotEmpty) {
-        curPerson = localPeopleData.removeLast().data()!;
+        curPerson = localPeopleData.removeLast();
       } else {
-        curPerson = supperDishCrew.removeLast().data()!;
+        curPerson = supperDishCrew.removeLast();
       }
 
       () {
@@ -169,10 +166,10 @@ class SeatingListingState extends State<SeatingListing> {
 
               // Dish Crew Check
               if (curPerson.jobs.contains(Jobs.lunchDishCrew.name)) {
-                final i = supperDishCrew.indexWhere(
-                    (element) => fitsFilter(table, element.data()!));
+                final i = supperDishCrew
+                    .indexWhere((element) => fitsFilter(table, element));
                 if (i != -1) {
-                  table.addPerson(seat, supperDishCrew[i].data()!.name);
+                  table.addPerson(seat, supperDishCrew[i].name);
                   supperDishCrew.removeAt(i);
                 }
               }
