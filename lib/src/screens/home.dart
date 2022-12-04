@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../services/firestore_service.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -8,6 +11,15 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Organizer'),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.logout),
+            tooltip: 'Sign out',
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+            },
+          ),
+        ],
       ),
       drawer: Drawer(
         child: ListView(
@@ -31,9 +43,44 @@ class HomePage extends StatelessWidget {
               title: const Text('Seating'),
               onTap: () => Navigator.of(context).pushNamed("/seating"),
             ),
+            ListTile(
+              leading: const Icon(Icons.calendar_month_outlined),
+              title: const Text('Calendar'),
+              onTap: () => Navigator.of(context).pushNamed("/calendar"),
+            ),
           ],
         ),
       ),
+      body: const UserWidget(),
     );
+  }
+}
+
+class UserWidget extends StatelessWidget {
+  const UserWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    print("Building:");
+    final user = FirestoreService.of(context, FService.users)!.userService.user;
+    print(user);
+    if (user != null) {
+      return Container(
+        child: Card(
+          child: Column(children: [
+            Row(
+              children: [
+                const Icon(
+                  Icons.person,
+                  size: 42,
+                ),
+                Text(user["name"]),
+              ],
+            ),
+          ]),
+        ),
+      );
+    }
+    return const Center(child: CircularProgressIndicator());
   }
 }

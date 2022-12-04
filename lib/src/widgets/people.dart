@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:organizer/src/services/firestore_service.dart';
 
 import '../services/people.dart';
 import 'cards.dart';
@@ -27,95 +28,102 @@ class PeopleListing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final peopleData =
-        subsetPeopleData ?? PeopleService.of(context)!.peopleData;
-    return ListView(
+    final peopleData = subsetPeopleData ??
+        FirestoreService.of(context, FService.people)!.peopleService.peopleData;
+    return ListView.builder(
       scrollDirection: Axis.vertical,
-      children: [
-        for (var person in peopleData)
-          GestureDetector(
-            onTap: tappable ? () => Navigator.of(context).pop(person) : null,
-            child: ListCard(
-              icon: Icons.person,
-              children: [
-                Container(
-                  width: 200,
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(person.name),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("Year ${(person.year).toString()}"),
-                ),
-                AddableBlockWidget(
-                    editable: editable,
-                    blocks: person.jobs.map((e) => BlockRecord(e, e)),
-                    addCallback: () async {
-                      final job = await Navigator.of(
-                        context,
-                        rootNavigator: true,
-                      ).push<String>(
-                        DialogRoute<String>(
-                            context: context,
-                            builder: (context) {
-                              return const JobsModal();
-                            }),
-                      );
+      itemCount: peopleData.length,
+      itemBuilder: (context, index) {
+        final person = peopleData[index];
+        return GestureDetector(
+          onTap: tappable ? () => Navigator.of(context).pop(person) : null,
+          child: ListCard(
+            icon: Icons.person,
+            children: [
+              Container(
+                width: 200,
+                padding: const EdgeInsets.all(8.0),
+                child: Text(person.name),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("Year ${(person.year).toString()}"),
+              ),
+              AddableBlockWidget(
+                  editable: editable,
+                  blocks: person.jobs.map((e) => BlockRecord(e, e)),
+                  addCallback: () async {
+                    final job = await Navigator.of(
+                      context,
+                      rootNavigator: true,
+                    ).push<String>(
+                      DialogRoute<String>(
+                          context: context,
+                          builder: (context) {
+                            return const JobsModal();
+                          }),
+                    );
 
-                      if (job != null) {
-                        if (editable) {
-                          List<String> newJobs = List.from(person.jobs);
-                          newJobs.add(job);
-                          final newPerson = Person(
-                            path: person.path,
-                            firstName: person.firstName,
-                            lastName: person.lastName,
-                            year: person.year,
-                            jobs: newJobs,
-                          );
+                    if (job != null) {
+                      if (editable) {
+                        List<String> newJobs = List.from(person.jobs);
+                        newJobs.add(job);
+                        final newPerson = Person(
+                          path: person.path,
+                          firstName: person.firstName,
+                          lastName: person.lastName,
+                          year: person.year,
+                          jobs: newJobs,
+                        );
 
-                          PeopleService.of(context)?.updatePerson(newPerson);
-                        }
+                        FirestoreService.of(context, FService.people)
+                            ?.peopleService
+                            .updatePerson(newPerson);
                       }
-                    },
-                    deleteCallback: (b) {
-                      List<String> newJobs = List.from(person.jobs);
-                      newJobs.remove(b.value);
-                      final newPerson = Person(
-                        path: person.path,
-                        firstName: person.firstName,
-                        lastName: person.lastName,
-                        year: person.year,
-                        jobs: newJobs,
-                      );
-                      PeopleService.of(context)?.updatePerson(newPerson);
-                    }),
-                // TODO make people service inherited widget to whom you can refer all people getting.
-                if (!tappable)
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: PopupMenuButton<String>(
-                        onSelected: (value) {
-                          if (value == "Delete") {
-                            PeopleService.of(context)?.deletePerson(person);
-                          }
-                        },
-                        itemBuilder: (BuildContext context) {
-                          return {'Delete'}.map((String choice) {
-                            return PopupMenuItem<String>(
-                              value: choice,
-                              child: Text(choice),
-                            );
-                          }).toList();
-                        },
-                      ),
+                    }
+                  },
+                  deleteCallback: (b) {
+                    List<String> newJobs = List.from(person.jobs);
+                    newJobs.remove(b.value);
+                    final newPerson = Person(
+                      path: person.path,
+                      firstName: person.firstName,
+                      lastName: person.lastName,
+                      year: person.year,
+                      jobs: newJobs,
+                    );
+                    FirestoreService.of(context, FService.people)
+                        ?.peopleService
+                        .updatePerson(newPerson);
+                  }),
+              // TODO make people service inherited widget to whom you can refer all people getting.
+              if (!tappable)
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: PopupMenuButton<String>(
+                      onSelected: (value) {
+                        if (value == "Delete") {
+                          FirestoreService.of(context, FService.people)
+                              ?.peopleService
+                              .deletePerson(person);
+                        }
+                      },
+                      itemBuilder: (BuildContext context) {
+                        return {'Delete'}.map((String choice) {
+                          return PopupMenuItem<String>(
+                            value: choice,
+                            child: Text(choice),
+                          );
+                        }).toList();
+                      },
                     ),
-                  )
-              ],
-            ),
+                  ),
+                )
+            ],
           ),
-      ],
+        );
+      },
     );
   }
 }
@@ -177,7 +185,8 @@ class _PeopleListingModalState extends State<PeopleListingModal> {
   String? filter;
 
   List<Person> filteredPeople(BuildContext context) {
-    final peopleData = PeopleService.of(context)!.peopleData;
+    final peopleData =
+        FirestoreService.of(context, FService.people)!.peopleService.peopleData;
     final localFilter = filter;
     if (localFilter != null && localFilter.isNotEmpty) {
       return peopleData

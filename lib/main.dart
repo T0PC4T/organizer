@@ -2,13 +2,15 @@ import 'package:firebase_auth/firebase_auth.dart'
     show FirebaseAuth, Persistence;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:organizer/src/screens/calendar.dart';
 // WEB
 
 import 'package:organizer/src/screens/home.dart';
 import 'package:organizer/src/screens/login.dart';
 import 'package:organizer/src/screens/people.dart';
 import 'package:organizer/src/screens/seating.dart';
-import 'package:organizer/src/services/people.dart';
+import 'package:organizer/src/services/firestore_service.dart';
+import 'package:organizer/theme.dart';
 
 import 'firebase_options.dart';
 
@@ -50,28 +52,21 @@ class _MyAppState extends State<MyApp> {
         if (FirebaseAuth.instance.currentUser == null) {
           return MaterialApp(
             title: 'Organizer',
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(
-                  seedColor: const Color.fromARGB(255, 14, 44, 142),
-                  secondary: const Color.fromARGB(255, 255, 194, 13)),
-            ),
+            theme: themeData,
             home: const LoginPage(),
           );
         }
-        return PeopleServiceWidget(
+        return FirestoreServiceWidget(
           child: MaterialApp(
             title: 'Organizer',
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(
-                  seedColor: const Color.fromARGB(255, 14, 44, 142),
-                  secondary: const Color.fromARGB(255, 255, 194, 13)),
-            ),
+            theme: themeData,
             home: const HomePage(),
             onGenerateRoute: (settings) {
               Widget? widget;
               Map routeMap = {
                 '/people': (context) => const PeoplePage(),
                 '/seating': (context) => const SeatingPage(),
+                '/calendar': (context) => const PrayersScreen(),
               };
               if (routeMap.containsKey(settings.name)) {
                 widget = routeMap[settings.name](context);

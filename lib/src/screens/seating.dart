@@ -3,6 +3,7 @@ import 'dart:html' as html;
 import 'package:flutter/material.dart';
 import 'package:printing/printing.dart';
 
+import '../services/firestore_service.dart';
 import '../services/pdf_gen.dart';
 import '../services/people.dart';
 import '../services/seating_data.dart';
@@ -16,7 +17,8 @@ class SeatingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final peopleData = PeopleService.of(context)!.peopleData;
+    final peopleData =
+        FirestoreService.of(context, FService.people)!.peopleService;
     return Scaffold(
         appBar: AppBar(
           title: const Text('Seating'),
@@ -32,7 +34,7 @@ class SeatingPage extends StatelessWidget {
           ],
         ),
         floatingActionButton: ConstrainedBox(
-          constraints: const BoxConstraints(maxHeight: 200, maxWidth: 300),
+          constraints: const BoxConstraints(maxHeight: 250, maxWidth: 300),
           child: Column(
             children: [
               Padding(
@@ -46,6 +48,7 @@ class SeatingPage extends StatelessWidget {
                   label: const Text('Generate'),
                   icon: const Icon(Icons.settings),
                   backgroundColor: Theme.of(context).colorScheme.primary,
+                  foregroundColor: Theme.of(context).colorScheme.onPrimary,
                 ),
               ),
               Padding(
@@ -59,6 +62,7 @@ class SeatingPage extends StatelessWidget {
                   label: const Text('Clear all'),
                   icon: const Icon(Icons.clear),
                   backgroundColor: Colors.red[700],
+                  foregroundColor: Theme.of(context).colorScheme.onPrimary,
                 ),
               ),
               Padding(
@@ -70,8 +74,8 @@ class SeatingPage extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => PdfPreview(
-                          build: (format) => generateSeetingPdf("Seating Chart",
-                              seatKey.currentState!.localTableData),
+                          build: (format) => generateSeetingPdf(
+                              "Seating Chart", seatKey.currentState!.tableData),
                         ),
                       ),
                     );
@@ -79,6 +83,7 @@ class SeatingPage extends StatelessWidget {
                   label: const Text('Download'),
                   icon: const Icon(Icons.download),
                   backgroundColor: Colors.green[700],
+                  foregroundColor: Theme.of(context).colorScheme.onPrimary,
                 ),
               ),
             ],
@@ -98,8 +103,8 @@ class SeatingListing extends StatefulWidget {
 }
 
 class SeatingListingState extends State<SeatingListing> {
-  List<TableData> localTableData;
-  SeatingListingState() : localTableData = TableData.getTables();
+  List<TableData> tableData;
+  SeatingListingState() : tableData = TableData.getTables();
 
   @override
   void initState() {
@@ -108,31 +113,31 @@ class SeatingListingState extends State<SeatingListing> {
 
   reset() {
     setState(() {
-      for (var element in localTableData) {
+      for (var element in tableData) {
         element.data
             .removeWhere((key, value) => !["name", "filter"].contains(key));
       }
     });
   }
 
+  bool fitsFilter(TableData t, Person p) {
+    return (t.filter).contains(p.year);
+  }
+
   generate(peopleData) {
     final localPeopleData = List<Person>.from(peopleData);
-    final moreLocalTableData = TableData.fromTableData(localTableData);
+    final scopedTableData = TableData.fromTableData(tableData);
     localPeopleData.shuffle();
     List<String> alreadyAssigned = [];
-    // Remove people who have already been placed
-    for (var table in moreLocalTableData) {
+
+    // ? Remove people who have already been placed
+    for (var table in scopedTableData) {
       for (var seat in table.seats) {
         if (table.seminarianSeat(seat)) {
           alreadyAssigned.addAll(table.seatPeople(seat));
         }
       }
     }
-
-    bool fitsFilter(TableData t, Person p) {
-      return (t.filter).contains(p.year);
-    }
-
     localPeopleData
         .removeWhere((element) => alreadyAssigned.contains(element.name));
 
@@ -157,7 +162,7 @@ class SeatingListingState extends State<SeatingListing> {
       }
 
       () {
-        for (var table in moreLocalTableData) {
+        for (var table in scopedTableData) {
           for (var seat in table.seats) {
             if (table.seatOccupied(seat)) {
               continue;
@@ -184,7 +189,7 @@ class SeatingListingState extends State<SeatingListing> {
     }
 
     setState(() {
-      localTableData = moreLocalTableData;
+      tableData = scopedTableData;
     });
   }
 
@@ -194,7 +199,7 @@ class SeatingListingState extends State<SeatingListing> {
       padding: const EdgeInsets.all(32),
       scrollDirection: Axis.vertical,
       children: [
-        for (TableData table in localTableData) ...[
+        for (TableData table in tableData) ...[
           ListCard(icon: Icons.table_restaurant, alt: true, children: [
             Container(
               width: 50,
@@ -307,7 +312,7 @@ class TableData {
   }
 
   static List<TableData> getTables() {
-    return List.from(tablesData.map((e) => TableData(Map.from(e))));
+    return List.from(defaultTablesData.map((e) => TableData(Map.from(e))));
   }
 
   Iterable<String> get seats sync* {

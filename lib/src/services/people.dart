@@ -1,75 +1,40 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:organizer/src/services/firestore_service.dart';
 
-class PeopleServiceWidget extends StatefulWidget {
-  final Widget child;
-  const PeopleServiceWidget({super.key, required this.child});
-
-  @override
-  State<PeopleServiceWidget> createState() => PeopleService();
-}
-
-class PeopleService extends State<PeopleServiceWidget> {
+class PeopleService {
   List<Person> peopleData;
+  final void Function(FService) update;
 
-  PeopleService() : peopleData = [];
+  PeopleService(this.update) : peopleData = [];
 
-  static PeopleService? of(BuildContext context) {
-    context.dependOnInheritedWidgetOfExactType<PeopleServiceInherited>();
-    return context.findAncestorStateOfType<PeopleService>();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getPeople();
-  }
-
-  void getPeople() async {
+  void initialize() async {
     final peopleRef = FirebaseFirestore.instance.collection('people');
 
     final response = await peopleRef.get();
     final value = response.docs
       ..sort((a, b) => a["lastName"].compareTo(b.data()["lastName"]));
-    setState(() {
-      peopleData = value.map((e) => e.person).toList();
-    });
+    peopleData = value.map((e) => e.person).toList();
+    update(FService.people);
   }
 
   void updatePerson(
     Person newPerson,
   ) async {
     await newPerson.ref.set(newPerson.toJson());
-    setState(() {
-      final i =
-          peopleData.indexWhere((element) => element.path == newPerson.path);
-      peopleData[i] = newPerson;
-    });
+    final i =
+        peopleData.indexWhere((element) => element.path == newPerson.path);
+    peopleData[i] = newPerson;
+    update(FService.people);
   }
 
   void deletePerson(
     Person person,
   ) async {
     await person.ref.delete();
-    setState(() {
-      peopleData.remove(person);
-    });
-  }
 
-  @override
-  Widget build(BuildContext context) {
-    return PeopleServiceInherited(
-      child: widget.child,
-    );
-  }
-}
-
-class PeopleServiceInherited extends InheritedWidget {
-  const PeopleServiceInherited({super.key, required super.child});
-
-  @override
-  bool updateShouldNotify(PeopleServiceInherited oldWidget) {
-    return true;
+    peopleData.remove(person);
+    update(FService.people);
   }
 }
 
