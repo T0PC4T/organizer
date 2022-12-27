@@ -17,8 +17,8 @@ class SeatingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final peopleData =
-        FirestoreService.of(context, FService.people)!.peopleService;
+    final peopleService =
+        FirestoreService.serve(context, FServices.people) as PeopleService;
     return Scaffold(
         appBar: AppBar(
           title: const Text('Seating'),
@@ -43,7 +43,7 @@ class SeatingPage extends StatelessWidget {
                   key: const ValueKey(1),
                   heroTag: const ValueKey(1),
                   onPressed: () {
-                    seatKey.currentState?.generate(peopleData);
+                    seatKey.currentState?.generate(peopleService.data);
                   },
                   label: const Text('Generate'),
                   icon: const Icon(Icons.settings),

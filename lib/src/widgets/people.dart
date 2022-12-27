@@ -28,8 +28,9 @@ class PeopleListing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final peopleData = subsetPeopleData ??
-        FirestoreService.of(context, FService.people)!.peopleService.peopleData;
+    final peopleService =
+        FirestoreService.serve(context, FServices.people) as PeopleService;
+    final peopleData = subsetPeopleData ?? peopleService.data;
     return ListView.builder(
       scrollDirection: Axis.vertical,
       itemCount: peopleData.length,
@@ -69,16 +70,14 @@ class PeopleListing extends StatelessWidget {
                         List<String> newJobs = List.from(person.jobs);
                         newJobs.add(job);
                         final newPerson = Person(
-                          path: person.path,
+                          id: person.id,
                           firstName: person.firstName,
                           lastName: person.lastName,
                           year: person.year,
                           jobs: newJobs,
                         );
 
-                        FirestoreService.of(context, FService.people)
-                            ?.peopleService
-                            .updatePerson(newPerson);
+                        peopleService.updatePerson(newPerson);
                       }
                     }
                   },
@@ -86,15 +85,13 @@ class PeopleListing extends StatelessWidget {
                     List<String> newJobs = List.from(person.jobs);
                     newJobs.remove(b.value);
                     final newPerson = Person(
-                      path: person.path,
+                      id: person.id,
                       firstName: person.firstName,
                       lastName: person.lastName,
                       year: person.year,
                       jobs: newJobs,
                     );
-                    FirestoreService.of(context, FService.people)
-                        ?.peopleService
-                        .updatePerson(newPerson);
+                    peopleService.updatePerson(newPerson);
                   }),
               // TODO make people service inherited widget to whom you can refer all people getting.
               if (!tappable)
@@ -104,9 +101,7 @@ class PeopleListing extends StatelessWidget {
                     child: PopupMenuButton<String>(
                       onSelected: (value) {
                         if (value == "Delete") {
-                          FirestoreService.of(context, FService.people)
-                              ?.peopleService
-                              .deletePerson(person);
+                          peopleService.deletePerson(person);
                         }
                       },
                       itemBuilder: (BuildContext context) {
@@ -185,8 +180,9 @@ class _PeopleListingModalState extends State<PeopleListingModal> {
   String? filter;
 
   List<Person> filteredPeople(BuildContext context) {
-    final peopleData =
-        FirestoreService.of(context, FService.people)!.peopleService.peopleData;
+    final peopleService =
+        FirestoreService.serve(context, FServices.people) as PeopleService;
+    final peopleData = peopleService.data;
     final localFilter = filter;
     if (localFilter != null && localFilter.isNotEmpty) {
       return peopleData

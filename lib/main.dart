@@ -9,6 +9,7 @@ import 'package:organizer/src/screens/home.dart';
 import 'package:organizer/src/screens/login.dart';
 import 'package:organizer/src/screens/people.dart';
 import 'package:organizer/src/screens/seating.dart';
+import 'package:organizer/src/services/example.dart';
 import 'package:organizer/src/services/firestore_service.dart';
 import 'package:organizer/theme.dart';
 
@@ -66,7 +67,8 @@ class _MyAppState extends State<MyApp> {
               Map routeMap = {
                 '/people': (context) => const PeoplePage(),
                 '/seating': (context) => const SeatingPage(),
-                '/calendar': (context) => const PrayersScreen(),
+                '/calendar': (context) => const CalendarScreen(),
+                '/test': (context) => const ExampleScreen(),
               };
               if (routeMap.containsKey(settings.name)) {
                 widget = routeMap[settings.name](context);
