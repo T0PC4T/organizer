@@ -11,9 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
 
-  firebase_core: ^1.24.0
-  firebase_auth: ^3.11.0
-  cloud_firestore: ^3.5.0
+  firebase_core: ^2.4.1
+  firebase_auth: ^4.2.5
+  cloud_firestore: ^4.3.1
   firestore_ui: ^1.24.0
   pdf: ^3.8.3
   printing: ^5.9.3

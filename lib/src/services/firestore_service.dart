@@ -1,15 +1,11 @@
-import 'dart:html' as html;
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:organizer/src/services/example.dart';
-import 'package:organizer/src/services/people.dart';
-import 'package:organizer/src/services/users.dart';
+import 'package:organizer/src/services/people_service.dart';
+import 'package:organizer/src/services/services.dart';
+import 'package:organizer/src/services/user_service.dart';
 
 enum FServices {
-  people(PeopleService.new),
-  users(UserService.new),
-  example(ExampleService.new);
+  user(UserService.new),
+  people(PeopleService.new);
 
   final FService Function({required void Function(int) update}) cons;
   const FServices(this.cons);
@@ -37,19 +33,25 @@ class FirestoreService extends State<FirestoreServiceWidget> {
     return context.findAncestorStateOfType<FirestoreService>();
   }
 
-  static FService? serve(BuildContext context, FServices s) {
+  static T? serve<T extends FService>(BuildContext context, FServices s) {
     context.dependOnInheritedWidgetOfExactType<FirestoreServiceModel>(
       aspect: s,
     );
     final me = context.findAncestorStateOfType<FirestoreService>();
     final service = me?.services[s];
-    if (!service!.initialized) {
+    if (service == null) {
+      throw "No Firestore Service Running!";
+    }
+
+    if (!service.initialized) {
       service.initialize();
     }
-    return service;
+
+    return service as T;
   }
 
   void updateService(FServices s, int newI) {
+    print("updating service: ${s.name} // ${data[s]} -> $newI");
     setState(() {
       data = Map.from(data);
       data[s] = newI;
@@ -58,13 +60,10 @@ class FirestoreService extends State<FirestoreServiceWidget> {
 
   @override
   void initState() {
-    const a = ExampleService.new;
-
     services = {
       for (var key in FServices.values)
         key: key.cons(update: (int i) => updateService(key, i))
     };
-
     data = {
       for (var key in services.keys) key: services[key]!.index,
     };
@@ -98,99 +97,12 @@ class FirestoreServiceModel extends InheritedModel<FServices> {
   @override
   bool updateShouldNotifyDependent(
       FirestoreServiceModel oldWidget, Set<FServices> dependencies) {
-    for (var v in FServices.values) {
-      if (data[v] != oldWidget.data[v] && dependencies.contains(v)) {
+    for (var v in dependencies) {
+      if (data[v] != oldWidget.data[v]) {
+        print("SENDING UPDATE");
         return true;
       }
     }
     return false;
   }
-}
-
-// CACHE SERVICE
-
-typedef CacheUpdate = void Function(int);
-
-abstract class FService<T> {
-  final CacheUpdate updateFunc;
-  dynamic get data;
-  bool get initialized;
-  int index;
-  void initialize();
-  FService({required CacheUpdate update, required this.index})
-      : updateFunc = update;
-}
-
-abstract class CacheService<T> extends FService<T> {
-  String get name;
-  @override
-  List<T> data;
-  @override
-  bool initialized;
-  String get indexName => "${name}Index";
-
-  CacheService({required super.update, super.index = 0, this.data = const []})
-      : initialized = false;
-
-  @override
-  initialize() async {
-    initialized = true;
-    if (html.window.localStorage.containsKey(name) &&
-        html.window.localStorage.containsKey(indexName)) {
-      try {
-        data = stringToData(html.window.localStorage[name]!);
-        index = int.parse(html.window.localStorage[indexName].toString());
-      } catch (e) {
-        // Clean cache on error.
-        print("There was an error: $e");
-        print(e);
-        html.window.localStorage.remove(name);
-        html.window.localStorage.remove(indexName);
-      }
-    }
-    final cacheRef = FirebaseFirestore.instance.doc("/cache/$name");
-
-    final cacheRecord = await cacheRef.get();
-    int liveIndex = cacheRecord.exists ? cacheRecord["index"] : 0;
-    if (liveIndex != index) {
-      print("-------------FETCHING '$name' DATA-------------");
-      data = await fetchData();
-      index = liveIndex;
-    }
-    updateLocalStoreAndWidget(index);
-  }
-
-  Map<String, dynamic> docToJson(
-      QueryDocumentSnapshot<Map<String, dynamic>> doc) {
-    return doc.data()..putIfAbsent("id", () => doc.id);
-  }
-
-  Future<DocumentSnapshot<Map<String, dynamic>>> addRecord(
-      Map<String, dynamic> d) async {
-    final response = await FirebaseFirestore.instance.collection(name).add(d);
-    return response.get();
-  }
-
-  void changeRecord(dynamic record, Map<String, dynamic> d) {
-    FirebaseFirestore.instance.collection(name).doc(record["id"]).set(d);
-    (data[data.indexOf(record)] as Map).addAll(d);
-    updateLocalStoreAndWidget(++index);
-  }
-
-  void deleteRecord(dynamic record) {
-    FirebaseFirestore.instance.collection(name).doc(record["id"]).delete();
-    data.remove(record);
-    updateLocalStoreAndWidget(++index);
-  }
-
-  updateLocalStoreAndWidget(int i) {
-    FirebaseFirestore.instance.doc("/cache/$name").set({"index": i});
-    html.window.localStorage[name] = dataToString(data);
-    html.window.localStorage[indexName] = i.toString();
-    updateFunc(i);
-  }
-
-  List<T> stringToData(String d);
-  String dataToString(List<T> d);
-  Future<List<T>> fetchData();
 }

@@ -9,11 +9,12 @@ import 'package:organizer/src/screens/home.dart';
 import 'package:organizer/src/screens/login.dart';
 import 'package:organizer/src/screens/people.dart';
 import 'package:organizer/src/screens/seating.dart';
-import 'package:organizer/src/services/example.dart';
 import 'package:organizer/src/services/firestore_service.dart';
 import 'package:organizer/theme.dart';
 
 import 'firebase_options.dart';
+
+// flutter build web --web-renderer=canvaskit
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -68,7 +69,6 @@ class _MyAppState extends State<MyApp> {
                 '/people': (context) => const PeoplePage(),
                 '/seating': (context) => const SeatingPage(),
                 '/calendar': (context) => const CalendarScreen(),
-                '/test': (context) => const ExampleScreen(),
               };
               if (routeMap.containsKey(settings.name)) {
                 widget = routeMap[settings.name](context);

@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../services/firestore_service.dart';
-import '../services/users.dart';
+import '../services/user_service.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -63,7 +63,7 @@ class UserWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user =
-        (FirestoreService.serve(context, FServices.users) as UserService).data;
+        (FirestoreService.serve(context, FServices.user) as UserService).data;
     if (user != null) {
       return Container(
         child: Card(

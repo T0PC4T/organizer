@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:organizer/src/services/firestore_service.dart';
 
-import '../services/people.dart';
+import '../services/people_service.dart';
 import 'cards.dart';
 
 enum Jobs {
@@ -16,7 +16,7 @@ enum Jobs {
 }
 
 class PeopleListing extends StatelessWidget {
-  final List<Person>? subsetPeopleData;
+  final List<Map<String, dynamic>>? subsetPeopleData;
   final bool tappable;
   final bool editable;
   const PeopleListing({
@@ -30,7 +30,11 @@ class PeopleListing extends StatelessWidget {
   Widget build(BuildContext context) {
     final peopleService =
         FirestoreService.serve(context, FServices.people) as PeopleService;
-    final peopleData = subsetPeopleData ?? peopleService.data;
+    List<Map<String, dynamic>>? peopleData =
+        subsetPeopleData ?? peopleService.data?.values.toList();
+    if (peopleData == null) {
+      return const CircularProgressIndicator();
+    }
     return ListView.builder(
       scrollDirection: Axis.vertical,
       itemCount: peopleData.length,
@@ -48,52 +52,28 @@ class PeopleListing extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("Year ${(person.year).toString()}"),
+                child: Text("Year ${(person["year"]).toString()}"),
               ),
               AddableBlockWidget(
                   editable: editable,
                   blocks: person.jobs.map((e) => BlockRecord(e, e)),
                   addCallback: () async {
-                    final job = await Navigator.of(
-                      context,
-                      rootNavigator: true,
-                    ).push<String>(
-                      DialogRoute<String>(
-                          context: context,
-                          builder: (context) {
-                            return const JobsModal();
-                          }),
-                    );
-
+                    final job = await showDialog<String>(
+                        context: context,
+                        builder: (context) => const JobsModal());
                     if (job != null) {
                       if (editable) {
-                        List<String> newJobs = List.from(person.jobs);
+                        List<String> newJobs = person.jobs;
                         newJobs.add(job);
-                        final newPerson = Person(
-                          id: person.id,
-                          firstName: person.firstName,
-                          lastName: person.lastName,
-                          year: person.year,
-                          jobs: newJobs,
-                        );
-
-                        peopleService.updatePerson(newPerson);
+                        peopleService.updateRecord(person, {"jobs": newJobs});
                       }
                     }
                   },
                   deleteCallback: (b) {
-                    List<String> newJobs = List.from(person.jobs);
+                    List<String> newJobs = person.jobs;
                     newJobs.remove(b.value);
-                    final newPerson = Person(
-                      id: person.id,
-                      firstName: person.firstName,
-                      lastName: person.lastName,
-                      year: person.year,
-                      jobs: newJobs,
-                    );
-                    peopleService.updatePerson(newPerson);
+                    peopleService.updateRecord(person, {"jobs": newJobs});
                   }),
-              // TODO make people service inherited widget to whom you can refer all people getting.
               if (!tappable)
                 Expanded(
                   child: Align(
@@ -101,7 +81,7 @@ class PeopleListing extends StatelessWidget {
                     child: PopupMenuButton<String>(
                       onSelected: (value) {
                         if (value == "Delete") {
-                          peopleService.deletePerson(person);
+                          peopleService.deleteRecord(person);
                         }
                       },
                       itemBuilder: (BuildContext context) {
@@ -179,14 +159,14 @@ class PeopleListingModal extends StatefulWidget {
 class _PeopleListingModalState extends State<PeopleListingModal> {
   String? filter;
 
-  List<Person> filteredPeople(BuildContext context) {
+  List<Map<String, dynamic>> filteredPeople(BuildContext context) {
     final peopleService =
         FirestoreService.serve(context, FServices.people) as PeopleService;
-    final peopleData = peopleService.data;
+    final peopleData = peopleService.data?.values.toList() ?? [];
     final localFilter = filter;
     if (localFilter != null && localFilter.isNotEmpty) {
       return peopleData
-          .where((element) => element.lastName
+          .where((element) => (element["lastName"] as String)
               .toLowerCase()
               .startsWith(localFilter.toLowerCase()))
           .toList();

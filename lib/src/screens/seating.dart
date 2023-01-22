@@ -1,11 +1,12 @@
 import 'dart:html' as html;
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:printing/printing.dart';
 
 import '../services/firestore_service.dart';
 import '../services/pdf_gen.dart';
-import '../services/people.dart';
+import '../services/people_service.dart';
 import '../services/seating_data.dart';
 import '../widgets/cards.dart';
 import '../widgets/people.dart';
@@ -42,8 +43,19 @@ class SeatingPage extends StatelessWidget {
                 child: FloatingActionButton.extended(
                   key: const ValueKey(1),
                   heroTag: const ValueKey(1),
-                  onPressed: () {
-                    seatKey.currentState?.generate(peopleService.data);
+                  onPressed: () async {
+                    final randomSeed = await showDialog<int>(
+                        context: context,
+                        builder: (context) => const RandomSeedModalWidget());
+                    if (randomSeed != null) {
+                      seatKey.currentState
+                          ?.generate(randomSeed, peopleService.data!);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        backgroundColor: Colors.red,
+                        content: Text("Invalid random seed"),
+                      ));
+                    }
                   },
                   label: const Text('Generate'),
                   icon: const Icon(Icons.settings),
@@ -95,6 +107,46 @@ class SeatingPage extends StatelessWidget {
   }
 }
 
+class RandomSeedModalWidget extends StatefulWidget {
+  const RandomSeedModalWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<RandomSeedModalWidget> createState() => _RandomSeedModalWidgetState();
+}
+
+class _RandomSeedModalWidgetState extends State<RandomSeedModalWidget> {
+  String textValue = "";
+
+  @override
+  Widget build(BuildContext context) {
+    return ModalCard(
+        title: const Text("Random seed"),
+        child: ListView(
+          padding: const EdgeInsets.all(20),
+          children: [
+            TextField(
+              onChanged: (value) {
+                textValue = value;
+              },
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  int i = 0;
+                  try {
+                    i = int.parse(textValue);
+                  } catch (e) {
+                    i = Random().nextInt(1000000);
+                  }
+                  Navigator.pop(context, i);
+                },
+                child: const Text("Submit"))
+          ],
+        ));
+  }
+}
+
 class SeatingListing extends StatefulWidget {
   const SeatingListing({super.key});
 
@@ -120,13 +172,14 @@ class SeatingListingState extends State<SeatingListing> {
     });
   }
 
-  bool fitsFilter(TableData t, Person p) {
-    return (t.filter).contains(p.year);
+  bool fitsFilter(TableData t, Map<String, dynamic> p) {
+    return (t.filter).contains(p["year"]);
   }
 
-  generate(peopleData) {
-    final localPeopleData = List<Person>.from(peopleData);
+  void generate(int randomSeed, Map<String, Map<String, dynamic>> peopleData) {
+    final localPeopleData = List<Map<String, dynamic>>.from(peopleData.values);
     final scopedTableData = TableData.fromTableData(tableData);
+    localPeopleData.shuffle(Random(randomSeed));
     localPeopleData.shuffle();
     List<String> alreadyAssigned = [];
 
@@ -139,22 +192,22 @@ class SeatingListingState extends State<SeatingListing> {
       }
     }
     localPeopleData
-        .removeWhere((element) => alreadyAssigned.contains(element.name));
+        .removeWhere((person) => alreadyAssigned.contains(person.name));
 
     // ? Remove people on waiter crew
     localPeopleData
-        .removeWhere((element) => element.jobs.contains(Jobs.waiter.name));
+        .removeWhere((person) => person["jobs"].contains(Jobs.waiter.name));
 
     // ? Remove people with supper crew
     final supperDishCrew = localPeopleData
-        .where((element) => element.jobs.contains(Jobs.supperDishCrew.name))
+        .where((element) => element["jobs"].contains(Jobs.supperDishCrew.name))
         .toList();
 
     localPeopleData.removeWhere(
-        (element) => element.jobs.contains(Jobs.supperDishCrew.name));
+        (element) => element["jobs"].contains(Jobs.supperDishCrew.name));
 
     while (localPeopleData.isNotEmpty || supperDishCrew.isNotEmpty) {
-      late Person curPerson;
+      late Map<String, dynamic> curPerson;
       if (localPeopleData.isNotEmpty) {
         curPerson = localPeopleData.removeLast();
       } else {
@@ -171,7 +224,7 @@ class SeatingListingState extends State<SeatingListing> {
               table.addPerson(seat, curPerson.name);
 
               // Dish Crew Check
-              if (curPerson.jobs.contains(Jobs.lunchDishCrew.name)) {
+              if (curPerson["jobs"].contains(Jobs.lunchDishCrew.name)) {
                 final i = supperDishCrew
                     .indexWhere((element) => fitsFilter(table, element));
                 if (i != -1) {
@@ -233,7 +286,8 @@ class SeatingListingState extends State<SeatingListing> {
 
                     if (response != null) {
                       if (response == 1) {
-                        final chosenPerson = await showDialog<Person>(
+                        final chosenPerson =
+                            await showDialog<Map<String, dynamic>>(
                           context: context,
                           builder: (innerContext) {
                             return const PeopleListingModal();
@@ -333,6 +387,7 @@ class TableData {
   }
 
   String get name => data["name"].toString().toUpperCase();
+
   List<int> get filter => data["filter"];
 
   void remove(String key) {
