@@ -28,10 +28,11 @@ class PeopleListing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final peopleService =
-        FirestoreService.serve(context, FServices.people) as PeopleService;
+    PeopleService peopleService =
+        FirestoreService.serve(context, FServices.people)!;
     List<Map<String, dynamic>>? peopleData =
-        subsetPeopleData ?? peopleService.data?.values.toList();
+        subsetPeopleData ?? peopleService.dataList;
+
     if (peopleData == null) {
       return const CircularProgressIndicator();
     }
@@ -162,7 +163,7 @@ class _PeopleListingModalState extends State<PeopleListingModal> {
   List<Map<String, dynamic>> filteredPeople(BuildContext context) {
     final peopleService =
         FirestoreService.serve(context, FServices.people) as PeopleService;
-    final peopleData = peopleService.data?.values.toList() ?? [];
+    final peopleData = peopleService.dataList ?? [];
     final localFilter = filter;
     if (localFilter != null && localFilter.isNotEmpty) {
       return peopleData

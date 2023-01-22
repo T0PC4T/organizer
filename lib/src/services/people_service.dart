@@ -13,6 +13,12 @@ class PeopleService extends CacheService {
   }
 
   @override
+  List<Map<String, dynamic>>? get dataList {
+    return data?.values.toList()
+      ?..sort((a, b) => a["lastName"].compareTo(b["lastName"]));
+  }
+
+  @override
   String get name => "people";
 }
 
