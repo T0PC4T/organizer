@@ -23,7 +23,7 @@ class PeopleService extends CacheService {
 }
 
 extension PersonName on Map<String, dynamic> {
-  String get name => '${this["firstName"]}  ${this["lastName"]}';
+  String get name => '${this["lastName"]}, ${this["firstName"]}';
   List<String> get jobs {
     if (this["jobs"] is List) {
       return List<String>.from(this["jobs"]);
