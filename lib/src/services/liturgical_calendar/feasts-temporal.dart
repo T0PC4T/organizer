@@ -280,8 +280,32 @@ const temporalFeasts = [
     "color": "white"
   },
   {
+    "latinName": "Feria in Rogationibus",
+    "englishName": "Rogation Mass",
+    "daysFromEaster": "36",
+    "daysToEaster": "",
+    "class": "II. classis",
+    "color": "purple"
+  },
+  {
+    "latinName": "Feria in Rogationibus",
+    "englishName": "Rogation Mass",
+    "daysFromEaster": "37",
+    "daysToEaster": "",
+    "class": "II. classis",
+    "color": "purple"
+  },
+  {
     "latinName": "In Vigilia Ascensionis",
     "englishName": "The Vigil of Ascention",
+    "daysFromEaster": "38",
+    "daysToEaster": "",
+    "class": "II. classis",
+    "color": "purple"
+  },
+  {
+    "latinName": "Feria in Rogationibus",
+    "englishName": "Rogation Mass",
     "daysFromEaster": "38",
     "daysToEaster": "",
     "class": "II. classis",
@@ -521,7 +545,7 @@ const temporalFeasts = [
   },
   {
     "latinName": "Dominica XXI Post Pentecosten",
-    "englishName": "Twentyfirst Sunday after the Pentecost",
+    "englishName": "Twenty first Sunday after the Pentecost",
     "daysFromEaster": "196",
     "daysToEaster": "",
     "class": "II. classis",
@@ -529,7 +553,7 @@ const temporalFeasts = [
   },
   {
     "latinName": "Dominica XXII Post Pentecosten",
-    "englishName": "Twentysecond Sunday after the Pentecost",
+    "englishName": "Twenty second Sunday after the Pentecost",
     "daysFromEaster": "203",
     "daysToEaster": "",
     "class": "II. classis",
@@ -537,7 +561,7 @@ const temporalFeasts = [
   },
   {
     "latinName": "Dominica XXIII Post Pentecosten",
-    "englishName": "Twentythird Sunday after the Pentecost",
+    "englishName": "Twenty third Sunday after the Pentecost",
     "daysFromEaster": "210",
     "daysToEaster": "",
     "class": "II. classis",

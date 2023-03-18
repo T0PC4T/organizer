@@ -3,31 +3,40 @@ import 'package:intl/intl.dart';
 import 'utils.dart';
 
 class Day {
-  Day(DateTime date, DateTime easter)
-      : date = date,
-        easter = easter,
+  Day(this.date, this.easter)
+      : isSeptuagesima = false,
         isQuadragesima = false,
         isHolyWeek = false,
         feasts = <Feast>[] {
+    isSeptuagesima = date.compareTo(easter) < 0 &&
+        date.compareTo(easter.subtract(const Duration(days: 63))) > 0;
     isQuadragesima = date.compareTo(easter) < 0 &&
         date.compareTo(easter.subtract(const Duration(days: 46))) > 0;
     isHolyWeek = date.compareTo(easter) < 0 &&
         date.compareTo(easter.subtract(const Duration(days: 7))) > 0;
 
+    if (date.weekday != DateTime.sunday && isSeptuagesima && !isHolyWeek) {
+      feasts.add(Feast("Feria Quadragesimae", "Feria", FeastClass.fourthClass,
+          Color.purple));
+    }
     if (date.weekday != DateTime.sunday && isQuadragesima && !isHolyWeek) {
       feasts.add(Feast("Feria Quadragesimae", "Feria of Lent",
-          FeastClass.ThirdClass, Color.purple, PropriumType.Tempore));
+          FeastClass.thirdClass, Color.purple));
     }
+  }
+
+  void removeFeastWithName(String latinName) {
+    feasts.removeWhere((element) => element.latinName.contains(latinName));
   }
 
   bool isFeastDay() {
     return feasts
-        .map((e) => e.feastClass != FeastClass.FourthClass)
+        .map((e) => e.feastClass != FeastClass.fourthClass)
         .contains(true);
   }
 
   bool containsFeast(String name) {
-    return feasts.map((e) => e.latinName.startsWith(name)).contains(true);
+    return feasts.map((e) => e.latinName.contains(name)).contains(true);
   }
 
   bool isFeria() {
@@ -53,12 +62,57 @@ class Day {
         getDateFormat(): {
           "latinName": "Feria",
           "englishName": "Feria",
-          "class": "FourthClass",
-          "color": "default"
+          "class": "IV. Class",
+          "color": "Green",
+          "commemorations": []
         }
       };
     }
-    return {getDateFormat(): formatFeast()};
+    return {getDateFormat(): finalFeastPolish(formatFeast())};
+  }
+
+  dynamic finalFeastPolish(dynamic feastData) {
+    Feast mainFeast = getFeastFromDynamic(feastData);
+    List<Feast> others = <Feast>[];
+    for (var c in feastData['commemorations']) {
+      others.add(getFeastFromDynamic(c));
+    }
+    if (mainFeast.englishName.contains("Feria of Lent") ||
+        mainFeast.englishName.contains("Feira of Advent")) {
+      feastData["alternatives"] = [];
+    } else {
+      var alts =
+          getFeastsOfClassExceptOne(mainFeast.feastClass, mainFeast.latinName);
+      List<Map<String, dynamic>> comms = [];
+      for (var c in feastData['commemorations']) {
+        if (!alts.map((e) => e["latinName"] == c["latinName"]).contains(true)) {
+          comms.add(c);
+        }
+      }
+      feastData["alternatives"] = alts;
+      feastData["commemorations"] = comms;
+    }
+    return feastData;
+  }
+
+  void removeFeastsFromCommemorations(dynamic feastData) {}
+
+  Feast getFeastFromDynamic(dynamic data) {
+    Map<String, FeastClass> feastClass = {
+      "I. Class": FeastClass.firstClass,
+      "II. Class": FeastClass.secondClass,
+      "III. Class": FeastClass.thirdClass,
+      "IV. Class": FeastClass.fourthClass
+    };
+    Map<String, Color> feastColor = {
+      "White": Color.white,
+      "Green": Color.green,
+      "Purple": Color.purple,
+      "Black": Color.black,
+      "Red": Color.red,
+    };
+    return Feast(data['latinName'], data['englishName'],
+        feastClass[data['class']]!, feastColor[data['color']]!);
   }
 
   bool isFeastOfTheLord() {
@@ -89,58 +143,71 @@ class Day {
     return feast;
   }
 
+  Map<String, dynamic> getSunday() {
+    return feasts
+        .firstWhere((element) => element.latinName.contains("Dominica"))
+        .formatJSON();
+  }
+
   dynamic formatFeast() {
     if (feasts.length == 1) {
-      return feasts.first.formatJSON();
+      dynamic feast = feasts.first.formatJSON();
+      feast["commemorations"] = [];
+      return feast;
     }
-    if (containsFeastOfClass(FeastClass.FirstClass)) {
-      return getIClassFeast().formatJSON();
+    if (containsFeastOfClass(FeastClass.firstClass)) {
+      dynamic feast = getIClassFeast().formatJSON();
+      if (isSunday()) {
+        Map<String, dynamic> f = getSunday();
+        if (f["latinName"] != feast["latinName"]) {
+          feast["commemorations"] = [f];
+        } else {
+          feast["commemorations"] = [];
+        }
+      } else {
+        feast["commemorations"] = [];
+      }
+      return feast;
     }
     if (isFeastOfTheLord()) {
       dynamic feast = getFeastOfTheLord();
       feast["commemorations"] =
-          getFeastsOfClassExceptOne(FeastClass.SecondClass, feast["latinName"]);
+          getFeastsOfClassExceptOne(FeastClass.secondClass, feast["latinName"]);
       return feast;
     }
     if (isSunday()) {
-      // check if is feast of the Lord
-      dynamic feast = feasts
-          .firstWhere((element) => element.latinName.contains("Dominica"))
-          .formatJSON();
+      dynamic feast = getSunday();
       feast["commemorations"] =
-          getFeastsOfClassExceptOne(FeastClass.SecondClass, "Dominica");
+          getFeastsOfClassExceptOne(FeastClass.secondClass, "Dominica");
       return feast;
     }
 
-    if (containsFeastOfClass(FeastClass.SecondClass)) {
-      Feast feast = feasts.firstWhere(
-          (element) => element.feastClass == FeastClass.SecondClass);
-      var comm =
-          getFeastsOfClassExceptOne(FeastClass.SecondClass, feast.latinName);
-      comm.addAll(getFeastsOfClass(FeastClass.ThirdClass));
-      Map<String, dynamic> ret = feast.formatJSON();
-      ret["commemorations"] = comm;
-      return ret;
+    if (containsFeastOfClass(FeastClass.secondClass)) {
+      dynamic feast = feasts
+          .firstWhere((element) => element.feastClass == FeastClass.secondClass)
+          .formatJSON();
+      feast["commemorations"] =
+          getFeastsOfClassExceptOne(FeastClass.secondClass, feast["latinName"]);
+      feast["commemorations"].addAll(getFeastsOfClass(FeastClass.thirdClass));
+      return feast;
     }
-    if (containsFeastOfClass(FeastClass.ThirdClass)) {
-      Feast feast = feasts
-          .firstWhere((element) => element.feastClass == FeastClass.ThirdClass);
-      var comm =
-          getFeastsOfClassExceptOne(FeastClass.SecondClass, feast.latinName);
-      dynamic ret = feast.formatJSON();
-      ret["commemorations"] = comm;
-      return ret;
+    if (containsFeastOfClass(FeastClass.thirdClass)) {
+      dynamic feast = feasts
+          .firstWhere((element) => element.feastClass == FeastClass.thirdClass)
+          .formatJSON();
+      feast["commemorations"] =
+          getFeastsOfClassExceptOne(FeastClass.thirdClass, feast["latinName"]);
+      feast["commemorations"].addAll(getFeastsOfClass(FeastClass.fourthClass));
+      return feast;
     }
     if (isFeria()) {
-      var comm = getFeastsOfClass(FeastClass.FourthClass);
-      Map<String, dynamic> ret = {
-        "latinName": "Feria",
-        "englishName": "Feria",
-        "class": "FourthClass",
-        "color": "default"
-      };
-      if (comm.isEmpty) return ret;
-      ret["commemorations"] = comm;
+      Feast f = feasts.firstWhere(
+          (element) => element.englishName.contains("Feria"),
+          orElse: () =>
+              Feast("Feria", "Feria", FeastClass.fourthClass, Color.green));
+      dynamic ret = f.formatJSON();
+      ret["commemorations"] =
+          getFeastsOfClassExceptOne(f.feastClass, f.latinName);
       return ret;
     }
   }
@@ -176,6 +243,7 @@ class Day {
   DateTime date;
   DateTime easter;
   bool isQuadragesima;
+  bool isSeptuagesima;
   bool isHolyWeek;
 
   bool isSundayOfAdvent() {
@@ -188,33 +256,19 @@ class Day {
 
   Feast getIClassFeast() {
     return feasts
-        .firstWhere((element) => element.feastClass == FeastClass.FirstClass);
+        .firstWhere((element) => element.feastClass == FeastClass.firstClass);
   }
 }
 
 class Feast {
-  Feast(String latinName, String englishName, FeastClass feastClass,
-      Color color, PropriumType prop)
-      : latinName = latinName,
-        englishName = englishName,
-        feastClass = feastClass,
-        color = color,
-        proprium = prop;
-
-  bool isPropiumSanctorum() {
-    return proprium == PropriumType.Sanctorum;
-  }
-
-  bool isPropriumDeTempore() {
-    return proprium == PropriumType.Tempore;
-  }
+  Feast(this.latinName, this.englishName, this.feastClass, this.color);
 
   Map<String, dynamic> formatJSON() {
     return {
       "latinName": latinName,
       "englishName": englishName,
-      "class": feastClass.toString().split('.')[1],
-      "color": color.toString().split('.')[1]
+      "class": feastClass.feastName,
+      "color": color.colorName
     };
   }
 
@@ -222,5 +276,4 @@ class Feast {
   String englishName;
   FeastClass feastClass;
   Color color;
-  PropriumType proprium;
 }

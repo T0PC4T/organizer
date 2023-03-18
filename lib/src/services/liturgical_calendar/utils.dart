@@ -3,11 +3,26 @@ import 'dart:io';
 
 import 'day.dart';
 
-enum Color { white, green, purple, black, red }
+enum Color {
+  white("White"),
+  green("Green"),
+  purple("Purple"),
+  black("Black"),
+  red("Red");
 
-enum FeastClass { FourthClass, ThirdClass, SecondClass, FirstClass }
+  final String colorName;
+  const Color(this.colorName);
+}
 
-enum PropriumType { Sanctorum, Tempore }
+enum FeastClass {
+  firstClass("I. Class"),
+  secondClass("II. Class"),
+  thirdClass("III. Class"),
+  fourthClass("IV. Class");
+
+  final String feastName;
+  const FeastClass(this.feastName);
+}
 
 Future<List<Map<String, String>>> readCSV(filename) async {
   final File file = File(filename);
@@ -27,37 +42,29 @@ Future<List<Map<String, String>>> readCSV(filename) async {
   return ret;
 }
 
-DateTime getFeastDate(int year, Map<String, String> feast, PropriumType type) {
-  if (type == PropriumType.Tempore) {
-    return getDatePropriumDeTempore(year, feast);
-  }
-  return parseTime(year, feast['date']!);
-}
-
 DateTime getDatePropriumDeTempore(year, feast) {
-  DateTime Easter = parseTime(year, easterDate(year));
+  DateTime easter = parseTime(year, easterDate(year));
   if (feast['daysToEaster'] == '') {
-    return Easter.add(Duration(days: int.parse(feast['daysFromEaster'])));
+    return easter.add(Duration(days: int.parse(feast['daysFromEaster'])));
   }
-  return Easter.subtract(Duration(days: int.parse(feast['daysToEaster'])));
+  return easter.subtract(Duration(days: int.parse(feast['daysToEaster'])));
 }
 
 DateTime parseTime(int year, String mmddFormatWithDashInBetween) {
-  return DateTime.parse(
-      year.toString() + '-' + mmddFormatWithDashInBetween + " 12:00:00");
+  return DateTime.parse("$year-$mmddFormatWithDashInBetween 12:00:00");
 }
 
-Feast getFeastData(Map<String, String> feast, PropriumType type) {
+Feast getFeastData(Map<String, String> feast) {
   return Feast(feast['latinName']!, feast['englishName']!,
-      strToFeastClass(feast['class']!), strToFeastColor(feast['color']!), type);
+      strToFeastClass(feast['class']!), strToFeastColor(feast['color']!));
 }
 
 FeastClass strToFeastClass(String feastClass) {
   final Map<String, FeastClass> conv = {
-    "I. classis": FeastClass.FirstClass,
-    "II. classis": FeastClass.SecondClass,
-    "III. classis": FeastClass.ThirdClass,
-    "IV. classis": FeastClass.FourthClass
+    "I. classis": FeastClass.firstClass,
+    "II. classis": FeastClass.secondClass,
+    "III. classis": FeastClass.thirdClass,
+    "IV. classis": FeastClass.fourthClass
   };
   return conv[feastClass]!;
 }
@@ -94,8 +101,7 @@ String easterDate(y) {
 }
 
 String getDate(DateTime dt) {
-  var date =
-      '${dt.month < 10 ? ("0" + dt.month.toString()) : dt.month.toString()}-';
+  var date = '${dt.month < 10 ? ("0${dt.month}") : dt.month.toString()}-';
   date += dt.day < 10 ? ("0${dt.day}") : dt.day.toString();
   return date;
 }
