@@ -1,0 +1,357 @@
+date;latinName;englishName;class;color
+01-01;Die Octavae Nativitatis Domini;The Octave of Christmas;II. classis;white
+01-02;Die Secunda Januarii;Feria of Christmastide;IV. classis;white
+01-03;Die Tertia Januarii;Feria of Christmastide;IV. classis;white
+01-04;Die Quarta Januarii;Feria of Christmastide;IV. classis;white
+01-04;(USA)Elisabeth Annae Seton, Viduae;(USA) St. Elisabeth Ann Seton, Widow;IV. classis;white
+01-05;Die Quinta Januarii;Feria of Christmastide;IV. classis;white
+01-05;S. Telespohori Papae et Martyris;Feria of ChristmastideSt. Telesphorus Pope & Martyr;IV. classis;red
+01-05;(USA)S. Joannis Neumann, Episcopi et Confessoris;(USA) St. John Neumann, Bishop & Confessor;III. classis;white
+01-06;In Epiphania Domini;The Epiphany of the Lord;I. classis;white
+01-07;Die Septima Januarii;Feria of Epiphany;IV. classis;white
+01-08;Die Octava Januarii;Feria of Epiphany;IV. classis;white
+01-09;Die Nona Januarii;Feria of Epiphany;IV. classis;white
+01-10;Die Decima Januarii;Feria of Epiphany;IV. classis;white
+01-11;Die Undecima Januarii;Feria of Epiphany;IV. classis;white
+01-11;S. Hygini Papae et Martyris;St. Hyginus, Pope & Martyr;IV. classis;red
+01-12;Die Duodecima Januarii;Feria of Epiphany;IV. classis;white
+01-13;Commemoratio Baptismatis Domini Nostri Jesu Christi;Commemoration of the Baptism of our Lord Jesus Christ;II. classis;white
+01-14;S. Hilarii Episcopi Confessoris Ecclesiae Doctoris;St. Hilary, Bishop Confessor & Doctor of the Church;III. classis;white
+01-14;S. Felicis Presbyteri et Martyris;St. Felix, Priest and Martyr;IV. classis;red
+01-15;S. Pauli Primi Eremitae et Confessoris;St. Paul the first Hermit & Confessor;III. classis;white
+01-15;S. Mauri Abbatis;St. Maurus, Abbot;IV. classis;white
+01-16;S. Marcelli Papae et Martyris;St. Marcellus I, Pope & Martyr;III. classis;red
+01-17;S. Antonii Abbatis;St. Anthony, Abbot;III. classis;white
+01-18;S. Priscae Virginis et Martyris;St. Prisca, Virgin & Martyr;IV. classis;red
+01-19;Ss. Marii, Marthae, Audifacis, et Abachum Martyrum;Ss. Marius, Martha, Audifax and Abachum, Martyrs;IV. classis;red
+01-19;S. Canutis Regis et Martyris;St. Canute, King & Martyr;IV. classis;red
+01-20;Ss. Fabiani et Sebastiani Martyrum;Ss. Fabian, Pope and Sebastian, Martyrs;III. classis;red
+01-21;S. Agnetis Virginis et Martyris;St. Agnes, Virgin & Martyr;III. classis;red
+01-22;Ss. Vincentii et Anastasii Martyrum;Ss. Vincent and Anastasius, Martyrs;III. classis;red
+01-23;S. Raymundi de Peaeafort Confessoris;St. Raymund de Peaeafort, Confessor;III. classis;white
+01-23;S. Emerentianae, Virginis et Martyris;St. Emerentiana, Virgin & Martyr;IV. classis;red
+01-24;S. Timothei Episcopi et Martyris;St. Timothy, Bishop & Martyr;III. classis;red
+01-25;In Conversione S. Pauli Apostoli;Conversion of St. Paul, Apostle;III. classis;white
+01-26;S. Polycarpi Episcopi et Martyris;St. Polycarp, Bishop & Martyr;III. classis;red
+01-27;S. Joannis Chrysostomi Episcopi Confessoris et Ecclesiae Doctoris;St. John Chrysostom, Bishop, Confessor & Doctor of the Church;III. classis;white
+01-28;S. Petri Nolasci Confessoris;St. Peter Nolasco, Confessor;III. classis;white
+01-28;S. Agnetis Virginis Martyris secundo;St. Agnes, Virgin Martyr;IV. classis;red
+01-29;S. Francisci Salesii Episcopi Confessoris et Ecclesiae Doctoris;St. Francis de Sales, Bishop, Confessor & Doctor of the Church;III. classis;white
+01-30;S. Martinae Virginis et Martyris;St. Martina, Virgin & Martyr;III. classis;red
+01-31;S. Joannis Bosco Confessoris;St. John Bosco, Confessor;III. classis;white
+02-01;S. Ignatii Episcopi et Martyris;St. Ignatius, Bishop & Martyr;III. classis;red
+02-02;In Purificatione Beatae Mariae Virginis;The Purification of the Blessed Virgin Mary;II. classis;white
+02-03;S. Blasii Episcopi et Martyris;St. Blaise Bishop & Martyr;IV. classis;red
+02-04;S. Andreae Corsini Episcopi et Confessoris;St. Andrew Corsini, Bishop & Confessor;III. classis;white
+02-05;S. Agathae Virginis et Martyris;St. Agatha, Virgin & Martyr;III. classis;red
+02-06;S. Titi Episcopi et Confessoris;St. Titus, Bishop & Confessor;III. classis;white
+02-07;S. Romualdi Abbatis;St. Romuald, Abbot;III. classis;white
+02-08;S. Joannis de Matha Confessoris;St. John of Matha, Confessor;III. classis;white
+02-09;S. Cyrilli Episc. Alexandrini Confessoris et Ecclesiae Doctoris;St. Cyril, Bisop of Alexandria, Confessor & Doctor of the Church;III. classis;white
+02-09;S. Apolloniae Virginis et Martyris;St. Apollonia, Virgin and Martyr;IV. classis;red
+02-10;S. Scholasticae Virginis;St. Scholastica, Virgin;III. classis;white
+02-11;In Apparitione Beatae Mariae Virginis Immaculatae;The Apparition of the Blessed Virgin Mary Immaculate;III. classis;white
+02-12;Ss. Septem Fundatorum Ordinis Servorum B. M. V.;Seven Holy Founders of the Servile Order of the BVM, Confessors;III. classis;red
+02-14;S. Valentini Presbyteri et Martyris;St. Valentine, Priest & Martyr;IV. classis;red
+02-15;SS. Faustini et Jovitae Martyrum;Ss. Faustinus and Jovita, Martyrs;IV. classis;red
+02-18;S. Simeonis Episcopi et Martyris;St. Simeon, Bishop & Martyr;IV. classis;red
+02-19;S. Dorotheae, Virginis et Martyris;St. Dorothy, Virgin & Martyr;IV. classis;red
+02-22;In Cathedra S. Petri Apostoli;The Chair of St. Peter, Apostle;II. classis;white
+02-23;S. Petri Damiani Episcopi Confessoris et Ecclesiae Doctoris;St. Peter Damian, Bishop, Confessor & Doctor of the Church;III. classis;white
+03-04;S. Casimiri Confessoris;St. Casimir, Confessor;IV. classis;white
+03-06;Ss. Perpetuae et Felicitatis Martyrum;Ss. Perpetua and Felicity, Martyrs;IV. classis;red
+03-07;S. Thomae de Aquino Confessoris et Ecclesiae Doctoris;St. Thomas Aquinas, Confessor & Doctor of the Church;III. classis;white
+03-08;S. Joannis de Deo Confessoris;St. John of God, Confessor;IV. classis;white
+03-09;S. Franciscae Romanae Viduae;St. Frances of Rome, Vidow;IV. classis;white
+03-10;Ss. Quadraginta Martyrum;The Forty Holy Martyrs;IV. classis;red
+03-12;S. Gregorii Papae Confessoris et Ecclesiae Doctoris;St. Gregory, Pope, Confessor & Doctor of the Church;IV. classis;white
+03-17;S. Patricii Episcopi et Confessoris;St. Parick, Bishop & Martyr;IV. classis;white
+03-18;S. Cyrilli Episcopi Hierosolymitani Confessoris et Ecclesiae Doctoris;St. Cyril, Bishop of Jerusalem, Confessor & Doctor of the Church;IV. classis;white
+03-19;S. Joseph Sponsi B.M.V. Confessoris;St. Joseph, Spouse of the Blessed Virgin Mary, Confessor;I. classis;white
+03-21;S. Benedicti Abbatis;St. Benedict, Abbot;IV. classis;white
+03-24;S. Gabrielis Archangeli;St. Gabriel the Archangel;IV. classis;white
+03-25;In Annuntiatione Beatae Mariae Virginis;Annuntiation of the Blessed Virgin Mary;I. classis;white
+03-27;S. Joannis Damasceni Confessoris;St. John Damascene, Confessor;IV. classis;white
+03-28;S. Joannis a Capistrano Confessoris;St. John a Capistrano, Confessor;IV. classis;white
+04-02;S. Francisci de Paula Confessoris;St. Francis de Paul, Confessor;IV. classis;white
+04-04;S. Isidori Episcopi Confessoris et Ecclesiae Doctoris;St. Isidorius, Bishop, Confessor & Doctor of the Church;IV. classis;white
+04-05;S. Vincentii Ferrerii Confessoris;St. Vincent Ferrer, Confessor;IV. classis;white
+04-11;S. Leonis I Papae Confessoris et Ecclesiae Doctoris;St. Leo I, Pope, Confessor & Doctor of the Church;III. classis;white
+04-13;S. Hermenegildi Martyris;St. Hermenegild, Martyr;III. classis;red
+04-14;S. Justini Martyris;St. Justyn, Martyr;III. classis;red
+04-14;Ss. Tiburtii, Valeriani et Maximi, Martyrum;Ss. Tiburtius, Valerian and Maximus, Martyrs;IV. classis;red
+04-17;S. Aniceti Papae et Martyris;St. Ancetus, Pope & Martyr;IV. classis;red
+04-21;S. Anselmi Episcopi Confessoris et Ecclesiae Doctoris;St. Anselm, Bishop, Confessor & Doctor of the Church;III. classis;white
+04-22;SS. Soteris et Caii Summorum Pontificum et Martyrum;Ss. Soter and Caius, Popes & Martyrs;III. classis;red
+04-23;S. Georgii Martyris;St. Georgius, Martyr;IV. classis;red
+04-24;S. Fidelis de Sigmaringa Martyris;St. Fidelis of Sigmaringen, Martyr;III. classis;red
+04-25;S. Marci Evangelistae;St. Mark, Evangelist;II. classis;red
+04-25;Major Litanies;The Greater Litanies;II. classis;purple
+04-26;SS. Cleti et Marcellini Summorum Pontificum et Martyrum;Ss. Cletus and Marcellinus, Popes and Martyrs;III. classis;red
+04-27;S. Petri Canisii Confessoris et Ecclesiae Doctoris;St. Peter Canisius, Doctor;III. classis;white
+04-28;S. Pauli a Cruce Confessoris;St. Paul of the Cross, Confessor;III. classis;white
+04-29;S. Petri Martyris;St. Peter, Martyr;III. classis;red
+04-30;S. Catharinae Senensis Virginis;St. Catherine of Siena, Virgin;III. classis;white
+05-01;S. Joseph Opificis;St. Joseph the Worksman;I. classis;white
+05-02;S. Athanasii Episcopi Confessoris et Ecclesiae Doctoris;St. Athanasius, Bishop, Confessor & Doctor of the Church;III. classis;white
+05-03;Ss. Alexandri et Sociorum Martyrum;Ss. Alexander and Companions, Martyrs;IV. classis;red
+05-04;S. Monicae Viduae;St. Monica, Widow;III. classis;white
+05-05;S. Pii V Papae et Confessoris;St. Pius V, Pope & Confessor;III. classis;white
+05-07;S. Stanislai Episcopi et Martyris;St. Stanislaus, Bishop & Martyr;III. classis;red
+05-09;S. Gregorii Nazianzeni Episcopi Confessoris et Ecclesiae Doctoris;St. Gregory of Nazianzus, Bishop, Confessor & Doctor of the Church;III. classis;white
+05-10;S. Antonini Episcopi et Confessoris;St. Antonin, Bishop & Confessor;III. classis;white
+05-10;Ss. Gordiani et Epimachi Martyrum;Ss. Gordian and Epimachus, Martyrs;IV. classis;red
+05-11;Ss. Philippi et Jacobi Apostolorum;Ss. Philip and Jacob, Apostles;II. classis;red
+05-12;Ss. Nerei, Achillei et Domitillae Virg. atque Pancratii Martyrum;Ss. Nereus, Achilleus and Domitilla, Virgins, and Pancratius Martyrs;III. classis;red
+05-13;S. Roberti Bellarmino Episcopi Confessoris et Ecclesiae Doctoris;St. Robert Ballarmino, Bishop, Confessor & Doctor of the Church;III. classis;white
+05-14;S. Bonifatii Martyris;St. Bonifatius, Martyr;IV. classis;red
+05-15;S. Joannis Baptistae de la Salle Confessoris;St. John Baptist de la Salle, Confessor;III. classis;white
+05-16;S. Ubaldi Episcopi et Confessoris;St. Ubald, Bishop & Confessor;III. classis;white
+05-17;S. Paschalis Baylon Confessoris;St. Paschal Baylon, Confessor;III. classis;red
+05-18;S. Venantii Martyris;St. Venantius, Martyr;III. classis;red
+05-19;S. Petri Celestini Papae et Confessoris;St. Peter Celestine, Pope & Confessor;III. classis;white
+05-19;S. Pudentianae Virginis;St. Pudentiana, Virgin;IV. classis;white
+05-20;S. Bernardini Senensis Confessoris;St. Bernardino of Sienna, Confessor;III. classis;white
+05-25;S. Gregorii VII Papae et Confessoris;St. Gregory VII, Pope & Confessor;III. classis;white
+05-26;S. Philippi Neri Confessoris;St. Philip Neri, Confessor;III. classis;white
+05-27;S. Bedae Venerabilis Confessoris et Ecclesiae Doctoris;St. Bede the Venerable, Confessor & Doctor of the Church;III. classis;white
+05-27;S. Joannis Papae et Martyris;St. John I, Pope and Martyr;IV. classis;red
+05-28;St. Augustini Episcopi et Confessoris;St. Augustine, Bishop & Confessor;III. classis;white
+05-29;S. Mariae Magdalenae de Pazzis Virginis;St. Mary Magdalene de Pazzi, Virgin;III. classis;white
+05-30;S. Felicis I Papae et Martyris;St. Felix I, Pope & Martyr;IV. classis;red
+05-31;Beatae Mariae Virginis Reginae;Queenship of Blessed Virgin Mary;II. classis;white
+05-31;S. Petronillae Virginis;St. Petronilla, Virgin;IV. classis;white
+06-01;S. Angelae Mericiae Virginis;St. Angela Marici, Virgin;III. classis;white
+06-02;Ss. Marcellini, Petri, atque Erasmi Martyrum;Ss. Marcellinus, Peter and Erasmus, Martyrs;IV. classis;red
+06-04;S. Francisci Caracciolo Confessoris;St. Franciscus Caracciolo, Confessor;III. classis;white
+06-05;S. Bonifatii Episcopi et Martyris;St. Bonifase, Bishop & Martyr;III. classis;red
+06-06;S. Norberti Episcopi et Confessoris;St. Norbert, Bishop & Confessor;III. classis;white
+06-09;Ss. Primi et Feliciani Martyrum;Ss. Primus and Felician, Martyrs;IV. classis;red
+06-10;S. Margaritae Reginae Viduae;St. Margaret, Queen of Scotland;III. classis;white
+06-11;S. Barnabae Apostoli;St. Barnabas, Apostle;III. classis;red
+06-12;S. Joannis a S. Facundo Confessoris;St. John of San Facundo, Confessor;III. classis;white
+06-12;Ss. Basilidus, Cyrinus, Naborus and Nazarius, Martyrs;Ss. Basilidus, Cyrinus, Naborus and Nazarius, Martyrs;IV. classis;red
+06-13;S. Antonii de Padua Confessoris et Ecclesiae Doctoris;St. Anthony of Padua, Confessor & Doctor of the Church;III. classis;white
+06-14;S. Basilii Magni Confessoris et Ecclesiae Doctoris;St. Basil the Great, Bishop, Confessor & Doctor of the Church;III. classis;white
+06-15;Ss. Viti, Modesti atque Crescentiae Martyrum;Ss. Vitus and Companions, Martyrs;IV. classis;red
+06-17;S. Gregorii Barbadici Episcopi et Confessoris;St. Gregory Barbarigo, Bishop;III. classis;white
+06-18;S. Ephraem Syri Confessoris et Ecclesiae Doctoris;St. Ephrem the Syrian, Confessor & Doctor of the Church;III. classis;white
+06-18;SS. Marci et Marcelliani Martyrum;Ss. Marcus and Marcellianus, Martyrs;IV. classis;red
+06-19;S. Julianae de Falconeriis Virginis;St. Juliana Falconieri, Virgin;III. classis;white
+06-19;Ss. Gervasii et Protasii Martyrum;Ss. Gervasius and Protasius, Martyrs;IV. classis;red
+06-20;S. Silverii Papae et Martyris;St. Silverius, Pop & Martyr;IV. classis;red
+06-21;S. Aloisii Gonzagae Confessoris;St. Aloysius Gonzaga, Confessor;III. classis;white
+06-22;S. Paulini Episcopi et Confessoris;St. Paulinus of Nola, Bishop & Confessor;III. classis;white
+06-23;In Vigilia S. Joannis Baptistae;Vigil of the Nativity of St. John the Baptist;II. classis;purple
+06-24;In Nativitate S. Joannis Baptistae;The Nativity of St. John the Baptist;I. classis;white
+06-25;S. Gulielmi Abbatis;St. William, Abbot;III. classis;white
+06-26;Ss. Joannis et Pauli Martyrum;Ss. John and Paul, Martyrs;III. classis;red
+06-27;BMV Auxilium Perpetuum;Our Lady of Perpetual Help;IV. classis;white
+06-28;In Vigilia Ss. Petri et Pauli Apostolorum;Vigil of Ss. Peter and Paul, Apostles;II. classis;purple
+06-29;Ss. Apostolorum Petri et Pauli;Ss. Peter and Paul, Apostles;I. classis;red
+06-30;In Commemoratione S. Pauli Apostoli;The Commemoration of St. Paul, Apostle;III. classis;red
+07-01;Pretiosissimi Sanguinis Domini Nostri Jesu Christi;The Most Precious Blood of our Lord Jesus Christ;I. classis;red
+07-02;In Visitatione B. Mariae Virginis;The Visitation of the Blessed Virgin Mary;II. classis;white
+07-02;Ss. Processi et Martiniani Martyrum;Ss. Processus and Martinianus, Martyrs;IV. classis;red
+07-03;S. Irenaei Episcopi et Martyris;St. Irenaeus, Bishop & Martyr;III. classis;red
+07-04;In Commemoratione Omnium Sanctis Papis;Commemoration of All Holy Popes;IV. classis;red
+07-05;S. Antonii Mariae Zaccaria Confessoris;St. Anthony Mary Zaccaria, Confessor;III. classis;white
+07-06;S. Mariae Goretti, Virginis et Martyris;St. Maria Goretti, Virgin & Martyr;III. classis;red
+07-07;Ss. Cyrilli et Methodii Pont. et Conf.;Ss. Cyril and Methodius, Bishops and Confessors;III. classis;white
+07-08;S. Elisabeth Reg. Portugaliae Viduae;St. Elizabeth of Portugal, Queen, Widow;III. classis;white
+07-10;Ss. Septem Fratrum Martyrum, ac Rufinae et Secundae Virginum et Martyrum;Ss. Seven Brothers Martyrs, and Rufina and Secunda, Virgins and Martyrs;III. classis;red
+07-11;S. Pii I Papae et Martyris;St. Pius I, Pope & Martyr;IV. classis;red
+07-12;S. Joannis Gualberti Abbatis;St. John Gualbert, Abbot;III. classis;white
+07-12;Ss. Naboris et Felicis Martyrum;Ss. Nabor and Felix, Martyrs;IV. classis;red
+07-14;S. Bonaventurae Episcopi Confessoris et Ecclesiae Doctoris;St. Bonaventure, Bishop, Confessor & Doctor of the Church;III. classis;white
+07-15;S. Henrici Imperatoris Confessoris;St. Henry II, Emperor, Confessor;III. classis;white
+07-16;Beatae Mariae Virginis de Monte Carmelo;Blessed Virgin Mary of the Mount Carmel;IV. classis;white
+07-17;S. Alexii Confessoris;St. Alexius, Confessor;IV. classis;white
+07-18;S. Camilli de Lellis Confessoris;St. Camillus de Lellis, Confessor;III. classis;white
+07-18;Ss. Symphorosa et Septem Filiis Martyribus;St. Symphorosa and her Seven Sons, Martyrs;IV. classis;red
+07-19;S. Vincentii a Paulo Confessoris;St. Vincent de Paul, Confessor;III. classis;white
+07-20;S. Hieronymi aemiliani Confessoris;St. Jerome Emiliani, Confessor;III. classis;white
+07-20;S. Margaritae, Virginis et Martyris;St. Margaret, Virgin and Martyr;IV. classis;red
+07-21;S. Laurentii a Brundusio Confessoris et Ecclesiae Doctoris;St. Lawrence of Brindisi, Doctor of the Church;III. classis;white
+07-21;S. Praxedis Virginis;St. Praxedes, Virgin;IV. classis;white
+07-22;S. Mariae Magdalenae Paenitentis;St. Mary Magdalene, Penitent;III. classis;white
+07-23;S. Apollinaris Episcopi et Martyris;St. Apollinarius, Bishop & Martyr;III. classis;red
+07-23;S. Liborii Episcopi et Confessoris;St. Liborius, Bishop and Confessor;IV. classis;white
+07-24;S. Christinae Virginis et Martyris;St. Christina, Virgin & Martyr;IV. classis;red
+07-24;S. Christophori Martyris;St. Chrisophor, Martyr;IV. classis;red
+07-25;S. Jacobi Apostoli;St. James the Greater, Apostle;II. classis;red
+07-26;S. Annae Matris B.M.V.;St. Anne, Mother of the Blessed Virgin Mary;II. classis;white
+07-27;S. Pantaleonis Martyris;St. Pantaleon, Martyr;IV. classis;red
+07-28;Ss. Nazarii et Celsi Martyrum, Victoris I Papae et Martyris ac Innocentii I Papae et Confessoris;Ss. Nazarius and Celsus, Martyrs, Victor I, Pope and Martyr, and St. Innocent I, Pope and Confessor;III. classis;red
+07-29;S. Marthae Virginis;St. Martha, Virgin;III. classis;white
+07-29;Ss. Felicis, Simplicii, Faustini et Beatricis Maertyrum;Ss. Felix, Simplicius, Faustinus, and Beatrice, Martyrs;IV. classis;red
+07-30;S. Abdon et Sennen Martyrum;St. Abdon and Sennen, Martyrs;IV. classis;red
+07-31;S. Ignatii Confessoris;St. Ignatius Loyola, Confessor;III. classis;white
+08-01;Ss. Martyrum Machabaeorum;Holy Machabees, Martyrs;IV. classis;red
+08-01;St. Petrus ad Vincula;St. Peter in Chains;IV. classis;red
+08-02;S. Alfonsi Mariae de Ligorio Episc. Conf. et Eccles. Doct.;St. Alphonsus Liguori, Bishop, Confessor & Doctor of the Church;III. classis;white
+08-02;S. Stephani Papae et Martyris;St. Stephen I, Pope and Martyr;IV. classis;red
+08-04;S. Dominici Confessoris;St. Dominic, Confessor;III. classis;white
+08-05;S. Mariae Virginis ad Nives;Dedication of Our Lady of the Snows (Basilica of St. Mary Major);III. classis;white
+08-06;In Transfiguratione Domini Nostri Jesu Christi;The Transfiguration of Our Lord Jesus Christ;II. classis;white
+08-06;Ss. Xysti, Felicissimi et Agapiti Martyrum;Ss. Sixtus II, Pope, and Felicissimus and Agapitus, Martyrs;IV. classis;red
+08-07;S. Cajetani Confessoris;St. Cajetan, Confessor;III. classis;white
+08-07;S. Donati Episcopi et Martyris;St. Donatius, Bishop & Martyr;IV. classis;red
+08-08;S. Joannis Mariae Vianney Confessoris;St. John Mary Vianney, Confessor;III. classis;white
+08-08;Ss. Cyriaci, Largi et Smaragdi Martyrum;Ss. Cyriac, Largus and Smaragdus, Martyrs;IV. classis;red
+08-09;In Vigilia S. Laurentii Mart.;Vigil of St. Laurence;III. classis;purple
+08-09;S. Romani Martyris;St. Romanus, Martyr;IV. classis;red
+08-10;S. Laurentii Martyris;St. Laurence, Martyr;II. classis;red
+08-11;Ss. Tiburtii et Susannae Virginis, Martyrum;Ss. Tiburtius & Susanna, Virgin, Martyrs;IV. classis;red
+08-12;S. Clarae Virginis;St. Clare, Virgin;III. classis;white
+08-13;Ss. Hippolyti et Cassiani Martyrum;Ss. Hyppolitus & Cassian, Martyrs;IV. classis;red
+08-14;In Vigilia Assumptionis B.M.V.;Vigil of the Assumption;II. classis;purple
+08-14;S. Eusebii Confessoris;St. Eusebius, Confessor;IV. classis;white
+08-15;In Assumptione Beatae Mariae Virginis;The Assumption of the Blessed Virgin Mary;I. classis;white
+08-16;S. Joachim Confessoris, Patris B. M. V.;St. Joachim, Father of the Blessed Virgin Mary, Confessor;II. classis;white
+08-17;S. Hyacinthi Confessoris;St. Hyacinth, Confessor;III. classis;white
+08-18;S. Agapiti Martyris;St. Agapitus, Martyr;IV. classis;red
+08-19;S. Joannis Eudes Confessoris;St. John Eudes, Confessor;III. classis;white
+08-20;S. Bernardi Abbatis et Ecclesiae Doctoris;St. Bernard, Abbot & Doctor;III. classis;white
+08-21;S. Joannae Franciscae Fraemiot de Chantal Viduae;St. Jane Frances de Chantal;III. classis;white
+08-22;Immaculati Cordis Beatae Mariae Virginis;Immaculate Heart of the Blessed Virgin Mary;II. classis;white
+08-23;S. Philippi Benitii Confessoris;St. Philip Benizi, Confessor;III. classis;white
+08-23;S. Theclae Virginis et Martyris;St. Thecla, Virgin & Martyr;IV. classis;red
+08-24;S. Bartholomaei Apostoli;St. Bartholomew, Apostle;II. classis;red
+08-25;S. Ludovici Confessoris;St. Louis IX, King & Confessor;III. classis;white
+08-26;S. Zephyrini Papae et Martyris;St. Zephyrinus, Pope and Martyr;IV. classis;red
+08-27;S. Josephi Calasanctii Confessoris;St. Joseph Calasanctius, Confessor;III. classis;white
+08-28;S. Augustini Episcopi et Confessoris et Ecclesiae Doctoris;St. Augustine, Bishop, Confessor & Doctor;III. classis;white
+08-28;S. Hermetis Martyris;St. Hermetis, Martyr;IV. classis;red
+08-29;In Decollatione S. Joannis Baptistae;The Beheading of St. John the Baptist;III. classis;red
+08-29;S. Sabinae Martyris;St. Sabina, Martyr;IV. classis;red
+08-30;S. Rosae a Sancta Maria Limanae Virginis;St. Rose of Lima, Virgin;III. classis;white
+08-30;Ss. Felicis et Adaucti Martyrum;Ss. Felix and Audactus, Martyrs;IV. classis;red
+08-31;S. Raymundi Nonnati Confessoris;St. Raymond Nonnatus, Confessor;III. classis;white
+09-01;The Holy Twelve Brother, Martyrs;The Holy Twelve Brother, Martyrs;IV. classis;red
+09-01;S. aegidii Abbatis;St. Giles, Confessor;IV. classis;white
+09-02;S. Stephani Hungariae Regis Confessoris;St. Stephen of Hungary, King & Confessor;III. classis;white
+09-03;S. Pii X Papae Confessoris;St. Pius X, Pope & Confessor;III. classis;white
+09-05;S. Laurentii Justiniani Episcopi et Confessoris;St. Lawrence Justinian, Bishop & Confessor;III. classis;white
+09-08;In Nativitate Beatae Mariae Virginis;The Nativity of the Blessed Virgin Mary;II. classis;white
+09-08;S. Hadriani, Martyris;St. Adrian, Martyr;IV. classis;red
+09-09;(USA) S. Peter Claver, Confessoris;(USA) St. Peter Claver, Confessor;III. classis;white
+09-09;S. Gorgonii Martyris;St. Gorgonius, Martyr;IV. classis;red
+09-10;S. Nicolai de Tolentino Confessoris;St. Nicholas of Tolentino;III. classis;white
+09-11;Ss. Proti et Hyacinthi Martyrum;Ss. Protus & Hyacinth, Martyrs;IV. classis;red
+09-12;S. Nominis Beatae Mariae Virginis;The Most Holy Name of Mary;III. classis;white
+09-14;In Exaltatione Sanctae Crucis;The Exaltation of the Holy Cross;II. classis;red
+09-15;Septem Dolorum Beatae Mariae Virginis;Seven Sorrows of the Blessed Virgin Mary;II. classis;white
+09-15;S. Nicomedis Martyris;St. Nicomedes, Martyr;IV. classis;red
+09-16;Ss. Cornelii Papae et Cypriani Episcopi, Martyrum;Ss. Cornelius, Pope and Cyprian, Bishop, Martyrs;III. classis;red
+09-16;Ss. Euphemiae, Luciae et Geminiani Martyrum;St. Euphemia, Virgin and Martyr, and Ss Lucia and Geminianus, Martyrs;IV. classis;red
+09-17;Impressionis Stigmatum S. Francisci;The Stigmata of St. Francis;IV. classis;white
+09-18;S. Josephi de Cupertino Confessoris;St. Joseph of Cupertino, Confessor;III. classis;white
+09-19;S. Januarii Episcopi et Sociorum Martyrum;St. Januarius, Bishop, and Companions, Martyrs;III. classis;red
+09-20;Ss. Eustachii et Sociorum Martyrum;St. Eustache & Companions;IV. classis;red
+09-21;S. Matthaei Apostoli et Evangelistae;St. Matthew, Apostle and Evangelist;II. classis;red
+09-22;S. Thomae de Villanova Episcopi et Confessoris;St. Thomas of Villanova;III. classis;white
+09-22;Ss. Mauritii et Sociorum Maertyrum;Ss. Mauritius and Companions, Martyrs;IV. classis;red
+09-23;S. Lini Papae et Martyris;St. Linus Pope and Martyr;III. classis;red
+09-24;Beatae Mariae Virginis de Mercede;Our Lady of Ransom;IV. classis;white
+09-26;(USA) Ss. Jean de Brebeuf, Isaac Jogues et Sociorum Martyrum;(USA) Ss. Jean de Brebeuf, Isaac Jogues & Companions, Martyrs;III. classis;red
+09-26;(Canada) Ss. Jean de Brebeuf, Isaac Jogues et Sociorum Martyrum;(Canada) Ss. Jean de Brebeuf, Isaac Jogues & Companions, Martyrs;II. classis;red
+09-26;Ss. Cypriani et Justinae Martyrum;Ss. Cyprian and Justina, Virgin, Martrys;IV. classis;red
+09-27;Ss. Cosmae et Damiani Martyrum;Ss. Cosmas and Damian, Martyrs;III. classis;red
+09-28;S. Wenceslai Ducis et Martyris;St. Wenceslaus, Duke & Martyr;III. classis;red
+09-29;In Dedicatione S. Michaaelis Archangelis;The Dedication of St. Michael the Archangel;I. classis;white
+09-30;S. Hieronymi Presbyteris Confessoris et Ecclesiae Doctoris;St. Jerome, Priest, Confessor & Doctor;III. classis;white
+10-01;S. Remigii Episcopi et Confessoris;St. Remigius, Bishop & Confessor;IV. classis;white
+10-02;Ss. Angelorum Custodum;Holy Guardian Angels;III. classis;white
+10-03;S. Theresiae a Jesu Infante Virginis;St. Teresa of the Child Jesus, Virgin;III. classis;white
+10-04;S. Francisci Confessoris;St. Francis of Assisi, Confessor;III. classis;white
+10-05;Ss. Placidi et Sociorum Martyrum;St. Placid & Companions, Martyrs;IV. classis;red
+10-06;S. Brunonis Confessoris;St. Bruno, Confessor;III. classis;white
+10-07;Beatae Mariae Virginis a Rosario;Our Lady of the Rosary;II. classis;white
+10-07;S. Marci Papae;St. Mark I, Pope and Confessor;IV. classis;white
+10-08;S. Birgittae Viduae;St. Bridget of Sweden;III. classis;white
+10-09;S. Joannis Leonardi Confessoris;St. John Leonardi, Confessor;III. classis;white
+10-09;S. Dionysii Episcopi, Rustici et Eleutherii, Martyrum;St. Dionisius, Bishop, Rusticus and Eleutherius, Martyrs;IV. classis;red
+10-10;S. Francisci Borgiae Confessoris;St. Francis Borgia, Confessor;III. classis;white
+10-11;Maternitatis Beatae Mariae Virginis;Motherhood of the Blessed Virgin Mary;II. classis;white
+10-13;S. Eduardi Regis Confessoris;St. Edward the Confessor, King;III. classis;white
+10-14;S. Callisti Papae et Martyris;St. Callistus I, Pope and Martyr;III. classis;red
+10-15;S. Teresiae Virginis;St. Teresa of Avila, Virgin;III. classis;white
+10-16;S. Hedwigis Viduae;St. Hedwig, Widow;III. classis;white
+10-17;S. Margaritae Mariae Alacoque Virginis;St. Margaret Mary Alocoque, Virgin;III. classis;white
+10-18;S. Lucae Evangelistae;St. Luke the Evangelist;II. classis;red
+10-19;S. Petri de Alcantara Confessoris;St. Peter of Alcantara, Confessor;III. classis;white
+10-20;S. Joannis Cantii Confessoris;St. John Cantius, Confessor;III. classis;white
+10-21;;St. Ursula and Companions, Virgins and Martyrs;IV. classis;white
+10-21;S. Hilarionis Abbatis;St. Hilarion, Abbot;IV. classis;white
+10-23;S. Antonii Mariae Claret Episcopi et Confessoris;St. Anthony Mary Claret, Bishop & Confessor;III. classis;white
+10-24;S. Raphaaelis Archangeli;St. Raphael the Archangel;III. classis;white
+10-25;S. Isidore Agricola, Confessoris;St. Isidore the Farmer, Confessor;III. classis;white
+10-25;Ss. Chrysanthi et Dariae Martyrum;Ss. Chrysanthus and Daria, Martyrs;IV. classis;red
+10-26;S. Evaristi Papae et Martyris;St. Evaristus, Pope Martyr;IV. classis;red
+10-28;Ss. Simonis et Judae Apostolorum;Ss. Simon and Jude, Apostles;II. classis;red
+11-01;Omnium Sanctorum;All Saints;I. classis;white
+11-02;In Commemoratione Omnium Fidelium Defunctorum;Commemoration of All Souls;I. classis;black
+11-04;S. Caroli Episcopi et Confessoris;St. Charles Borromeo, Bishop;III. classis;white
+11-04;Ss. Vitalis et Agricolae, Martyrum;Ss. Vitalis and Agricola, Martyrs;IV. classis;red
+11-08;Ss. Quatuor Coronatorum Martyrum;Four Holy Crowned Martyrs;IV. classis;red
+11-09;In Dedicatione Basilicae Ss. Salvatoris;The Dedication of the Archbasilica of the Most Holy Savior;II. classis;white
+11-09;S. Theodori Martyris;St. Theodore, Martyr;IV. classis;red
+11-10;S. Andreae Avellini Confessoris;St. Andrew Avellino, Confessor;III. classis;white
+11-10;Ss. Tryphonis et Sociorum Maertyrum;Ss. Tryphon, Respicius, and Nympha (Virgin), Martyrs;IV. classis;red
+11-11;S. Martini Episcopi et Confessoris;St. Martin of Tours, Bishop & Confessor;III. classis;white
+11-11;S. Mennae Martyris;St. Mennas, Martyrs;IV. classis;red
+11-12;S. Martini Papae et Martyris;St. Martin I, Pope & Martyr;III. classis;red
+11-13;S. Frances Xavier Cabrini, Virginis;(USA) St. Frances Xavier Cabrini, Virgin;III. classis;white
+11-13;S. Didaci Confessoris;St. Didacus, Confessor;III. classis;white
+11-14;S. Josaphat Episcopi et Martyris;St. Josephat, Bishop and Martyr;III. classis;red
+11-15;S. Alberti Magni Episcopi Confessoris et Ecclesiae Doctoris;St. Albert the Great, Bishop, Confessor & Doctor;III. classis;white
+11-16;S. Gertrudis Virginis;St. Gertrude the Great, Virgin;III. classis;white
+11-17;S. Gregorii Thaumaturgi Episcopi et Confessoris;St. Gregory the Wonderworker, Bishop and Confessor;III. classis;white
+11-18;In Dedicatione Basilicarum Ss. Apostolorum Petri et Pauli;The Dedication of the Basilicas of Ss. Peter and Paul;III. classis;white
+11-19;S. Elisabeth Viduae;St. Elizabeth, Widow;III. classis;white
+11-19;S. Pontiani Papae et Martyris;St. Pontian, Pope and Martyr;IV. classis;red
+11-20;S. Felicis de Valois Confessoris;St. Felix of Valois, Confessor;III. classis;white
+11-21;In Praesentatione Beatae Mariae Virginis;The Presentation of the Blessed Virgin Mary;III. classis;white
+11-22;S. Caeciliae Virginis et Martyris;St. Cecilia, Virgin and Martyr;III. classis;white
+11-23;S. Clementis I Papae et Martyris;St. Clement I, Pope and Martyr;III. classis;white
+11-23;S. Felicitatis Martyris;St. Felicity, Martyr;IV. classis;red
+11-24;S. Joannis a Cruce Confessoris et Ecclesiae Doctoris;St. John of the Cross, Confessor & Doctor;III. classis;white
+11-24;S. Chrysogoni Martyris;St. Chrysogonus, Martyr;IV. classis;red
+11-25;S. Catharinae Virginis et Martyris;St. Catherine of Alexandria, Virgin and Martyr;III. classis;red
+11-26;S. Silvestri Abbatis;St. Sylvester, Abbot;III. classis;white
+11-26;S. Petri Alexandrini Martyris;St. Peter Alexandrinus, Bishop, Martyr;IV. classis;red
+11-29;S. Saturnini Martyris;St. Saturninus, Martyr;IV. classis;white
+11-30;S. Andreae Apostoli;St. Andrew, Apostle;II. classis;red
+12-02;S. Bibianae Virginis et Martyris;St. Bibiana, Virgin and Martyr;III. classis;red
+12-02;Feria of Advent;Feria of Advent;III. classis;purple
+12-03;S. Francisci Xaverii Confessoris;St. Francis Xavier, Confessor;III. classis;white
+12-03;Feria of Advent;Feria of Advent;III. classis;purple
+12-04;S. Petri Chrysologi Episcopi Confessoris et Ecclesiae Doctoris;St. Peter Chrysologus, Bishop, Confessor & Doctor;III. classis;white
+12-05;S. Sabbae Abbatis;St. Sabbas Abbot;IV. classis;white
+12-06;S. Nicolai Episcopi et Confessoris;St. Nicholas, Bishop & Confessor;III. classis;white
+12-06;Feria of Advent;Feria of Advent;III. classis;purple
+12-07;S. Ambrosii Episcopi Confessoris et Ecclesiae Doctoris;St. Ambrose, Bishop Confessor & Doctor;III. classis;white
+12-07;Feria of Advent;Feria of Advent;III. classis;purple
+12-08;In Conceptione Immaculata Beatae Mariae Virginis;Immaculate Conception of the Blessed Virgin Mary;I. classis;white
+12-08;Feria of Advent;Feria of Advent;III. classis;purple
+12-10;S. Melchiadis Papae et Martyris;St. Miltiades, Pope & Martyr;IV. classis;red
+12-11;S. Damasi Papae et Confessoris;St. Damasus I, Pope & Confessor;III. classis;white
+12-12;(USA)Beatae Mariae Virginis de Guadalupe;(USA) Our Lady of Guadalupe;III. classis;white
+12-13;S. Luciae Virginis et Martyris;St Lucy, Virgin and Martyr;III. classis;red
+12-13;Feria of Advent;Feria of Advent;III. classis;purple
+12-16;S. Eusebii Episcopi et Martyris;St. Eusebius, Bishop and Martyr;III. classis;red
+12-21;S. Thomae Apostoli;St. Thomas, Apostle;II. classis;red
+12-24;In Vigilia Nativitatis Domini;Vigil of Christmas;I. classis;purple
+12-25;In Nativitate Domini;The Nativity of Our Lord;I. classis;white
+12-26;S. Stephani Protomartyris;St. Stephen, Deacon & Protomartyr;II. classis;red
+12-26;Dies Octavae Nativitiatis;Day in the Octave of Christmas;II. classis;white
+12-27;S. Joannis Apostoli et Evangelistae;St. John the Evangelist, Apostle;II. classis;white
+12-27;Dies Octavae Nativitiatis;Day in the Octave of Christmas;II. classis;white
+12-28;Ss. Innocentium;Holy Innocents, Martyrs;II. classis;red
+12-28;Dies Octavae Nativitiatis;Day in the Octave of Christmas;III. classis;white
+12-29;Die quinta post Nativitatem;5th Day in the Octave of Christmas;II. classis;white
+12-29;Sancti Thomae Episcopi Cantuariensis et Martyris;St. Thomas Becket;III. classis;white
+12-30;Die sexta post Nativitatem;6th Day in the Octave of Christmas;II. classis;white
+12-31;Die septima post Nativitatem;7th Day in the Octave of Christmas;II. classis;white
+12-31;Sancti Silvestri Papae;St. Sylvester I, Pope;III. classis;white

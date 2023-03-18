@@ -1,0 +1,69 @@
+latinName;englishName;daysFromEaster;daysToEaster;class;color
+Sanctissimi Nominis Jesu;The Holy Name of Jesus;;91;II. classis;white
+Dominica in Septuagesima;Septuagesima Sunday;;63;II. classis;purple
+Dominica in Sexagesima;Sexagesima Sunday;;56;II. classis;purple
+Dominica in Quinquagesima;Quinquagesima Sunday;;49;II. classis;purple
+Feria IV Cinerum;Ash Wednesday;;46;I. classis;purple
+Dominica I in Quadr;First Sunday of Lent;;42;I. classis;purple
+Feria Quarta Quattuor Temporum Quadragesimae;Ember Wednesday of Lent;;39;II. classis;purple
+Feria Sexta Quattuor Temporum Quadragesimae;Ember Friday of Lent;;37;II. classis;purple
+Feria VI post Cineres;Friday after Ash Wednesday;;44;III. classis;purple
+Sabbato Quattuor Temporum Quadragesimae;Ember Saturday of Lent;;36;II. classis;purple
+Sabbato post Cineres;Saturday after Ash Wednesday;;43;III. classis;purple
+Dominica II in Quadr;Second Sunday of Lent;;35;I. classis;purple
+Dominica III in Quadr;Third Sunday of Lent;;28;I. classis;purple
+Feria V post Cineres;Thursday after Ash Wednesday;;45;III. classis;purple
+Dominica IV in Quadr;Fourth Sunday of Lent;;21;I. classis;purple
+Dominica I Passionis;Passion Sunday;;14;I. classis;purple
+Dominica II Passionis seu in Palmis;Palm Sunday;;7;I. classis;purple
+Feria Secunda Hebdomadae Sanctae;Monday of the Holy Week;;6;I. classis;purple
+Feria Tertia Hebdomadae Sanctae;Tuesday of the Holy Week;;5;I. classis;purple
+Feria Quarta Hebdomadae Sanctae;Wednesday of the Holy Week;;4;I. classis;purple
+Feria Quinta in Cena Domini;Holy Thursday;;3;I. classis;white
+Feria Sexta in Passione et Morte Domini;Good Friday;;2;I. classis;black
+Sabbato Sancto;Holy Saturday and the Easter Vigil;;1;I. classis;purple
+Dominica Resurrectionis;Easter Sunday;0;;I. classis;white
+Dominica in Albis in Octava Paschae;Low Sunday;7;;I. classis;white
+Die II infra octavam Paschae;Easter Monday;1;;I. classis;white
+Die III infra octavam Paschae;Easter Tuesday;2;;I. classis;white
+Die IV infra octavam Paschae;Easter Wednesday;3;;I. classis;white
+Die V infra octavam Paschae;Easter Thursday;4;;I. classis;white
+Dominica II Post Pascha;Second Sunday after Easter;14;;II. classis;white
+Sabbato in Albis;Easter Saturday;6;;I. classis;white
+Dominica III Post Pascha;Third Sunday after Easter;21;;II. classis;white
+Die VI infra octavam Paschae;Easter Friday;5;;I. classis;white
+Dominica IV Post Pascha;Fourth Sunday after Easter;28;;II. classis;white
+Dominica V Post Pascha;Fifth Sunday after Easter;35;;II. classis;white
+In Vigilia Ascensionis;The Vigil of Ascention;38;;II. classis;purple
+In Ascensione Domini;Ascension of the Lord;39;;I. classis;white
+Dominica post Ascensionem;Sunday after the Ascension;42;;II. classis;white
+Sabbato in Vigilia Pentecostes;Vigil of the Pentecost;48;;I. classis;red
+Dominica Pentecostes;Pentecost Sunday;49;;I. classis;red
+Dominica Sanctissimae Trinitatis;Holy Trinity Sunday;56;;I. classis;white
+Festum Sanctissimi Corporis Christi;Corpus Christi;60;;I. classis;white
+Feria Quarta Quattuor Temporum Pentecostes;Ember Wednesday in the Octave of Pentecost;52;;I. classis;red
+Feria Sexta Quattuor Temporum Pentecostes;Ember Friday in the Octave of Pentecost;54;;I. classis;red
+Dominica II Post Pentecosten;Second Sunday Post Pentecosten;63;;II. classis;green
+Sabbato Quattuor Temporum Pentecostes;Ember Saturday in the Octave of Pentecost;55;;I. classis;red
+Sanctissimi Cordis Domini Nostri Jesu Christi;Sacred Heart of Jesus;68;;I. classis;white
+Dominica III Post Pentecosten;Third Sunday after the Pentecost;70;;II. classis;green
+Dominica IV Post Pentecosten;Fourth Sunday after the Pentecost;77;;II. classis;green
+Dominica V Post Pentecosten;Fifth Sunday after the Pentecost;84;;II. classis;green
+Dominica VI Post Pentecosten;Sixth Sunday after the Pentecost;91;;II. classis;green
+Dominica VII Post Pentecosten;Seventh Sunday after the Pentecost;98;;II. classis;green
+Dominica VIII Post Pentecosten;Eight Sunday after the Pentecost;105;;II. classis;green
+Dominica IX Post Pentecosten;Nineth Sunday after the Pentecost;112;;II. classis;green
+Dominica X Post Pentecosten;Tenth Sunday after the Pentecost;119;;II. classis;green
+Dominica XI Post Pentecosten;Eleventh Sunday after the Pentecost;126;;II. classis;green
+Dominica XII Post Pentecosten;Tvelfth Sunday after the Pentecost;133;;II. classis;green
+Dominica XIII Post Pentecosten;Thirteenth Sunday after the Pentecost;140;;II. classis;green
+Dominica XIV Post Pentecosten;Foureenth Sunday after the Pentecost;147;;II. classis;green
+Dominica XV Post Pentecosten;Fifteenth Sunday after the Pentecost;154;;II. classis;green
+Dominica XVI Post Pentecosten;Sixteenth Sunday after the Pentecost;161;;II. classis;green
+Dominica XVII Post Pentecosten;Seventeenth Sunday after the Pentecost;168;;II. classis;green
+Dominica XVIII Post Pentecosten;Eighteenth Sunday after the Pentecost;175;;II. classis;green
+Dominica XIX Post Pentecosten;Nineteenth Sunday after the Pentecost;182;;II. classis;green
+Dominica XX Post Pentecosten;Twentieth Sunday after the Pentecost;189;;II. classis;green
+Dominica XXI Post Pentecosten;Twentyfirst Sunday after the Pentecost;196;;II. classis;green
+Dominica XXII Post Pentecosten;Twentysecond Sunday after the Pentecost;203;;II. classis;green
+Dominica XXIII Post Pentecosten;Twentythird Sunday after the Pentecost;210;;II. classis;green

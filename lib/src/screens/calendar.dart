@@ -1,262 +1,220 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-
-const OffWhite = Color.fromARGB(255, 245, 245, 245);
+import 'package:organizer/src/services/liturgical_calendar/calendar.dart';
+import 'package:organizer/src/services/liturgical_calendar/liturgical_calendar.dart';
+import 'package:organizer/src/widgets/cards.dart';
+import 'package:organizer/src/widgets/util.dart';
 
 @immutable
 class CalendarScreen extends StatelessWidget {
   const CalendarScreen({Key? key}) : super(key: key);
 
-  String generateRandomName() {
-    String name = "";
-    String alphabet = "abcdefghijklmnopqrstuvwxyz";
-    final r = Random();
-    for (var i = 0; i < r.nextInt(6) + 4; i++) {
-      name = "$name${alphabet[r.nextInt(24)]}";
-    }
-
-    return name;
-  }
-
-  Map<String, dynamic> generateData(DateTime date) {
-    final r = Random();
-    Map<String, dynamic> genData = {};
-    for (var i = 1; i < 30; i++) {
-      genData["$i-${date.month}"] = {
-        "name": generateRandomName(),
-        "color": ["red", "green", "white", "violet"][r.nextInt(4)],
-        "class": "3rd Class",
-        "commemoration": [
-          for (var j = 0; j < r.nextInt(3); j++)
-            {
-              "name": generateRandomName(),
-              "color": ["red", "green", "white", "violet"][r.nextInt(4)],
-              "class": "3rd Class",
-            }
-        ],
-      };
-    }
-    return genData;
-  }
-
   @override
   Widget build(BuildContext context) {
-    DateTime now = DateTime.now();
-    DateTime generateDate = DateTime(now.year, now.month, 1);
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Calendar (Preview)'),
+        title: const Text('Liturgical Calendar'),
       ),
-      body: ListView.builder(
-        itemCount: 28,
-        itemBuilder: (context, index) {
-          DateTime newDate = DateTime(
-              generateDate.year, generateDate.month, generateDate.day + index);
-          return LiturgicalDay(
-            date: newDate,
-            data: generateData(generateDate),
-          );
-        },
-      ),
+      body: const CalendarTable(),
     );
   }
 }
 
-class LiturgicalDay extends StatelessWidget {
-  final DateTime date;
-  final Map<String, dynamic> data;
-  const LiturgicalDay({
-    Key? key,
-    required this.date,
-    required this.data,
-  }) : super(key: key);
+class CalendarTable extends StatefulWidget {
+  const CalendarTable({super.key});
+
+  @override
+  State<CalendarTable> createState() => CalendarTableState();
+}
+
+class CalendarTableState extends State<CalendarTable> {
+  int month = DateTime.now().month;
+  int year = DateTime.now().year;
+  Calendar? calendar;
+  List<Map<String, String>>? data;
+
+  @override
+  void initState() {
+    super.initState();
+    calendar = getLiturgicalCalendar();
+    data = calendar?.getMonthIterable(month).toList();
+  }
+
+  static const monthNames = [
+    "-",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  changeMonth(int diff) {
+    setState(() {
+      month += diff;
+      if (month == 0) {
+        year--;
+        month = 12;
+        calendar = getLiturgicalCalendar(year);
+      } else if (month == 13) {
+        year++;
+        month = 1;
+        calendar = getLiturgicalCalendar(year);
+      }
+      data = calendar?.getMonthIterable(month).toList();
+    });
+  }
+
+  void editData() {}
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 900),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SizedBox(
-            width: double.infinity,
-            child: Row(
-              children: [
-                Flexible(
-                  flex: 2,
-                  child: DatePieceWidget(
-                    date: date,
-                    feasts: const [],
-                  ),
-                ),
-                Flexible(
-                  flex: 8,
-                  child: FeastPieceWidget(
-                    data: data["${date.day}-${date.month}"],
-                  ),
-                ),
-              ],
+    return SmoothListView(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            IconButton(
+                onPressed: () {
+                  changeMonth(-1);
+                },
+                icon: const Icon(Icons.arrow_back)),
+            Text(
+              "${monthNames[month]} $year",
+              style: const TextStyle(fontSize: 42),
             ),
-          ),
+            IconButton(
+                onPressed: () {
+                  changeMonth(1);
+                },
+                icon: const Icon(Icons.arrow_forward)),
+          ],
         ),
-      ),
-    );
-  }
-}
-
-class FeastPieceWidget extends StatelessWidget {
-  final Map<String, dynamic> data;
-  const FeastPieceWidget({
-    Key? key,
-    required this.data,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final r = Random();
-    final primary = Theme.of(context).colorScheme.primary;
-    final onPrimary = Theme.of(context).colorScheme.onPrimary;
-    return Card(
-      elevation: 20,
-      child: DefaultTextStyle(
-        style: TextStyle(
-          color: onPrimary,
+        const RowWidget(
+          items: ["Date", "English", "Color", "Class", "Commemorations"],
+          editable: false,
         ),
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          color: onPrimary,
-          constraints:
-              const BoxConstraints(minHeight: 120, minWidth: double.infinity),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              FeastRow(data: data),
-              const Divider(),
-              const Text(
-                "Commemorations:",
-                style: TextStyle(color: Colors.black),
-              ),
-              for (var comm in data["commemoration"]) FeastRow(data: comm)
+        for (var datum in data!)
+          RowWidget(
+            items: [
+              datum["date"] as String,
+              datum["englishName"] as String,
+              datum["color"] as String,
+              datum["class"] as String,
+              datum["commemorations"] as String,
             ],
           ),
-        ),
-      ),
+      ],
     );
   }
 }
 
-class FeastRow extends StatelessWidget {
-  static const Map stringToColor = {
-    "red": Colors.red,
-    "violet": Colors.purple,
-    "white": Color.fromARGB(255, 255, 245, 224),
-    "green": Colors.green,
-  };
-
-  const FeastRow({
-    Key? key,
-    required this.data,
-  }) : super(key: key);
-
-  final Map<String, dynamic> data;
+class RowWidget extends StatelessWidget {
+  final List<String> items;
+  final bool editable;
+  const RowWidget({super.key, required this.items, this.editable = true});
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
-      padding: const EdgeInsets.all(12),
-      color: stringToColor[data["color"]],
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(data["name"]),
-          Text(data["class"]),
-        ],
+      height: 60,
+      width: double.infinity,
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+      decoration: const BoxDecoration(
+        border: Border.symmetric(
+          horizontal: BorderSide(width: 1),
+        ),
       ),
+      child: Row(children: [
+        for (var item in items)
+          GestureDetector(
+            onTap: () async {
+              if (editable) {
+                final value = await showDialog(
+                    context: context,
+                    builder: (ctx) {
+                      return ChangeStringModalWidget(currentValue: item);
+                    });
+              }
+            },
+            child: Container(
+              width: (size.width - 22) / items.length,
+              height: double.infinity,
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: editable ? Colors.white : Theme.of(context).primaryColor,
+                border: const Border.symmetric(
+                  vertical: BorderSide(width: 1),
+                ),
+              ),
+              child: Text(
+                item,
+                style: TextStyle(color: editable ? Colors.black : Colors.white),
+              ),
+            ),
+          )
+      ]),
     );
   }
 }
 
-class DatePieceWidget extends StatelessWidget {
-  static final List<String> months = [
-    "",
-    "JAN",
-    "FEB",
-    "MAR",
-    "APR",
-    "MAY",
-    "JUN",
-    "JUL",
-    "AUG",
-    "SEP",
-    "OCT",
-    "NOV",
-    "DEC"
-  ];
+class ChangeStringModalWidget extends StatefulWidget {
+  final String currentValue;
 
-  static final List<String> days = [
-    "",
-    "MON",
-    "TUE",
-    "WED",
-    "THU",
-    "FRI",
-    "SAT",
-    "SUN",
-  ];
-
-  final List<Map<String, dynamic>> feasts;
-  final DateTime date;
-  const DatePieceWidget({
+  const ChangeStringModalWidget({
     super.key,
-    required this.date,
-    required this.feasts,
+    required this.currentValue,
   });
 
+  static GlobalKey textKey = GlobalKey();
+
+  @override
+  State<ChangeStringModalWidget> createState() =>
+      _ChangeStringModalWidgetState();
+}
+
+class _ChangeStringModalWidgetState extends State<ChangeStringModalWidget> {
+  TextEditingController? controller;
+
+  @override
+  void initState() {
+    controller = TextEditingController(text: widget.currentValue);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    DateTime today = DateTime.now();
-    bool isToday = today.day == date.day && today.month == date.month;
-    bool isSunday = date.weekday == 7;
-    return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: PhysicalModel(
-        elevation: 20,
-        color: Colors.black,
-        shape: BoxShape.circle,
-        child: Container(
-          height: 100,
-          width: 100,
-          decoration: BoxDecoration(
-            color: isToday
-                ? Colors.green[200]
-                : isSunday
-                    ? Colors.amber[300]
-                    : OffWhite,
-            shape: BoxShape.circle,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                days[date.weekday],
-                style: const TextStyle(fontSize: 16),
+    return ModalCard(
+        title: const Text("Edit Liturgical Calendar"),
+        child: ListView(
+          padding: const EdgeInsets.all(20),
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: TextField(
+                controller: controller,
               ),
-              Text(
-                date.day < 10 ? "0${date.day}" : date.day.toString(),
-                style:
-                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                months[date.month],
-                style: const TextStyle(fontSize: 16),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context, controller?.value);
+                },
+                child: const Text("Submit"))
+          ],
+        ));
   }
 }
