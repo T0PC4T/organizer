@@ -30,13 +30,27 @@ class CalendarTableState extends State<CalendarTable> {
   int month = DateTime.now().month;
   int year = DateTime.now().year;
   Calendar? calendar;
-  List<Map<String, String>>? data;
+  List<List<String>>? data;
 
   @override
   void initState() {
     super.initState();
     calendar = getLiturgicalCalendar();
-    data = calendar?.getMonthIterable(month).toList();
+    setDataFromCalendar();
+  }
+
+  setDataFromCalendar() {
+    final keys = [
+      "date",
+      "englishName",
+      "color",
+      "class",
+      "commemorations",
+    ];
+    data = calendar
+        ?.getMonthIterable(month)
+        .map((e) => <String>[for (var key in keys) e[key]!])
+        .toList();
   }
 
   static const monthNames = [
@@ -67,11 +81,19 @@ class CalendarTableState extends State<CalendarTable> {
         month = 1;
         calendar = getLiturgicalCalendar(year);
       }
-      data = calendar?.getMonthIterable(month).toList();
+      setDataFromCalendar();
     });
   }
 
-  void editData() {}
+  void editData(List<String> row, itemIndex, newValue) {
+    setState(() {
+      data![data!.indexOf(row)][itemIndex] = newValue;
+    });
+  }
+
+  static CalendarTableState? of(BuildContext context) {
+    return context.findAncestorStateOfType<CalendarTableState>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,13 +125,7 @@ class CalendarTableState extends State<CalendarTable> {
         ),
         for (var datum in data!)
           RowWidget(
-            items: [
-              datum["date"] as String,
-              datum["englishName"] as String,
-              datum["color"] as String,
-              datum["class"] as String,
-              datum["commemorations"] as String,
-            ],
+            items: datum,
           ),
       ],
     );
@@ -143,6 +159,11 @@ class RowWidget extends StatelessWidget {
                     builder: (ctx) {
                       return ChangeStringModalWidget(currentValue: item);
                     });
+
+                if (value is String && context.mounted) {
+                  CalendarTableState.of(context)
+                      ?.editData(items, items.indexOf(item), value);
+                }
               }
             },
             child: Container(
@@ -211,7 +232,7 @@ class _ChangeStringModalWidgetState extends State<ChangeStringModalWidget> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.pop(context, controller?.value);
+                  Navigator.pop(context, controller?.value.text);
                 },
                 child: const Text("Submit"))
           ],
