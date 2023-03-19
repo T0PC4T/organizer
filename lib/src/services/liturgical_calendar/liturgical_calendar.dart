@@ -9,16 +9,13 @@ Calendar getLiturgicalCalendar([int? year]) {
 
   Calendar calendar = Calendar(year);
 
-  List<Map<String, String>> tempore = temporalFeasts;
-  for (var feast in tempore) {
-    calendar.addFeast(getFeastDate(year, feast, PropriumType.Tempore),
-        getFeastData(feast, PropriumType.Tempore));
+  for (var feast in temporalFeasts) {
+    calendar.addFeast(
+        getDatePropriumDeTempore(year, feast), getFeastData(feast));
   }
 
-  List<Map<String, String>> sanctorum = sanctoralFeasts;
-  for (var feast in sanctorum) {
-    calendar.addFeast(getFeastDate(year, feast, PropriumType.Sanctorum),
-        getFeastData(feast, PropriumType.Sanctorum));
+  for (var feast in sanctoralFeasts) {
+    calendar.addFeast(parseTime(year, feast['date']!), getFeastData(feast));
   }
 
   calendar.addMissingStuff();

@@ -44,7 +44,7 @@ const sanctoralFeasts = [
   {
     "date": "01-05",
     "latinName": "S. Telespohori Papae et Martyris",
-    "englishName": "Feria of ChristmastideSt. Telesphorus Pope & Martyr",
+    "englishName": "St. Telesphorus Pope & Martyr",
     "class": "IV. classis",
     "color": "red"
   },
@@ -522,7 +522,7 @@ const sanctoralFeasts = [
   {
     "date": "03-28",
     "latinName": "S. Joannis a Capistrano Confessoris",
-    "englishName": "St. John a Capistrano, Confessor",
+    "englishName": "St. John Capistran, Confessor",
     "class": "IV. classis",
     "color": "white"
   },
@@ -1818,15 +1818,6 @@ const sanctoralFeasts = [
   },
   {
     "date": "09-26",
-    "latinName":
-        "(Canada) Ss. Jean de Brebeuf, Isaac Jogues et Sociorum Martyrum",
-    "englishName":
-        "(Canada) Ss. Jean de Brebeuf, Isaac Jogues & Companions, Martyrs",
-    "class": "II. classis",
-    "color": "red"
-  },
-  {
-    "date": "09-26",
     "latinName": "Ss. Cypriani et Justinae Martyrum",
     "englishName": "Ss. Cyprian and Justina, Virgin, Martrys",
     "class": "IV. classis",
@@ -2302,25 +2293,11 @@ const sanctoralFeasts = [
     "color": "red"
   },
   {
-    "date": "12-02",
-    "latinName": "Feria of Advent",
-    "englishName": "Feria of Advent",
-    "class": "III. classis",
-    "color": "purple"
-  },
-  {
     "date": "12-03",
     "latinName": "S. Francisci Xaverii Confessoris",
     "englishName": "St. Francis Xavier, Confessor",
     "class": "III. classis",
     "color": "white"
-  },
-  {
-    "date": "12-03",
-    "latinName": "Feria of Advent",
-    "englishName": "Feria of Advent",
-    "class": "III. classis",
-    "color": "purple"
   },
   {
     "date": "12-04",
@@ -2345,13 +2322,6 @@ const sanctoralFeasts = [
     "color": "white"
   },
   {
-    "date": "12-06",
-    "latinName": "Feria of Advent",
-    "englishName": "Feria of Advent",
-    "class": "III. classis",
-    "color": "purple"
-  },
-  {
     "date": "12-07",
     "latinName": "S. Ambrosii Episcopi Confessoris et Ecclesiae Doctoris",
     "englishName": "St. Ambrose, Bishop Confessor & Doctor",
@@ -2359,25 +2329,11 @@ const sanctoralFeasts = [
     "color": "white"
   },
   {
-    "date": "12-07",
-    "latinName": "Feria of Advent",
-    "englishName": "Feria of Advent",
-    "class": "III. classis",
-    "color": "purple"
-  },
-  {
     "date": "12-08",
     "latinName": "In Conceptione Immaculata Beatae Mariae Virginis",
     "englishName": "Immaculate Conception of the Blessed Virgin Mary",
     "class": "I. classis",
     "color": "white"
-  },
-  {
-    "date": "12-08",
-    "latinName": "Feria of Advent",
-    "englishName": "Feria of Advent",
-    "class": "III. classis",
-    "color": "purple"
   },
   {
     "date": "12-10",
@@ -2406,13 +2362,6 @@ const sanctoralFeasts = [
     "englishName": "St Lucy, Virgin and Martyr",
     "class": "III. classis",
     "color": "red"
-  },
-  {
-    "date": "12-13",
-    "latinName": "Feria of Advent",
-    "englishName": "Feria of Advent",
-    "class": "III. classis",
-    "color": "purple"
   },
   {
     "date": "12-16",

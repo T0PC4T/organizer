@@ -7,9 +7,8 @@ import 'day.dart';
 import 'utils.dart';
 
 class Calendar {
-  Calendar(int year)
+  Calendar(this.year)
       : days = <Day>[],
-        year = year,
         easter = parseTime(year, easterDate(year)) {
     DateTime start = DateTime(year, 1, 1, 12, 0, 0);
     DateTime end = DateTime(year + 1, 1, 1, 10, 0, 0);
@@ -26,15 +25,19 @@ class Calendar {
 
   void addFeast(DateTime date, Feast feast) {
     Day originalDay = getDayAtDate(date);
-    getDayIfFeastTransfered(originalDay, feast).addFeast(feast);
+    Day day = getDayIfFeastTransfered(originalDay, feast);
+    day.addFeast(feast);
+    if (feast.latinName.contains("Quattuor Temporum Quadr")) {
+      day.removeFeastWithName("Feria Quadr");
+    }
   }
 
   Day getDayIfFeastTransfered(Day originalDay, Feast feast) {
     //Trasfer of the Feast in case two First Class Feast occur on the same day
-    if (feast.feastClass != FeastClass.FirstClass) {
+    if (feast.feastClass != FeastClass.firstClass) {
       return originalDay;
     }
-    if (!originalDay.containsFeastOfClass(FeastClass.FirstClass)) {
+    if (!originalDay.containsFeastOfClass(FeastClass.firstClass)) {
       return originalDay;
     }
     if (originalDay.isHolyWeek) {
@@ -69,6 +72,22 @@ class Calendar {
     return days.firstWhere((element) => element.getDateFormat() == date);
   }
 
+  Iterable<Map<String, String>> getMonthIterable(int month) sync* {
+    for (var element in days.where((day) => day.date.month == month)) {
+      final jsonData = element.formatJSON().values.first;
+      yield <String, String>{
+        "date": element.date.day.toString(),
+        "latinName": jsonData["latinName"],
+        "englishName": jsonData["englishName"],
+        "color": jsonData["color"],
+        "class": jsonData["class"],
+        "commemorations": ((jsonData["commemorations"] as List?) ?? [])
+            .map((e) => e["englishName"])
+            .join("<br>")
+      };
+    }
+  }
+
   void addMissingStuff() {
     addMissingSundays();
     addMovableFeasts();
@@ -89,35 +108,18 @@ class Calendar {
     return ret;
   }
 
-  Iterable<Map<String, String>> getMonthIterable(int month) sync* {
-    for (var element in days.where((day) => day.date.month == month)) {
-      final jsonData = element.formatJSON().values.first;
-      yield <String, String>{
-        "date": element.date.day.toString(),
-        "latinName": jsonData["latinName"],
-        "englishName": jsonData["englishName"],
-        "color": jsonData["color"],
-        "class": jsonData["class"],
-        "commemorations": ((jsonData["commemorations"] as List?) ?? [])
-            .map((e) => e["englishName"])
-            .join("<br>")
-      };
-    }
-  }
-
   void addMovableFeasts() {
     Feast SSNJ = Feast("Sanctissimi Nominis Jesu", "The Holy Name of Jesus",
-        FeastClass.SecondClass, Color.white, PropriumType.Tempore);
+        FeastClass.secondClass, Color.white);
 
     Feast SGVPC = Feast(
         "S. Gabrielis a Virgine Pardolente Confessoris",
         "St. Gabriel of Our Lady of Sorrows, Confessor",
-        FeastClass.SecondClass,
-        Color.white,
-        PropriumType.Sanctorum);
+        FeastClass.secondClass,
+        Color.white);
 
     Feast SMA = Feast("S. Mathiae Apostoli", "St. Matthias, Apostle",
-        FeastClass.SecondClass, Color.red, PropriumType.Sanctorum);
+        FeastClass.secondClass, Color.red);
 
     var d = DateTime(year, 1, 1).weekday;
     if (d == 1 || d == 2 || d == 7) {
@@ -137,9 +139,8 @@ class Calendar {
     Feast DION = Feast(
         "Dominica Infra Octavam Nativitatis",
         "Sunday in the Octave of Christmas",
-        FeastClass.SecondClass,
-        Color.white,
-        PropriumType.Tempore);
+        FeastClass.secondClass,
+        Color.white);
 
     var dd = DateTime(year, 12, 25);
     d = dd.weekday % 7;
@@ -149,7 +150,7 @@ class Calendar {
     }
 
     Feast DNJCR = Feast("Domini Nostri Jesu Christi Regi", "Christ the King",
-        FeastClass.FirstClass, Color.white, PropriumType.Sanctorum);
+        FeastClass.firstClass, Color.white);
 
     d = DateTime(year, 10, 31).weekday % 7;
     DateTime date = DateTime(year, 10, 31 - d, 12);
@@ -157,13 +158,12 @@ class Calendar {
 
     var diff = const Duration(days: 9);
     DateTime xx =
-        DateTime.parse(year.toString() + '-' + easterDate(year) + " 12:00:00")
-            .subtract(diff);
+        DateTime.parse("$year-${easterDate(year)} 12:00:00").subtract(diff);
 
     addFeast(
         xx,
         Feast("Septem Dolorum BMV", "Seven Dolours of Our Lady",
-            FeastClass.ThirdClass, Color.purple, PropriumType.Tempore));
+            FeastClass.thirdClass, Color.purple));
 
     d = DateTime(year, 12, 25).weekday;
 
@@ -174,7 +174,7 @@ class Calendar {
       var numDays = Duration(days: i);
       DateTime date = DateTime(year, 12, 17, 12).add(numDays);
       Feast FMA = Feast("Feria Maior Adventus", "Major Feria of Advent",
-          FeastClass.SecondClass, Color.purple, PropriumType.Tempore);
+          FeastClass.secondClass, Color.purple);
       addFeast(date, FMA);
     }
 
@@ -186,9 +186,8 @@ class Calendar {
         Feast(
             "Sanctae Familiae Jesu Mariae Joseph",
             "Holy Family Jesus, Mary, and Joseph",
-            FeastClass.FirstClass,
-            Color.white,
-            PropriumType.Tempore));
+            FeastClass.firstClass,
+            Color.white));
   }
 
   DateTime getDateOfFeast(String name) {
@@ -200,47 +199,47 @@ class Calendar {
       "Dominica IV Adventus": {
         "eng": "Fourth Sunday of Advent",
         "color": Color.purple,
-        "class": FeastClass.FirstClass
+        "class": FeastClass.firstClass
       },
       "Dominica III Adventus": {
         "eng": "Third Sunday of Advent",
         "color": Color.purple,
-        "class": FeastClass.FirstClass
+        "class": FeastClass.firstClass
       },
       "Dominica II Adventus": {
         "eng": "Second Sunday of Advent",
         "color": Color.purple,
-        "class": FeastClass.FirstClass
+        "class": FeastClass.firstClass
       },
       "Dominica I Adventus": {
         "eng": "First Sunday of Advent",
         "color": Color.purple,
-        "class": FeastClass.FirstClass
+        "class": FeastClass.firstClass
       },
       "Dominica XXIV et Ultima post Pentecosten": {
         "eng": "Twenty second and last Sunday after the Pentecost",
         "color": Color.green,
-        "class": FeastClass.SecondClass
+        "class": FeastClass.secondClass
       },
       "Dominica VI Post Epiphaniam": {
         "eng": "Rsumed Sixth Sunday after the Epiphany",
         "color": Color.green,
-        "class": FeastClass.SecondClass
+        "class": FeastClass.secondClass
       },
       "Dominica V Post Epiphaniam": {
         "eng": "Rsumed Fifth Sunday after the Epiphany",
         "color": Color.green,
-        "class": FeastClass.SecondClass
+        "class": FeastClass.secondClass
       },
       "Dominica IV Post Epiphaniam": {
         "eng": "Rsumed Fourth Sunday after the Epiphany",
         "color": Color.green,
-        "class": FeastClass.SecondClass
+        "class": FeastClass.secondClass
       },
       "Dominica III Post Epiphaniam": {
         "eng": "Rsumed Third Sunday after the Epiphany",
         "color": Color.green,
-        "class": FeastClass.SecondClass
+        "class": FeastClass.secondClass
       },
     };
 
@@ -253,36 +252,22 @@ class Calendar {
       }
 
       addFeast(
-          date,
-          Feast(element, value['eng'], value['class'], value['color'],
-              PropriumType.Tempore));
+          date, Feast(element, value['eng'], value['class'], value['color']));
 
       if (element.startsWith("Dominica III Adventus")) {
         var d = date.add(const Duration(days: 3));
 
-        Feast FQT = Feast(
-            "Feria IV Quattuor Temporum Adventus",
-            "Ember Wednesday of Advent",
-            FeastClass.SecondClass,
-            Color.purple,
-            PropriumType.Tempore);
+        Feast FQT = Feast("Feria IV Quattuor Temporum Adventus",
+            "Ember Wednesday of Advent", FeastClass.secondClass, Color.purple);
 
         addFeast(d, FQT);
         d = d.add(const Duration(days: 2));
-        FQT = Feast(
-            "Feria VI Quattuor Temporum Adventus",
-            "Ember Friday of Advent",
-            FeastClass.SecondClass,
-            Color.purple,
-            PropriumType.Tempore);
+        FQT = Feast("Feria VI Quattuor Temporum Adventus",
+            "Ember Friday of Advent", FeastClass.secondClass, Color.purple);
         addFeast(d, FQT);
         d = d.add(const Duration(days: 1));
-        FQT = Feast(
-            "Sabbato Quattuor Temporum Adventus",
-            "Ember Saturday of Advent",
-            FeastClass.SecondClass,
-            Color.purple,
-            PropriumType.Tempore);
+        FQT = Feast("Sabbato Quattuor Temporum Adventus",
+            "Ember Saturday of Advent", FeastClass.secondClass, Color.purple);
         addFeast(d, FQT);
       }
       date = date.subtract(const Duration(days: 7));
@@ -300,9 +285,8 @@ class Calendar {
           Feast(
               "Feria IV Quattuor Temporum Septembris",
               "Ember Wednesday in September",
-              FeastClass.SecondClass,
-              Color.purple,
-              PropriumType.Tempore));
+              FeastClass.secondClass,
+              Color.purple));
     }
     date = date.add(const Duration(days: 2));
     if (date.day != 21) {
@@ -311,9 +295,8 @@ class Calendar {
           Feast(
               "Feria VI Quattuor Temporum Septembris",
               "Ember Friday in September",
-              FeastClass.SecondClass,
-              Color.purple,
-              PropriumType.Tempore));
+              FeastClass.secondClass,
+              Color.purple));
     }
     date = date.add(const Duration(days: 1));
     if (date.day != 21) {
@@ -322,9 +305,8 @@ class Calendar {
           Feast(
               "Sabbato Quattuor Temporum Septembris",
               "Ember Saturday in September",
-              FeastClass.SecondClass,
-              Color.purple,
-              PropriumType.Tempore));
+              FeastClass.secondClass,
+              Color.purple));
     }
 
     Map<String, String> sundaysPostEpiphaniam = {
@@ -344,9 +326,7 @@ class Calendar {
         return;
       }
       addFeast(
-          date,
-          Feast(element, value, FeastClass.SecondClass, Color.green,
-              PropriumType.Tempore));
+          date, Feast(element, value, FeastClass.secondClass, Color.green));
       date = date.add(const Duration(days: 7));
     });
   }
@@ -359,42 +339,36 @@ class Calendar {
   }
 
   void addFirstFridays() {
-    Feast SCJC = Feast(
-        "Sacratissimi Cordis Jesu Christi",
-        "Most Holy Name of Jesus",
-        FeastClass.ThirdClass,
-        Color.white,
-        PropriumType.Tempore);
+    Feast SCJC = Feast("Sacratissimi Cordis Jesu Christi",
+        "Most Holy Name of Jesus", FeastClass.thirdClass, Color.white);
     addCyclicFeast(SCJC, DateTime.friday);
   }
 
   void addFirstThursdays() {
-    Feast JCSAC = Feast(
-        "Jesu Christi Summi et Aeterni Sacerdoti",
-        "Jesus High Priest",
-        FeastClass.ThirdClass,
-        Color.white,
-        PropriumType.Tempore);
+    Feast JCSAC = Feast("Jesu Christi Summi et Aeterni Sacerdoti",
+        "Jesus Christ the High Priest", FeastClass.thirdClass, Color.white);
     addCyclicFeast(JCSAC, DateTime.thursday);
   }
 
   void addFirstSaturdays() {
-    Feast ICBMV = Feast(
-        "Immaculati Cordis Beatae Mariae Virginis",
-        "Immaculate Heart of Mary",
-        FeastClass.ThirdClass,
-        Color.white,
-        PropriumType.Tempore);
+    Feast ICBMV = Feast("Immaculati Cordis Beatae Mariae Virginis",
+        "Immaculate Heart of Mary", FeastClass.thirdClass, Color.white);
     addCyclicFeast(ICBMV, DateTime.saturday);
   }
 
   void addCyclicFeast(Feast data, int dayOfTheWeek) {
     for (int i = 1; i < 13; i++) {
-      DateTime date = DateTime(1, i, year, 12, 0, 0);
+      DateTime date = DateTime(year, i, 1, 12, 0, 0);
       var nearestSaturday =
           Duration(days: (dayOfTheWeek - (date.weekday % DateTime.sunday)));
       date = date.add(nearestSaturday);
-      addFeast(date, data);
+      Day day = getDayAtDate(date);
+      if (!day.containsFeastOfClass(FeastClass.firstClass) &&
+          !day.containsFeastOfClass(FeastClass.secondClass) &&
+          !day.containsFeast("Quadragesim") &&
+          !day.containsFeast("Adventus")) {
+        addFeast(date, data);
+      }
     }
   }
 
@@ -407,9 +381,14 @@ class Calendar {
     DateTime end = DateTime(year, 12, 31, 0, 0);
 
     Feast SMS = Feast("Sancta Maria Sabbato", "Our Lady on Saturday",
-        FeastClass.FourthClass, Color.white, PropriumType.Tempore);
+        FeastClass.fourthClass, Color.white);
     while (date.compareTo(end) <= 0) {
-      addFeast(date, SMS);
+      Day day = getDayAtDate(date);
+      if (!day.containsFeastOfClass(FeastClass.firstClass) &&
+          !day.containsFeastOfClass(FeastClass.secondClass) &&
+          !day.containsFeastOfClass(FeastClass.thirdClass)) {
+        addFeast(date, SMS);
+      }
       date = date.add(diff);
     }
   }
@@ -425,8 +404,8 @@ class Calendar {
       start = start.add(const Duration(days: 1));
       addFeast(
           start,
-          Feast("Feria Adventus", "Feria of Advent", FeastClass.ThirdClass,
-              Color.purple, PropriumType.Tempore));
+          Feast("Feria Adventus", "Feria of Advent", FeastClass.thirdClass,
+              Color.purple));
     }
   }
 }
