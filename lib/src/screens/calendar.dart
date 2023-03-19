@@ -1,32 +1,19 @@
+import 'dart:html' as html;
+
 import 'package:flutter/material.dart';
 import 'package:organizer/src/services/liturgical_calendar/calendar.dart';
 import 'package:organizer/src/services/liturgical_calendar/liturgical_calendar.dart';
 import 'package:organizer/src/widgets/cards.dart';
 import 'package:organizer/src/widgets/util.dart';
 
-@immutable
-class CalendarScreen extends StatelessWidget {
-  const CalendarScreen({Key? key}) : super(key: key);
+class CalendarScreen extends StatefulWidget {
+  const CalendarScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Liturgical Calendar'),
-      ),
-      body: const CalendarTable(),
-    );
-  }
+  State<CalendarScreen> createState() => CalendarScreenState();
 }
 
-class CalendarTable extends StatefulWidget {
-  const CalendarTable({super.key});
-
-  @override
-  State<CalendarTable> createState() => CalendarTableState();
-}
-
-class CalendarTableState extends State<CalendarTable> {
+class CalendarScreenState extends State<CalendarScreen> {
   int month = DateTime.now().month;
   int year = DateTime.now().year;
   Calendar? calendar;
@@ -37,6 +24,19 @@ class CalendarTableState extends State<CalendarTable> {
     super.initState();
     calendar = getLiturgicalCalendar();
     setDataFromCalendar();
+  }
+
+  void download(filename, text) {
+    var element = html.document.createElement('a');
+    element.setAttribute(
+        'href', 'data:text/plain;charset=utf-8,${Uri.encodeFull(text)}');
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    html.document.body?.append(element);
+
+    element.click();
+    element.remove();
   }
 
   setDataFromCalendar() {
@@ -91,43 +91,55 @@ class CalendarTableState extends State<CalendarTable> {
     });
   }
 
-  static CalendarTableState? of(BuildContext context) {
-    return context.findAncestorStateOfType<CalendarTableState>();
+  static CalendarScreenState? of(BuildContext context) {
+    return context.findAncestorStateOfType<CalendarScreenState>();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SmoothListView(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            IconButton(
-                onPressed: () {
-                  changeMonth(-1);
-                },
-                icon: const Icon(Icons.arrow_back)),
-            Text(
-              "${monthNames[month]} $year",
-              style: const TextStyle(fontSize: 42),
-            ),
-            IconButton(
-                onPressed: () {
-                  changeMonth(1);
-                },
-                icon: const Icon(Icons.arrow_forward)),
-          ],
-        ),
-        const RowWidget(
-          items: ["Date", "English", "Color", "Class", "Commemorations"],
-          editable: false,
-        ),
-        for (var datum in data!)
-          RowWidget(
-            items: datum,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Liturgical Calendar'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          final csv = data?.map((e) => e.join(",")).join("\r\n");
+          download("output.csv", csv);
+        },
+        child: const Icon(Icons.download),
+      ),
+      body: SmoothListView(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              IconButton(
+                  onPressed: () {
+                    changeMonth(-1);
+                  },
+                  icon: const Icon(Icons.arrow_back)),
+              Text(
+                "${monthNames[month]} $year",
+                style: const TextStyle(fontSize: 42),
+              ),
+              IconButton(
+                  onPressed: () {
+                    changeMonth(1);
+                  },
+                  icon: const Icon(Icons.arrow_forward)),
+            ],
           ),
-      ],
+          const RowWidget(
+            items: ["Date", "English", "Color", "Class", "Commemorations"],
+            editable: false,
+          ),
+          for (var datum in data!)
+            RowWidget(
+              items: datum,
+            ),
+        ],
+      ),
     );
   }
 }
@@ -161,7 +173,7 @@ class RowWidget extends StatelessWidget {
                     });
 
                 if (value is String && context.mounted) {
-                  CalendarTableState.of(context)
+                  CalendarScreenState.of(context)
                       ?.editData(items, items.indexOf(item), value);
                 }
               }
