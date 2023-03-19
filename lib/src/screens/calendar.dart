@@ -103,7 +103,9 @@ class CalendarScreenState extends State<CalendarScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          final csv = data?.map((e) => e.join(",")).join("\r\n");
+          final csv = data
+              ?.map((e) => e.map((e) => e.replaceAll(",", "&#44;")).join(","))
+              .join("\r\n");
           download("output.csv", csv);
         },
         child: const Icon(Icons.download),
