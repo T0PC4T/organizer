@@ -72,15 +72,29 @@ class Calendar {
     return days.firstWhere((element) => element.getDateFormat() == date);
   }
 
+  String getOrdinalSuffix(i) {
+    var j = i % 10, k = i % 100;
+    if (j == 1 && k != 11) {
+      return "${i}st";
+    }
+    if (j == 2 && k != 12) {
+      return "${i}nd";
+    }
+    if (j == 3 && k != 13) {
+      return "${i}rd";
+    }
+    return "${i}th";
+  }
+
   Iterable<Map<String, String>> getMonthIterable(int month) sync* {
     for (var element in days.where((day) => day.date.month == month)) {
       final jsonData = element.formatJSON().values.first;
       yield <String, String>{
-        "date": element.date.day.toString(),
+        "date": getOrdinalSuffix(element.date.day),
         "latinName": jsonData["latinName"],
         "englishName": jsonData["englishName"],
         "color": jsonData["color"],
-        "class": jsonData["class"],
+        "class": (jsonData["class"] as String).replaceAll(". Class", ""),
         "commemorations": ((jsonData["commemorations"] as List?) ?? [])
             .map((e) => e["englishName"])
             .join("<br>")

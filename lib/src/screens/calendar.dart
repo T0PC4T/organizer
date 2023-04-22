@@ -43,7 +43,6 @@ class CalendarScreenState extends State<CalendarScreen> {
     final keys = [
       "date",
       "englishName",
-      "color",
       "class",
       "commemorations",
     ];
@@ -103,10 +102,10 @@ class CalendarScreenState extends State<CalendarScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          final csv = data
-              ?.map((e) => e.map((e) => e.replaceAll(",", "&#44;")).join(","))
-              .join("\r\n");
-          download("output.csv", csv);
+          String csv =
+              "Date,Feast,Class,Commemoration\r\n${data?.map((e) => e.map((e) => e.replaceAll(",", "&comma;")).join(",")).join("\r\n")}";
+
+          download("LiturgicalCalendar${monthNames[month]}$year.csv", csv);
         },
         child: const Icon(Icons.download),
       ),
@@ -133,7 +132,7 @@ class CalendarScreenState extends State<CalendarScreen> {
             ],
           ),
           const RowWidget(
-            items: ["Date", "English", "Color", "Class", "Commemorations"],
+            items: ["Date", "English", "Class", "Commemorations"],
             editable: false,
           ),
           for (var datum in data!)
