@@ -86,19 +86,63 @@ class Calendar {
     return "${i}th";
   }
 
-  Iterable<Map<String, String>> getMonthIterable(int month) sync* {
+  Map<String, String> formatDataJSON(date, jsonData) {
+    return {
+      "date": getOrdinalSuffix(date),
+      "latinName": jsonData["latinName"],
+      "englishName": jsonData["englishName"],
+      "color": jsonData["color"],
+      "class": (jsonData["class"] as String).replaceAll(". Class", ""),
+      "commemorations": ((jsonData["commemorations"] as List?) ?? [])
+          .map((e) => e["englishName"])
+          .join("<br>")
+    };
+  }
+
+  void swapMainFeastWithAlternative(var jsonData, altInd) {
+    var day = {
+      "latinName": jsonData["latinName"],
+      "englishName": jsonData["englishName"],
+      "color": jsonData["color"],
+      "class": (jsonData["class"] as String)
+    };
+
+    jsonData["latinName"] = jsonData["alternatives"][altInd]["latinName"];
+    jsonData["englishName"] = jsonData["alternatives"][altInd]["englishName"];
+    jsonData["color"] = jsonData["alternatives"][altInd]["color"];
+    jsonData["class"] = jsonData["alternatives"][altInd]["class"];
+
+    jsonData["alternatives"][altInd]["latinName"] = day["latinName"];
+    jsonData["alternatives"][altInd]["englishName"] = day["englishName"];
+    jsonData["alternatives"][altInd]["color"] = day["color"];
+    jsonData["alternatives"][altInd]["class"] = day["class"];
+  }
+
+  Iterable<List<Map<String, String>>> getMonthIterable(int month) sync* {
     for (var element in days.where((day) => day.date.month == month)) {
       final jsonData = element.formatJSON().values.first;
-      yield <String, String>{
-        "date": getOrdinalSuffix(element.date.day),
-        "latinName": jsonData["latinName"],
-        "englishName": jsonData["englishName"],
-        "color": jsonData["color"],
-        "class": (jsonData["class"] as String).replaceAll(". Class", ""),
-        "commemorations": ((jsonData["commemorations"] as List?) ?? [])
-            .map((e) => e["englishName"])
-            .join("<br>")
-      };
+      if (!jsonData.keys.contains("alternatives") ||
+          (jsonData["alternatives"] as List).isEmpty) {
+        List<Map<String, String>> a = [
+          formatDataJSON(element.date.day, jsonData)
+        ];
+        yield a;
+      } else {
+        var nJsonData = json.decode(json.encode(jsonData));
+        nJsonData["commemorations"].addAll(nJsonData["alternatives"]
+            .where((i) => !isFeriaOrVotiveMass(i["latinName"])));
+        List<Map<String, String>> a = [
+          formatDataJSON(element.date.day, nJsonData)
+        ];
+        for (int i = 0; i < (jsonData["alternatives"] as List).length; i++) {
+          var nJsonData = json.decode(json.encode(jsonData));
+          swapMainFeastWithAlternative(nJsonData, i);
+          nJsonData["commemorations"].addAll(nJsonData["alternatives"]
+              .where((i) => !isFeriaOrVotiveMass(i["latinName"])));
+          a.add(formatDataJSON(element.date.day, nJsonData));
+        }
+        yield a;
+      }
     }
   }
 
