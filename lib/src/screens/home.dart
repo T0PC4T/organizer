@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:organizer/theme.dart';
 
 import '../services/firestore_service.dart';
 import '../services/user_service.dart';
@@ -65,19 +66,32 @@ class UserWidget extends StatelessWidget {
     final user =
         (FirestoreService.serve(context, FServices.user) as UserService).data;
     if (user != null) {
-      return Container(
-        child: Card(
-          child: Column(children: [
-            Row(
-              children: [
-                const Icon(
-                  Icons.person,
-                  size: 42,
+      return Card(
+        margin: const EdgeInsets.all(20),
+        child: ColoredBox(
+          color: themeData.hoverColor,
+          child: FractionallySizedBox(
+            widthFactor: 0.5,
+            heightFactor: 0.9,
+            child: Column(children: [
+              const FractionallySizedBox(
+                widthFactor: 0.5,
+                child: FittedBox(
+                  child: Icon(
+                    Icons.person,
+                  ),
                 ),
-                Text(user["name"]),
-              ],
-            ),
-          ]),
+              ),
+              Text(
+                'Name: ${user["name"]}',
+                style: themeLarge,
+              ),
+              const Text(
+                "Last active: just now!",
+                style: themeLarge,
+              ),
+            ]),
+          ),
         ),
       );
     }
