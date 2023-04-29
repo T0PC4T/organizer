@@ -223,7 +223,8 @@ class Day {
           orElse: () =>
               Feast("Feria", "Feria", FeastClass.fourthClass, Color.green));
       dynamic ret = f.formatJSON();
-      ret["commemorations"] =
+      ret["commemorations"] = [];
+      ret["alternatives"] =
           getFeastsOfClassExceptOne(f.feastClass, f.latinName);
       return ret;
     }
