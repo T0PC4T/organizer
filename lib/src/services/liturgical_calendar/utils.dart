@@ -59,6 +59,14 @@ Feast getFeastData(Map<String, String> feast) {
       strToFeastClass(feast['class']!), strToFeastColor(feast['color']!));
 }
 
+bool isFeriaOrVotiveMass(String name) {
+  return name == "Feria" ||
+      name.startsWith("Immaculati Cordis ") ||
+      name.startsWith("Jesu Christi Summi ") ||
+      name.startsWith("Sacratissimi Cordis ") ||
+      name.startsWith("Sancta Maria Sabbato");
+}
+
 FeastClass strToFeastClass(String feastClass) {
   final Map<String, FeastClass> conv = {
     "I. classis": FeastClass.firstClass,

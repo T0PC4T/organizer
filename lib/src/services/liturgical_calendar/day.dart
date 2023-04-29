@@ -15,8 +15,11 @@ class Day {
     isHolyWeek = date.compareTo(easter) < 0 &&
         date.compareTo(easter.subtract(const Duration(days: 7))) > 0;
 
-    if (date.weekday != DateTime.sunday && isSeptuagesima && !isHolyWeek) {
-      feasts.add(Feast("Feria Quadragesimae", "Feria", FeastClass.fourthClass,
+    if (date.weekday != DateTime.sunday &&
+        isSeptuagesima &&
+        !isQuadragesima &&
+        !isHolyWeek) {
+      feasts.add(Feast("Feria Septuagesimae", "Feria", FeastClass.fourthClass,
           Color.purple));
     }
     if (date.weekday != DateTime.sunday && isQuadragesima && !isHolyWeek) {
@@ -78,7 +81,9 @@ class Day {
       others.add(getFeastFromDynamic(c));
     }
     if (mainFeast.englishName.contains("Feria of Lent") ||
-        mainFeast.englishName.contains("Feira of Advent")) {
+        mainFeast.englishName.contains("Feira of Advent") ||
+        (mainFeast.feastClass == FeastClass.secondClass &&
+            isFeastOfTheLord(mainFeast))) {
       feastData["alternatives"] = [];
     } else {
       var alts =
@@ -115,7 +120,17 @@ class Day {
         feastClass[data['class']]!, feastColor[data['color']]!);
   }
 
-  bool isFeastOfTheLord() {
+  bool isFeastOfTheLord(Feast feast) {
+    final List<String> feastsOfTheLord = <String>[
+      "Domini Nostri",
+      "In Purificatione",
+      "In Exaltatione ",
+      "Basilicae Ss. Salvatoris"
+    ];
+    return feastsOfTheLord.any((name) => feast.latinName.contains(name));
+  }
+
+  bool containsFeastOfTheLord() {
     final List<String> feastsOfTheLord = <String>[
       "Domini Nostri",
       "In Purificatione",
@@ -169,7 +184,7 @@ class Day {
       }
       return feast;
     }
-    if (isFeastOfTheLord()) {
+    if (containsFeastOfTheLord()) {
       dynamic feast = getFeastOfTheLord();
       feast["commemorations"] =
           getFeastsOfClassExceptOne(FeastClass.secondClass, feast["latinName"]);
@@ -195,9 +210,11 @@ class Day {
       dynamic feast = feasts
           .firstWhere((element) => element.feastClass == FeastClass.thirdClass)
           .formatJSON();
+
       feast["commemorations"] =
           getFeastsOfClassExceptOne(FeastClass.thirdClass, feast["latinName"]);
-      feast["commemorations"].addAll(getFeastsOfClass(FeastClass.fourthClass));
+      feast["commemorations"].addAll(getFeastsOfClass(FeastClass.fourthClass)
+          .where((element) => !isFeriaOrVotiveMass(element["latinName"])));
       return feast;
     }
     if (isFeria()) {

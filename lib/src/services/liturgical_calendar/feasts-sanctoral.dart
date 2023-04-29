@@ -752,7 +752,7 @@ const sanctoralFeasts = [
   {
     "date": "05-14",
     "latinName": "S. Bonifatii Martyris",
-    "englishName": "St. Bonifatius, Martyr",
+    "englishName": "St. Boniface, Martyr",
     "class": "IV. classis",
     "color": "red"
   },
@@ -892,7 +892,7 @@ const sanctoralFeasts = [
   {
     "date": "06-05",
     "latinName": "S. Bonifatii Episcopi et Martyris",
-    "englishName": "St. Bonifase, Bishop & Martyr",
+    "englishName": "St. Boniface, Bishop & Martyr",
     "class": "III. classis",
     "color": "red"
   },

@@ -344,6 +344,54 @@ const temporalFeasts = [
     "color": "red"
   },
   {
+    "latinName": "Feria Secunda infra Octavam Pentecostes",
+    "englishName": "Pentecost Monday",
+    "daysFromEaster": "50",
+    "daysToEaster": "",
+    "class": "I. classis",
+    "color": "red"
+  },
+  {
+    "latinName": "Feria Tertia infra Octavam Pentecostes",
+    "englishName": "Pentecost Tuesday",
+    "daysFromEaster": "51",
+    "daysToEaster": "",
+    "class": "I. classis",
+    "color": "red"
+  },
+  {
+    "latinName": "Feria Quarta Quattuor Temporum Pentecostes",
+    "englishName": "Ember Wednesday in the Octave of Pentecost",
+    "daysFromEaster": "52",
+    "daysToEaster": "",
+    "class": "I. classis",
+    "color": "red"
+  },
+  {
+    "latinName": "Feria Quinta infra Octavam Pentecostes",
+    "englishName": "Pentecost Thursday",
+    "daysFromEaster": "53",
+    "daysToEaster": "",
+    "class": "I. classis",
+    "color": "red"
+  },
+  {
+    "latinName": "Feria Sexta Quattuor Temporum Pentecostes",
+    "englishName": "Ember Friday in the Octave of Pentecost",
+    "daysFromEaster": "54",
+    "daysToEaster": "",
+    "class": "I. classis",
+    "color": "red"
+  },
+  {
+    "latinName": "Sabbato Quattuor Temporum Pentecostes",
+    "englishName": "Ember Saturday in the Octave of Pentecost",
+    "daysFromEaster": "55",
+    "daysToEaster": "",
+    "class": "I. classis",
+    "color": "red"
+  },
+  {
     "latinName": "Dominica Sanctissimae Trinitatis",
     "englishName": "Holy Trinity Sunday",
     "daysFromEaster": "56",
@@ -360,36 +408,12 @@ const temporalFeasts = [
     "color": "white"
   },
   {
-    "latinName": "Feria Quarta Quattuor Temporum Pentecostes",
-    "englishName": "Ember Wednesday in the Octave of Pentecost",
-    "daysFromEaster": "52",
-    "daysToEaster": "",
-    "class": "I. classis",
-    "color": "red"
-  },
-  {
-    "latinName": "Feria Sexta Quattuor Temporum Pentecostes",
-    "englishName": "Ember Friday in the Octave of Pentecost",
-    "daysFromEaster": "54",
-    "daysToEaster": "",
-    "class": "I. classis",
-    "color": "red"
-  },
-  {
     "latinName": "Dominica II Post Pentecosten",
     "englishName": "Second Sunday Post Pentecosten",
     "daysFromEaster": "63",
     "daysToEaster": "",
     "class": "II. classis",
     "color": "green"
-  },
-  {
-    "latinName": "Sabbato Quattuor Temporum Pentecostes",
-    "englishName": "Ember Saturday in the Octave of Pentecost",
-    "daysFromEaster": "55",
-    "daysToEaster": "",
-    "class": "I. classis",
-    "color": "red"
   },
   {
     "latinName": "Sanctissimi Cordis Domini Nostri Jesu Christi",

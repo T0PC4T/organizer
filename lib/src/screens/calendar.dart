@@ -48,7 +48,9 @@ class CalendarScreenState extends State<CalendarScreen> {
     ];
     data = calendar
         ?.getMonthIterable(month)
-        .map((e) => <String>[for (var key in keys) e[key]!])
+        .map((e) => <String>[
+              for (var key in keys) e[0][key]!
+            ]) // TODO: iterate over the feast days, not get just the first one.
         .toList();
   }
 
