@@ -136,7 +136,6 @@ class Calendar {
         ];
         for (int i = 0; i < (jsonData["alternatives"] as List).length; i++) {
           var nJsonData = json.decode(json.encode(jsonData));
-          print(nJsonData);
           swapMainFeastWithAlternative(nJsonData, i);
           nJsonData["commemorations"].addAll(nJsonData["alternatives"]
               .where((i) => !isFeriaOrVotiveMass(i["latinName"])));
@@ -418,9 +417,10 @@ class Calendar {
   void addCyclicFeast(Feast data, int dayOfTheWeek) {
     for (int i = 1; i < 13; i++) {
       DateTime date = DateTime(year, i, 1, 12, 0, 0);
-      var nearestSaturday =
-          Duration(days: (dayOfTheWeek - (date.weekday % DateTime.sunday)));
-      date = date.add(nearestSaturday);
+      var nearestDesiredDayOfTheWeek =
+          dayOfTheWeek - (date.weekday % DateTime.sunday);
+      if (nearestDesiredDayOfTheWeek < 0) nearestDesiredDayOfTheWeek += 7;
+      date = date.add(Duration(days: nearestDesiredDayOfTheWeek));
       Day day = getDayAtDate(date);
       if (!day.containsFeastOfClass(FeastClass.firstClass) &&
           !day.containsFeastOfClass(FeastClass.secondClass) &&

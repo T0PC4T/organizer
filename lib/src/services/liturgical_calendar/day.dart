@@ -165,9 +165,10 @@ class Day {
   }
 
   dynamic formatFeast() {
-    if (feasts.length == 1) {
+    if (feasts.length == 1 && isFeastDay()) {
       dynamic feast = feasts.first.formatJSON();
       feast["commemorations"] = [];
+      feast["alternatives"] = [];
       return feast;
     }
     if (containsFeastOfClass(FeastClass.firstClass)) {
@@ -225,7 +226,7 @@ class Day {
       dynamic ret = f.formatJSON();
       ret["commemorations"] = [];
       ret["alternatives"] =
-          getFeastsOfClassExceptOne(f.feastClass, f.latinName);
+          getFeastsOfClassExceptOne(FeastClass.fourthClass, f.latinName);
       return ret;
     }
   }

@@ -497,7 +497,7 @@ const temporalFeasts = [
   },
   {
     "latinName": "Dominica XII Post Pentecosten",
-    "englishName": "Tvelfth Sunday after the Pentecost",
+    "englishName": "Twelfth Sunday after the Pentecost",
     "daysFromEaster": "133",
     "daysToEaster": "",
     "class": "II. classis",

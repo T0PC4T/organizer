@@ -1375,7 +1375,7 @@ const sanctoralFeasts = [
     "date": "08-05",
     "latinName": "S. Mariae Virginis ad Nives",
     "englishName":
-        "Dedication of Our Lady of the Snows (Basilica of St. Mary Major)",
+        "Dedication of the Basilica of St. Mary Major (Our Lady of Snows)",
     "class": "III. classis",
     "color": "white"
   },
@@ -1535,6 +1535,13 @@ const sanctoralFeasts = [
     "color": "white"
   },
   {
+    "date": "08-22",
+    "latinName": "Ss. Timotheo, Hippolyto et Symphoriano, Martyribus",
+    "englishName": "Sts. Timothy, Hippolytus and Symphorianus, Martyrs",
+    "class": "III. classis",
+    "color": "red"
+  },
+  {
     "date": "08-23",
     "latinName": "S. Philippi Benitii Confessoris",
     "englishName": "St. Philip Benizi, Confessor",
@@ -1586,7 +1593,7 @@ const sanctoralFeasts = [
   {
     "date": "08-28",
     "latinName": "S. Hermetis Martyris",
-    "englishName": "St. Hermetis, Martyr",
+    "englishName": "St. Hermes, Martyr",
     "class": "IV. classis",
     "color": "red"
   },
