@@ -6,12 +6,11 @@ final defaultTablesData = [
   {
     "name": "b",
     "filter": [2, 3, 4, 5, 6, 7],
-    "2": null
   },
   {
     "name": "c",
     "filter": [2, 3, 4, 5, 6, 7],
-    "2": null
+    "2": null // automatically adds a guest seat.
   },
   {
     "name": "d",

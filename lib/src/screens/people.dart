@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:organizer/src/services/firestore_service.dart';
 import 'package:organizer/src/services/people_service.dart';
 import 'package:organizer/src/widgets/cards.dart';
-
-import '../widgets/people.dart';
+import 'package:organizer/src/widgets/people.dart';
 
 class PeoplePage extends StatelessWidget {
   const PeoplePage({super.key});
@@ -14,17 +13,49 @@ class PeoplePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('People'),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          Map<String, dynamic>? value = await showDialog<Map<String, dynamic>>(
-              context: context, builder: (context) => const AddPersonModal());
-          if (value != null && context.mounted) {
-            FirestoreService.serve<PeopleService>(context, FServices.people)
-                ?.addRecord(value);
-          }
-        },
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        child: const Icon(Icons.add),
+      floatingActionButton: SizedBox(
+        height: 150,
+        width: 150,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FloatingActionButton(
+                onPressed: () async {
+                  PeopleService peopleService =
+                      FirestoreService.serve(context, FServices.people)!;
+                  for (var person in peopleService.dataList ?? []) {
+                    if ((person["jobs"] as List).isNotEmpty) {
+                      peopleService.updateRecord(person, {"jobs": []});
+                    }
+                  }
+                },
+                backgroundColor: Colors.red,
+                child: const Icon(Icons.clear),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FloatingActionButton(
+                key: const ValueKey(1),
+                heroTag: const ValueKey(1),
+                onPressed: () async {
+                  Map<String, dynamic>? value =
+                      await showDialog<Map<String, dynamic>>(
+                          context: context,
+                          builder: (context) => const AddPersonModal());
+                  if (value != null && context.mounted) {
+                    FirestoreService.serve<PeopleService>(
+                            context, FServices.people)
+                        ?.addRecord(value);
+                  }
+                },
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                child: const Icon(Icons.add),
+              ),
+            ),
+          ],
+        ),
       ),
       body: const PeopleListing(
         editable: true,

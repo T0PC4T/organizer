@@ -84,15 +84,6 @@ class SeatingPage extends StatelessWidget {
                   onPressed: () {
                     generateSeetingPdf(
                         "Seating Chart", seatKey.currentState!.tableData);
-                    // Navigator.of(context).push(
-
-                    // MaterialPageRoute(
-                    //   builder: (context) => Container(
-                    //     build: (format) => generateSeetingPdf(
-                    //         "Seating Chart", seatKey.currentState!.tableData),
-                    //   ),
-                    // ),
-                    // );
                   },
                   label: const Text('Download'),
                   icon: const Icon(Icons.download),
