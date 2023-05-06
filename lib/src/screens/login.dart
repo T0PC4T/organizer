@@ -81,6 +81,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                   onSaved: (newValue) {
                     data!["password"] = newValue!;
                   },
+                  onFieldSubmitted: (value) {
+                    submitLoginForm();
+                  },
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 32.0),
@@ -88,14 +91,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                     constraints:
                         BoxConstraints.tight(const Size(double.infinity, 40)),
                     child: ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState?.save();
-                          FirebaseAuth.instance.signInWithEmailAndPassword(
-                              email: data!["email"]!,
-                              password: data!["password"]!);
-                        }
-                      },
+                      onPressed: submitLoginForm,
                       child: const Center(
                         child: Text('Login'),
                       ),
@@ -108,5 +104,13 @@ class _LoginWidgetState extends State<LoginWidget> {
         ),
       ),
     );
+  }
+
+  void submitLoginForm() {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState?.save();
+      FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: data!["email"]!, password: data!["password"]!);
+    }
   }
 }
