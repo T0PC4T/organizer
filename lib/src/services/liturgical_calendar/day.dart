@@ -86,11 +86,17 @@ class Day {
             isFeastOfTheLord(mainFeast))) {
       feastData["alternatives"] = [];
     } else {
-      var alts =
-          getFeastsOfClassExceptOne(mainFeast.feastClass, mainFeast.latinName);
+      List<Map<String, dynamic>> alts = [];
+      if (feastData["alternatives"] != null) {
+        for (var c in feastData['alternatives']) {
+          if (!alts.any((e) => e["latinName"] == c["latinName"])) {
+            alts.add(c);
+          }
+        }
+      }
       List<Map<String, dynamic>> comms = [];
       for (var c in feastData['commemorations']) {
-        if (!alts.map((e) => e["latinName"] == c["latinName"]).contains(true)) {
+        if (!alts.any((e) => e["latinName"] == c["latinName"])) {
           comms.add(c);
         }
       }
@@ -202,9 +208,10 @@ class Day {
       dynamic feast = feasts
           .firstWhere((element) => element.feastClass == FeastClass.secondClass)
           .formatJSON();
-      feast["commemorations"] =
+      feast["alternatives"] =
           getFeastsOfClassExceptOne(FeastClass.secondClass, feast["latinName"]);
-      feast["commemorations"].addAll(getFeastsOfClass(FeastClass.thirdClass));
+
+      feast["commemorations"] = getFeastsOfClass(FeastClass.thirdClass);
       return feast;
     }
     if (containsFeastOfClass(FeastClass.thirdClass)) {
@@ -212,10 +219,29 @@ class Day {
           .firstWhere((element) => element.feastClass == FeastClass.thirdClass)
           .formatJSON();
 
-      feast["commemorations"] =
+      feast["alternatives"] =
           getFeastsOfClassExceptOne(FeastClass.thirdClass, feast["latinName"]);
-      feast["commemorations"].addAll(getFeastsOfClass(FeastClass.fourthClass)
-          .where((element) => !isFeriaOrVotiveMass(element["latinName"])));
+
+      if (isFeriaVotiveMassOrUSProper(feast["latinName"]) &&
+          (feast["alternatives"] as List).every(
+            (element) =>
+                isFeriaVotiveMassOrUSProper(element["latinName"]) ||
+                element["class"] == FeastClass.fourthClass,
+          )) {
+        var ff = getFeastsOfClass(FeastClass.fourthClass)
+            .where(
+                (element) => !isFeriaVotiveMassOrUSProper(element["latinName"]))
+            .toList();
+        ff.add(Feast("Feria", "Feria", FeastClass.fourthClass, Color.green)
+            .formatJSON());
+        feast["alternatives"] = ff;
+        feast["commemorations"] = [];
+      } else {
+        feast["commemorations"] = getFeastsOfClass(FeastClass.fourthClass)
+            .where((element) =>
+                !isFeriaVotiveMassOrUSProper(element["latinName"]) &&
+                !isProAliquibusLocis(element["latinName"]));
+      }
       return feast;
     }
     if (isFeria()) {

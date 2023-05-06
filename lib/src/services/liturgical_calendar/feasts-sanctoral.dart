@@ -1365,6 +1365,13 @@ const sanctoralFeasts = [
     "color": "red"
   },
   {
+    "date": "08-03",
+    "latinName": "In Inventione St. Sthephani Protomartyris",
+    "englishName": "Finding of the Body of St. Stephen, Protomartyr",
+    "class": "IV. classis",
+    "color": "white"
+  },
+  {
     "date": "08-04",
     "latinName": "S. Dominici Confessoris",
     "englishName": "St. Dominic, Confessor",

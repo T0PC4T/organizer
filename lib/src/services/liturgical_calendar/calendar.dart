@@ -142,14 +142,18 @@ class Calendar {
         yield a;
       } else {
         var nJsonData = json.decode(json.encode(jsonData));
-        nJsonData["commemorations"].addAll(nJsonData["alternatives"]
-            .where((i) => !isFeriaOrVotiveMass(i["latinName"])));
+        nJsonData["commemorations"].addAll(nJsonData["alternatives"].where(
+            (i) =>
+                !isFeriaVotiveMassOrUSProper(i["latinName"]) &&
+                !isProAliquibusLocis(i["latinName"])));
         List<Map<String, String>> a = [formatDataJSON(element.date, nJsonData)];
         for (int i = 0; i < (jsonData["alternatives"] as List).length; i++) {
           var nJsonData = json.decode(json.encode(jsonData));
           swapMainFeastWithAlternative(nJsonData, i);
-          nJsonData["commemorations"].addAll(nJsonData["alternatives"]
-              .where((i) => !isFeriaOrVotiveMass(i["latinName"])));
+          nJsonData["commemorations"].addAll(nJsonData["alternatives"].where(
+              (i) =>
+                  !isFeriaVotiveMassOrUSProper(i["latinName"]) &&
+                  !isProAliquibusLocis(i["latinName"])));
           a.add(formatDataJSON(element.date, nJsonData, alternative: true));
         }
         yield a;
@@ -162,6 +166,20 @@ class Calendar {
     addMovableFeasts();
     polishCalendar();
     addFeriasOfAdvent();
+
+    //Add External Solemnity of St. Peter and Paul.
+    DateTime date = DateTime(year, 6, 29);
+    int dayOfTheWeek = date.weekday;
+    if (dayOfTheWeek != DateTime.sunday) {
+      date = date.add(Duration(days: 7 - dayOfTheWeek));
+      addFeast(
+          date,
+          Feast(
+              "(USA)Externa Sollemnitas Ss. Petri et Pauli",
+              "(USA)External Solemnity of Ss. Peter and Paul",
+              FeastClass.secondClass,
+              Color.red));
+    }
   }
 
   void saveCalendar() async {
