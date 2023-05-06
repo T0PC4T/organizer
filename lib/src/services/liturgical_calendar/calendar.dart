@@ -142,15 +142,18 @@ class Calendar {
         yield a;
       } else {
         var nJsonData = json.decode(json.encode(jsonData));
-        nJsonData["commemorations"].addAll(nJsonData["alternatives"]
-            .where((i) => !isFeriaOrVotiveMass(i["latinName"])));
+        nJsonData["commemorations"].addAll(nJsonData["alternatives"].where(
+            (i) =>
+                !isFeriaVotiveMassOrUSProper(i["latinName"]) &&
+                !isProAliquibusLocis(i["latinName"])));
         List<Map<String, String>> a = [formatDataJSON(element.date, nJsonData)];
         for (int i = 0; i < (jsonData["alternatives"] as List).length; i++) {
           var nJsonData = json.decode(json.encode(jsonData));
-          print(nJsonData);
           swapMainFeastWithAlternative(nJsonData, i);
-          nJsonData["commemorations"].addAll(nJsonData["alternatives"]
-              .where((i) => !isFeriaOrVotiveMass(i["latinName"])));
+          nJsonData["commemorations"].addAll(nJsonData["alternatives"].where(
+              (i) =>
+                  !isFeriaVotiveMassOrUSProper(i["latinName"]) &&
+                  !isProAliquibusLocis(i["latinName"])));
           a.add(formatDataJSON(element.date, nJsonData, alternative: true));
         }
         yield a;
@@ -163,6 +166,20 @@ class Calendar {
     addMovableFeasts();
     polishCalendar();
     addFeriasOfAdvent();
+
+    //Add External Solemnity of St. Peter and Paul.
+    DateTime date = DateTime(year, 6, 29);
+    int dayOfTheWeek = date.weekday;
+    if (dayOfTheWeek != DateTime.sunday) {
+      date = date.add(Duration(days: 7 - dayOfTheWeek));
+      addFeast(
+          date,
+          Feast(
+              "(USA)Externa Sollemnitas Ss. Petri et Pauli",
+              "(USA)External Solemnity of Ss. Peter and Paul",
+              FeastClass.secondClass,
+              Color.red));
+    }
   }
 
   void saveCalendar() async {
@@ -429,9 +446,10 @@ class Calendar {
   void addCyclicFeast(Feast data, int dayOfTheWeek) {
     for (int i = 1; i < 13; i++) {
       DateTime date = DateTime(year, i, 1, 12, 0, 0);
-      var nearestSaturday =
-          Duration(days: (dayOfTheWeek - (date.weekday % DateTime.sunday)));
-      date = date.add(nearestSaturday);
+      var nearestDesiredDayOfTheWeek =
+          dayOfTheWeek - (date.weekday % DateTime.sunday);
+      if (nearestDesiredDayOfTheWeek < 0) nearestDesiredDayOfTheWeek += 7;
+      date = date.add(Duration(days: nearestDesiredDayOfTheWeek));
       Day day = getDayAtDate(date);
       if (!day.containsFeastOfClass(FeastClass.firstClass) &&
           !day.containsFeastOfClass(FeastClass.secondClass) &&

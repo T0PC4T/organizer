@@ -416,6 +416,14 @@ const temporalFeasts = [
     "color": "green"
   },
   {
+    "latinName": "(USA)Externa Sollemnitas Corpori Christi",
+    "englishName": "(USA)External Solemnity of Corpus Christy",
+    "daysFromEaster": "63",
+    "daysToEaster": "",
+    "class": "II. classis",
+    "color": "white"
+  },
+  {
     "latinName": "Sanctissimi Cordis Domini Nostri Jesu Christi",
     "englishName": "Sacred Heart of Jesus",
     "daysFromEaster": "68",
@@ -426,6 +434,14 @@ const temporalFeasts = [
   {
     "latinName": "Dominica III Post Pentecosten",
     "englishName": "Third Sunday after the Pentecost",
+    "daysFromEaster": "70",
+    "daysToEaster": "",
+    "class": "II. classis",
+    "color": "green"
+  },
+  {
+    "latinName": "(USA)Extera Sollemnitas Sanctissimi Corde DNJC",
+    "englishName": "(USA)External Solemnity of The Sacred Heart of Jesus",
     "daysFromEaster": "70",
     "daysToEaster": "",
     "class": "II. classis",
@@ -497,7 +513,7 @@ const temporalFeasts = [
   },
   {
     "latinName": "Dominica XII Post Pentecosten",
-    "englishName": "Tvelfth Sunday after the Pentecost",
+    "englishName": "Twelfth Sunday after the Pentecost",
     "daysFromEaster": "133",
     "daysToEaster": "",
     "class": "II. classis",
