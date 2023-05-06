@@ -147,6 +147,7 @@ class Calendar {
         List<Map<String, String>> a = [formatDataJSON(element.date, nJsonData)];
         for (int i = 0; i < (jsonData["alternatives"] as List).length; i++) {
           var nJsonData = json.decode(json.encode(jsonData));
+          print(nJsonData);
           swapMainFeastWithAlternative(nJsonData, i);
           nJsonData["commemorations"].addAll(nJsonData["alternatives"]
               .where((i) => !isFeriaOrVotiveMass(i["latinName"])));
