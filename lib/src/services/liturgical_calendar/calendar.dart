@@ -72,7 +72,7 @@ class Calendar {
     return days.firstWhere((element) => element.getDateFormat() == date);
   }
 
-  String getOrdinalSuffix(i) {
+  String getOrdinalSuffix(int i) {
     var j = i % 10, k = i % 100;
     if (j == 1 && k != 11) {
       return "${i}st";
@@ -86,9 +86,24 @@ class Calendar {
     return "${i}th";
   }
 
-  Map<String, String> formatDataJSON(date, jsonData) {
+  static const weekdays = [
+    "-",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thur",
+    "Fri",
+    "Sat",
+    "Sun",
+  ];
+
+  Map<String, String> formatDataJSON(
+      DateTime date, Map<String, dynamic> jsonData,
+      {bool alternative = false}) {
     return {
-      "date": getOrdinalSuffix(date),
+      "date": alternative
+          ? ""
+          : '${Calendar.weekdays[date.weekday]}, ${getOrdinalSuffix(date.day)}',
       "latinName": jsonData["latinName"],
       "englishName": jsonData["englishName"],
       "color": jsonData["color"],
@@ -123,23 +138,19 @@ class Calendar {
       final jsonData = element.formatJSON().values.first;
       if (!jsonData.keys.contains("alternatives") ||
           (jsonData["alternatives"] as List).isEmpty) {
-        List<Map<String, String>> a = [
-          formatDataJSON(element.date.day, jsonData)
-        ];
+        List<Map<String, String>> a = [formatDataJSON(element.date, jsonData)];
         yield a;
       } else {
         var nJsonData = json.decode(json.encode(jsonData));
         nJsonData["commemorations"].addAll(nJsonData["alternatives"]
             .where((i) => !isFeriaOrVotiveMass(i["latinName"])));
-        List<Map<String, String>> a = [
-          formatDataJSON(element.date.day, nJsonData)
-        ];
+        List<Map<String, String>> a = [formatDataJSON(element.date, nJsonData)];
         for (int i = 0; i < (jsonData["alternatives"] as List).length; i++) {
           var nJsonData = json.decode(json.encode(jsonData));
           swapMainFeastWithAlternative(nJsonData, i);
           nJsonData["commemorations"].addAll(nJsonData["alternatives"]
               .where((i) => !isFeriaOrVotiveMass(i["latinName"])));
-          a.add(formatDataJSON(element.date.day, nJsonData));
+          a.add(formatDataJSON(element.date, nJsonData, alternative: true));
         }
         yield a;
       }

@@ -67,9 +67,10 @@ class UserWidget extends StatelessWidget {
         (FirestoreService.serve(context, FServices.user) as UserService).data;
     if (user != null) {
       return Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         margin: const EdgeInsets.all(20),
         child: ColoredBox(
-          color: themeData.hoverColor,
+          color: const Color.fromARGB(255, 200, 230, 255),
           child: FractionallySizedBox(
             widthFactor: 0.5,
             heightFactor: 0.9,

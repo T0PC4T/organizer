@@ -1271,9 +1271,9 @@ const sanctoralFeasts = [
     "color": "red"
   },
   {
-    "date": "07-24",
+    "date": "07-25",
     "latinName": "S. Christophori Martyris",
-    "englishName": "St. Chrisophor, Martyr",
+    "englishName": "St. Chrisopher, Martyr",
     "class": "IV. classis",
     "color": "red"
   },

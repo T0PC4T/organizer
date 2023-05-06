@@ -2,7 +2,6 @@ import 'dart:html' as html;
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:printing/printing.dart';
 
 import '../services/firestore_service.dart';
 import '../services/pdf_gen.dart';
@@ -83,14 +82,17 @@ class SeatingPage extends StatelessWidget {
                   key: const ValueKey(3),
                   heroTag: const ValueKey(3),
                   onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => PdfPreview(
-                          build: (format) => generateSeetingPdf(
-                              "Seating Chart", seatKey.currentState!.tableData),
-                        ),
-                      ),
-                    );
+                    generateSeetingPdf(
+                        "Seating Chart", seatKey.currentState!.tableData);
+                    // Navigator.of(context).push(
+
+                    // MaterialPageRoute(
+                    //   builder: (context) => Container(
+                    //     build: (format) => generateSeetingPdf(
+                    //         "Seating Chart", seatKey.currentState!.tableData),
+                    //   ),
+                    // ),
+                    // );
                   },
                   label: const Text('Download'),
                   icon: const Icon(Icons.download),

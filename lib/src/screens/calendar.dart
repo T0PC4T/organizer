@@ -5,6 +5,7 @@ import 'package:organizer/src/services/liturgical_calendar/calendar.dart';
 import 'package:organizer/src/services/liturgical_calendar/liturgical_calendar.dart';
 import 'package:organizer/src/widgets/cards.dart';
 import 'package:organizer/src/widgets/util.dart';
+import 'package:organizer/theme.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
@@ -17,7 +18,7 @@ class CalendarScreenState extends State<CalendarScreen> {
   int month = DateTime.now().month;
   int year = DateTime.now().year;
   Calendar? calendar;
-  List<List<String>>? data;
+  List<List<Map<String, String>>>? data;
 
   @override
   void initState() {
@@ -40,18 +41,7 @@ class CalendarScreenState extends State<CalendarScreen> {
   }
 
   setDataFromCalendar() {
-    final keys = [
-      "date",
-      "englishName",
-      "class",
-      "commemorations",
-    ];
-    data = calendar
-        ?.getMonthIterable(month)
-        .map((e) => <String>[
-              for (var key in keys) e[0][key]!
-            ]) // TODO: iterate over the feast days, not get just the first one.
-        .toList();
+    data = calendar?.getMonthIterable(month).toList();
   }
 
   static const monthNames = [
@@ -86,9 +76,10 @@ class CalendarScreenState extends State<CalendarScreen> {
     });
   }
 
-  void editData(List<String> row, itemIndex, newValue) {
+  void editData(int day, Map<String, String> option, String key, newValue) {
+    final rowIndex = data![day].indexOf(option);
     setState(() {
-      data![data!.indexOf(row)][itemIndex] = newValue;
+      data![day][rowIndex][key] = newValue;
     });
   }
 
@@ -104,9 +95,18 @@ class CalendarScreenState extends State<CalendarScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          String csv =
-              "Date,Feast,Class,Commemoration\r\n${data?.map((e) => e.map((e) => e.replaceAll(",", "&comma;")).join(",")).join("\r\n")}";
-
+          List<String> lines = [];
+          lines.add("Date,Feast,Class,Commemoration");
+          for (var day in data!) {
+            List<String> line = [];
+            for (var option in day) {
+              line.add(CalendarRowWidget.dataRowNames
+                  .map((key) => option[key]?.replaceAll(",", "&comma"))
+                  .join(","));
+            }
+            lines.add(line.join("\r\n"));
+          }
+          final csv = lines.join("\r\n");
           download("LiturgicalCalendar${monthNames[month]}$year.csv", csv);
         },
         child: const Icon(Icons.download),
@@ -133,66 +133,90 @@ class CalendarScreenState extends State<CalendarScreen> {
                   icon: const Icon(Icons.arrow_forward)),
             ],
           ),
-          const RowWidget(
-            items: ["Date", "English", "Class", "Commemorations"],
+          const CalendarRowWidget(
+            item: {
+              "date": "Date",
+              "englishName": "English",
+              "class": "Class",
+              "commemorations": "Commemorations",
+            },
             editable: false,
           ),
-          for (var datum in data!)
-            RowWidget(
-              items: datum,
-            ),
+          for (var i = 0; i < data!.length; i++)
+            for (var option in data![i])
+              CalendarRowWidget(
+                item: option,
+                childIndex: i,
+              ),
         ],
       ),
     );
   }
 }
 
-class RowWidget extends StatelessWidget {
-  final List<String> items;
+class CalendarRowWidget extends StatelessWidget {
+  static const dataRowNames = <String>[
+    "date",
+    "englishName",
+    "class",
+    "commemorations",
+  ];
+  final Map<String, String> item;
   final bool editable;
-  const RowWidget({super.key, required this.items, this.editable = true});
+  final int childIndex;
+  const CalendarRowWidget({
+    super.key,
+    required this.item,
+    this.editable = true,
+    this.childIndex = 0,
+  });
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      height: 60,
+      height: 40,
       width: double.infinity,
       margin: const EdgeInsets.symmetric(horizontal: 10),
       decoration: const BoxDecoration(
         border: Border.symmetric(
-          horizontal: BorderSide(width: 1),
-        ),
+            // horizontal: BorderSide(width: 0.5),
+            ),
       ),
       child: Row(children: [
-        for (var item in items)
+        for (var rowName in dataRowNames)
           GestureDetector(
             onTap: () async {
               if (editable) {
                 final value = await showDialog(
                     context: context,
                     builder: (ctx) {
-                      return ChangeStringModalWidget(currentValue: item);
+                      return ChangeStringModalWidget(
+                          currentValue: item[rowName] ?? "ERROR");
                     });
 
                 if (value is String && context.mounted) {
                   CalendarScreenState.of(context)
-                      ?.editData(items, items.indexOf(item), value);
+                      ?.editData(childIndex, item, rowName, value);
                 }
               }
             },
             child: Container(
-              width: (size.width - 22) / items.length,
+              width: (size.width - 22) / dataRowNames.length,
               height: double.infinity,
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: editable ? Colors.white : Theme.of(context).primaryColor,
+                color: !editable
+                    ? themePrimary
+                    : (childIndex % 2 == 0)
+                        ? Colors.white
+                        : const Color.fromARGB(255, 213, 236, 255),
                 border: const Border.symmetric(
                   vertical: BorderSide(width: 1),
                 ),
               ),
               child: Text(
-                item,
+                item[rowName] ?? "ERROR",
                 style: TextStyle(color: editable ? Colors.black : Colors.white),
               ),
             ),
