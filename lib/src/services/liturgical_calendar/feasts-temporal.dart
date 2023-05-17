@@ -440,7 +440,7 @@ const temporalFeasts = [
     "color": "green"
   },
   {
-    "latinName": "(USA)Extera Sollemnitas Sanctissimi Corde DNJC",
+    "latinName": "(USA)Externa Sollemnitas Sanctissimi Corde DNJC",
     "englishName": "(USA)External Solemnity of The Sacred Heart of Jesus",
     "daysFromEaster": "70",
     "daysToEaster": "",
@@ -529,7 +529,7 @@ const temporalFeasts = [
   },
   {
     "latinName": "Dominica XIV Post Pentecosten",
-    "englishName": "Foureenth Sunday after the Pentecost",
+    "englishName": "Fourteenth Sunday after the Pentecost",
     "daysFromEaster": "147",
     "daysToEaster": "",
     "class": "II. classis",

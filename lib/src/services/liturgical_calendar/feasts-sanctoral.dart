@@ -1140,7 +1140,7 @@ const sanctoralFeasts = [
     "latinName":
         "Ss. Septem Fratrum Martyrum, ac Rufinae et Secundae Virginum et Martyrum",
     "englishName":
-        "Ss. Seven Brothers Martyrs, and Rufina and Secunda, Virgins and Martyrs",
+        "Seven Holy Brothers Martyrs, and Rufina and Secunda, Virgins and Martyrs",
     "class": "III. classis",
     "color": "red"
   },
@@ -1274,7 +1274,7 @@ const sanctoralFeasts = [
     "date": "07-25",
     "latinName": "S. Christophori Martyris",
     "englishName": "St. Chrisopher, Martyr",
-    "class": "IV. classis",
+    "class": "III. classis",
     "color": "red"
   },
   {
@@ -1685,7 +1685,7 @@ const sanctoralFeasts = [
     "date": "09-08",
     "latinName": "S. Hadriani, Martyris",
     "englishName": "St. Adrian, Martyr",
-    "class": "IV. classis",
+    "class": "III. classis",
     "color": "red"
   },
   {
@@ -1741,7 +1741,7 @@ const sanctoralFeasts = [
     "date": "09-15",
     "latinName": "S. Nicomedis Martyris",
     "englishName": "St. Nicomedes, Martyr",
-    "class": "IV. classis",
+    "class": "III. classis",
     "color": "red"
   },
   {
@@ -1938,7 +1938,7 @@ const sanctoralFeasts = [
   {
     "date": "10-09",
     "latinName": "S. Dionysii Episcopi, Rustici et Eleutherii, Martyrum",
-    "englishName": "St. Dionisius, Bishop, Rusticus and Eleutherius, Martyrs",
+    "englishName": "St. Denis, Bishop, Rusticus and Eleutherius, Martyrs",
     "class": "IV. classis",
     "color": "red"
   },
@@ -2042,8 +2042,8 @@ const sanctoralFeasts = [
   },
   {
     "date": "10-25",
-    "latinName": "S. Isidore Agricola, Confessoris",
-    "englishName": "St. Isidore the Farmer, Confessor",
+    "latinName": "(USA)S. Isidore Agricola, Confessoris",
+    "englishName": "(USA)St. Isidore the Farmer, Confessor",
     "class": "III. classis",
     "color": "white"
   },

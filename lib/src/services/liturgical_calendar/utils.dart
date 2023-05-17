@@ -61,9 +61,9 @@ Feast getFeastData(Map<String, String> feast) {
 
 bool isFeriaVotiveMassOrUSProper(String name) {
   return name == "Feria" ||
-      name.startsWith("Immaculati Cordis ") ||
-      name.startsWith("Jesu Christi Summi ") ||
-      name.startsWith("Sacratissimi Cordis ") ||
+      name.startsWith("Immaculati Cordis") ||
+      name.startsWith("Jesu Christi Summi") ||
+      name.startsWith("Sacratissimi Cordis") ||
       name.startsWith("Sancta Maria Sabbato") ||
       name.startsWith("(USA)");
 }
