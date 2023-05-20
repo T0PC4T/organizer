@@ -50,6 +50,11 @@ class HomePage extends StatelessWidget {
               title: const Text('Calendar'),
               onTap: () => Navigator.of(context).pushNamed("/calendar"),
             ),
+            ListTile(
+              leading: const Icon(Icons.luggage),
+              title: const Text('Guestmasters'),
+              onTap: () => Navigator.of(context).pushNamed("/calendar"),
+            ),
           ],
         ),
       ),

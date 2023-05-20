@@ -101,7 +101,7 @@ class CalendarScreenState extends State<CalendarScreen> {
             List<String> line = [];
             for (var option in day) {
               line.add(CalendarRowWidget.dataRowNames
-                  .map((key) => option[key]?.replaceAll(",", "&comma"))
+                  .map((key) => option[key]?.replaceAll(",", "&comma;"))
                   .join(","));
             }
             lines.add(line.join("\r\n"));
