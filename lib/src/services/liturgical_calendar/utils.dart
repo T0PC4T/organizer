@@ -42,28 +42,44 @@ Future<List<Map<String, String>>> readCSV(filename) async {
   return ret;
 }
 
-DateTime getDatePropriumDeTempore(year, feast) {
+DateTime getDatePropriumDeTempore(
+    int year,
+    ({
+      String englishName,
+      String latinName,
+      String daysToEaster,
+      String daysFromEaster,
+      FeastClass feastClass,
+      Color color
+    }) feast) {
   DateTime easter = parseTime(year, easterDate(year));
-  if (feast['daysToEaster'] == '') {
-    return easter.add(Duration(days: int.parse(feast['daysFromEaster'])));
+  if (feast.daysToEaster == '') {
+    return easter.add(Duration(days: int.parse(feast.daysFromEaster)));
   }
-  return easter.subtract(Duration(days: int.parse(feast['daysToEaster'])));
+  return easter.subtract(Duration(days: int.parse(feast.daysToEaster)));
 }
 
 DateTime parseTime(int year, String mmddFormatWithDashInBetween) {
   return DateTime.parse("$year-$mmddFormatWithDashInBetween 12:00:00");
 }
 
-Feast getFeastData(Map<String, String> feast) {
-  return Feast(feast['latinName']!, feast['englishName']!,
-      strToFeastClass(feast['class']!), strToFeastColor(feast['color']!));
+Feast getFeastData(
+    ({
+      String date,
+      String latinName,
+      String englishName,
+      FeastClass feastClass,
+      Color color
+    }) feast) {
+  return Feast(
+      feast.latinName, feast.englishName, feast.feastClass, feast.color);
 }
 
 bool isFeriaVotiveMassOrUSProper(String name) {
   return name == "Feria" ||
-      name.startsWith("Immaculati Cordis ") ||
-      name.startsWith("Jesu Christi Summi ") ||
-      name.startsWith("Sacratissimi Cordis ") ||
+      name.startsWith("Immaculati Cordis") ||
+      name.startsWith("Jesu Christi Summi") ||
+      name.startsWith("Sacratissimi Cordis") ||
       name.startsWith("Sancta Maria Sabbato") ||
       name.startsWith("(USA)");
 }

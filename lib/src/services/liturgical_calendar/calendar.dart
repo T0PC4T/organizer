@@ -180,6 +180,18 @@ class Calendar {
               FeastClass.secondClass,
               Color.red));
     }
+
+    //Add External Solemnity of Our Lady of Rosary.
+    date = DateTime(year, 10, 1);
+    dayOfTheWeek = date.weekday;
+    date = date.add(Duration(days: 7 - dayOfTheWeek));
+    addFeast(
+        date,
+        Feast(
+            "(USA)Externa Sollemnitas Dominae Nostrae de Rosario",
+            "(USA)External Solemnity of Our Lady of the Rosary",
+            FeastClass.secondClass,
+            Color.red));
   }
 
   void saveCalendar() async {
@@ -427,7 +439,7 @@ class Calendar {
 
   void addFirstFridays() {
     Feast SCJC = Feast("Sacratissimi Cordis Jesu Christi",
-        "Most Holy Name of Jesus", FeastClass.thirdClass, Color.white);
+        "Sacred Heart of Jesus", FeastClass.thirdClass, Color.white);
     addCyclicFeast(SCJC, DateTime.friday);
   }
 
@@ -474,7 +486,9 @@ class Calendar {
       Day day = getDayAtDate(date);
       if (!day.containsFeastOfClass(FeastClass.firstClass) &&
           !day.containsFeastOfClass(FeastClass.secondClass) &&
-          !day.containsFeastOfClass(FeastClass.thirdClass)) {
+          (!day.containsFeastOfClass(FeastClass.thirdClass) ||
+              day.getFeastsOfClass(FeastClass.thirdClass).every((element) =>
+                  isFeriaVotiveMassOrUSProper(element["latinName"])))) {
         addFeast(date, SMS);
       }
       date = date.add(diff);

@@ -11,11 +11,18 @@ Calendar getLiturgicalCalendar([int? year]) {
 
   for (var feast in temporalFeasts) {
     calendar.addFeast(
-        getDatePropriumDeTempore(year, feast), getFeastData(feast));
+        getDatePropriumDeTempore(year, feast),
+        getFeastData((
+          color: feast.color,
+          feastClass: feast.feastClass,
+          latinName: feast.latinName,
+          englishName: feast.englishName,
+          date: ""
+        )));
   }
 
   for (var feast in sanctoralFeasts) {
-    calendar.addFeast(parseTime(year, feast['date']!), getFeastData(feast));
+    calendar.addFeast(parseTime(year, feast.date), getFeastData(feast));
   }
 
   calendar.addMissingStuff();

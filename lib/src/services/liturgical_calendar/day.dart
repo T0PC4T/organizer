@@ -7,6 +7,7 @@ class Day {
       : isSeptuagesima = false,
         isQuadragesima = false,
         isHolyWeek = false,
+        isPaschalTime = false,
         feasts = <Feast>[] {
     isSeptuagesima = date.compareTo(easter) < 0 &&
         date.compareTo(easter.subtract(const Duration(days: 63))) > 0;
@@ -14,6 +15,8 @@ class Day {
         date.compareTo(easter.subtract(const Duration(days: 46))) > 0;
     isHolyWeek = date.compareTo(easter) < 0 &&
         date.compareTo(easter.subtract(const Duration(days: 7))) > 0;
+    isPaschalTime = date.compareTo(easter) > 0 &&
+        date.compareTo((easter.add(const Duration(days: 50)))) < 0;
 
     if (date.weekday != DateTime.sunday &&
         isSeptuagesima &&
@@ -25,6 +28,10 @@ class Day {
     if (date.weekday != DateTime.sunday && isQuadragesima && !isHolyWeek) {
       feasts.add(Feast("Feria Quadragesimae", "Feria of Lent",
           FeastClass.thirdClass, Color.purple));
+    }
+
+    if (date.weekday != DateTime.sunday && isPaschalTime) {
+      feasts.add(Feast("Feria", "Feria", FeastClass.fourthClass, Color.white));
     }
   }
 
@@ -171,7 +178,9 @@ class Day {
   }
 
   dynamic formatFeast() {
-    if (feasts.length == 1 && isFeastDay()) {
+    if (feasts.length == 1 &&
+        isFeastDay() &&
+        !isFeriaVotiveMassOrUSProper(feasts.first.latinName)) {
       dynamic feast = feasts.first.formatJSON();
       feast["commemorations"] = [];
       feast["alternatives"] = [];
@@ -200,7 +209,17 @@ class Day {
     if (isSunday()) {
       dynamic feast = getSunday();
       feast["commemorations"] =
-          getFeastsOfClassExceptOne(FeastClass.secondClass, "Dominica");
+          getFeastsOfClassExceptOne(FeastClass.secondClass, "Dominica").where(
+              (element) => !element["englishName"].startsWith("(USA)External"));
+      if (containsFeast("(USA)Externa")) {
+        feast["alternatives"] = [
+          feasts
+              .where(
+                  (element) => element.englishName.startsWith("(USA)External"))
+              .first
+              .formatJSON()
+        ];
+      }
       return feast;
     }
 
@@ -214,6 +233,7 @@ class Day {
       feast["commemorations"] = getFeastsOfClass(FeastClass.thirdClass);
       return feast;
     }
+
     if (containsFeastOfClass(FeastClass.thirdClass)) {
       dynamic feast = feasts
           .firstWhere((element) => element.feastClass == FeastClass.thirdClass)
@@ -223,18 +243,18 @@ class Day {
           getFeastsOfClassExceptOne(FeastClass.thirdClass, feast["latinName"]);
 
       if (isFeriaVotiveMassOrUSProper(feast["latinName"]) &&
-          (feast["alternatives"] as List).every(
-            (element) =>
-                isFeriaVotiveMassOrUSProper(element["latinName"]) ||
-                element["class"] == FeastClass.fourthClass,
-          )) {
+          (feast["alternatives"].length == 0 ||
+              (feast["alternatives"] as List).every((element) =>
+                  isFeriaVotiveMassOrUSProper(element["latinName"]) ||
+                  element["class"] == FeastClass.fourthClass))) {
         var ff = getFeastsOfClass(FeastClass.fourthClass)
-            .where(
-                (element) => !isFeriaVotiveMassOrUSProper(element["latinName"]))
+            .where((element) =>
+                !isFeriaVotiveMassOrUSProper(element["latinName"]) ||
+                element["latinName"].startsWith("Sancta Maria Sabbato"))
             .toList();
         ff.add(Feast("Feria", "Feria", FeastClass.fourthClass, Color.green)
             .formatJSON());
-        feast["alternatives"] = ff;
+        feast["alternatives"].addAll(ff);
         feast["commemorations"] = [];
       } else {
         feast["commemorations"] = getFeastsOfClass(FeastClass.fourthClass)
@@ -290,6 +310,7 @@ class Day {
   bool isQuadragesima;
   bool isSeptuagesima;
   bool isHolyWeek;
+  bool isPaschalTime;
 
   bool isSundayOfAdvent() {
     return feasts
