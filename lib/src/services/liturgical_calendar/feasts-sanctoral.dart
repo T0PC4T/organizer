@@ -1733,7 +1733,7 @@ const List<
   ),
   (
     date: "08-01",
-    latinName: "St. Petrus ad Vincula",
+    latinName: "S. Petri ad Vincula",
     englishName: "St. Peter in Chains",
     feastClass: FeastClass.fourthClass,
     color: Color.red,

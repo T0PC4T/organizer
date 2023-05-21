@@ -118,7 +118,8 @@ bool isFeriaVotiveMassOrUSProper(String name) {
 }
 
 bool isProAliquibusLocis(String name) {
-  return name.startsWith("In Inventione St. Sthephani");
+  return name.startsWith("In Inventione St. Sthephani") ||
+      name.startsWith("S. Petri ad Vincula");
 }
 
 FeastClass strToFeastClass(String feastClass) {
