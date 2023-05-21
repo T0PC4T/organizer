@@ -39,6 +39,20 @@ Map<String, FeastClass> convStrToClass = {
   "IV. Class": FeastClass.fourthClass,
 };
 
+FeastWithCommemorationsData makeFeastWithCommemorations(
+    FeastData feast, List<FeastData> comms, List<FeastData> alts) {
+  return (
+    alternatives: alts,
+    commemorations: comms,
+    latinName: feast.latinName,
+    englishName: feast.englishName,
+    feastClass: feast.feastClass,
+    color: feast.color,
+    epistles: feast.epistles,
+    gospel: feast.gospel
+  );
+}
+
 Future<List<Map<String, String>>> readCSV(filename) async {
   final File file = File(filename);
 

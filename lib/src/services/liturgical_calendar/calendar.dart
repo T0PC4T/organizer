@@ -115,46 +115,65 @@ class Calendar {
     );
   }
 
-  void swapMainFeastWithAlternative(var jsonData, altInd) {
-    var day = {
-      "latinName": jsonData["latinName"],
-      "englishName": jsonData["englishName"],
-      "color": jsonData["color"],
-      "class": (jsonData["class"] as String)
-    };
-
-    jsonData["latinName"] = jsonData["alternatives"][altInd]["latinName"];
-    jsonData["englishName"] = jsonData["alternatives"][altInd]["englishName"];
-    jsonData["color"] = jsonData["alternatives"][altInd]["color"];
-    jsonData["class"] = jsonData["alternatives"][altInd]["class"];
-
-    jsonData["alternatives"][altInd]["latinName"] = day["latinName"];
-    jsonData["alternatives"][altInd]["englishName"] = day["englishName"];
-    jsonData["alternatives"][altInd]["color"] = day["color"];
-    jsonData["alternatives"][altInd]["class"] = day["class"];
+  FeastWithCommemorationsData swapMainFeastWithAlternative(
+      FeastWithCommemorationsData feastData, int altInd) {
+    FeastData feast = feastData.alternatives[altInd];
+    FeastData mainFeast = (
+      latinName: feastData.latinName,
+      englishName: feastData.englishName,
+      feastClass: feastData.feastClass,
+      color: feastData.color,
+      epistles: feastData.epistles,
+      gospel: feastData.gospel
+    );
+    var comms = feastData.commemorations;
+    var alts = feastData.alternatives;
+    alts[altInd] = mainFeast;
+    return makeFeastWithCommemorations(feast, comms, alts);
   }
 
   Iterable<List<FeastDayData>> getMonthIterable(int month) sync* {
     for (var element in days.where((day) => day.date.month == month)) {
-      final jsonData = element.formatFeast().values.first;
+      FeastWithCommemorationsData jsonData = element.formatFeast().values.first;
       if (jsonData.alternatives.isEmpty) {
         List<FeastDayData> a = [formatDataJSON(element.date, jsonData)];
         yield a;
       } else {
-        var nJsonData = json.decode(json.encode(jsonData));
-        nJsonData["commemorations"].addAll(nJsonData["alternatives"].where(
-            (i) =>
-                !isFeriaVotiveMassOrUSProper(i["latinName"]) &&
-                !isProAliquibusLocis(i["latinName"])));
-        List<FeastDayData> a = [formatDataJSON(element.date, nJsonData)];
+        List<FeastData> comms = jsonData.commemorations;
+        List<FeastData> alts = jsonData.alternatives;
+        comms.addAll(alts.where((i) =>
+            !isFeriaVotiveMassOrUSProper(i.latinName) &&
+            !isProAliquibusLocis(i.latinName)));
+        List<FeastDayData> a = [
+          formatDataJSON(
+              element.date,
+              makeFeastWithCommemorations((
+                latinName: jsonData.latinName,
+                englishName: jsonData.englishName,
+                color: jsonData.color,
+                feastClass: jsonData.feastClass,
+                epistles: jsonData.epistles,
+                gospel: jsonData.gospel
+              ), comms, alts))
+        ];
         for (int i = 0; i < (jsonData.alternatives).length; i++) {
-          var nJsonData = json.decode(json.encode(jsonData));
-          swapMainFeastWithAlternative(nJsonData, i);
-          nJsonData["commemorations"].addAll(nJsonData["alternatives"].where(
-              (i) =>
-                  !isFeriaVotiveMassOrUSProper(i["latinName"]) &&
-                  !isProAliquibusLocis(i["latinName"])));
-          a.add(formatDataJSON(element.date, nJsonData, alternative: true));
+          jsonData = swapMainFeastWithAlternative(jsonData, i);
+          List<FeastData> comms = jsonData.commemorations;
+          List<FeastData> alts = jsonData.alternatives;
+          comms.addAll(alts.where((i) =>
+              !isFeriaVotiveMassOrUSProper(i.latinName) &&
+              !isProAliquibusLocis(i.latinName)));
+          a.add(formatDataJSON(
+              element.date,
+              makeFeastWithCommemorations((
+                latinName: jsonData.latinName,
+                englishName: jsonData.englishName,
+                color: jsonData.color,
+                feastClass: jsonData.feastClass,
+                epistles: jsonData.epistles,
+                gospel: jsonData.gospel
+              ), comms, alts),
+              alternative: true));
         }
         yield a;
       }

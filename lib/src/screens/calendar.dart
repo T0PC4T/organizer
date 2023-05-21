@@ -27,12 +27,7 @@ class CalendarScreenState extends State<CalendarScreen> {
   int month = DateTime.now().month;
   int year = DateTime.now().year;
   Calendar? calendar;
-<<<<<<< HEAD
   List<List<FeastDayData>>? data;
-=======
-  // This considers the data as days which have options.
-  List<List<Map<String, String>>>? data;
->>>>>>> 3f7df132549fae1993f6cd91c53716cc867f6503
 
   // This is the data just considered as options.
   List<List<String>>? simpleData;
@@ -63,10 +58,10 @@ class CalendarScreenState extends State<CalendarScreen> {
       for (var i = 0; i < data!.length; i++)
         for (var option in data![i])
           [
-            option["date"] as String,
-            option["englishName"] as String,
-            option["class"] as String,
-            option["commemorations"] as String,
+            option.date,
+            option.englishName,
+            option.feastClass,
+            option.commemorations,
           ]
     ];
   }
