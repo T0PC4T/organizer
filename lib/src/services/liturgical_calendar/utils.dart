@@ -14,6 +14,14 @@ enum Color {
   const Color(this.colorName);
 }
 
+Map<String, Color> convStrToColor = {
+  "White": Color.white,
+  "Green": Color.green,
+  "Purple": Color.purple,
+  "Black": Color.black,
+  "Red": Color.red
+};
+
 enum FeastClass {
   firstClass("I. Class"),
   secondClass("II. Class"),
@@ -23,6 +31,13 @@ enum FeastClass {
   final String feastName;
   const FeastClass(this.feastName);
 }
+
+Map<String, FeastClass> convStrToClass = {
+  "I. Class": FeastClass.firstClass,
+  "II. Class": FeastClass.secondClass,
+  "III. Class": FeastClass.thirdClass,
+  "IV. Class": FeastClass.fourthClass,
+};
 
 Future<List<Map<String, String>>> readCSV(filename) async {
   final File file = File(filename);
@@ -50,7 +65,9 @@ DateTime getDatePropriumDeTempore(
       String daysToEaster,
       String daysFromEaster,
       FeastClass feastClass,
-      Color color
+      Color color,
+      List<String> epistles,
+      String gospel
     }) feast) {
   DateTime easter = parseTime(year, easterDate(year));
   if (feast.daysToEaster == '') {
@@ -69,10 +86,12 @@ Feast getFeastData(
       String latinName,
       String englishName,
       FeastClass feastClass,
-      Color color
+      Color color,
+      List<String> epistles,
+      String gospel
     }) feast) {
-  return Feast(
-      feast.latinName, feast.englishName, feast.feastClass, feast.color);
+  return Feast(feast.latinName, feast.englishName, feast.feastClass,
+      feast.color, feast.epistles, feast.gospel);
 }
 
 bool isFeriaVotiveMassOrUSProper(String name) {

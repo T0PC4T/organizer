@@ -2,6 +2,7 @@ import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
 import 'package:organizer/src/services/liturgical_calendar/calendar.dart';
+import 'package:organizer/src/services/liturgical_calendar/day.dart';
 import 'package:organizer/src/services/liturgical_calendar/liturgical_calendar.dart';
 import 'package:organizer/src/widgets/cards.dart';
 import 'package:organizer/src/widgets/util.dart';
@@ -18,7 +19,7 @@ class CalendarScreenState extends State<CalendarScreen> {
   int month = DateTime.now().month;
   int year = DateTime.now().year;
   Calendar? calendar;
-  List<List<Map<String, String>>>? data;
+  List<List<FeastDayData>>? data;
 
   @override
   void initState() {

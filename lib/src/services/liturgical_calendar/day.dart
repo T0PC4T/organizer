@@ -2,6 +2,37 @@ import 'package:intl/intl.dart';
 
 import 'utils.dart';
 
+typedef FeastData = ({
+  String latinName,
+  String englishName,
+  String feastClass,
+  String color,
+  List<String> epistles,
+  String gospel
+});
+
+typedef FeastWithCommemorationsData = ({
+  String latinName,
+  String englishName,
+  String feastClass,
+  String color,
+  List<String> epistles,
+  String gospel,
+  List<FeastData> commemorations,
+  List<FeastData> alternatives
+});
+
+typedef FeastDayData = ({
+  String date,
+  String latinName,
+  String englishName,
+  String feastClass,
+  String color,
+  String epistles,
+  String gospel,
+  String commemorations
+});
+
 class Day {
   Day(this.date, this.easter)
       : isSeptuagesima = false,
@@ -23,15 +54,16 @@ class Day {
         !isQuadragesima &&
         !isHolyWeek) {
       feasts.add(Feast("Feria Septuagesimae", "Feria", FeastClass.fourthClass,
-          Color.purple));
+          Color.purple, [""], ""));
     }
     if (date.weekday != DateTime.sunday && isQuadragesima && !isHolyWeek) {
       feasts.add(Feast("Feria Quadragesimae", "Feria of Lent",
-          FeastClass.thirdClass, Color.purple));
+          FeastClass.thirdClass, Color.purple, [""], ""));
     }
 
     if (date.weekday != DateTime.sunday && isPaschalTime) {
-      feasts.add(Feast("Feria", "Feria", FeastClass.fourthClass, Color.white));
+      feasts.add(Feast(
+          "Feria", "Feria", FeastClass.fourthClass, Color.white, [""], ""));
     }
   }
 
@@ -66,71 +98,48 @@ class Day {
     return formatter.format(date);
   }
 
-  Map<String, dynamic> formatJSON() {
+  Map<String, FeastWithCommemorationsData> formatFeast() {
     if (feasts.isEmpty) {
       return {
-        getDateFormat(): {
-          "latinName": "Feria",
-          "englishName": "Feria",
-          "class": "IV. Class",
-          "color": "Green",
-          "commemorations": []
-        }
+        getDateFormat(): (
+          latinName: "Feria",
+          englishName: "Feria",
+          feastClass: FeastClass.fourthClass.feastName,
+          color: Color.green.colorName,
+          commemorations: [],
+          alternatives: [],
+          epistles: [],
+          gospel: ""
+        )
       };
     }
-    return {getDateFormat(): finalFeastPolish(formatFeast())};
+    return {getDateFormat(): finalFeastPolish(formatFeastData())};
   }
 
-  dynamic finalFeastPolish(dynamic feastData) {
-    Feast mainFeast = getFeastFromDynamic(feastData);
-    List<Feast> others = <Feast>[];
-    for (var c in feastData['commemorations']) {
-      others.add(getFeastFromDynamic(c));
-    }
+  FeastWithCommemorationsData finalFeastPolish(
+      FeastWithCommemorationsData feastData) {
+    Feast mainFeast = Feast.fromFeastDataWithCommemorations(feastData);
+
+    List<FeastData> comms = [];
+    List<FeastData> alts = [];
     if (mainFeast.englishName.contains("Feria of Lent") ||
         mainFeast.englishName.contains("Feira of Advent") ||
         (mainFeast.feastClass == FeastClass.secondClass &&
             isFeastOfTheLord(mainFeast))) {
-      feastData["alternatives"] = [];
+      alts = [];
     } else {
-      List<Map<String, dynamic>> alts = [];
-      if (feastData["alternatives"] != null) {
-        for (var c in feastData['alternatives']) {
-          if (!alts.any((e) => e["latinName"] == c["latinName"])) {
-            alts.add(c);
-          }
+      for (var c in feastData.alternatives) {
+        if (!alts.any((e) => e.latinName == c.latinName)) {
+          alts.add(c);
         }
       }
-      List<Map<String, dynamic>> comms = [];
-      for (var c in feastData['commemorations']) {
-        if (!alts.any((e) => e["latinName"] == c["latinName"])) {
+      for (var c in feastData.commemorations) {
+        if (!alts.any((e) => e.latinName == c.latinName)) {
           comms.add(c);
         }
       }
-      feastData["alternatives"] = alts;
-      feastData["commemorations"] = comms;
     }
-    return feastData;
-  }
-
-  void removeFeastsFromCommemorations(dynamic feastData) {}
-
-  Feast getFeastFromDynamic(dynamic data) {
-    Map<String, FeastClass> feastClass = {
-      "I. Class": FeastClass.firstClass,
-      "II. Class": FeastClass.secondClass,
-      "III. Class": FeastClass.thirdClass,
-      "IV. Class": FeastClass.fourthClass
-    };
-    Map<String, Color> feastColor = {
-      "White": Color.white,
-      "Green": Color.green,
-      "Purple": Color.purple,
-      "Black": Color.black,
-      "Red": Color.red,
-    };
-    return Feast(data['latinName'], data['englishName'],
-        feastClass[data['class']]!, feastColor[data['color']]!);
+    return makeFeastWithCommemorations(mainFeast.formatFeast(), comms, alts);
   }
 
   bool isFeastOfTheLord(Feast feast) {
@@ -156,145 +165,142 @@ class Day {
         .contains(true);
   }
 
-  Map<String, dynamic> getFeastOfTheLord() {
+  FeastData getFeastOfTheLord() {
     final List<String> feastsOfTheLord = <String>[
       "Domini Nostri",
       "In Purificatione",
       "In Exaltatione ",
       "Basilicae Ss. Salvatoris"
     ];
-    Map<String, dynamic> feast = feasts
+    FeastData feast = feasts
         .firstWhere((element) =>
             feastsOfTheLord.any((e) => element.latinName.contains(e)))
-        .formatJSON();
-    feast["feastOfTheLord"] = true;
+        .formatFeast();
     return feast;
   }
 
-  Map<String, dynamic> getSunday() {
+  FeastData getSunday() {
     return feasts
         .firstWhere((element) => element.latinName.contains("Dominica"))
-        .formatJSON();
+        .formatFeast();
   }
 
-  dynamic formatFeast() {
+  FeastWithCommemorationsData formatFeastData() {
     if (feasts.length == 1 &&
         isFeastDay() &&
         !isFeriaVotiveMassOrUSProper(feasts.first.latinName)) {
-      dynamic feast = feasts.first.formatJSON();
-      feast["commemorations"] = [];
-      feast["alternatives"] = [];
-      return feast;
+      FeastData feast = feasts.first.formatFeast();
+      return makeFeastWithCommemorations(feast, [], []);
     }
+
+    List<FeastData> comms = [];
+    List<FeastData> alts = [];
     if (containsFeastOfClass(FeastClass.firstClass)) {
-      dynamic feast = getIClassFeast().formatJSON();
+      var feast = getIClassFeast().formatFeast();
       if (isSunday()) {
-        Map<String, dynamic> f = getSunday();
-        if (f["latinName"] != feast["latinName"]) {
-          feast["commemorations"] = [f];
-        } else {
-          feast["commemorations"] = [];
+        FeastData f = getSunday();
+        if (f.latinName != feast.latinName) {
+          comms.add(f);
         }
-      } else {
-        feast["commemorations"] = [];
       }
-      return feast;
+      return makeFeastWithCommemorations(feast, comms, []);
     }
     if (containsFeastOfTheLord()) {
-      dynamic feast = getFeastOfTheLord();
-      feast["commemorations"] =
-          getFeastsOfClassExceptOne(FeastClass.secondClass, feast["latinName"]);
-      return feast;
+      return makeFeastWithCommemorations(
+          getFeastOfTheLord(), getFeastsOfClass(FeastClass.secondClass), []);
     }
     if (isSunday()) {
-      dynamic feast = getSunday();
-      feast["commemorations"] =
-          getFeastsOfClassExceptOne(FeastClass.secondClass, "Dominica").where(
-              (element) => !element["englishName"].startsWith("(USA)External"));
+      FeastData feast = getSunday();
+      comms = getFeastsOfClassExceptOne(FeastClass.secondClass, "Dominica")
+          .where((element) => !element.englishName.startsWith("(USA)External"))
+          .toList();
       if (containsFeast("(USA)Externa")) {
-        feast["alternatives"] = [
+        alts = [
           feasts
               .where(
                   (element) => element.englishName.startsWith("(USA)External"))
               .first
-              .formatJSON()
+              .formatFeast()
         ];
       }
-      return feast;
+      return makeFeastWithCommemorations(feast, comms, alts);
     }
 
     if (containsFeastOfClass(FeastClass.secondClass)) {
-      dynamic feast = feasts
+      FeastData feast = feasts
           .firstWhere((element) => element.feastClass == FeastClass.secondClass)
-          .formatJSON();
-      feast["alternatives"] =
-          getFeastsOfClassExceptOne(FeastClass.secondClass, feast["latinName"]);
-
-      feast["commemorations"] = getFeastsOfClass(FeastClass.thirdClass);
-      return feast;
+          .formatFeast();
+      alts = getFeastsOfClassExceptOne(FeastClass.secondClass, feast.latinName);
+      comms = getFeastsOfClass(FeastClass.thirdClass);
+      return makeFeastWithCommemorations(feast, comms, alts);
     }
 
     if (containsFeastOfClass(FeastClass.thirdClass)) {
-      dynamic feast = feasts
+      FeastData feast = feasts
           .firstWhere((element) => element.feastClass == FeastClass.thirdClass)
-          .formatJSON();
+          .formatFeast();
 
-      feast["alternatives"] =
-          getFeastsOfClassExceptOne(FeastClass.thirdClass, feast["latinName"]);
+      alts = getFeastsOfClassExceptOne(FeastClass.thirdClass, feast.latinName);
 
-      if (isFeriaVotiveMassOrUSProper(feast["latinName"]) &&
-          (feast["alternatives"].length == 0 ||
-              (feast["alternatives"] as List).every((element) =>
-                  isFeriaVotiveMassOrUSProper(element["latinName"]) ||
-                  element["class"] == FeastClass.fourthClass))) {
+      if (isFeriaVotiveMassOrUSProper(feast.latinName) &&
+          (alts.isEmpty ||
+              alts.every((element) =>
+                  isFeriaVotiveMassOrUSProper(element.latinName) ||
+                  element.feastClass == FeastClass.fourthClass.feastName))) {
         var ff = getFeastsOfClass(FeastClass.fourthClass)
             .where((element) =>
-                !isFeriaVotiveMassOrUSProper(element["latinName"]) ||
-                element["latinName"].startsWith("Sancta Maria Sabbato"))
+                !isFeriaVotiveMassOrUSProper(element.latinName) ||
+                element.latinName.startsWith("Sancta Maria Sabbato"))
             .toList();
-        ff.add(Feast("Feria", "Feria", FeastClass.fourthClass, Color.green)
-            .formatJSON());
-        feast["alternatives"].addAll(ff);
-        feast["commemorations"] = [];
+        ff.add(Feast(
+                "Feria", "Feria", FeastClass.fourthClass, Color.green, [""], "")
+            .formatFeast());
+        alts.addAll(ff);
+        comms = [];
       } else {
-        feast["commemorations"] = getFeastsOfClass(FeastClass.fourthClass)
+        comms = getFeastsOfClass(FeastClass.fourthClass)
             .where((element) =>
-                !isFeriaVotiveMassOrUSProper(element["latinName"]) &&
-                !isProAliquibusLocis(element["latinName"]));
+                !isFeriaVotiveMassOrUSProper(element.latinName) &&
+                !isProAliquibusLocis(element.latinName))
+            .toList();
       }
-      return feast;
+      return makeFeastWithCommemorations(feast, comms, alts);
     }
     if (isFeria()) {
       Feast f = feasts.firstWhere(
           (element) => element.englishName.contains("Feria"),
-          orElse: () =>
-              Feast("Feria", "Feria", FeastClass.fourthClass, Color.green));
-      dynamic ret = f.formatJSON();
-      ret["commemorations"] = [];
-      ret["alternatives"] =
-          getFeastsOfClassExceptOne(FeastClass.fourthClass, f.latinName);
-      return ret;
+          orElse: () => Feast(
+              "Feria", "Feria", FeastClass.fourthClass, Color.green, [""], ""));
+
+      FeastData feast = f.formatFeast();
+      return makeFeastWithCommemorations(feast, [],
+          getFeastsOfClassExceptOne(FeastClass.fourthClass, f.latinName));
     }
+    return makeFeastWithCommemorations(
+        Feast("Feria", "Feria", FeastClass.fourthClass, Color.green, [""], "")
+            .formatFeast(),
+        [],
+        []);
   }
 
-  List<Map<String, dynamic>> getFeastsOfClass(FeastClass feastClass) {
+  List<FeastData> getFeastsOfClass(FeastClass feastClass) {
     if (containsFeastOfClass(feastClass)) {
       return feasts
           .where((element) => element.feastClass == feastClass)
-          .map((e) => e.formatJSON())
+          .map((e) => e.formatFeast())
           .toList();
     }
     return [];
   }
 
-  List<Map<String, dynamic>> getFeastsOfClassExceptOne(
+  List<FeastData> getFeastsOfClassExceptOne(
       FeastClass feastClass, String latinName) {
     if (containsFeastOfClass(feastClass)) {
       return feasts
           .where((element) =>
               element.feastClass == feastClass &&
               !element.latinName.contains(latinName))
-          .map((e) => e.formatJSON())
+          .map((e) => e.formatFeast())
           .toList();
     }
     return [];
@@ -324,22 +330,57 @@ class Day {
     return feasts
         .firstWhere((element) => element.feastClass == FeastClass.firstClass);
   }
+
+  FeastWithCommemorationsData makeFeastWithCommemorations(
+      FeastData feast, List<FeastData> comms, List<FeastData> alts) {
+    return (
+      alternatives: alts,
+      commemorations: comms,
+      latinName: feast.latinName,
+      englishName: feast.englishName,
+      feastClass: feast.feastClass,
+      color: feast.color,
+      epistles: feast.epistles,
+      gospel: feast.gospel
+    );
+  }
 }
 
 class Feast {
-  Feast(this.latinName, this.englishName, this.feastClass, this.color);
+  Feast(this.latinName, this.englishName, this.feastClass, this.color,
+      this.epistles, this.gospel);
 
-  Map<String, dynamic> formatJSON() {
-    return {
-      "latinName": latinName,
-      "englishName": englishName,
-      "class": feastClass.feastName,
-      "color": color.colorName
-    };
+  Feast.fromFeastData(FeastData data)
+      : latinName = data.latinName,
+        englishName = data.englishName,
+        color = convStrToColor[data.color]!,
+        feastClass = convStrToClass[data.feastClass]!,
+        epistles = data.epistles,
+        gospel = data.gospel;
+
+  Feast.fromFeastDataWithCommemorations(FeastWithCommemorationsData data)
+      : latinName = data.latinName,
+        englishName = data.englishName,
+        color = convStrToColor[data.color]!,
+        feastClass = convStrToClass[data.feastClass]!,
+        epistles = data.epistles,
+        gospel = data.gospel;
+
+  FeastData formatFeast() {
+    return (
+      latinName: latinName,
+      englishName: englishName,
+      feastClass: feastClass.feastName,
+      color: color.colorName,
+      epistles: epistles,
+      gospel: gospel
+    );
   }
 
   String latinName;
   String englishName;
   FeastClass feastClass;
   Color color;
+  List<String> epistles;
+  String gospel;
 }
