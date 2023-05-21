@@ -134,7 +134,7 @@ class Day {
         }
       }
       for (var c in feastData.commemorations) {
-        if (!alts.any((e) => e.latinName == c.latinName)) {
+        if (!comms.any((e) => e.latinName == c.latinName)) {
           comms.add(c);
         }
       }
@@ -329,20 +329,6 @@ class Day {
   Feast getIClassFeast() {
     return feasts
         .firstWhere((element) => element.feastClass == FeastClass.firstClass);
-  }
-
-  FeastWithCommemorationsData makeFeastWithCommemorations(
-      FeastData feast, List<FeastData> comms, List<FeastData> alts) {
-    return (
-      alternatives: alts,
-      commemorations: comms,
-      latinName: feast.latinName,
-      englishName: feast.englishName,
-      feastClass: feast.feastClass,
-      color: feast.color,
-      epistles: feast.epistles,
-      gospel: feast.gospel
-    );
   }
 }
 

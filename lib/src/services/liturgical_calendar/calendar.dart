@@ -50,7 +50,6 @@ class Calendar {
       return getDayIfFeastTransfered(nextDay(originalDay), feast);
     }
 
-    //Should we compare feasts for more noble one? How?
     return getDayIfFeastTransfered(nextDay(originalDay), feast);
   }
 
@@ -144,6 +143,7 @@ class Calendar {
         comms.addAll(alts.where((i) =>
             !isFeriaVotiveMassOrUSProper(i.latinName) &&
             !isProAliquibusLocis(i.latinName)));
+        comms.removeWhere((element) => element.latinName == jsonData.latinName);
         List<FeastDayData> a = [
           formatDataJSON(
               element.date,
@@ -158,11 +158,13 @@ class Calendar {
         ];
         for (int i = 0; i < (jsonData.alternatives).length; i++) {
           jsonData = swapMainFeastWithAlternative(jsonData, i);
-          List<FeastData> comms = jsonData.commemorations;
-          List<FeastData> alts = jsonData.alternatives;
+          Set<FeastData> comms = jsonData.commemorations.toSet();
+          Set<FeastData> alts = jsonData.alternatives.toSet();
           comms.addAll(alts.where((i) =>
               !isFeriaVotiveMassOrUSProper(i.latinName) &&
               !isProAliquibusLocis(i.latinName)));
+          comms.removeWhere(
+              (element) => element.latinName == jsonData.latinName);
           a.add(formatDataJSON(
               element.date,
               makeFeastWithCommemorations((
@@ -172,7 +174,7 @@ class Calendar {
                 feastClass: jsonData.feastClass,
                 epistles: jsonData.epistles,
                 gospel: jsonData.gospel
-              ), comms, alts),
+              ), comms.toList(), alts.toList()),
               alternative: true));
         }
         yield a;
