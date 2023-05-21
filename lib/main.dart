@@ -14,7 +14,7 @@ import 'package:organizer/theme.dart';
 
 import 'firebase_options.dart';
 
-// flutter build web --web-renderer=canvaskit
+// flutter build web --release --web-renderer=canvaskit
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
