@@ -25,6 +25,9 @@ class Calendar {
 
   void addFeast(DateTime date, Feast feast) {
     Day originalDay = getDayAtDate(date);
+    if (originalDay.containsFeast("Nativitat")) {
+      return; //if vigil of Christmas or Christmas don't translate feast because it is Sunday of Advent
+    }
     Day day = getDayIfFeastTransfered(originalDay, feast);
     day.addFeast(feast);
     if (feast.latinName.contains("Quattuor Temporum Quadr")) {
@@ -157,23 +160,23 @@ class Calendar {
               ), comms, alts))
         ];
         for (int i = 0; i < (jsonData.alternatives).length; i++) {
-          jsonData = swapMainFeastWithAlternative(jsonData, i);
-          Set<FeastData> comms = jsonData.commemorations.toSet();
-          Set<FeastData> alts = jsonData.alternatives.toSet();
+          FeastWithCommemorationsData fData =
+              swapMainFeastWithAlternative(jsonData, i);
+          Set<FeastData> comms = fData.commemorations.toSet();
+          Set<FeastData> alts = fData.alternatives.toSet();
           comms.addAll(alts.where((i) =>
               !isFeriaVotiveMassOrUSProper(i.latinName) &&
               !isProAliquibusLocis(i.latinName)));
-          comms.removeWhere(
-              (element) => element.latinName == jsonData.latinName);
+          comms.removeWhere((element) => element.latinName == fData.latinName);
           a.add(formatDataJSON(
               element.date,
               makeFeastWithCommemorations((
-                latinName: jsonData.latinName,
-                englishName: jsonData.englishName,
-                color: jsonData.color,
-                feastClass: jsonData.feastClass,
-                epistles: jsonData.epistles,
-                gospel: jsonData.gospel
+                latinName: fData.latinName,
+                englishName: fData.englishName,
+                color: fData.color,
+                feastClass: fData.feastClass,
+                epistles: fData.epistles,
+                gospel: fData.gospel
               ), comms.toList(), alts.toList()),
               alternative: true));
         }
@@ -360,7 +363,7 @@ class Calendar {
         "gospel": ""
       },
       "Dominica XXIV et Ultima post Pentecosten": {
-        "eng": "Twenty second and last Sunday after the Pentecost",
+        "eng": "Twenty fourth and last Sunday after the Pentecost",
         "color": Color.green,
         "class": FeastClass.secondClass,
         "epistles": [""],

@@ -2468,7 +2468,7 @@ const List<
     date: "10-07",
     latinName: "S. Marci Papae",
     englishName: "St. Mark I, Pope and Confessor",
-    feastClass: FeastClass.fourthClass,
+    feastClass: FeastClass.thirdClass,
     color: Color.white,
     epistles: [""],
     gospel: ""
@@ -2681,6 +2681,15 @@ const List<
     gospel: ""
   ),
   (
+    date: "11-03",
+    latinName: "Missa Cotidiana pro Defunctis",
+    englishName: "Daily Mass for the Dead",
+    feastClass: FeastClass.thirdClass,
+    color: Color.black,
+    epistles: [""],
+    gospel: ""
+  ),
+  (
     date: "11-04",
     latinName: "S. Caroli Episcopi et Confessoris",
     englishName: "St. Charles Borromeo, Bishop",
@@ -2699,10 +2708,64 @@ const List<
     gospel: ""
   ),
   (
+    date: "11-04",
+    latinName: "Missa Cotidiana pro Defunctis",
+    englishName: "Daily Mass for the Dead",
+    feastClass: FeastClass.thirdClass,
+    color: Color.black,
+    epistles: [""],
+    gospel: ""
+  ),
+  (
+    date: "11-05",
+    latinName: "Missa Cotidiana pro Defunctis",
+    englishName: "Daily Mass for the Dead",
+    feastClass: FeastClass.thirdClass,
+    color: Color.black,
+    epistles: [""],
+    gospel: ""
+  ),
+  (
+    date: "11-06",
+    latinName: "Missa Cotidiana pro Defunctis",
+    englishName: "Daily Mass for the Dead",
+    feastClass: FeastClass.thirdClass,
+    color: Color.black,
+    epistles: [""],
+    gospel: ""
+  ),
+  (
+    date: "11-07",
+    latinName: "Missa Cotidiana pro Defunctis",
+    englishName: "Daily Mass for the Dead",
+    feastClass: FeastClass.thirdClass,
+    color: Color.black,
+    epistles: [""],
+    gospel: ""
+  ),
+  (
     date: "11-08",
     latinName: "Ss. Quatuor Coronatorum Martyrum",
     englishName: "Four Holy Crowned Martyrs",
     feastClass: FeastClass.fourthClass,
+    color: Color.red,
+    epistles: [""],
+    gospel: ""
+  ),
+  (
+    date: "11-08",
+    latinName: "Missa Cotidiana pro Defunctis",
+    englishName: "Daily Mass for the Dead",
+    feastClass: FeastClass.thirdClass,
+    color: Color.black,
+    epistles: [""],
+    gospel: ""
+  ),
+  (
+    date: "11-09",
+    latinName: "S. Theodori Martyris",
+    englishName: "St. Theodore, Martyr",
+    feastClass: FeastClass.secondClass,
     color: Color.red,
     epistles: [""],
     gospel: ""
@@ -2720,7 +2783,7 @@ const List<
     date: "11-09",
     latinName: "S. Theodori Martyris",
     englishName: "St. Theodore, Martyr",
-    feastClass: FeastClass.fourthClass,
+    feastClass: FeastClass.thirdClass,
     color: Color.red,
     epistles: [""],
     gospel: ""
@@ -2772,7 +2835,7 @@ const List<
   ),
   (
     date: "11-13",
-    latinName: "S. Frances Xavier Cabrini, Virginis",
+    latinName: "(USA) S. Frances Xavier Cabrini, Virginis",
     englishName: "(USA) St. Frances Xavier Cabrini, Virgin",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
@@ -2936,6 +2999,15 @@ const List<
     date: "11-26",
     latinName: "S. Petri Alexandrini Martyris",
     englishName: "St. Peter Alexandrinus, Bishop, Martyr",
+    feastClass: FeastClass.fourthClass,
+    color: Color.red,
+    epistles: [""],
+    gospel: ""
+  ),
+  (
+    date: "11-27",
+    latinName: "BMV de Nummo Miraculoso",
+    englishName: "Our Lady of the Miraculous Medal",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
     epistles: [""],
@@ -3107,7 +3179,7 @@ const List<
     date: "12-26",
     latinName: "Dies Octavae Nativitiatis",
     englishName: "Day in the Octave of Christmas",
-    feastClass: FeastClass.secondClass,
+    feastClass: FeastClass.thirdClass,
     color: Color.white,
     epistles: [""],
     gospel: ""
@@ -3125,7 +3197,7 @@ const List<
     date: "12-27",
     latinName: "Dies Octavae Nativitiatis",
     englishName: "Day in the Octave of Christmas",
-    feastClass: FeastClass.secondClass,
+    feastClass: FeastClass.thirdClass,
     color: Color.white,
     epistles: [""],
     gospel: ""
@@ -3150,18 +3222,18 @@ const List<
   ),
   (
     date: "12-29",
-    latinName: "Die quinta post Nativitatem",
-    englishName: "5th Day in the Octave of Christmas",
-    feastClass: FeastClass.secondClass,
+    latinName: "Sancti Thomae Episcopi Cantuariensis et Martyris",
+    englishName: "St. Thomas Becket",
+    feastClass: FeastClass.thirdClass,
     color: Color.white,
     epistles: [""],
     gospel: ""
   ),
   (
     date: "12-29",
-    latinName: "Sancti Thomae Episcopi Cantuariensis et Martyris",
-    englishName: "St. Thomas Becket",
-    feastClass: FeastClass.thirdClass,
+    latinName: "Die quinta post Nativitatem",
+    englishName: "5th Day in the Octave of Christmas",
+    feastClass: FeastClass.secondClass,
     color: Color.white,
     epistles: [""],
     gospel: ""

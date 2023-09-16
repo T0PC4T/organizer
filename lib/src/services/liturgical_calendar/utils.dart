@@ -39,11 +39,39 @@ Map<String, FeastClass> convStrToClass = {
   "IV. Class": FeastClass.fourthClass,
 };
 
+bool isMassForDead(String name) {
+  return name == "Missa Cotidiana pro Defunctis";
+}
+
 FeastWithCommemorationsData makeFeastWithCommemorations(
     FeastData feast, List<FeastData> comms, List<FeastData> alts) {
+  List<FeastData> a = alts;
+  if (alts.any((e) => e.latinName.contains("Feria Adventus")) &&
+      !feast.latinName.contains("Guadalupe")) {
+    a = alts
+        .where((element) => !element.latinName.contains("Feria Adventus"))
+        .toList();
+    comms.add(alts.firstWhere((e) => e.latinName.contains("Feria Adventus")));
+  }
+  if (alts.any((e) => e.latinName.contains("Feria Maior Adventus"))) {
+    a = alts
+        .where((element) => !element.latinName.contains("Feria Maior Adventus"))
+        .toList();
+    comms.add(
+        alts.firstWhere((e) => e.latinName.contains("Feria Maior Adventus")));
+  }
+  List<FeastData> c = comms
+      .where((element) =>
+          !isFeriaVotiveMassOrUSProper(element.latinName) &&
+          !isProAliquibusLocis(element.latinName) &&
+          !isMassForDead(element.latinName))
+      .toList();
+  if (isMassForDead(feast.latinName)) {
+    c = [];
+  }
   return (
-    alternatives: alts,
-    commemorations: comms,
+    alternatives: a,
+    commemorations: c,
     latinName: feast.latinName,
     englishName: feast.englishName,
     feastClass: feast.feastClass,
@@ -114,7 +142,8 @@ bool isFeriaVotiveMassOrUSProper(String name) {
       name.startsWith("Jesu Christi Summi") ||
       name.startsWith("Sacratissimi Cordis") ||
       name.startsWith("Sancta Maria Sabbato") ||
-      name.startsWith("(USA)");
+      name.startsWith("(USA)") ||
+      isMassForDead(name);
 }
 
 bool isProAliquibusLocis(String name) {

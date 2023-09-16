@@ -146,8 +146,7 @@ class Day {
     final List<String> feastsOfTheLord = <String>[
       "Domini Nostri",
       "In Purificatione",
-      "In Exaltatione ",
-      "Basilicae Ss. Salvatoris"
+      "In Exaltatione "
     ];
     return feastsOfTheLord.any((name) => feast.latinName.contains(name));
   }
@@ -156,8 +155,7 @@ class Day {
     final List<String> feastsOfTheLord = <String>[
       "Domini Nostri",
       "In Purificatione",
-      "In Exaltatione ",
-      "Basilicae Ss. Salvatoris"
+      "In Exaltatione "
     ];
     return feasts
         .map((e) =>
@@ -169,8 +167,7 @@ class Day {
     final List<String> feastsOfTheLord = <String>[
       "Domini Nostri",
       "In Purificatione",
-      "In Exaltatione ",
-      "Basilicae Ss. Salvatoris"
+      "In Exaltatione "
     ];
     FeastData feast = feasts
         .firstWhere((element) =>
@@ -202,6 +199,28 @@ class Day {
         if (f.latinName != feast.latinName) {
           comms.add(f);
         }
+      }
+      if (containsFeast("Feria Adventus") && !isSundayOfAdvent()) {
+        comms.add((
+          color: Color.purple.name,
+          englishName: "Feria of Advent",
+          latinName: "Feria Adventus",
+          feastClass: FeastClass.thirdClass.name,
+          epistles: [],
+          gospel: ""
+        ));
+      }
+      if (containsFeast("Feria Quadragesimae") &&
+          !isSundayOfLent() &&
+          !containsFeast("post Cineres")) {
+        comms.add((
+          color: Color.purple.name,
+          englishName: "Feria of Lent",
+          latinName: "Feria Quadragesimae",
+          feastClass: FeastClass.thirdClass.name,
+          epistles: [],
+          gospel: ""
+        ));
       }
       return makeFeastWithCommemorations(feast, comms, []);
     }
@@ -323,6 +342,14 @@ class Day {
         .map((e) =>
             e.latinName.startsWith("Dominica") &&
             e.latinName.contains("Adventus"))
+        .contains(true);
+  }
+
+  bool isSundayOfLent() {
+    return feasts
+        .map((e) =>
+            e.latinName.startsWith("Dominica") &&
+            e.latinName.contains("Quadragesimae"))
         .contains(true);
   }
 
