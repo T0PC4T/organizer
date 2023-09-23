@@ -7,8 +7,7 @@ const List<
       String englishName,
       FeastClass feastClass,
       Color color,
-      List<String> epistles,
-      String gospel
+      String readingID
     })> sanctoralFeasts = [
   (
     date: "01-01",
@@ -16,8 +15,7 @@ const List<
     englishName: "The Octave of Christmas",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-02",
@@ -25,8 +23,7 @@ const List<
     englishName: "Feria of Christmastide",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-03",
@@ -34,8 +31,7 @@ const List<
     englishName: "Feria of Christmastide",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-04",
@@ -43,8 +39,7 @@ const List<
     englishName: "Feria of Christmastide",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-04",
@@ -52,8 +47,7 @@ const List<
     englishName: "(USA) St. Elisabeth Ann Seton, Widow",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-05",
@@ -61,8 +55,7 @@ const List<
     englishName: "Feria of Christmastide",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-05",
@@ -70,8 +63,7 @@ const List<
     englishName: "St. Telesphorus Pope & Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-05",
@@ -79,8 +71,7 @@ const List<
     englishName: "(USA) St. John Neumann, Bishop & Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-06",
@@ -88,8 +79,7 @@ const List<
     englishName: "The Epiphany of the Lord",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-07",
@@ -97,8 +87,7 @@ const List<
     englishName: "Feria of Epiphany",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-08",
@@ -106,8 +95,7 @@ const List<
     englishName: "Feria of Epiphany",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-09",
@@ -115,8 +103,7 @@ const List<
     englishName: "Feria of Epiphany",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-10",
@@ -124,8 +111,7 @@ const List<
     englishName: "Feria of Epiphany",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-11",
@@ -133,8 +119,7 @@ const List<
     englishName: "Feria of Epiphany",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-11",
@@ -142,8 +127,7 @@ const List<
     englishName: "St. Hyginus, Pope & Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-12",
@@ -151,8 +135,7 @@ const List<
     englishName: "Feria of Epiphany",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-13",
@@ -160,8 +143,7 @@ const List<
     englishName: "Commemoration of the Baptism of our Lord Jesus Christ",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-14",
@@ -169,8 +151,7 @@ const List<
     englishName: "St. Hilary, Bishop Confessor & Doctor of the Church",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-14",
@@ -178,8 +159,7 @@ const List<
     englishName: "St. Felix, Priest and Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-15",
@@ -187,8 +167,7 @@ const List<
     englishName: "St. Paul the first Hermit & Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-15",
@@ -196,8 +175,7 @@ const List<
     englishName: "St. Maurus, Abbot",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-16",
@@ -205,8 +183,7 @@ const List<
     englishName: "St. Marcellus I, Pope & Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-17",
@@ -214,8 +191,7 @@ const List<
     englishName: "St. Anthony, Abbot",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-18",
@@ -223,8 +199,7 @@ const List<
     englishName: "St. Prisca, Virgin & Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-19",
@@ -232,8 +207,7 @@ const List<
     englishName: "Ss. Marius, Martha, Audifax and Abachum, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-19",
@@ -241,8 +215,7 @@ const List<
     englishName: "St. Canute, King & Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-20",
@@ -250,8 +223,7 @@ const List<
     englishName: "Ss. Fabian, Pope and Sebastian, Martyrs",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-21",
@@ -259,8 +231,7 @@ const List<
     englishName: "St. Agnes, Virgin & Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-22",
@@ -268,8 +239,7 @@ const List<
     englishName: "Ss. Vincent and Anastasius, Martyrs",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-23",
@@ -277,8 +247,7 @@ const List<
     englishName: "St. Raymund de Peaeafort, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-23",
@@ -286,8 +255,7 @@ const List<
     englishName: "St. Emerentiana, Virgin & Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-24",
@@ -295,8 +263,7 @@ const List<
     englishName: "St. Timothy, Bishop & Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-25",
@@ -304,8 +271,7 @@ const List<
     englishName: "Conversion of St. Paul, Apostle",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-26",
@@ -313,8 +279,7 @@ const List<
     englishName: "St. Polycarp, Bishop & Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-27",
@@ -324,8 +289,7 @@ const List<
         "St. John Chrysostom, Bishop, Confessor & Doctor of the Church",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-28",
@@ -333,8 +297,7 @@ const List<
     englishName: "St. Peter Nolasco, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-28",
@@ -342,8 +305,7 @@ const List<
     englishName: "St. Agnes, Virgin Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-29",
@@ -353,8 +315,7 @@ const List<
         "St. Francis de Sales, Bishop, Confessor & Doctor of the Church",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-30",
@@ -362,8 +323,7 @@ const List<
     englishName: "St. Martina, Virgin & Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "01-31",
@@ -371,8 +331,7 @@ const List<
     englishName: "St. John Bosco, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "02-01",
@@ -380,8 +339,7 @@ const List<
     englishName: "St. Ignatius, Bishop & Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "02-02",
@@ -389,8 +347,7 @@ const List<
     englishName: "The Purification of the Blessed Virgin Mary",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "02-03",
@@ -398,8 +355,7 @@ const List<
     englishName: "St. Blaise Bishop & Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "02-04",
@@ -407,8 +363,7 @@ const List<
     englishName: "St. Andrew Corsini, Bishop & Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "02-05",
@@ -416,8 +371,7 @@ const List<
     englishName: "St. Agatha, Virgin & Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "02-06",
@@ -425,8 +379,7 @@ const List<
     englishName: "St. Titus, Bishop & Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "02-07",
@@ -434,8 +387,7 @@ const List<
     englishName: "St. Romuald, Abbot",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "02-08",
@@ -443,8 +395,7 @@ const List<
     englishName: "St. John of Matha, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "02-09",
@@ -454,8 +405,7 @@ const List<
         "St. Cyril, Bisop of Alexandria, Confessor & Doctor of the Church",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "02-09",
@@ -463,8 +413,7 @@ const List<
     englishName: "St. Apollonia, Virgin and Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "02-10",
@@ -472,8 +421,7 @@ const List<
     englishName: "St. Scholastica, Virgin",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "02-11",
@@ -481,8 +429,7 @@ const List<
     englishName: "The Apparition of the Blessed Virgin Mary Immaculate",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "02-12",
@@ -491,8 +438,7 @@ const List<
         "Seven Holy Founders of the Servile Order of the BVM, Confessors",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "02-14",
@@ -500,8 +446,7 @@ const List<
     englishName: "St. Valentine, Priest & Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "02-15",
@@ -509,8 +454,7 @@ const List<
     englishName: "Ss. Faustinus and Jovita, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "02-18",
@@ -518,8 +462,7 @@ const List<
     englishName: "St. Simeon, Bishop & Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "02-19",
@@ -527,8 +470,7 @@ const List<
     englishName: "St. Dorothy, Virgin & Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "02-22",
@@ -536,8 +478,7 @@ const List<
     englishName: "The Chair of St. Peter, Apostle",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "02-23",
@@ -545,8 +486,7 @@ const List<
     englishName: "St. Peter Damian, Bishop, Confessor & Doctor of the Church",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "03-04",
@@ -554,8 +494,7 @@ const List<
     englishName: "St. Casimir, Confessor",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "03-06",
@@ -563,8 +502,7 @@ const List<
     englishName: "Ss. Perpetua and Felicity, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "03-07",
@@ -572,8 +510,7 @@ const List<
     englishName: "St. Thomas Aquinas, Confessor & Doctor of the Church",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "03-08",
@@ -581,8 +518,7 @@ const List<
     englishName: "St. John of God, Confessor",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "03-09",
@@ -590,8 +526,7 @@ const List<
     englishName: "St. Frances of Rome, Vidow",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "03-10",
@@ -599,8 +534,7 @@ const List<
     englishName: "The Forty Holy Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "03-12",
@@ -608,8 +542,7 @@ const List<
     englishName: "St. Gregory, Pope, Confessor & Doctor of the Church",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "03-17",
@@ -617,8 +550,7 @@ const List<
     englishName: "St. Parick, Bishop & Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "03-18",
@@ -628,8 +560,7 @@ const List<
         "St. Cyril, Bishop of Jerusalem, Confessor & Doctor of the Church",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "03-19",
@@ -637,8 +568,7 @@ const List<
     englishName: "St. Joseph, Spouse of the Blessed Virgin Mary, Confessor",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "03-21",
@@ -646,8 +576,7 @@ const List<
     englishName: "St. Benedict, Abbot",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "03-24",
@@ -655,8 +584,7 @@ const List<
     englishName: "St. Gabriel the Archangel",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "03-25",
@@ -664,8 +592,7 @@ const List<
     englishName: "Annuntiation of the Blessed Virgin Mary",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "03-27",
@@ -673,8 +600,7 @@ const List<
     englishName: "St. John Damascene, Confessor",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "03-28",
@@ -682,8 +608,7 @@ const List<
     englishName: "St. John Capistran, Confessor",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "04-02",
@@ -691,8 +616,7 @@ const List<
     englishName: "St. Francis de Paul, Confessor",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "04-04",
@@ -700,8 +624,7 @@ const List<
     englishName: "St. Isidorius, Bishop, Confessor & Doctor of the Church",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "04-05",
@@ -709,8 +632,7 @@ const List<
     englishName: "St. Vincent Ferrer, Confessor",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "04-11",
@@ -718,8 +640,7 @@ const List<
     englishName: "St. Leo I, Pope, Confessor & Doctor of the Church",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "04-13",
@@ -727,8 +648,7 @@ const List<
     englishName: "St. Hermenegild, Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "04-14",
@@ -736,8 +656,7 @@ const List<
     englishName: "St. Justyn, Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "04-14",
@@ -745,8 +664,7 @@ const List<
     englishName: "Ss. Tiburtius, Valerian and Maximus, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "04-17",
@@ -754,8 +672,7 @@ const List<
     englishName: "St. Ancetus, Pope & Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "04-21",
@@ -763,8 +680,7 @@ const List<
     englishName: "St. Anselm, Bishop, Confessor & Doctor of the Church",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "04-22",
@@ -772,8 +688,7 @@ const List<
     englishName: "Ss. Soter and Caius, Popes & Martyrs",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "04-23",
@@ -781,8 +696,7 @@ const List<
     englishName: "St. Georgius, Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "04-24",
@@ -790,8 +704,7 @@ const List<
     englishName: "St. Fidelis of Sigmaringen, Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "04-25",
@@ -799,8 +712,7 @@ const List<
     englishName: "St. Mark, Evangelist",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "04-25",
@@ -808,8 +720,7 @@ const List<
     englishName: "The Greater Litanies",
     feastClass: FeastClass.secondClass,
     color: Color.purple,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "04-26",
@@ -817,8 +728,7 @@ const List<
     englishName: "Ss. Cletus and Marcellinus, Popes and Martyrs",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "04-27",
@@ -826,8 +736,7 @@ const List<
     englishName: "St. Peter Canisius, Doctor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "04-28",
@@ -835,8 +744,7 @@ const List<
     englishName: "St. Paul of the Cross, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "04-29",
@@ -844,8 +752,7 @@ const List<
     englishName: "St. Peter, Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "04-30",
@@ -853,8 +760,7 @@ const List<
     englishName: "St. Catherine of Siena, Virgin",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-01",
@@ -862,8 +768,7 @@ const List<
     englishName: "St. Joseph the Worksman",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-02",
@@ -871,8 +776,7 @@ const List<
     englishName: "St. Athanasius, Bishop, Confessor & Doctor of the Church",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-03",
@@ -880,8 +784,7 @@ const List<
     englishName: "Ss. Alexander and Companions, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-04",
@@ -889,8 +792,7 @@ const List<
     englishName: "St. Monica, Widow",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-05",
@@ -898,8 +800,7 @@ const List<
     englishName: "St. Pius V, Pope & Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-07",
@@ -907,8 +808,7 @@ const List<
     englishName: "St. Stanislaus, Bishop & Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-09",
@@ -918,8 +818,7 @@ const List<
         "St. Gregory of Nazianzus, Bishop, Confessor & Doctor of the Church",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-10",
@@ -927,8 +826,7 @@ const List<
     englishName: "St. Antonin, Bishop & Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-10",
@@ -936,8 +834,7 @@ const List<
     englishName: "Ss. Gordian and Epimachus, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-11",
@@ -945,8 +842,7 @@ const List<
     englishName: "Ss. Philip and Jacob, Apostles",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-12",
@@ -956,8 +852,7 @@ const List<
         "Ss. Nereus, Achilleus and Domitilla, Virgins, and Pancratius Martyrs",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-13",
@@ -967,8 +862,7 @@ const List<
         "St. Robert Ballarmino, Bishop, Confessor & Doctor of the Church",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-14",
@@ -976,8 +870,7 @@ const List<
     englishName: "St. Boniface, Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-15",
@@ -985,8 +878,7 @@ const List<
     englishName: "St. John Baptist de la Salle, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-16",
@@ -994,8 +886,7 @@ const List<
     englishName: "St. Ubald, Bishop & Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-17",
@@ -1003,8 +894,7 @@ const List<
     englishName: "St. Paschal Baylon, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-18",
@@ -1012,8 +902,7 @@ const List<
     englishName: "St. Venantius, Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-19",
@@ -1021,8 +910,7 @@ const List<
     englishName: "St. Peter Celestine, Pope & Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-19",
@@ -1030,8 +918,7 @@ const List<
     englishName: "St. Pudentiana, Virgin",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-20",
@@ -1039,8 +926,7 @@ const List<
     englishName: "St. Bernardino of Sienna, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-25",
@@ -1048,8 +934,7 @@ const List<
     englishName: "St. Gregory VII, Pope & Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-26",
@@ -1057,8 +942,7 @@ const List<
     englishName: "St. Philip Neri, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-27",
@@ -1066,8 +950,7 @@ const List<
     englishName: "St. Bede the Venerable, Confessor & Doctor of the Church",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-27",
@@ -1075,8 +958,7 @@ const List<
     englishName: "St. John I, Pope and Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-28",
@@ -1084,8 +966,7 @@ const List<
     englishName: "St. Augustine, Bishop & Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-29",
@@ -1093,8 +974,7 @@ const List<
     englishName: "St. Mary Magdalene de Pazzi, Virgin",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-30",
@@ -1102,8 +982,7 @@ const List<
     englishName: "St. Felix I, Pope & Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-31",
@@ -1111,8 +990,7 @@ const List<
     englishName: "Queenship of Blessed Virgin Mary",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "05-31",
@@ -1120,8 +998,7 @@ const List<
     englishName: "St. Petronilla, Virgin",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-01",
@@ -1129,8 +1006,7 @@ const List<
     englishName: "St. Angela Marici, Virgin",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-02",
@@ -1138,8 +1014,7 @@ const List<
     englishName: "Ss. Marcellinus, Peter and Erasmus, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-04",
@@ -1147,8 +1022,7 @@ const List<
     englishName: "St. Franciscus Caracciolo, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-05",
@@ -1156,8 +1030,7 @@ const List<
     englishName: "St. Boniface, Bishop & Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-06",
@@ -1165,8 +1038,7 @@ const List<
     englishName: "St. Norbert, Bishop & Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-09",
@@ -1174,8 +1046,7 @@ const List<
     englishName: "Ss. Primus and Felician, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-10",
@@ -1183,8 +1054,7 @@ const List<
     englishName: "St. Margaret, Queen of Scotland",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-11",
@@ -1192,8 +1062,7 @@ const List<
     englishName: "St. Barnabas, Apostle",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-12",
@@ -1201,8 +1070,7 @@ const List<
     englishName: "St. John of San Facundo, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-12",
@@ -1210,8 +1078,7 @@ const List<
     englishName: "Ss. Basilidus, Cyrinus, Naborus and Nazarius, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-13",
@@ -1219,8 +1086,7 @@ const List<
     englishName: "St. Anthony of Padua, Confessor & Doctor of the Church",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-14",
@@ -1229,8 +1095,7 @@ const List<
         "St. Basil the Great, Bishop, Confessor & Doctor of the Church",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-15",
@@ -1238,8 +1103,7 @@ const List<
     englishName: "Ss. Vitus and Companions, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-17",
@@ -1247,8 +1111,7 @@ const List<
     englishName: "St. Gregory Barbarigo, Bishop",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-18",
@@ -1256,8 +1119,7 @@ const List<
     englishName: "St. Ephrem the Syrian, Confessor & Doctor of the Church",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-18",
@@ -1265,8 +1127,7 @@ const List<
     englishName: "Ss. Marcus and Marcellianus, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-19",
@@ -1274,8 +1135,7 @@ const List<
     englishName: "St. Juliana Falconieri, Virgin",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-19",
@@ -1283,8 +1143,7 @@ const List<
     englishName: "Ss. Gervasius and Protasius, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-20",
@@ -1292,8 +1151,7 @@ const List<
     englishName: "St. Silverius, Pop & Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-21",
@@ -1301,8 +1159,7 @@ const List<
     englishName: "St. Aloysius Gonzaga, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-22",
@@ -1310,8 +1167,7 @@ const List<
     englishName: "St. Paulinus of Nola, Bishop & Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-23",
@@ -1319,8 +1175,7 @@ const List<
     englishName: "Vigil of the Nativity of St. John the Baptist",
     feastClass: FeastClass.secondClass,
     color: Color.purple,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-24",
@@ -1328,8 +1183,7 @@ const List<
     englishName: "The Nativity of St. John the Baptist",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-25",
@@ -1337,8 +1191,7 @@ const List<
     englishName: "St. William, Abbot",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-26",
@@ -1346,8 +1199,7 @@ const List<
     englishName: "Ss. John and Paul, Martyrs",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-27",
@@ -1355,8 +1207,7 @@ const List<
     englishName: "Our Lady of Perpetual Help",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-28",
@@ -1364,8 +1215,7 @@ const List<
     englishName: "Vigil of Ss. Peter and Paul, Apostles",
     feastClass: FeastClass.secondClass,
     color: Color.purple,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-29",
@@ -1373,8 +1223,7 @@ const List<
     englishName: "Ss. Peter and Paul, Apostles",
     feastClass: FeastClass.firstClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "06-30",
@@ -1382,8 +1231,7 @@ const List<
     englishName: "The Commemoration of St. Paul, Apostle",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-01",
@@ -1391,8 +1239,7 @@ const List<
     englishName: "The Most Precious Blood of our Lord Jesus Christ",
     feastClass: FeastClass.firstClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-02",
@@ -1400,8 +1247,7 @@ const List<
     englishName: "The Visitation of the Blessed Virgin Mary",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-02",
@@ -1409,8 +1255,7 @@ const List<
     englishName: "Ss. Processus and Martinianus, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-03",
@@ -1418,8 +1263,7 @@ const List<
     englishName: "St. Irenaeus, Bishop & Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-04",
@@ -1427,8 +1271,7 @@ const List<
     englishName: "Commemoration of All Holy Popes",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-05",
@@ -1436,8 +1279,7 @@ const List<
     englishName: "St. Anthony Mary Zaccaria, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-06",
@@ -1445,8 +1287,7 @@ const List<
     englishName: "St. Maria Goretti, Virgin & Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-07",
@@ -1454,8 +1295,7 @@ const List<
     englishName: "Ss. Cyril and Methodius, Bishops and Confessors",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-08",
@@ -1463,8 +1303,7 @@ const List<
     englishName: "St. Elizabeth of Portugal, Queen, Widow",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-10",
@@ -1474,8 +1313,7 @@ const List<
         "Seven Holy Brothers Martyrs, and Rufina and Secunda, Virgins and Martyrs",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-11",
@@ -1483,8 +1321,7 @@ const List<
     englishName: "St. Pius I, Pope & Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-12",
@@ -1492,8 +1329,7 @@ const List<
     englishName: "St. John Gualbert, Abbot",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-12",
@@ -1501,8 +1337,7 @@ const List<
     englishName: "Ss. Nabor and Felix, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-14",
@@ -1510,8 +1345,7 @@ const List<
     englishName: "St. Bonaventure, Bishop, Confessor & Doctor of the Church",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-15",
@@ -1519,8 +1353,7 @@ const List<
     englishName: "St. Henry II, Emperor, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-16",
@@ -1528,8 +1361,7 @@ const List<
     englishName: "Blessed Virgin Mary of the Mount Carmel",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-17",
@@ -1537,8 +1369,7 @@ const List<
     englishName: "St. Alexius, Confessor",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-18",
@@ -1546,8 +1377,7 @@ const List<
     englishName: "St. Camillus de Lellis, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-18",
@@ -1555,8 +1385,7 @@ const List<
     englishName: "St. Symphorosa and her Seven Sons, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-19",
@@ -1564,8 +1393,7 @@ const List<
     englishName: "St. Vincent de Paul, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-20",
@@ -1573,8 +1401,7 @@ const List<
     englishName: "St. Jerome Emiliani, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-20",
@@ -1582,8 +1409,7 @@ const List<
     englishName: "St. Margaret, Virgin and Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-21",
@@ -1591,8 +1417,7 @@ const List<
     englishName: "St. Lawrence of Brindisi, Doctor of the Church",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-21",
@@ -1600,8 +1425,7 @@ const List<
     englishName: "St. Praxedes, Virgin",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-22",
@@ -1609,8 +1433,7 @@ const List<
     englishName: "St. Mary Magdalene, Penitent",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-23",
@@ -1618,8 +1441,7 @@ const List<
     englishName: "St. Apollinarius, Bishop & Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-23",
@@ -1627,8 +1449,7 @@ const List<
     englishName: "St. Liborius, Bishop and Confessor",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-24",
@@ -1636,8 +1457,7 @@ const List<
     englishName: "St. Christina, Virgin & Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-25",
@@ -1645,8 +1465,7 @@ const List<
     englishName: "St. Chrisopher, Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-25",
@@ -1654,8 +1473,7 @@ const List<
     englishName: "St. James the Greater, Apostle",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-26",
@@ -1663,8 +1481,7 @@ const List<
     englishName: "St. Anne, Mother of the Blessed Virgin Mary",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-27",
@@ -1672,8 +1489,7 @@ const List<
     englishName: "St. Pantaleon, Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-28",
@@ -1683,8 +1499,7 @@ const List<
         "Ss. Nazarius and Celsus, Martyrs, Victor I, Pope and Martyr, and St. Innocent I, Pope and Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-29",
@@ -1692,8 +1507,7 @@ const List<
     englishName: "St. Martha, Virgin",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-29",
@@ -1701,8 +1515,7 @@ const List<
     englishName: "Ss. Felix, Simplicius, Faustinus, and Beatrice, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-30",
@@ -1710,8 +1523,7 @@ const List<
     englishName: "St. Abdon and Sennen, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "07-31",
@@ -1719,8 +1531,7 @@ const List<
     englishName: "St. Ignatius Loyola, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-01",
@@ -1728,8 +1539,7 @@ const List<
     englishName: "Holy Machabees, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-01",
@@ -1737,8 +1547,7 @@ const List<
     englishName: "St. Peter in Chains",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-02",
@@ -1747,8 +1556,7 @@ const List<
         "St. Alphonsus Liguori, Bishop, Confessor & Doctor of the Church",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-02",
@@ -1756,8 +1564,7 @@ const List<
     englishName: "St. Stephen I, Pope and Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-03",
@@ -1765,8 +1572,7 @@ const List<
     englishName: "Finding of the Body of St. Stephen, Protomartyr",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-04",
@@ -1774,8 +1580,7 @@ const List<
     englishName: "St. Dominic, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-05",
@@ -1784,8 +1589,7 @@ const List<
         "Dedication of the Basilica of St. Mary Major (Our Lady of Snows)",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-06",
@@ -1793,8 +1597,7 @@ const List<
     englishName: "The Transfiguration of Our Lord Jesus Christ",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-06",
@@ -1802,8 +1605,7 @@ const List<
     englishName: "Ss. Sixtus II, Pope, and Felicissimus and Agapitus, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-07",
@@ -1811,8 +1613,7 @@ const List<
     englishName: "St. Cajetan, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-07",
@@ -1820,8 +1621,7 @@ const List<
     englishName: "St. Donatius, Bishop & Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-08",
@@ -1829,8 +1629,7 @@ const List<
     englishName: "St. John Mary Vianney, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-08",
@@ -1838,8 +1637,7 @@ const List<
     englishName: "Ss. Cyriac, Largus and Smaragdus, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-09",
@@ -1847,8 +1645,7 @@ const List<
     englishName: "Vigil of St. Laurence",
     feastClass: FeastClass.thirdClass,
     color: Color.purple,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-09",
@@ -1856,8 +1653,7 @@ const List<
     englishName: "St. Romanus, Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-10",
@@ -1865,8 +1661,7 @@ const List<
     englishName: "St. Laurence, Martyr",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-11",
@@ -1874,8 +1669,7 @@ const List<
     englishName: "Ss. Tiburtius & Susanna, Virgin, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-12",
@@ -1883,8 +1677,7 @@ const List<
     englishName: "St. Clare, Virgin",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-13",
@@ -1892,8 +1685,7 @@ const List<
     englishName: "Ss. Hyppolitus & Cassian, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-14",
@@ -1901,8 +1693,7 @@ const List<
     englishName: "Vigil of the Assumption",
     feastClass: FeastClass.secondClass,
     color: Color.purple,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-14",
@@ -1910,8 +1701,7 @@ const List<
     englishName: "St. Eusebius, Confessor",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-15",
@@ -1919,8 +1709,7 @@ const List<
     englishName: "The Assumption of the Blessed Virgin Mary",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-16",
@@ -1928,8 +1717,7 @@ const List<
     englishName: "St. Joachim, Father of the Blessed Virgin Mary, Confessor",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-17",
@@ -1937,8 +1725,7 @@ const List<
     englishName: "St. Hyacinth, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-18",
@@ -1946,8 +1733,7 @@ const List<
     englishName: "St. Agapitus, Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-19",
@@ -1955,8 +1741,7 @@ const List<
     englishName: "St. John Eudes, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-20",
@@ -1964,8 +1749,7 @@ const List<
     englishName: "St. Bernard, Abbot & Doctor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-21",
@@ -1973,8 +1757,7 @@ const List<
     englishName: "St. Jane Frances de Chantal",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-22",
@@ -1982,8 +1765,7 @@ const List<
     englishName: "Immaculate Heart of the Blessed Virgin Mary",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-22",
@@ -1991,8 +1773,7 @@ const List<
     englishName: "Sts. Timothy, Hippolytus and Symphorianus, Martyrs",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-23",
@@ -2000,8 +1781,7 @@ const List<
     englishName: "St. Philip Benizi, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-23",
@@ -2009,8 +1789,7 @@ const List<
     englishName: "St. Thecla, Virgin & Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-24",
@@ -2018,8 +1797,7 @@ const List<
     englishName: "St. Bartholomew, Apostle",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-25",
@@ -2027,8 +1805,7 @@ const List<
     englishName: "St. Louis IX, King & Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-26",
@@ -2036,8 +1813,7 @@ const List<
     englishName: "St. Zephyrinus, Pope and Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-27",
@@ -2045,8 +1821,7 @@ const List<
     englishName: "St. Joseph Calasanctius, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-28",
@@ -2054,8 +1829,7 @@ const List<
     englishName: "St. Augustine, Bishop, Confessor & Doctor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-28",
@@ -2063,8 +1837,7 @@ const List<
     englishName: "St. Hermes, Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-29",
@@ -2072,8 +1845,7 @@ const List<
     englishName: "The Beheading of St. John the Baptist",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-29",
@@ -2081,8 +1853,7 @@ const List<
     englishName: "St. Sabina, Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-30",
@@ -2090,8 +1861,7 @@ const List<
     englishName: "St. Rose of Lima, Virgin",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-30",
@@ -2099,8 +1869,7 @@ const List<
     englishName: "Ss. Felix and Audactus, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "08-31",
@@ -2108,8 +1877,7 @@ const List<
     englishName: "St. Raymond Nonnatus, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-01",
@@ -2117,8 +1885,7 @@ const List<
     englishName: "The Holy Twelve Brother, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-01",
@@ -2126,8 +1893,7 @@ const List<
     englishName: "St. Giles, Confessor",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-02",
@@ -2135,8 +1901,7 @@ const List<
     englishName: "St. Stephen of Hungary, King & Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-03",
@@ -2144,8 +1909,7 @@ const List<
     englishName: "St. Pius X, Pope & Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-05",
@@ -2153,8 +1917,7 @@ const List<
     englishName: "St. Lawrence Justinian, Bishop & Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-08",
@@ -2162,8 +1925,7 @@ const List<
     englishName: "The Nativity of the Blessed Virgin Mary",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-08",
@@ -2171,8 +1933,7 @@ const List<
     englishName: "St. Adrian, Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-09",
@@ -2180,8 +1941,7 @@ const List<
     englishName: "(USA) St. Peter Claver, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-09",
@@ -2189,8 +1949,7 @@ const List<
     englishName: "St. Gorgonius, Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-10",
@@ -2198,8 +1957,7 @@ const List<
     englishName: "St. Nicholas of Tolentino",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-11",
@@ -2207,8 +1965,7 @@ const List<
     englishName: "Ss. Protus & Hyacinth, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-12",
@@ -2216,8 +1973,7 @@ const List<
     englishName: "The Most Holy Name of Mary",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-14",
@@ -2225,8 +1981,7 @@ const List<
     englishName: "The Exaltation of the Holy Cross",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-15",
@@ -2234,8 +1989,7 @@ const List<
     englishName: "Seven Sorrows of the Blessed Virgin Mary",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-15",
@@ -2243,8 +1997,7 @@ const List<
     englishName: "St. Nicomedes, Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-16",
@@ -2252,8 +2005,7 @@ const List<
     englishName: "Ss. Cornelius, Pope and Cyprian, Bishop, Martyrs",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-16",
@@ -2262,8 +2014,7 @@ const List<
         "St. Euphemia, Virgin and Martyr, and Ss Lucia and Geminianus, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-17",
@@ -2271,8 +2022,7 @@ const List<
     englishName: "The Stigmata of St. Francis",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-18",
@@ -2280,8 +2030,7 @@ const List<
     englishName: "St. Joseph of Cupertino, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-19",
@@ -2289,8 +2038,7 @@ const List<
     englishName: "St. Januarius, Bishop, and Companions, Martyrs",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-20",
@@ -2298,8 +2046,7 @@ const List<
     englishName: "St. Eustache & Companions",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-21",
@@ -2307,8 +2054,7 @@ const List<
     englishName: "St. Matthew, Apostle and Evangelist",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-22",
@@ -2316,8 +2062,7 @@ const List<
     englishName: "St. Thomas of Villanova",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-22",
@@ -2325,8 +2070,7 @@ const List<
     englishName: "Ss. Mauritius and Companions, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-23",
@@ -2334,8 +2078,7 @@ const List<
     englishName: "St. Linus Pope and Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-24",
@@ -2343,8 +2086,7 @@ const List<
     englishName: "Our Lady of Ransom",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-26",
@@ -2353,8 +2095,7 @@ const List<
         "(USA) Ss. Jean de Brebeuf, Isaac Jogues & Companions, Martyrs",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-26",
@@ -2362,8 +2103,7 @@ const List<
     englishName: "Ss. Cyprian and Justina, Virgin, Martrys",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-27",
@@ -2371,8 +2111,7 @@ const List<
     englishName: "Ss. Cosmas and Damian, Martyrs",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-28",
@@ -2380,8 +2119,7 @@ const List<
     englishName: "St. Wenceslaus, Duke & Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-29",
@@ -2389,8 +2127,7 @@ const List<
     englishName: "The Dedication of St. Michael the Archangel",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "09-30",
@@ -2398,8 +2135,7 @@ const List<
     englishName: "St. Jerome, Priest, Confessor & Doctor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-01",
@@ -2407,8 +2143,7 @@ const List<
     englishName: "St. Remigius, Bishop & Confessor",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-02",
@@ -2416,8 +2151,7 @@ const List<
     englishName: "Holy Guardian Angels",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-03",
@@ -2425,8 +2159,7 @@ const List<
     englishName: "St. Teresa of the Child Jesus, Virgin",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-04",
@@ -2434,8 +2167,7 @@ const List<
     englishName: "St. Francis of Assisi, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-05",
@@ -2443,8 +2175,7 @@ const List<
     englishName: "St. Placid & Companions, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-06",
@@ -2452,8 +2183,7 @@ const List<
     englishName: "St. Bruno, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-07",
@@ -2461,8 +2191,7 @@ const List<
     englishName: "Our Lady of the Rosary",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-07",
@@ -2470,8 +2199,7 @@ const List<
     englishName: "St. Mark I, Pope and Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-08",
@@ -2479,8 +2207,7 @@ const List<
     englishName: "St. Bridget of Sweden",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-09",
@@ -2488,8 +2215,7 @@ const List<
     englishName: "St. John Leonardi, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-09",
@@ -2497,8 +2223,7 @@ const List<
     englishName: "St. Denis, Bishop, Rusticus and Eleutherius, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-10",
@@ -2506,8 +2231,7 @@ const List<
     englishName: "St. Francis Borgia, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-11",
@@ -2515,8 +2239,7 @@ const List<
     englishName: "Motherhood of the Blessed Virgin Mary",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-13",
@@ -2524,8 +2247,7 @@ const List<
     englishName: "St. Edward the Confessor, King",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-14",
@@ -2533,8 +2255,7 @@ const List<
     englishName: "St. Callistus I, Pope and Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-15",
@@ -2542,8 +2263,7 @@ const List<
     englishName: "St. Teresa of Avila, Virgin",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-16",
@@ -2551,8 +2271,7 @@ const List<
     englishName: "St. Hedwig, Widow",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-17",
@@ -2560,8 +2279,7 @@ const List<
     englishName: "St. Margaret Mary Alocoque, Virgin",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-18",
@@ -2569,8 +2287,7 @@ const List<
     englishName: "St. Luke the Evangelist",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-19",
@@ -2578,8 +2295,7 @@ const List<
     englishName: "St. Peter of Alcantara, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-20",
@@ -2587,8 +2303,7 @@ const List<
     englishName: "St. John Cantius, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-21",
@@ -2596,8 +2311,7 @@ const List<
     englishName: "St. Ursula and Companions, Virgins and Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-21",
@@ -2605,8 +2319,7 @@ const List<
     englishName: "St. Hilarion, Abbot",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-23",
@@ -2614,8 +2327,7 @@ const List<
     englishName: "St. Anthony Mary Claret, Bishop & Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-24",
@@ -2623,8 +2335,7 @@ const List<
     englishName: "St. Raphael the Archangel",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-25",
@@ -2632,8 +2343,7 @@ const List<
     englishName: "(USA)St. Isidore the Farmer, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-25",
@@ -2641,8 +2351,7 @@ const List<
     englishName: "Ss. Chrysanthus and Daria, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-26",
@@ -2650,8 +2359,7 @@ const List<
     englishName: "St. Evaristus, Pope Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "10-28",
@@ -2659,8 +2367,7 @@ const List<
     englishName: "Ss. Simon and Jude, Apostles",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-01",
@@ -2668,8 +2375,7 @@ const List<
     englishName: "All Saints",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-02",
@@ -2677,8 +2383,7 @@ const List<
     englishName: "Commemoration of All Souls",
     feastClass: FeastClass.firstClass,
     color: Color.black,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-03",
@@ -2686,8 +2391,7 @@ const List<
     englishName: "Daily Mass for the Dead",
     feastClass: FeastClass.thirdClass,
     color: Color.black,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-04",
@@ -2695,8 +2399,7 @@ const List<
     englishName: "St. Charles Borromeo, Bishop",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-04",
@@ -2704,8 +2407,7 @@ const List<
     englishName: "Ss. Vitalis and Agricola, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-04",
@@ -2713,8 +2415,7 @@ const List<
     englishName: "Daily Mass for the Dead",
     feastClass: FeastClass.thirdClass,
     color: Color.black,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-05",
@@ -2722,8 +2423,7 @@ const List<
     englishName: "Daily Mass for the Dead",
     feastClass: FeastClass.thirdClass,
     color: Color.black,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-06",
@@ -2731,8 +2431,7 @@ const List<
     englishName: "Daily Mass for the Dead",
     feastClass: FeastClass.thirdClass,
     color: Color.black,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-07",
@@ -2740,8 +2439,7 @@ const List<
     englishName: "Daily Mass for the Dead",
     feastClass: FeastClass.thirdClass,
     color: Color.black,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-08",
@@ -2749,8 +2447,7 @@ const List<
     englishName: "Four Holy Crowned Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-08",
@@ -2758,8 +2455,7 @@ const List<
     englishName: "Daily Mass for the Dead",
     feastClass: FeastClass.thirdClass,
     color: Color.black,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-09",
@@ -2767,8 +2463,7 @@ const List<
     englishName: "St. Theodore, Martyr",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-09",
@@ -2776,8 +2471,7 @@ const List<
     englishName: "The Dedication of the Archbasilica of the Most Holy Savior",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-09",
@@ -2785,8 +2479,7 @@ const List<
     englishName: "St. Theodore, Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-10",
@@ -2794,8 +2487,7 @@ const List<
     englishName: "St. Andrew Avellino, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-10",
@@ -2803,8 +2495,7 @@ const List<
     englishName: "Ss. Tryphon, Respicius, and Nympha (Virgin), Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-11",
@@ -2812,8 +2503,7 @@ const List<
     englishName: "St. Martin of Tours, Bishop & Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-11",
@@ -2821,8 +2511,7 @@ const List<
     englishName: "St. Mennas, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-12",
@@ -2830,8 +2519,7 @@ const List<
     englishName: "St. Martin I, Pope & Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-13",
@@ -2839,8 +2527,7 @@ const List<
     englishName: "(USA) St. Frances Xavier Cabrini, Virgin",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-13",
@@ -2848,8 +2535,7 @@ const List<
     englishName: "St. Didacus, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-14",
@@ -2857,8 +2543,7 @@ const List<
     englishName: "St. Josephat, Bishop and Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-15",
@@ -2866,8 +2551,7 @@ const List<
     englishName: "St. Albert the Great, Bishop, Confessor & Doctor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-16",
@@ -2875,8 +2559,7 @@ const List<
     englishName: "St. Gertrude the Great, Virgin",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-17",
@@ -2884,8 +2567,7 @@ const List<
     englishName: "St. Gregory the Wonderworker, Bishop and Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-18",
@@ -2893,8 +2575,7 @@ const List<
     englishName: "The Dedication of the Basilicas of Ss. Peter and Paul",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-19",
@@ -2902,8 +2583,7 @@ const List<
     englishName: "St. Elizabeth, Widow",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-19",
@@ -2911,8 +2591,7 @@ const List<
     englishName: "St. Pontian, Pope and Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-20",
@@ -2920,8 +2599,7 @@ const List<
     englishName: "St. Felix of Valois, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-21",
@@ -2929,8 +2607,7 @@ const List<
     englishName: "The Presentation of the Blessed Virgin Mary",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-22",
@@ -2938,8 +2615,7 @@ const List<
     englishName: "St. Cecilia, Virgin and Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-23",
@@ -2947,8 +2623,7 @@ const List<
     englishName: "St. Clement I, Pope and Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-23",
@@ -2956,8 +2631,7 @@ const List<
     englishName: "St. Felicity, Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-24",
@@ -2965,8 +2639,7 @@ const List<
     englishName: "St. John of the Cross, Confessor & Doctor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-24",
@@ -2974,8 +2647,7 @@ const List<
     englishName: "St. Chrysogonus, Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-25",
@@ -2983,8 +2655,7 @@ const List<
     englishName: "St. Catherine of Alexandria, Virgin and Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-26",
@@ -2992,8 +2663,7 @@ const List<
     englishName: "St. Sylvester, Abbot",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-26",
@@ -3001,8 +2671,7 @@ const List<
     englishName: "St. Peter Alexandrinus, Bishop, Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-27",
@@ -3010,8 +2679,7 @@ const List<
     englishName: "Our Lady of the Miraculous Medal",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-29",
@@ -3019,8 +2687,7 @@ const List<
     englishName: "St. Saturninus, Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "11-30",
@@ -3028,8 +2695,7 @@ const List<
     englishName: "St. Andrew, Apostle",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-02",
@@ -3037,8 +2703,7 @@ const List<
     englishName: "St. Bibiana, Virgin and Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-03",
@@ -3046,8 +2711,7 @@ const List<
     englishName: "St. Francis Xavier, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-04",
@@ -3055,8 +2719,7 @@ const List<
     englishName: "St. Peter Chrysologus, Bishop, Confessor & Doctor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-05",
@@ -3064,8 +2727,7 @@ const List<
     englishName: "St. Sabbas Abbot",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-06",
@@ -3073,8 +2735,7 @@ const List<
     englishName: "St. Nicholas, Bishop & Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-07",
@@ -3082,8 +2743,7 @@ const List<
     englishName: "St. Ambrose, Bishop Confessor & Doctor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-08",
@@ -3091,8 +2751,7 @@ const List<
     englishName: "Immaculate Conception of the Blessed Virgin Mary",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-10",
@@ -3100,8 +2759,7 @@ const List<
     englishName: "St. Miltiades, Pope & Martyr",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-11",
@@ -3109,8 +2767,7 @@ const List<
     englishName: "St. Damasus I, Pope & Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-12",
@@ -3118,8 +2775,7 @@ const List<
     englishName: "(USA) Our Lady of Guadalupe",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-13",
@@ -3127,8 +2783,7 @@ const List<
     englishName: "St Lucy, Virgin and Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-16",
@@ -3136,8 +2791,7 @@ const List<
     englishName: "St. Eusebius, Bishop and Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-21",
@@ -3145,8 +2799,7 @@ const List<
     englishName: "St. Thomas, Apostle",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-24",
@@ -3154,8 +2807,7 @@ const List<
     englishName: "Vigil of Christmas",
     feastClass: FeastClass.firstClass,
     color: Color.purple,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-25",
@@ -3163,8 +2815,7 @@ const List<
     englishName: "The Nativity of Our Lord",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-26",
@@ -3172,8 +2823,7 @@ const List<
     englishName: "St. Stephen, Deacon & Protomartyr",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-26",
@@ -3181,8 +2831,7 @@ const List<
     englishName: "Day in the Octave of Christmas",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-27",
@@ -3190,8 +2839,7 @@ const List<
     englishName: "St. John the Evangelist, Apostle",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-27",
@@ -3199,8 +2847,7 @@ const List<
     englishName: "Day in the Octave of Christmas",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-28",
@@ -3208,8 +2855,7 @@ const List<
     englishName: "Holy Innocents, Martyrs",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-28",
@@ -3217,8 +2863,7 @@ const List<
     englishName: "Day in the Octave of Christmas",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-29",
@@ -3226,8 +2871,7 @@ const List<
     englishName: "St. Thomas Becket",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-29",
@@ -3235,8 +2879,7 @@ const List<
     englishName: "5th Day in the Octave of Christmas",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-30",
@@ -3244,8 +2887,7 @@ const List<
     englishName: "6th Day in the Octave of Christmas",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-31",
@@ -3253,8 +2895,7 @@ const List<
     englishName: "7th Day in the Octave of Christmas",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   ),
   (
     date: "12-31",
@@ -3262,7 +2903,6 @@ const List<
     englishName: "St. Sylvester I, Pope",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    epistles: [""],
-    gospel: ""
+    readingID: ""
   )
 ];

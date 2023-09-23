@@ -7,8 +7,7 @@ typedef FeastData = ({
   String englishName,
   String feastClass,
   String color,
-  List<String> epistles,
-  String gospel
+  String readingID
 });
 
 typedef FeastWithCommemorationsData = ({
@@ -16,8 +15,7 @@ typedef FeastWithCommemorationsData = ({
   String englishName,
   String feastClass,
   String color,
-  List<String> epistles,
-  String gospel,
+  String readingID,
   List<FeastData> commemorations,
   List<FeastData> alternatives
 });
@@ -28,8 +26,7 @@ typedef FeastDayData = ({
   String englishName,
   String feastClass,
   String color,
-  String epistles,
-  String gospel,
+  String readingID,
   String commemorations
 });
 
@@ -54,16 +51,16 @@ class Day {
         !isQuadragesima &&
         !isHolyWeek) {
       feasts.add(Feast("Feria Septuagesimae", "Feria", FeastClass.fourthClass,
-          Color.purple, [""], ""));
+          Color.purple, ""));
     }
     if (date.weekday != DateTime.sunday && isQuadragesima && !isHolyWeek) {
       feasts.add(Feast("Feria Quadragesimae", "Feria of Lent",
-          FeastClass.thirdClass, Color.purple, [""], ""));
+          FeastClass.thirdClass, Color.purple, ""));
     }
 
     if (date.weekday != DateTime.sunday && isPaschalTime) {
-      feasts.add(Feast(
-          "Feria", "Feria", FeastClass.fourthClass, Color.white, [""], ""));
+      feasts.add(
+          Feast("Feria", "Feria", FeastClass.fourthClass, Color.white, ""));
     }
   }
 
@@ -108,8 +105,7 @@ class Day {
           color: Color.green.colorName,
           commemorations: [],
           alternatives: [],
-          epistles: [],
-          gospel: ""
+          readingID: ""
         )
       };
     }
@@ -206,8 +202,7 @@ class Day {
           englishName: "Feria of Advent",
           latinName: "Feria Adventus",
           feastClass: FeastClass.thirdClass.name,
-          epistles: [],
-          gospel: ""
+          readingID: ""
         ));
       }
       if (containsFeast("Feria Quadragesimae") &&
@@ -218,8 +213,7 @@ class Day {
           englishName: "Feria of Lent",
           latinName: "Feria Quadragesimae",
           feastClass: FeastClass.thirdClass.name,
-          epistles: [],
-          gospel: ""
+          readingID: ""
         ));
       }
       return makeFeastWithCommemorations(feast, comms, []);
@@ -271,8 +265,7 @@ class Day {
                 !isFeriaVotiveMassOrUSProper(element.latinName) ||
                 element.latinName.startsWith("Sancta Maria Sabbato"))
             .toList();
-        ff.add(Feast(
-                "Feria", "Feria", FeastClass.fourthClass, Color.green, [""], "")
+        ff.add(Feast("Feria", "Feria", FeastClass.fourthClass, Color.green, "")
             .formatFeast());
         alts.addAll(ff);
         comms = [];
@@ -288,15 +281,15 @@ class Day {
     if (isFeria()) {
       Feast f = feasts.firstWhere(
           (element) => element.englishName.contains("Feria"),
-          orElse: () => Feast(
-              "Feria", "Feria", FeastClass.fourthClass, Color.green, [""], ""));
+          orElse: () =>
+              Feast("Feria", "Feria", FeastClass.fourthClass, Color.green, ""));
 
       FeastData feast = f.formatFeast();
       return makeFeastWithCommemorations(feast, [],
           getFeastsOfClassExceptOne(FeastClass.fourthClass, f.latinName));
     }
     return makeFeastWithCommemorations(
-        Feast("Feria", "Feria", FeastClass.fourthClass, Color.green, [""], "")
+        Feast("Feria", "Feria", FeastClass.fourthClass, Color.green, "")
             .formatFeast(),
         [],
         []);
@@ -361,23 +354,21 @@ class Day {
 
 class Feast {
   Feast(this.latinName, this.englishName, this.feastClass, this.color,
-      this.epistles, this.gospel);
+      this.readingID);
 
   Feast.fromFeastData(FeastData data)
       : latinName = data.latinName,
         englishName = data.englishName,
         color = convStrToColor[data.color]!,
         feastClass = convStrToClass[data.feastClass]!,
-        epistles = data.epistles,
-        gospel = data.gospel;
+        readingID = data.readingID;
 
   Feast.fromFeastDataWithCommemorations(FeastWithCommemorationsData data)
       : latinName = data.latinName,
         englishName = data.englishName,
         color = convStrToColor[data.color]!,
         feastClass = convStrToClass[data.feastClass]!,
-        epistles = data.epistles,
-        gospel = data.gospel;
+        readingID = data.readingID;
 
   FeastData formatFeast() {
     return (
@@ -385,8 +376,7 @@ class Feast {
       englishName: englishName,
       feastClass: feastClass.feastName,
       color: color.colorName,
-      epistles: epistles,
-      gospel: gospel
+      readingID: readingID
     );
   }
 
@@ -394,6 +384,5 @@ class Feast {
   String englishName;
   FeastClass feastClass;
   Color color;
-  List<String> epistles;
-  String gospel;
+  String readingID;
 }

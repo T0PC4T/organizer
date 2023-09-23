@@ -76,8 +76,7 @@ FeastWithCommemorationsData makeFeastWithCommemorations(
     englishName: feast.englishName,
     feastClass: feast.feastClass,
     color: feast.color,
-    epistles: feast.epistles,
-    gospel: feast.gospel
+    readingID: feast.readingID
   );
 }
 
@@ -108,8 +107,7 @@ DateTime getDatePropriumDeTempore(
       String daysFromEaster,
       FeastClass feastClass,
       Color color,
-      List<String> epistles,
-      String gospel
+      String readingID
     }) feast) {
   DateTime easter = parseTime(year, easterDate(year));
   if (feast.daysToEaster == '') {
@@ -129,11 +127,10 @@ Feast getFeastData(
       String englishName,
       FeastClass feastClass,
       Color color,
-      List<String> epistles,
-      String gospel
+      String readingID,
     }) feast) {
   return Feast(feast.latinName, feast.englishName, feast.feastClass,
-      feast.color, feast.epistles, feast.gospel);
+      feast.color, feast.readingID);
 }
 
 bool isFeriaVotiveMassOrUSProper(String name) {

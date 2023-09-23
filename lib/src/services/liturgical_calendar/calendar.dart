@@ -112,8 +112,7 @@ class Calendar {
       feastClass: jsonData.feastClass.replaceAll(". Class", ""),
       commemorations:
           jsonData.commemorations.map((e) => e.englishName).join("<br>"),
-      epistles: jsonData.epistles.join(" + "),
-      gospel: jsonData.gospel
+      readingID: jsonData.readingID
     );
   }
 
@@ -125,8 +124,7 @@ class Calendar {
       englishName: feastData.englishName,
       feastClass: feastData.feastClass,
       color: feastData.color,
-      epistles: feastData.epistles,
-      gospel: feastData.gospel
+      readingID: feastData.readingID
     );
     var comms = feastData.commemorations;
     var alts = feastData.alternatives;
@@ -155,8 +153,7 @@ class Calendar {
                 englishName: jsonData.englishName,
                 color: jsonData.color,
                 feastClass: jsonData.feastClass,
-                epistles: jsonData.epistles,
-                gospel: jsonData.gospel
+                readingID: jsonData.readingID
               ), comms, alts))
         ];
         for (int i = 0; i < (jsonData.alternatives).length; i++) {
@@ -175,8 +172,7 @@ class Calendar {
                 englishName: fData.englishName,
                 color: fData.color,
                 feastClass: fData.feastClass,
-                epistles: fData.epistles,
-                gospel: fData.gospel
+                readingID: fData.readingID
               ), comms.toList(), alts.toList()),
               alternative: true));
         }
@@ -203,7 +199,6 @@ class Calendar {
               "(USA)External Solemnity of Ss. Peter and Paul",
               FeastClass.secondClass,
               Color.red,
-              [""],
               "")); //TODO: add readings
     }
 
@@ -218,7 +213,6 @@ class Calendar {
             "(USA)External Solemnity of Our Lady of the Rosary",
             FeastClass.secondClass,
             Color.red,
-            [""],
             "")); //TODO: add readings
   }
 
@@ -237,18 +231,17 @@ class Calendar {
 
   void addMovableFeasts() {
     Feast SSNJ = Feast("Sanctissimi Nominis Jesu", "The Holy Name of Jesus",
-        FeastClass.secondClass, Color.white, [""], ""); //TODO: add readings
+        FeastClass.secondClass, Color.white, ""); //TODO: add readings
 
     Feast SGVPC = Feast(
         "S. Gabrielis a Virgine Pardolente Confessoris",
         "St. Gabriel of Our Lady of Sorrows, Confessor",
         FeastClass.secondClass,
         Color.white,
-        [""],
         ""); //TODO: add readings
 
     Feast SMA = Feast("S. Mathiae Apostoli", "St. Matthias, Apostle",
-        FeastClass.secondClass, Color.red, [""], ""); //TODO: add readings
+        FeastClass.secondClass, Color.red, ""); //TODO: add readings
 
     var d = DateTime(year, 1, 1).weekday;
     if (d == 1 || d == 2 || d == 7) {
@@ -270,7 +263,6 @@ class Calendar {
         "Sunday in the Octave of Christmas",
         FeastClass.secondClass,
         Color.white,
-        [""],
         ""); //TODO: add readings
 
     var dd = DateTime(year, 12, 25);
@@ -281,7 +273,7 @@ class Calendar {
     }
 
     Feast DNJCR = Feast("Domini Nostri Jesu Christi Regi", "Christ the King",
-        FeastClass.firstClass, Color.white, [""], ""); //TODO: add readings
+        FeastClass.firstClass, Color.white, ""); //TODO: add readings
 
     d = DateTime(year, 10, 31).weekday % 7;
     DateTime date = DateTime(year, 10, 31 - d, 12);
@@ -293,13 +285,8 @@ class Calendar {
 
     addFeast(
         xx,
-        Feast(
-            "Septem Dolorum BMV",
-            "Seven Dolours of Our Lady",
-            FeastClass.thirdClass,
-            Color.purple,
-            [""],
-            "")); //TODO: add readings
+        Feast("Septem Dolorum BMV", "Seven Dolours of Our Lady",
+            FeastClass.thirdClass, Color.purple, "")); //TODO: add readings
 
     d = DateTime(year, 12, 25).weekday;
 
@@ -310,7 +297,7 @@ class Calendar {
       var numDays = Duration(days: i);
       DateTime date = DateTime(year, 12, 17, 12).add(numDays);
       Feast FMA = Feast("Feria Maior Adventus", "Major Feria of Advent",
-          FeastClass.secondClass, Color.purple, [""], ""); //TODO: add readings
+          FeastClass.secondClass, Color.purple, ""); //TODO: add readings
       addFeast(date, FMA);
     }
 
@@ -324,7 +311,6 @@ class Calendar {
             "Holy Family Jesus, Mary, and Joseph",
             FeastClass.firstClass,
             Color.white,
-            [""],
             "")); //TODO: add readings
   }
 
@@ -338,64 +324,55 @@ class Calendar {
         "eng": "Fourth Sunday of Advent",
         "color": Color.purple,
         "class": FeastClass.firstClass,
-        "epistles": [""],
-        "gospel": ""
+        "readingID": ""
       },
       "Dominica III Adventus": {
         "eng": "Third Sunday of Advent",
         "color": Color.purple,
         "class": FeastClass.firstClass,
-        "epistles": [""],
-        "gospel": ""
+        "readingID": ""
       },
       "Dominica II Adventus": {
         "eng": "Second Sunday of Advent",
         "color": Color.purple,
         "class": FeastClass.firstClass,
-        "epistles": [""],
-        "gospel": ""
+        "readingID": ""
       },
       "Dominica I Adventus": {
         "eng": "First Sunday of Advent",
         "color": Color.purple,
         "class": FeastClass.firstClass,
-        "epistles": [""],
-        "gospel": ""
+        "readingID": ""
       },
       "Dominica XXIV et Ultima post Pentecosten": {
         "eng": "Twenty fourth and last Sunday after the Pentecost",
         "color": Color.green,
         "class": FeastClass.secondClass,
-        "epistles": [""],
-        "gospel": ""
+        "readingID": ""
       },
       "Dominica VI Post Epiphaniam": {
         "eng": "Rsumed Sixth Sunday after the Epiphany",
         "color": Color.green,
         "class": FeastClass.secondClass,
-        "epistles": [""],
-        "gospel": ""
+        "readingID": ""
       },
       "Dominica V Post Epiphaniam": {
         "eng": "Rsumed Fifth Sunday after the Epiphany",
         "color": Color.green,
         "class": FeastClass.secondClass,
-        "epistles": [""],
-        "gospel": ""
+        "readingID": ""
       },
       "Dominica IV Post Epiphaniam": {
         "eng": "Rsumed Fourth Sunday after the Epiphany",
         "color": Color.green,
         "class": FeastClass.secondClass,
-        "epistles": [""],
-        "gospel": ""
+        "readingID": ""
       },
       "Dominica III Post Epiphaniam": {
         "eng": "Rsumed Third Sunday after the Epiphany",
         "color": Color.green,
         "class": FeastClass.secondClass,
-        "epistles": [""],
-        "gospel": "" //TODO: add readings for all of these
+        "readingID": "" //TODO: add readings for all of these
       },
     };
 
@@ -410,7 +387,7 @@ class Calendar {
       addFeast(
           date,
           Feast(element, value['eng'], value['class'], value['color'],
-              value['epistles'], value['gospel']));
+              value['readingID']));
 
       if (element.startsWith("Dominica III Adventus")) {
         var d = date.add(const Duration(days: 3));
@@ -420,7 +397,6 @@ class Calendar {
             "Ember Wednesday of Advent",
             FeastClass.secondClass,
             Color.purple,
-            [""],
             ""); //TODO: add readings
 
         addFeast(d, FQT);
@@ -430,7 +406,6 @@ class Calendar {
             "Ember Friday of Advent",
             FeastClass.secondClass,
             Color.purple,
-            [""],
             ""); //TODO: add readings
         addFeast(d, FQT);
         d = d.add(const Duration(days: 1));
@@ -439,7 +414,6 @@ class Calendar {
             "Ember Saturday of Advent",
             FeastClass.secondClass,
             Color.purple,
-            [""],
             ""); //TODO: add readings
         addFeast(d, FQT);
       }
@@ -460,7 +434,6 @@ class Calendar {
               "Ember Wednesday in September",
               FeastClass.secondClass,
               Color.purple,
-              [""],
               "")); //TODO: add readings
     }
     date = date.add(const Duration(days: 2));
@@ -472,7 +445,6 @@ class Calendar {
               "Ember Friday in September",
               FeastClass.secondClass,
               Color.purple,
-              [""],
               "")); //TODO: add readings
     }
     date = date.add(const Duration(days: 1));
@@ -484,7 +456,6 @@ class Calendar {
               "Ember Saturday in September",
               FeastClass.secondClass,
               Color.purple,
-              [""],
               "")); //TODO: add readings
     }
 
@@ -506,7 +477,7 @@ class Calendar {
       }
       addFeast(
           date,
-          Feast(element, value, FeastClass.secondClass, Color.green, [""],
+          Feast(element, value, FeastClass.secondClass, Color.green,
               "")); //TODO: add readings
       date = date.add(const Duration(days: 7));
     });
@@ -525,7 +496,6 @@ class Calendar {
         "Sacred Heart of Jesus",
         FeastClass.thirdClass,
         Color.white,
-        [""],
         ""); //TODO: add readings
     addCyclicFeast(SCJC, DateTime.friday);
   }
@@ -536,7 +506,6 @@ class Calendar {
         "Jesus Christ the High Priest",
         FeastClass.thirdClass,
         Color.white,
-        [""],
         ""); //TODO: add readings
     addCyclicFeast(JCSAC, DateTime.thursday);
   }
@@ -547,7 +516,6 @@ class Calendar {
         "Immaculate Heart of Mary",
         FeastClass.thirdClass,
         Color.white,
-        [""],
         ""); //TODO: add readings
     addCyclicFeast(ICBMV, DateTime.saturday);
   }
@@ -578,7 +546,7 @@ class Calendar {
     DateTime end = DateTime(year, 12, 31, 0, 0);
 
     Feast SMS = Feast("Sancta Maria Sabbato", "Our Lady on Saturday",
-        FeastClass.fourthClass, Color.white, [""], ""); //TODO: add readings
+        FeastClass.fourthClass, Color.white, ""); //TODO: add readings
     while (date.compareTo(end) <= 0) {
       Day day = getDayAtDate(date);
       if (!day.containsFeastOfClass(FeastClass.firstClass) &&
@@ -604,7 +572,7 @@ class Calendar {
       addFeast(
           start,
           Feast("Feria Adventus", "Feria of Advent", FeastClass.thirdClass,
-              Color.purple, [""], "")); //TODO: add readings
+              Color.purple, "")); //TODO: add readings
     }
   }
 }
