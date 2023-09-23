@@ -15,7 +15,7 @@ const List<
     englishName: "The Octave of Christmas",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Octave_Day_of_Christmas"
   ),
   (
     date: "01-02",
@@ -79,7 +79,7 @@ const List<
     englishName: "The Epiphany of the Lord",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Epiphany_of_the_Lord"
   ),
   (
     date: "01-07",
@@ -568,7 +568,7 @@ const List<
     englishName: "St. Joseph, Spouse of the Blessed Virgin Mary, Confessor",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Feast_of_St_Joseph"
   ),
   (
     date: "03-21",
@@ -592,7 +592,7 @@ const List<
     englishName: "Annuntiation of the Blessed Virgin Mary",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Annunciation_of_the_Blessed_Virgin_Mary"
   ),
   (
     date: "03-27",
@@ -1223,7 +1223,7 @@ const List<
     englishName: "Ss. Peter and Paul, Apostles",
     feastClass: FeastClass.firstClass,
     color: Color.red,
-    readingID: ""
+    readingID: "Feast_of_Ss_Peter_and_Paul"
   ),
   (
     date: "06-30",
@@ -1239,7 +1239,7 @@ const List<
     englishName: "The Most Precious Blood of our Lord Jesus Christ",
     feastClass: FeastClass.firstClass,
     color: Color.red,
-    readingID: ""
+    readingID: "Feast_of_the_Most_Precious_Blood_of_Jesus"
   ),
   (
     date: "07-02",
@@ -1709,7 +1709,7 @@ const List<
     englishName: "The Assumption of the Blessed Virgin Mary",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Assumption_of_the_Blessed_Virgin_Mary"
   ),
   (
     date: "08-16",
@@ -1981,7 +1981,7 @@ const List<
     englishName: "The Exaltation of the Holy Cross",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    readingID: ""
+    readingID: "Exaltation_of_the_Holy_Cross"
   ),
   (
     date: "09-15",
@@ -2127,7 +2127,7 @@ const List<
     englishName: "The Dedication of St. Michael the Archangel",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Dedication_of_St_Michael_the_Archangel"
   ),
   (
     date: "09-30",
@@ -2375,7 +2375,7 @@ const List<
     englishName: "All Saints",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    readingID: ""
+    readingID: "All_Saints"
   ),
   (
     date: "11-02",
@@ -2383,7 +2383,7 @@ const List<
     englishName: "Commemoration of All Souls",
     feastClass: FeastClass.firstClass,
     color: Color.black,
-    readingID: ""
+    readingID: "Commemoration_of_All_Souls"
   ),
   (
     date: "11-03",
@@ -2468,10 +2468,10 @@ const List<
   (
     date: "11-09",
     latinName: "In Dedicatione Basilicae Ss. Salvatoris",
-    englishName: "The Dedication of the Archbasilica of the Most Holy Savior",
+    englishName: "The Dedication of the Archbasilica of the Most Holy Redeemer",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Dedication_of_the_Archbasilica_of_Our_Holy_Redeemer"
   ),
   (
     date: "11-09",
@@ -2751,7 +2751,7 @@ const List<
     englishName: "Immaculate Conception of the Blessed Virgin Mary",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Immaculate_Conception_of_the_Blessed_Virgin_Mary"
   ),
   (
     date: "12-10",
@@ -2807,7 +2807,7 @@ const List<
     englishName: "Vigil of Christmas",
     feastClass: FeastClass.firstClass,
     color: Color.purple,
-    readingID: ""
+    readingID: "Vigil_of_the_Nativity_of_the_Lord"
   ),
   (
     date: "12-25",
@@ -2815,7 +2815,7 @@ const List<
     englishName: "The Nativity of Our Lord",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Nativity_of_the_Lord"
   ),
   (
     date: "12-26",

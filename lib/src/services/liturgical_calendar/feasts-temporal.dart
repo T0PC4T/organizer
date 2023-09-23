@@ -8,7 +8,7 @@ const temporalFeasts = [
     daysToEaster: "91",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Most_Holy_Name_of_Jesus"
   ),
   (
     latinName: "Dominica in Septuagesima",
@@ -17,7 +17,7 @@ const temporalFeasts = [
     daysToEaster: "63",
     feastClass: FeastClass.secondClass,
     color: Color.purple,
-    readingID: ""
+    readingID: "Septuagesima_Sunday"
   ),
   (
     latinName: "Dominica in Sexagesima",
@@ -26,7 +26,7 @@ const temporalFeasts = [
     daysToEaster: "56",
     feastClass: FeastClass.secondClass,
     color: Color.purple,
-    readingID: ""
+    readingID: "Sexagesima_Sunday"
   ),
   (
     latinName: "Dominica in Quinquagesima",
@@ -35,7 +35,7 @@ const temporalFeasts = [
     daysToEaster: "49",
     feastClass: FeastClass.secondClass,
     color: Color.purple,
-    readingID: ""
+    readingID: "Quinquagesima_Sunday"
   ),
   (
     latinName: "Feria IV Cinerum",
@@ -44,7 +44,7 @@ const temporalFeasts = [
     daysToEaster: "46",
     feastClass: FeastClass.firstClass,
     color: Color.purple,
-    readingID: ""
+    readingID: "Ash_Wednesday"
   ),
   (
     latinName: "Dominica I in Quadr",
@@ -53,7 +53,7 @@ const temporalFeasts = [
     daysToEaster: "42",
     feastClass: FeastClass.firstClass,
     color: Color.purple,
-    readingID: ""
+    readingID: "1st_Sunday_of_Lent"
   ),
   (
     latinName: "Feria Quarta Quattuor Temporum Quadragesimae",
@@ -107,7 +107,7 @@ const temporalFeasts = [
     daysToEaster: "35",
     feastClass: FeastClass.firstClass,
     color: Color.purple,
-    readingID: ""
+    readingID: "2nd_Sunday_of_Lent"
   ),
   (
     latinName: "Dominica III in Quadr",
@@ -116,7 +116,7 @@ const temporalFeasts = [
     daysToEaster: "28",
     feastClass: FeastClass.firstClass,
     color: Color.purple,
-    readingID: ""
+    readingID: "3rd_Sunday_of_Lent"
   ),
   (
     latinName: "Feria V post Cineres",
@@ -134,7 +134,7 @@ const temporalFeasts = [
     daysToEaster: "21",
     feastClass: FeastClass.firstClass,
     color: Color.purple,
-    readingID: ""
+    readingID: "4th_Sunday_of_Lent"
   ),
   (
     latinName: "Dominica I Passionis",
@@ -143,7 +143,7 @@ const temporalFeasts = [
     daysToEaster: "14",
     feastClass: FeastClass.firstClass,
     color: Color.purple,
-    readingID: ""
+    readingID: "Passion_Sunday"
   ),
   (
     latinName: "Dominica II Passionis seu in Palmis",
@@ -152,7 +152,7 @@ const temporalFeasts = [
     daysToEaster: "7",
     feastClass: FeastClass.firstClass,
     color: Color.purple,
-    readingID: ""
+    readingID: "Palm_Sunday"
   ),
   (
     latinName: "Feria Secunda Hebdomadae Sanctae",
@@ -188,7 +188,7 @@ const temporalFeasts = [
     daysToEaster: "3",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Holy_Thursday"
   ),
   (
     latinName: "Feria Sexta in Passione et Morte Domini",
@@ -197,7 +197,7 @@ const temporalFeasts = [
     daysToEaster: "2",
     feastClass: FeastClass.firstClass,
     color: Color.black,
-    readingID: ""
+    readingID: "Good_Friday"
   ),
   (
     latinName: "Sabbato Sancto",
@@ -206,7 +206,7 @@ const temporalFeasts = [
     daysToEaster: "1",
     feastClass: FeastClass.firstClass,
     color: Color.purple,
-    readingID: ""
+    readingID: "Easter_Vigil"
   ),
   (
     latinName: "Dominica Resurrectionis",
@@ -215,7 +215,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Easter_Sunday"
   ),
   (
     latinName: "Dominica in Albis in Octava Paschae",
@@ -224,7 +224,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Low_Sunday"
   ),
   (
     latinName: "Die II infra octavam Paschae",
@@ -269,7 +269,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    readingID: ""
+    readingID: "2nd_Sunday_After_Easter"
   ),
   (
     latinName: "Sabbato in Albis",
@@ -287,7 +287,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    readingID: ""
+    readingID: "3rd_Sunday_After_Easter"
   ),
   (
     latinName: "Die VI infra octavam Paschae",
@@ -305,7 +305,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    readingID: ""
+    readingID: "4th_Sunday_After_Easter"
   ),
   (
     latinName: "Dominica V Post Pascha",
@@ -314,7 +314,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    readingID: ""
+    readingID: "5th_Sunday_After_Easter"
   ),
   (
     latinName: "Feria in Rogationibus",
@@ -356,7 +356,7 @@ const temporalFeasts = [
     latinName: "In Ascensione Domini",
     englishName: "Ascension of the Lord",
     daysFromEaster: "39",
-    daysToEaster: "",
+    daysToEaster: "Ascension_of_the_Lord",
     feastClass: FeastClass.firstClass,
     color: Color.white,
     readingID: ""
@@ -368,7 +368,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Sunday_After_the_Ascension"
   ),
   (
     latinName: "Sabbato in Vigilia Pentecostes",
@@ -386,7 +386,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
     color: Color.red,
-    readingID: ""
+    readingID: "Pentecost_Sunday"
   ),
   (
     latinName: "Feria Secunda infra Octavam Pentecostes",
@@ -449,7 +449,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Trinity_Sunday"
   ),
   (
     latinName: "Festum Sanctissimi Corporis Christi",
@@ -458,7 +458,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Corpus_Christi"
   ),
   (
     latinName: "Dominica II Post Pentecosten",
@@ -467,7 +467,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.green,
-    readingID: ""
+    readingID: "2nd_Sunday_after_Pentecost"
   ),
   (
     latinName: "(USA)Externa Sollemnitas Corpori Christi",
@@ -476,7 +476,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Corpus_Christi"
   ),
   (
     latinName: "Sanctissimi Cordis Domini Nostri Jesu Christi",
@@ -485,7 +485,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Sacred_Heart_of_Jesus"
   ),
   (
     latinName: "Dominica III Post Pentecosten",
@@ -494,16 +494,16 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.green,
-    readingID: ""
+    readingID: "3rd_Sunday_after_Pentecost"
   ),
   (
-    latinName: "(USA)Externa Sollemnitas Sanctissimi Corde DNJC",
+    latinName: "(USA)Externa Sollemnitas Sanctissimi Cordis DNJC",
     englishName: "(USA)External Solemnity of The Sacred Heart of Jesus",
     daysFromEaster: "70",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.green,
-    readingID: ""
+    readingID: "Sacred_Heart_of_Jesus"
   ),
   (
     latinName: "Dominica IV Post Pentecosten",
@@ -512,7 +512,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.green,
-    readingID: ""
+    readingID: "4th_Sunday_after_Pentecost"
   ),
   (
     latinName: "Dominica V Post Pentecosten",
@@ -521,7 +521,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.green,
-    readingID: ""
+    readingID: "5th_Sunday_after_Pentecost"
   ),
   (
     latinName: "Dominica VI Post Pentecosten",
@@ -530,7 +530,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.green,
-    readingID: ""
+    readingID: "6th_Sunday_after_Pentecost"
   ),
   (
     latinName: "Dominica VII Post Pentecosten",
@@ -539,7 +539,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.green,
-    readingID: ""
+    readingID: "7th_Sunday_after_Pentecost"
   ),
   (
     latinName: "Dominica VIII Post Pentecosten",
@@ -548,7 +548,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.green,
-    readingID: ""
+    readingID: "8th_Sunday_after_Pentecost"
   ),
   (
     latinName: "Dominica IX Post Pentecosten",
@@ -557,7 +557,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.green,
-    readingID: ""
+    readingID: "9th_Sunday_after_Pentecost"
   ),
   (
     latinName: "Dominica X Post Pentecosten",
@@ -566,7 +566,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.green,
-    readingID: ""
+    readingID: "10th_Sunday_after_Pentecost"
   ),
   (
     latinName: "Dominica XI Post Pentecosten",
@@ -575,7 +575,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.green,
-    readingID: ""
+    readingID: "11th_Sunday_after_Pentecost"
   ),
   (
     latinName: "Dominica XII Post Pentecosten",
@@ -584,7 +584,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.green,
-    readingID: ""
+    readingID: "12th_Sunday_after_Pentecost"
   ),
   (
     latinName: "Dominica XIII Post Pentecosten",
@@ -593,7 +593,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.green,
-    readingID: ""
+    readingID: "13th_Sunday_after_Pentecost"
   ),
   (
     latinName: "Dominica XIV Post Pentecosten",
@@ -602,7 +602,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.green,
-    readingID: ""
+    readingID: "14th_Sunday_after_Pentecost"
   ),
   (
     latinName: "Dominica XV Post Pentecosten",
@@ -611,7 +611,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.green,
-    readingID: ""
+    readingID: "15th_Sunday_after_Pentecost"
   ),
   (
     latinName: "Dominica XVI Post Pentecosten",
@@ -620,7 +620,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.green,
-    readingID: ""
+    readingID: "16th_Sunday_after_Pentecost"
   ),
   (
     latinName: "Dominica XVII Post Pentecosten",
@@ -629,7 +629,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.green,
-    readingID: ""
+    readingID: "17th_Sunday_after_Pentecost"
   ),
   (
     latinName: "Dominica XVIII Post Pentecosten",
@@ -638,7 +638,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.green,
-    readingID: ""
+    readingID: "18th_Sunday_after_Pentecost"
   ),
   (
     latinName: "Dominica XIX Post Pentecosten",
@@ -647,7 +647,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.green,
-    readingID: ""
+    readingID: "19th_Sunday_after_Pentecost"
   ),
   (
     latinName: "Dominica XX Post Pentecosten",
@@ -656,7 +656,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.green,
-    readingID: ""
+    readingID: "20th_Sunday_after_Pentecost"
   ),
   (
     latinName: "Dominica XXI Post Pentecosten",
@@ -665,7 +665,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.green,
-    readingID: ""
+    readingID: "21th_Sunday_after_Pentecost"
   ),
   (
     latinName: "Dominica XXII Post Pentecosten",
@@ -674,7 +674,7 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.green,
-    readingID: ""
+    readingID: "22th_Sunday_after_Pentecost"
   ),
   (
     latinName: "Dominica XXIII Post Pentecosten",
@@ -683,6 +683,6 @@ const temporalFeasts = [
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
     color: Color.green,
-    readingID: ""
+    readingID: "23th_Sunday_after_Pentecost"
   )
 ];

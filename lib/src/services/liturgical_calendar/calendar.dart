@@ -263,7 +263,7 @@ class Calendar {
         "Sunday in the Octave of Christmas",
         FeastClass.secondClass,
         Color.white,
-        ""); //TODO: add readings
+        "Sunday_After_Christmas");
 
     var dd = DateTime(year, 12, 25);
     d = dd.weekday % 7;
@@ -273,7 +273,7 @@ class Calendar {
     }
 
     Feast DNJCR = Feast("Domini Nostri Jesu Christi Regi", "Christ the King",
-        FeastClass.firstClass, Color.white, ""); //TODO: add readings
+        FeastClass.firstClass, Color.white, "Christ_the_King");
 
     d = DateTime(year, 10, 31).weekday % 7;
     DateTime date = DateTime(year, 10, 31 - d, 12);
@@ -311,7 +311,7 @@ class Calendar {
             "Holy Family Jesus, Mary, and Joseph",
             FeastClass.firstClass,
             Color.white,
-            "")); //TODO: add readings
+            "Holy_Family")); //TODO: add readings
   }
 
   DateTime getDateOfFeast(String name) {
@@ -324,55 +324,56 @@ class Calendar {
         "eng": "Fourth Sunday of Advent",
         "color": Color.purple,
         "class": FeastClass.firstClass,
-        "readingID": ""
+        "readingID": "4th_Sunday_of_Advent"
       },
       "Dominica III Adventus": {
         "eng": "Third Sunday of Advent",
         "color": Color.purple,
         "class": FeastClass.firstClass,
-        "readingID": ""
+        "readingID": "3rd_Sunday_of_Advent"
       },
       "Dominica II Adventus": {
         "eng": "Second Sunday of Advent",
         "color": Color.purple,
         "class": FeastClass.firstClass,
-        "readingID": ""
+        "readingID": "2nd_Sunday_of_Advent"
       },
       "Dominica I Adventus": {
         "eng": "First Sunday of Advent",
         "color": Color.purple,
         "class": FeastClass.firstClass,
-        "readingID": ""
+        "readingID": "1st_Sunday_of_Advent"
       },
       "Dominica XXIV et Ultima post Pentecosten": {
         "eng": "Twenty fourth and last Sunday after the Pentecost",
         "color": Color.green,
         "class": FeastClass.secondClass,
-        "readingID": ""
+        "readingID": "24th_and_Last_Sunday_after_Pentecost"
       },
       "Dominica VI Post Epiphaniam": {
-        "eng": "Rsumed Sixth Sunday after the Epiphany",
+        "eng": "Resumed Sixth Sunday after the Epiphany",
         "color": Color.green,
         "class": FeastClass.secondClass,
-        "readingID": ""
+        "readingID": "Resumed_6th_Sunday_After_Epiphany"
       },
       "Dominica V Post Epiphaniam": {
-        "eng": "Rsumed Fifth Sunday after the Epiphany",
+        "eng": "Resumed Fifth Sunday after the Epiphany",
         "color": Color.green,
         "class": FeastClass.secondClass,
-        "readingID": ""
+        "readingID": "Resumed_5th_Sunday_After_Epiphany"
       },
       "Dominica IV Post Epiphaniam": {
-        "eng": "Rsumed Fourth Sunday after the Epiphany",
+        "eng": "Resumed Fourth Sunday after the Epiphany",
         "color": Color.green,
         "class": FeastClass.secondClass,
-        "readingID": ""
+        "readingID": "Resumed_4th_Sunday_After_Epiphany"
       },
       "Dominica III Post Epiphaniam": {
-        "eng": "Rsumed Third Sunday after the Epiphany",
+        "eng": "Resumed Third Sunday after the Epiphany",
         "color": Color.green,
         "class": FeastClass.secondClass,
-        "readingID": "" //TODO: add readings for all of these
+        "readingID":
+            "Resumed_3rd_Sunday_After_Epiphany" //TODO: add readings for all of these
       },
     };
 
@@ -459,12 +460,27 @@ class Calendar {
               "")); //TODO: add readings
     }
 
-    Map<String, String> sundaysPostEpiphaniam = {
-      "Dominica II Post Epiphaniam": "Second Sunday after the Epiphany",
-      "Dominica III Post Epiphaniam": "Second Sunday after the Epiphany",
-      "Dominica IV Post Epiphaniam": "Second Sunday after the Epiphany",
-      "Dominica V Post Epiphaniam": "Second Sunday after the Epiphany",
-      "Dominica VI Post Epiphaniam": "Second Sunday after the Epiphany"
+    Map<String, (String, String)> sundaysPostEpiphaniam = {
+      "Dominica II Post Epiphaniam": (
+        "Second Sunday after the Epiphany",
+        "2nd_Sunday_after_Epiphany"
+      ),
+      "Dominica III Post Epiphaniam": (
+        "Third Sunday after the Epiphany",
+        "3rd_Sunday_after_Epiphany"
+      ),
+      "Dominica IV Post Epiphaniam": (
+        "Fourth Sunday after the Epiphany",
+        "4th_Sunday_after_Epiphany"
+      ),
+      "Dominica V Post Epiphaniam": (
+        "Fifth Sunday after the Epiphany",
+        "5th_Sunday_after_Epiphany"
+      ),
+      "Dominica VI Post Epiphaniam": (
+        "Sixth Sunday after the Epiphany",
+        "6th_Sunday_after_Epiphany"
+      )
     };
     date = DateTime(year, 1, 6, 12);
 
@@ -477,8 +493,8 @@ class Calendar {
       }
       addFeast(
           date,
-          Feast(element, value, FeastClass.secondClass, Color.green,
-              "")); //TODO: add readings
+          Feast(element, value.$1, FeastClass.secondClass, Color.green,
+              value.$2));
       date = date.add(const Duration(days: 7));
     });
   }
