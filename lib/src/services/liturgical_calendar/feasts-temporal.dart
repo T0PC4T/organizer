@@ -356,10 +356,10 @@ const temporalFeasts = [
     latinName: "In Ascensione Domini",
     englishName: "Ascension of the Lord",
     daysFromEaster: "39",
-    daysToEaster: "Ascension_of_the_Lord",
+    daysToEaster: "",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Ascension_of_the_Lord"
   ),
   (
     latinName: "Dominica post Ascensionem",
