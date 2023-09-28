@@ -522,7 +522,7 @@ class Calendar {
         "Jesus Christ the High Priest",
         FeastClass.thirdClass,
         Color.white,
-        ""); //TODO: add readings
+        "Jesus_Christ_Supreme_and_Eternal_Priest");
     addCyclicFeast(JCSAC, DateTime.thursday);
   }
 

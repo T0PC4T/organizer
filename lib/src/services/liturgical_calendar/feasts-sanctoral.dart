@@ -143,7 +143,7 @@ const List<
     englishName: "Commemoration of the Baptism of our Lord Jesus Christ",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Baptism_of_Our_Lord"
   ),
   (
     date: "01-14",
@@ -167,7 +167,7 @@ const List<
     englishName: "St. Paul the first Hermit & Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    readingID: ""
+    readingID: "St_Paul_the_First_Hermit"
   ),
   (
     date: "01-15",
@@ -191,7 +191,7 @@ const List<
     englishName: "St. Anthony, Abbot",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    readingID: ""
+    readingID: "St_Anthony_the_Abbot"
   ),
   (
     date: "01-18",
@@ -207,7 +207,7 @@ const List<
     englishName: "Ss. Marius, Martha, Audifax and Abachum, Martyrs",
     feastClass: FeastClass.fourthClass,
     color: Color.red,
-    readingID: ""
+    readingID: "St_Marius"
   ),
   (
     date: "01-19",
@@ -223,7 +223,7 @@ const List<
     englishName: "Ss. Fabian, Pope and Sebastian, Martyrs",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    readingID: ""
+    readingID: "Ss_Fabian_and_Sebastian"
   ),
   (
     date: "01-21",
@@ -263,7 +263,7 @@ const List<
     englishName: "St. Timothy, Bishop & Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    readingID: ""
+    readingID: "St_Timothy"
   ),
   (
     date: "01-25",
@@ -271,7 +271,7 @@ const List<
     englishName: "Conversion of St. Paul, Apostle",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Conversion_of_St_Paul"
   ),
   (
     date: "01-26",
@@ -279,7 +279,7 @@ const List<
     englishName: "St. Polycarp, Bishop & Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    readingID: ""
+    readingID: "St_Polycarp"
   ),
   (
     date: "01-27",
@@ -289,7 +289,7 @@ const List<
         "St. John Chrysostom, Bishop, Confessor & Doctor of the Church",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    readingID: ""
+    readingID: "St_John_Chrysostom"
   ),
   (
     date: "01-28",
@@ -347,7 +347,7 @@ const List<
     englishName: "The Purification of the Blessed Virgin Mary",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Purification_of_the_Blessed_Virgin_Mary"
   ),
   (
     date: "02-03",
@@ -371,7 +371,7 @@ const List<
     englishName: "St. Agatha, Virgin & Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    readingID: ""
+    readingID: "St_Agatha"
   ),
   (
     date: "02-06",
@@ -421,7 +421,7 @@ const List<
     englishName: "St. Scholastica, Virgin",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    readingID: ""
+    readingID: "St_Scholastica"
   ),
   (
     date: "02-11",
@@ -478,7 +478,7 @@ const List<
     englishName: "The Chair of St. Peter, Apostle",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Chair_of_St_Peter"
   ),
   (
     date: "02-23",
@@ -704,7 +704,7 @@ const List<
     englishName: "St. Fidelis of Sigmaringen, Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    readingID: ""
+    readingID: "St_Fidelis_of_Sigmaringen"
   ),
   (
     date: "04-25",
@@ -736,7 +736,7 @@ const List<
     englishName: "St. Peter Canisius, Doctor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    readingID: ""
+    readingID: "St_Peter_Canisius"
   ),
   (
     date: "04-28",
@@ -760,7 +760,7 @@ const List<
     englishName: "St. Catherine of Siena, Virgin",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    readingID: ""
+    readingID: "St_Catherine_of_Siena"
   ),
   (
     date: "05-01",
@@ -768,7 +768,7 @@ const List<
     englishName: "St. Joseph the Worksman",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    readingID: ""
+    readingID: "St_Joseph_the_Worker"
   ),
   (
     date: "05-02",
@@ -792,7 +792,7 @@ const List<
     englishName: "St. Monica, Widow",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    readingID: ""
+    readingID: "St_Monica"
   ),
   (
     date: "05-05",
@@ -839,10 +839,10 @@ const List<
   (
     date: "05-11",
     latinName: "Ss. Philippi et Jacobi Apostolorum",
-    englishName: "Ss. Philip and Jacob, Apostles",
+    englishName: "Ss. Philip and James, Apostles",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    readingID: ""
+    readingID: "Ss_Philip_and_James"
   ),
   (
     date: "05-12",
@@ -910,7 +910,7 @@ const List<
     englishName: "St. Peter Celestine, Pope & Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    readingID: ""
+    readingID: "St_Peter_Celestine"
   ),
   (
     date: "05-19",
@@ -942,7 +942,7 @@ const List<
     englishName: "St. Philip Neri, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    readingID: ""
+    readingID: "St_Philip_Neri"
   ),
   (
     date: "05-27",
@@ -1183,7 +1183,7 @@ const List<
     englishName: "The Nativity of St. John the Baptist",
     feastClass: FeastClass.firstClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Nativity_of_St_John_the_Baptist"
   ),
   (
     date: "06-25",
@@ -1191,7 +1191,7 @@ const List<
     englishName: "St. William, Abbot",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    readingID: ""
+    readingID: "St_William"
   ),
   (
     date: "06-26",
@@ -1207,7 +1207,7 @@ const List<
     englishName: "Our Lady of Perpetual Help",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Our_Lady_of_Perpetual_Help"
   ),
   (
     date: "06-28",
@@ -1247,7 +1247,7 @@ const List<
     englishName: "The Visitation of the Blessed Virgin Mary",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Visitation_of_the_Blessed_Virgin_Mary"
   ),
   (
     date: "07-02",
@@ -1361,7 +1361,7 @@ const List<
     englishName: "Blessed Virgin Mary of the Mount Carmel",
     feastClass: FeastClass.fourthClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Our_Lady_of_Mt_Carmel"
   ),
   (
     date: "07-17",
@@ -1473,7 +1473,7 @@ const List<
     englishName: "St. James the Greater, Apostle",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    readingID: ""
+    readingID: "St_James_the_Greater"
   ),
   (
     date: "07-26",
@@ -1481,7 +1481,7 @@ const List<
     englishName: "St. Anne, Mother of the Blessed Virgin Mary",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    readingID: ""
+    readingID: "St_Anne"
   ),
   (
     date: "07-27",
@@ -1597,7 +1597,7 @@ const List<
     englishName: "The Transfiguration of Our Lord Jesus Christ",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Transfiguration"
   ),
   (
     date: "08-06",
@@ -1765,7 +1765,7 @@ const List<
     englishName: "Immaculate Heart of the Blessed Virgin Mary",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Immaculate_Heart_of_Mary"
   ),
   (
     date: "08-22",
@@ -1797,7 +1797,7 @@ const List<
     englishName: "St. Bartholomew, Apostle",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    readingID: ""
+    readingID: "St_Bartholomew"
   ),
   (
     date: "08-25",
@@ -1845,7 +1845,7 @@ const List<
     englishName: "The Beheading of St. John the Baptist",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    readingID: ""
+    readingID: "Beheading_of_St_John_the_Baptist"
   ),
   (
     date: "08-29",
@@ -1925,7 +1925,7 @@ const List<
     englishName: "The Nativity of the Blessed Virgin Mary",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Nativity_of_the_Blessed_Virgin_Mary"
   ),
   (
     date: "09-08",
@@ -1941,7 +1941,7 @@ const List<
     englishName: "(USA) St. Peter Claver, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    readingID: ""
+    readingID: "St_Peter_Claver"
   ),
   (
     date: "09-09",
@@ -1989,7 +1989,7 @@ const List<
     englishName: "Seven Sorrows of the Blessed Virgin Mary",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Seven_Sorrows_of_the_Blessed_Virgin_Mary"
   ),
   (
     date: "09-15",
@@ -2030,7 +2030,7 @@ const List<
     englishName: "St. Joseph of Cupertino, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    readingID: ""
+    readingID: "St_Joseph_of_Cupertino"
   ),
   (
     date: "09-19",
@@ -2054,7 +2054,7 @@ const List<
     englishName: "St. Matthew, Apostle and Evangelist",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    readingID: ""
+    readingID: "St_Matthew"
   ),
   (
     date: "09-22",
@@ -2156,10 +2156,10 @@ const List<
   (
     date: "10-03",
     latinName: "S. Theresiae a Jesu Infante Virginis",
-    englishName: "St. Teresa of the Child Jesus, Virgin",
+    englishName: "St. Terese of the Child Jesus, Virgin",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    readingID: ""
+    readingID: "St_Therese_of_the_Child_Jesus"
   ),
   (
     date: "10-04",
@@ -2191,7 +2191,7 @@ const List<
     englishName: "Our Lady of the Rosary",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    readingID: ""
+    readingID: "Our_Lady_of_the_Rosary"
   ),
   (
     date: "10-07",
@@ -2287,7 +2287,7 @@ const List<
     englishName: "St. Luke the Evangelist",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    readingID: ""
+    readingID: "St_Luke"
   ),
   (
     date: "10-19",
@@ -2335,7 +2335,7 @@ const List<
     englishName: "St. Raphael the Archangel",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    readingID: ""
+    readingID: "St_Raphael_the_Archangel"
   ),
   (
     date: "10-25",
@@ -2367,7 +2367,7 @@ const List<
     englishName: "Ss. Simon and Jude, Apostles",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    readingID: ""
+    readingID: "Ss_Simon_and_Jude"
   ),
   (
     date: "11-01",
@@ -2695,7 +2695,7 @@ const List<
     englishName: "St. Andrew, Apostle",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    readingID: ""
+    readingID: "St_Andrew_the_Apostle"
   ),
   (
     date: "12-02",
@@ -2711,7 +2711,7 @@ const List<
     englishName: "St. Francis Xavier, Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    readingID: ""
+    readingID: "St_Francis_Xavier"
   ),
   (
     date: "12-04",
@@ -2719,7 +2719,7 @@ const List<
     englishName: "St. Peter Chrysologus, Bishop, Confessor & Doctor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    readingID: ""
+    readingID: "St_Peter_Chrysologus"
   ),
   (
     date: "12-05",
@@ -2735,7 +2735,7 @@ const List<
     englishName: "St. Nicholas, Bishop & Confessor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    readingID: ""
+    readingID: "St_Nicholas"
   ),
   (
     date: "12-07",
@@ -2743,7 +2743,7 @@ const List<
     englishName: "St. Ambrose, Bishop Confessor & Doctor",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    readingID: ""
+    readingID: "St_Ambrose"
   ),
   (
     date: "12-08",
@@ -2783,7 +2783,7 @@ const List<
     englishName: "St Lucy, Virgin and Martyr",
     feastClass: FeastClass.thirdClass,
     color: Color.red,
-    readingID: ""
+    readingID: "St_Lucy"
   ),
   (
     date: "12-16",
@@ -2799,7 +2799,7 @@ const List<
     englishName: "St. Thomas, Apostle",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    readingID: ""
+    readingID: "St_Thomas_the_Apostle"
   ),
   (
     date: "12-24",
@@ -2823,7 +2823,7 @@ const List<
     englishName: "St. Stephen, Deacon & Protomartyr",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    readingID: ""
+    readingID: "St_Stephen"
   ),
   (
     date: "12-26",
@@ -2839,7 +2839,7 @@ const List<
     englishName: "St. John the Evangelist, Apostle",
     feastClass: FeastClass.secondClass,
     color: Color.white,
-    readingID: ""
+    readingID: "St_John_the_Apostle_and_Evangelist"
   ),
   (
     date: "12-27",
@@ -2855,7 +2855,7 @@ const List<
     englishName: "Holy Innocents, Martyrs",
     feastClass: FeastClass.secondClass,
     color: Color.red,
-    readingID: ""
+    readingID: "Holy_Innocents"
   ),
   (
     date: "12-28",
@@ -2871,7 +2871,7 @@ const List<
     englishName: "St. Thomas Becket",
     feastClass: FeastClass.thirdClass,
     color: Color.white,
-    readingID: ""
+    readingID: "St_Thomas_Beckett"
   ),
   (
     date: "12-29",
