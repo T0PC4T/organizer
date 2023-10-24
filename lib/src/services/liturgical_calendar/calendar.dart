@@ -187,7 +187,6 @@ class Calendar {
     polishCalendar();
     addFeriasOfAdvent();
 
-    //Add External Solemnity of St. Peter and Paul.
     DateTime date = DateTime(year, 6, 29);
     int dayOfTheWeek = date.weekday;
     if (dayOfTheWeek != DateTime.sunday) {
@@ -199,10 +198,9 @@ class Calendar {
               "(USA)External Solemnity of Ss. Peter and Paul",
               FeastClass.secondClass,
               Color.red,
-              "")); //TODO: add readings
+              "Feast_of_Ss_Peter_and_Paul"));
     }
 
-    //Add External Solemnity of Our Lady of Rosary.
     date = DateTime(year, 10, 1);
     dayOfTheWeek = date.weekday;
     date = date.add(Duration(days: 7 - dayOfTheWeek));
@@ -212,8 +210,8 @@ class Calendar {
             "(USA)Externa Sollemnitas Dominae Nostrae de Rosario",
             "(USA)External Solemnity of Our Lady of the Rosary",
             FeastClass.secondClass,
-            Color.red,
-            "")); //TODO: add readings
+            Color.white,
+            "Our_Lady_of_the_Rosary"));
   }
 
   void saveCalendar() async {
@@ -311,7 +309,7 @@ class Calendar {
             "Holy Family Jesus, Mary, and Joseph",
             FeastClass.firstClass,
             Color.white,
-            "Holy_Family")); //TODO: add readings
+            "Holy_Family"));
   }
 
   DateTime getDateOfFeast(String name) {
@@ -372,8 +370,7 @@ class Calendar {
         "eng": "Resumed Third Sunday after the Epiphany",
         "color": Color.green,
         "class": FeastClass.secondClass,
-        "readingID":
-            "Resumed_3rd_Sunday_After_Epiphany" //TODO: add readings for all of these
+        "readingID": "Resumed_3rd_Sunday_After_Epiphany"
       },
     };
 
