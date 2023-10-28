@@ -190,7 +190,13 @@ class Day {
     List<FeastData> alts = [];
     if (containsFeastOfClass(FeastClass.firstClass)) {
       var feast = getIClassFeast().formatFeast();
-      if (isSunday()) {
+      if (isSunday() &&
+          !isFeastOfTheLord(Feast(
+              feast.latinName,
+              feast.englishName,
+              strToFeastClass(feast.feastClass),
+              strToFeastColor(feast.color),
+              feast.readingID))) {
         FeastData f = getSunday();
         if (f.latinName != feast.latinName) {
           comms.add(f);
@@ -359,15 +365,15 @@ class Feast {
   Feast.fromFeastData(FeastData data)
       : latinName = data.latinName,
         englishName = data.englishName,
-        color = convStrToColor[data.color]!,
-        feastClass = convStrToClass[data.feastClass]!,
+        color = strToFeastColor(data.color),
+        feastClass = strToFeastClass(data.feastClass),
         readingID = data.readingID;
 
   Feast.fromFeastDataWithCommemorations(FeastWithCommemorationsData data)
       : latinName = data.latinName,
         englishName = data.englishName,
-        color = convStrToColor[data.color]!,
-        feastClass = convStrToClass[data.feastClass]!,
+        color = strToFeastColor(data.color),
+        feastClass = strToFeastClass(data.feastClass),
         readingID = data.readingID;
 
   FeastData formatFeast() {

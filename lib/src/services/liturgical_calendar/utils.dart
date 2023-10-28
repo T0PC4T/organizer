@@ -14,14 +14,6 @@ enum Color {
   const Color(this.colorName);
 }
 
-Map<String, Color> convStrToColor = {
-  "White": Color.white,
-  "Green": Color.green,
-  "Purple": Color.purple,
-  "Black": Color.black,
-  "Red": Color.red
-};
-
 enum FeastClass {
   firstClass("I. Class"),
   secondClass("II. Class"),
@@ -31,13 +23,6 @@ enum FeastClass {
   final String feastName;
   const FeastClass(this.feastName);
 }
-
-Map<String, FeastClass> convStrToClass = {
-  "I. Class": FeastClass.firstClass,
-  "II. Class": FeastClass.secondClass,
-  "III. Class": FeastClass.thirdClass,
-  "IV. Class": FeastClass.fourthClass,
-};
 
 bool isMassForDead(String name) {
   return name == "Missa Cotidiana pro Defunctis";
@@ -150,21 +135,21 @@ bool isProAliquibusLocis(String name) {
 
 FeastClass strToFeastClass(String feastClass) {
   final Map<String, FeastClass> conv = {
-    "I. classis": FeastClass.firstClass,
-    "II. classis": FeastClass.secondClass,
-    "III. classis": FeastClass.thirdClass,
-    "IV. classis": FeastClass.fourthClass
+    "I. Class": FeastClass.firstClass,
+    "II. Class": FeastClass.secondClass,
+    "III. Class": FeastClass.thirdClass,
+    "IV. Class": FeastClass.fourthClass
   };
   return conv[feastClass]!;
 }
 
 Color strToFeastColor(String color) {
   final Map<String, Color> conv = {
-    "red": Color.red,
-    "white": Color.white,
-    "black": Color.black,
-    "purple": Color.purple,
-    "green": Color.green
+    "Red": Color.red,
+    "White": Color.white,
+    "Black": Color.black,
+    "Purple": Color.purple,
+    "Green": Color.green
   };
   return conv[color]!;
 }
