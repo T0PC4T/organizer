@@ -18,8 +18,7 @@ Calendar getLiturgicalCalendar([int? year]) {
           latinName: feast.latinName,
           englishName: feast.englishName,
           date: "",
-          epistles: feast.epistles,
-          gospel: feast.gospel
+          readingID: feast.readingID
         )));
   }
 

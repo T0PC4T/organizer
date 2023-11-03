@@ -3,24 +3,17 @@ import 'dart:io';
 
 import 'day.dart';
 
-enum Color {
-  white("White"),
-  green("Green"),
-  purple("Purple"),
-  black("Black"),
-  red("Red");
+enum FeastColor {
+  white("White", "#EFEFB1"),
+  green("Green", "#13590D"),
+  purple("Purple", "#800080"),
+  black("Black", "#000000"),
+  red("Red", "#BF0000");
 
   final String colorName;
-  const Color(this.colorName);
+  final String color;
+  const FeastColor(this.colorName, this.color);
 }
-
-Map<String, Color> convStrToColor = {
-  "White": Color.white,
-  "Green": Color.green,
-  "Purple": Color.purple,
-  "Black": Color.black,
-  "Red": Color.red
-};
 
 enum FeastClass {
   firstClass("I. Class"),
@@ -31,13 +24,6 @@ enum FeastClass {
   final String feastName;
   const FeastClass(this.feastName);
 }
-
-Map<String, FeastClass> convStrToClass = {
-  "I. Class": FeastClass.firstClass,
-  "II. Class": FeastClass.secondClass,
-  "III. Class": FeastClass.thirdClass,
-  "IV. Class": FeastClass.fourthClass,
-};
 
 bool isMassForDead(String name) {
   return name == "Missa Cotidiana pro Defunctis";
@@ -76,8 +62,7 @@ FeastWithCommemorationsData makeFeastWithCommemorations(
     englishName: feast.englishName,
     feastClass: feast.feastClass,
     color: feast.color,
-    epistles: feast.epistles,
-    gospel: feast.gospel
+    readingID: feast.readingID
   );
 }
 
@@ -107,9 +92,8 @@ DateTime getDatePropriumDeTempore(
       String daysToEaster,
       String daysFromEaster,
       FeastClass feastClass,
-      Color color,
-      List<String> epistles,
-      String gospel
+      FeastColor color,
+      String readingID
     }) feast) {
   DateTime easter = parseTime(year, easterDate(year));
   if (feast.daysToEaster == '') {
@@ -128,12 +112,11 @@ Feast getFeastData(
       String latinName,
       String englishName,
       FeastClass feastClass,
-      Color color,
-      List<String> epistles,
-      String gospel
+      FeastColor color,
+      String readingID,
     }) feast) {
   return Feast(feast.latinName, feast.englishName, feast.feastClass,
-      feast.color, feast.epistles, feast.gospel);
+      feast.color, feast.readingID);
 }
 
 bool isFeriaVotiveMassOrUSProper(String name) {
@@ -153,21 +136,21 @@ bool isProAliquibusLocis(String name) {
 
 FeastClass strToFeastClass(String feastClass) {
   final Map<String, FeastClass> conv = {
-    "I. classis": FeastClass.firstClass,
-    "II. classis": FeastClass.secondClass,
-    "III. classis": FeastClass.thirdClass,
-    "IV. classis": FeastClass.fourthClass
+    "I. Class": FeastClass.firstClass,
+    "II. Class": FeastClass.secondClass,
+    "III. Class": FeastClass.thirdClass,
+    "IV. Class": FeastClass.fourthClass
   };
   return conv[feastClass]!;
 }
 
-Color strToFeastColor(String color) {
-  final Map<String, Color> conv = {
-    "red": Color.red,
-    "white": Color.white,
-    "black": Color.black,
-    "purple": Color.purple,
-    "green": Color.green
+FeastColor strToFeastColor(String color) {
+  final Map<String, FeastColor> conv = {
+    FeastColor.red.color: FeastColor.red,
+    FeastColor.white.color: FeastColor.white,
+    FeastColor.black.color: FeastColor.black,
+    FeastColor.purple.color: FeastColor.purple,
+    FeastColor.green.color: FeastColor.green
   };
   return conv[color]!;
 }
