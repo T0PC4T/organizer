@@ -7,7 +7,7 @@ const temporalFeasts = [
     daysFromEaster: "",
     daysToEaster: "91",
     feastClass: FeastClass.secondClass,
-    color: Color.white,
+    color: FeastColor.white,
     readingID: "Most_Holy_Name_of_Jesus"
   ),
   (
@@ -16,7 +16,7 @@ const temporalFeasts = [
     daysFromEaster: "",
     daysToEaster: "63",
     feastClass: FeastClass.secondClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: "Septuagesima_Sunday"
   ),
   (
@@ -25,7 +25,7 @@ const temporalFeasts = [
     daysFromEaster: "",
     daysToEaster: "56",
     feastClass: FeastClass.secondClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: "Sexagesima_Sunday"
   ),
   (
@@ -34,7 +34,7 @@ const temporalFeasts = [
     daysFromEaster: "",
     daysToEaster: "49",
     feastClass: FeastClass.secondClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: "Quinquagesima_Sunday"
   ),
   (
@@ -43,7 +43,7 @@ const temporalFeasts = [
     daysFromEaster: "",
     daysToEaster: "46",
     feastClass: FeastClass.firstClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: "Ash_Wednesday"
   ),
   (
@@ -52,7 +52,7 @@ const temporalFeasts = [
     daysFromEaster: "",
     daysToEaster: "42",
     feastClass: FeastClass.firstClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: "1st_Sunday_of_Lent"
   ),
   (
@@ -61,7 +61,7 @@ const temporalFeasts = [
     daysFromEaster: "",
     daysToEaster: "39",
     feastClass: FeastClass.secondClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: ""
   ),
   (
@@ -70,7 +70,7 @@ const temporalFeasts = [
     daysFromEaster: "",
     daysToEaster: "37",
     feastClass: FeastClass.secondClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: ""
   ),
   (
@@ -79,7 +79,7 @@ const temporalFeasts = [
     daysFromEaster: "",
     daysToEaster: "44",
     feastClass: FeastClass.thirdClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: ""
   ),
   (
@@ -88,7 +88,7 @@ const temporalFeasts = [
     daysFromEaster: "",
     daysToEaster: "36",
     feastClass: FeastClass.secondClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: ""
   ),
   (
@@ -97,7 +97,7 @@ const temporalFeasts = [
     daysFromEaster: "",
     daysToEaster: "43",
     feastClass: FeastClass.thirdClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: ""
   ),
   (
@@ -106,7 +106,7 @@ const temporalFeasts = [
     daysFromEaster: "",
     daysToEaster: "35",
     feastClass: FeastClass.firstClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: "2nd_Sunday_of_Lent"
   ),
   (
@@ -115,7 +115,7 @@ const temporalFeasts = [
     daysFromEaster: "",
     daysToEaster: "28",
     feastClass: FeastClass.firstClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: "3rd_Sunday_of_Lent"
   ),
   (
@@ -124,7 +124,7 @@ const temporalFeasts = [
     daysFromEaster: "",
     daysToEaster: "45",
     feastClass: FeastClass.thirdClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: ""
   ),
   (
@@ -133,7 +133,7 @@ const temporalFeasts = [
     daysFromEaster: "",
     daysToEaster: "21",
     feastClass: FeastClass.firstClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: "4th_Sunday_of_Lent"
   ),
   (
@@ -142,7 +142,7 @@ const temporalFeasts = [
     daysFromEaster: "",
     daysToEaster: "14",
     feastClass: FeastClass.firstClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: "Passion_Sunday"
   ),
   (
@@ -151,7 +151,7 @@ const temporalFeasts = [
     daysFromEaster: "",
     daysToEaster: "7",
     feastClass: FeastClass.firstClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: "Palm_Sunday"
   ),
   (
@@ -160,7 +160,7 @@ const temporalFeasts = [
     daysFromEaster: "",
     daysToEaster: "6",
     feastClass: FeastClass.firstClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: ""
   ),
   (
@@ -169,7 +169,7 @@ const temporalFeasts = [
     daysFromEaster: "",
     daysToEaster: "5",
     feastClass: FeastClass.firstClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: ""
   ),
   (
@@ -178,7 +178,7 @@ const temporalFeasts = [
     daysFromEaster: "",
     daysToEaster: "4",
     feastClass: FeastClass.firstClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: ""
   ),
   (
@@ -187,7 +187,7 @@ const temporalFeasts = [
     daysFromEaster: "",
     daysToEaster: "3",
     feastClass: FeastClass.firstClass,
-    color: Color.white,
+    color: FeastColor.white,
     readingID: "Holy_Thursday"
   ),
   (
@@ -196,7 +196,7 @@ const temporalFeasts = [
     daysFromEaster: "",
     daysToEaster: "2",
     feastClass: FeastClass.firstClass,
-    color: Color.black,
+    color: FeastColor.black,
     readingID: "Good_Friday"
   ),
   (
@@ -205,7 +205,7 @@ const temporalFeasts = [
     daysFromEaster: "",
     daysToEaster: "1",
     feastClass: FeastClass.firstClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: "Easter_Vigil"
   ),
   (
@@ -214,7 +214,7 @@ const temporalFeasts = [
     daysFromEaster: "0",
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
-    color: Color.white,
+    color: FeastColor.white,
     readingID: "Easter_Sunday"
   ),
   (
@@ -223,7 +223,7 @@ const temporalFeasts = [
     daysFromEaster: "7",
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
-    color: Color.white,
+    color: FeastColor.white,
     readingID: "Low_Sunday"
   ),
   (
@@ -232,7 +232,7 @@ const temporalFeasts = [
     daysFromEaster: "1",
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
-    color: Color.white,
+    color: FeastColor.white,
     readingID: ""
   ),
   (
@@ -241,7 +241,7 @@ const temporalFeasts = [
     daysFromEaster: "2",
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
-    color: Color.white,
+    color: FeastColor.white,
     readingID: ""
   ),
   (
@@ -250,7 +250,7 @@ const temporalFeasts = [
     daysFromEaster: "3",
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
-    color: Color.white,
+    color: FeastColor.white,
     readingID: ""
   ),
   (
@@ -259,7 +259,7 @@ const temporalFeasts = [
     daysFromEaster: "4",
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
-    color: Color.white,
+    color: FeastColor.white,
     readingID: ""
   ),
   (
@@ -268,7 +268,7 @@ const temporalFeasts = [
     daysFromEaster: "14",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.white,
+    color: FeastColor.white,
     readingID: "2nd_Sunday_After_Easter"
   ),
   (
@@ -277,7 +277,7 @@ const temporalFeasts = [
     daysFromEaster: "6",
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
-    color: Color.white,
+    color: FeastColor.white,
     readingID: ""
   ),
   (
@@ -286,7 +286,7 @@ const temporalFeasts = [
     daysFromEaster: "21",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.white,
+    color: FeastColor.white,
     readingID: "3rd_Sunday_After_Easter"
   ),
   (
@@ -295,7 +295,7 @@ const temporalFeasts = [
     daysFromEaster: "5",
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
-    color: Color.white,
+    color: FeastColor.white,
     readingID: ""
   ),
   (
@@ -304,7 +304,7 @@ const temporalFeasts = [
     daysFromEaster: "28",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.white,
+    color: FeastColor.white,
     readingID: "4th_Sunday_After_Easter"
   ),
   (
@@ -313,7 +313,7 @@ const temporalFeasts = [
     daysFromEaster: "35",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.white,
+    color: FeastColor.white,
     readingID: "5th_Sunday_After_Easter"
   ),
   (
@@ -322,7 +322,7 @@ const temporalFeasts = [
     daysFromEaster: "36",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: ""
   ),
   (
@@ -331,7 +331,7 @@ const temporalFeasts = [
     daysFromEaster: "37",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: ""
   ),
   (
@@ -340,7 +340,7 @@ const temporalFeasts = [
     daysFromEaster: "38",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: ""
   ),
   (
@@ -349,7 +349,7 @@ const temporalFeasts = [
     daysFromEaster: "38",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.purple,
+    color: FeastColor.purple,
     readingID: ""
   ),
   (
@@ -358,7 +358,7 @@ const temporalFeasts = [
     daysFromEaster: "39",
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
-    color: Color.white,
+    color: FeastColor.white,
     readingID: "Ascension_of_the_Lord"
   ),
   (
@@ -367,7 +367,7 @@ const temporalFeasts = [
     daysFromEaster: "42",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.white,
+    color: FeastColor.white,
     readingID: "Sunday_After_the_Ascension"
   ),
   (
@@ -376,7 +376,7 @@ const temporalFeasts = [
     daysFromEaster: "48",
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
-    color: Color.red,
+    color: FeastColor.red,
     readingID: ""
   ),
   (
@@ -385,7 +385,7 @@ const temporalFeasts = [
     daysFromEaster: "49",
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
-    color: Color.red,
+    color: FeastColor.red,
     readingID: "Pentecost_Sunday"
   ),
   (
@@ -394,7 +394,7 @@ const temporalFeasts = [
     daysFromEaster: "50",
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
-    color: Color.red,
+    color: FeastColor.red,
     readingID: ""
   ),
   (
@@ -403,7 +403,7 @@ const temporalFeasts = [
     daysFromEaster: "51",
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
-    color: Color.red,
+    color: FeastColor.red,
     readingID: ""
   ),
   (
@@ -412,7 +412,7 @@ const temporalFeasts = [
     daysFromEaster: "52",
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
-    color: Color.red,
+    color: FeastColor.red,
     readingID: ""
   ),
   (
@@ -421,7 +421,7 @@ const temporalFeasts = [
     daysFromEaster: "53",
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
-    color: Color.red,
+    color: FeastColor.red,
     readingID: ""
   ),
   (
@@ -430,7 +430,7 @@ const temporalFeasts = [
     daysFromEaster: "54",
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
-    color: Color.red,
+    color: FeastColor.red,
     readingID: ""
   ),
   (
@@ -439,7 +439,7 @@ const temporalFeasts = [
     daysFromEaster: "55",
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
-    color: Color.red,
+    color: FeastColor.red,
     readingID: ""
   ),
   (
@@ -448,7 +448,7 @@ const temporalFeasts = [
     daysFromEaster: "56",
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
-    color: Color.white,
+    color: FeastColor.white,
     readingID: "Trinity_Sunday"
   ),
   (
@@ -457,7 +457,7 @@ const temporalFeasts = [
     daysFromEaster: "60",
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
-    color: Color.white,
+    color: FeastColor.white,
     readingID: "Corpus_Christi"
   ),
   (
@@ -466,7 +466,7 @@ const temporalFeasts = [
     daysFromEaster: "63",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.green,
+    color: FeastColor.green,
     readingID: "2nd_Sunday_after_Pentecost"
   ),
   (
@@ -475,7 +475,7 @@ const temporalFeasts = [
     daysFromEaster: "63",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.white,
+    color: FeastColor.white,
     readingID: "Corpus_Christi"
   ),
   (
@@ -484,7 +484,7 @@ const temporalFeasts = [
     daysFromEaster: "68",
     daysToEaster: "",
     feastClass: FeastClass.firstClass,
-    color: Color.white,
+    color: FeastColor.white,
     readingID: "Sacred_Heart_of_Jesus"
   ),
   (
@@ -493,7 +493,7 @@ const temporalFeasts = [
     daysFromEaster: "70",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.green,
+    color: FeastColor.green,
     readingID: "3rd_Sunday_after_Pentecost"
   ),
   (
@@ -502,7 +502,7 @@ const temporalFeasts = [
     daysFromEaster: "70",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.green,
+    color: FeastColor.green,
     readingID: "Sacred_Heart_of_Jesus"
   ),
   (
@@ -511,7 +511,7 @@ const temporalFeasts = [
     daysFromEaster: "77",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.green,
+    color: FeastColor.green,
     readingID: "4th_Sunday_after_Pentecost"
   ),
   (
@@ -520,7 +520,7 @@ const temporalFeasts = [
     daysFromEaster: "84",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.green,
+    color: FeastColor.green,
     readingID: "5th_Sunday_after_Pentecost"
   ),
   (
@@ -529,7 +529,7 @@ const temporalFeasts = [
     daysFromEaster: "91",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.green,
+    color: FeastColor.green,
     readingID: "6th_Sunday_after_Pentecost"
   ),
   (
@@ -538,7 +538,7 @@ const temporalFeasts = [
     daysFromEaster: "98",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.green,
+    color: FeastColor.green,
     readingID: "7th_Sunday_after_Pentecost"
   ),
   (
@@ -547,7 +547,7 @@ const temporalFeasts = [
     daysFromEaster: "105",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.green,
+    color: FeastColor.green,
     readingID: "8th_Sunday_after_Pentecost"
   ),
   (
@@ -556,7 +556,7 @@ const temporalFeasts = [
     daysFromEaster: "112",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.green,
+    color: FeastColor.green,
     readingID: "9th_Sunday_after_Pentecost"
   ),
   (
@@ -565,7 +565,7 @@ const temporalFeasts = [
     daysFromEaster: "119",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.green,
+    color: FeastColor.green,
     readingID: "10th_Sunday_after_Pentecost"
   ),
   (
@@ -574,7 +574,7 @@ const temporalFeasts = [
     daysFromEaster: "126",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.green,
+    color: FeastColor.green,
     readingID: "11th_Sunday_after_Pentecost"
   ),
   (
@@ -583,7 +583,7 @@ const temporalFeasts = [
     daysFromEaster: "133",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.green,
+    color: FeastColor.green,
     readingID: "12th_Sunday_after_Pentecost"
   ),
   (
@@ -592,7 +592,7 @@ const temporalFeasts = [
     daysFromEaster: "140",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.green,
+    color: FeastColor.green,
     readingID: "13th_Sunday_after_Pentecost"
   ),
   (
@@ -601,7 +601,7 @@ const temporalFeasts = [
     daysFromEaster: "147",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.green,
+    color: FeastColor.green,
     readingID: "14th_Sunday_after_Pentecost"
   ),
   (
@@ -610,7 +610,7 @@ const temporalFeasts = [
     daysFromEaster: "154",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.green,
+    color: FeastColor.green,
     readingID: "15th_Sunday_after_Pentecost"
   ),
   (
@@ -619,7 +619,7 @@ const temporalFeasts = [
     daysFromEaster: "161",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.green,
+    color: FeastColor.green,
     readingID: "16th_Sunday_after_Pentecost"
   ),
   (
@@ -628,7 +628,7 @@ const temporalFeasts = [
     daysFromEaster: "168",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.green,
+    color: FeastColor.green,
     readingID: "17th_Sunday_after_Pentecost"
   ),
   (
@@ -637,7 +637,7 @@ const temporalFeasts = [
     daysFromEaster: "175",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.green,
+    color: FeastColor.green,
     readingID: "18th_Sunday_after_Pentecost"
   ),
   (
@@ -646,7 +646,7 @@ const temporalFeasts = [
     daysFromEaster: "182",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.green,
+    color: FeastColor.green,
     readingID: "19th_Sunday_after_Pentecost"
   ),
   (
@@ -655,7 +655,7 @@ const temporalFeasts = [
     daysFromEaster: "189",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.green,
+    color: FeastColor.green,
     readingID: "20th_Sunday_after_Pentecost"
   ),
   (
@@ -664,7 +664,7 @@ const temporalFeasts = [
     daysFromEaster: "196",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.green,
+    color: FeastColor.green,
     readingID: "21th_Sunday_after_Pentecost"
   ),
   (
@@ -673,7 +673,7 @@ const temporalFeasts = [
     daysFromEaster: "203",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.green,
+    color: FeastColor.green,
     readingID: "22th_Sunday_after_Pentecost"
   ),
   (
@@ -682,7 +682,7 @@ const temporalFeasts = [
     daysFromEaster: "210",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
-    color: Color.green,
+    color: FeastColor.green,
     readingID: "23th_Sunday_after_Pentecost"
   )
 ];

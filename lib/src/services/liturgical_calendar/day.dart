@@ -51,16 +51,16 @@ class Day {
         !isQuadragesima &&
         !isHolyWeek) {
       feasts.add(Feast("Feria Septuagesimae", "Feria", FeastClass.fourthClass,
-          Color.purple, ""));
+          FeastColor.purple, ""));
     }
     if (date.weekday != DateTime.sunday && isQuadragesima && !isHolyWeek) {
       feasts.add(Feast("Feria Quadragesimae", "Feria of Lent",
-          FeastClass.thirdClass, Color.purple, ""));
+          FeastClass.thirdClass, FeastColor.purple, ""));
     }
 
     if (date.weekday != DateTime.sunday && isPaschalTime) {
-      feasts.add(
-          Feast("Feria", "Feria", FeastClass.fourthClass, Color.white, ""));
+      feasts.add(Feast(
+          "Feria", "Feria", FeastClass.fourthClass, FeastColor.white, ""));
     }
   }
 
@@ -95,14 +95,14 @@ class Day {
     return formatter.format(date);
   }
 
-  Map<String, FeastWithCommemorationsData> formatFeast() {
+  Map<String, FeastWithCommemorationsData> formatFeasts() {
     if (feasts.isEmpty) {
       return {
         getDateFormat(): (
           latinName: "Feria",
           englishName: "Feria",
           feastClass: FeastClass.fourthClass.feastName,
-          color: Color.green.colorName,
+          color: FeastColor.green.colorName,
           commemorations: [],
           alternatives: [],
           readingID: ""
@@ -204,7 +204,7 @@ class Day {
       }
       if (containsFeast("Feria Adventus") && !isSundayOfAdvent()) {
         comms.add((
-          color: Color.purple.name,
+          color: FeastColor.purple.color,
           englishName: "Feria of Advent",
           latinName: "Feria Adventus",
           feastClass: FeastClass.thirdClass.name,
@@ -215,7 +215,7 @@ class Day {
           !isSundayOfLent() &&
           !containsFeast("post Cineres")) {
         comms.add((
-          color: Color.purple.name,
+          color: FeastColor.purple.color,
           englishName: "Feria of Lent",
           latinName: "Feria Quadragesimae",
           feastClass: FeastClass.thirdClass.name,
@@ -271,7 +271,8 @@ class Day {
                 !isFeriaVotiveMassOrUSProper(element.latinName) ||
                 element.latinName.startsWith("Sancta Maria Sabbato"))
             .toList();
-        ff.add(Feast("Feria", "Feria", FeastClass.fourthClass, Color.green, "")
+        ff.add(Feast(
+                "Feria", "Feria", FeastClass.fourthClass, FeastColor.green, "")
             .formatFeast());
         alts.addAll(ff);
         comms = [];
@@ -287,15 +288,15 @@ class Day {
     if (isFeria()) {
       Feast f = feasts.firstWhere(
           (element) => element.englishName.contains("Feria"),
-          orElse: () =>
-              Feast("Feria", "Feria", FeastClass.fourthClass, Color.green, ""));
+          orElse: () => Feast(
+              "Feria", "Feria", FeastClass.fourthClass, FeastColor.green, ""));
 
       FeastData feast = f.formatFeast();
       return makeFeastWithCommemorations(feast, [],
           getFeastsOfClassExceptOne(FeastClass.fourthClass, f.latinName));
     }
     return makeFeastWithCommemorations(
-        Feast("Feria", "Feria", FeastClass.fourthClass, Color.green, "")
+        Feast("Feria", "Feria", FeastClass.fourthClass, FeastColor.green, "")
             .formatFeast(),
         [],
         []);
@@ -381,7 +382,7 @@ class Feast {
       latinName: latinName,
       englishName: englishName,
       feastClass: feastClass.feastName,
-      color: color.colorName,
+      color: color.color,
       readingID: readingID
     );
   }
@@ -389,6 +390,6 @@ class Feast {
   String latinName;
   String englishName;
   FeastClass feastClass;
-  Color color;
+  FeastColor color;
   String readingID;
 }

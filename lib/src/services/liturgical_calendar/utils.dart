@@ -3,15 +3,16 @@ import 'dart:io';
 
 import 'day.dart';
 
-enum Color {
-  white("White"),
-  green("Green"),
-  purple("Purple"),
-  black("Black"),
-  red("Red");
+enum FeastColor {
+  white("White", "#EFEFB1"),
+  green("Green", "#13590D"),
+  purple("Purple", "#800080"),
+  black("Black", "#000000"),
+  red("Red", "#BF0000");
 
   final String colorName;
-  const Color(this.colorName);
+  final String color;
+  const FeastColor(this.colorName, this.color);
 }
 
 enum FeastClass {
@@ -91,7 +92,7 @@ DateTime getDatePropriumDeTempore(
       String daysToEaster,
       String daysFromEaster,
       FeastClass feastClass,
-      Color color,
+      FeastColor color,
       String readingID
     }) feast) {
   DateTime easter = parseTime(year, easterDate(year));
@@ -111,7 +112,7 @@ Feast getFeastData(
       String latinName,
       String englishName,
       FeastClass feastClass,
-      Color color,
+      FeastColor color,
       String readingID,
     }) feast) {
   return Feast(feast.latinName, feast.englishName, feast.feastClass,
@@ -143,13 +144,13 @@ FeastClass strToFeastClass(String feastClass) {
   return conv[feastClass]!;
 }
 
-Color strToFeastColor(String color) {
-  final Map<String, Color> conv = {
-    "Red": Color.red,
-    "White": Color.white,
-    "Black": Color.black,
-    "Purple": Color.purple,
-    "Green": Color.green
+FeastColor strToFeastColor(String color) {
+  final Map<String, FeastColor> conv = {
+    FeastColor.red.color: FeastColor.red,
+    FeastColor.white.color: FeastColor.white,
+    FeastColor.black.color: FeastColor.black,
+    FeastColor.purple.color: FeastColor.purple,
+    FeastColor.green.color: FeastColor.green
   };
   return conv[color]!;
 }
