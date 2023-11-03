@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:organizer/src/services/firestore_service.dart';
-import 'package:organizer/src/services/people_service.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:organizer/src/services/providers.dart';
 import 'package:organizer/src/widgets/cards.dart';
 import 'package:organizer/src/widgets/people.dart';
 
-class PeoplePage extends StatelessWidget {
+class PeoplePage extends ConsumerWidget {
   const PeoplePage({super.key});
 
+  String personToMap(person) {
+    final firstName =
+        (person["firstName"] as String).replaceAll(",", "&comma;");
+    final secondName =
+        (person["secondName"] as String).replaceAll(",", "&comma;");
+    final year = (person["year"] as int);
+    return "$firstName,$secondName,$year\r\n";
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('People'),
@@ -20,38 +29,45 @@ class PeoplePage extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: FloatingActionButton(
-                onPressed: () async {
-                  PeopleService peopleService =
-                      FirestoreService.serve(context, FServices.people)!;
-                  for (var person in peopleService.dataList ?? []) {
-                    if ((person["jobs"] as List).isNotEmpty) {
-                      peopleService.updateRecord(person, {"jobs": []});
-                    }
-                  }
-                },
-                backgroundColor: Colors.red,
-                child: const Icon(Icons.clear),
-              ),
+              child: FloatingActionButton.extended(
+                  heroTag: const ValueKey(2),
+                  foregroundColor: Colors.white,
+                  label: const Row(
+                    children: [
+                      Icon(Icons.clear),
+                      Padding(padding: EdgeInsets.all(3)),
+                      Text("Delete Jobs"),
+                    ],
+                  ),
+                  onPressed: () async {
+                    ref.read(peopleProvider.notifier).removeAllJobs();
+                    // ref.read(peopleProvider.notifier).increaseYear();
+                    ref.invalidate(peopleProvider);
+                  },
+                  backgroundColor: Colors.red),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: FloatingActionButton(
-                key: const ValueKey(1),
+              child: FloatingActionButton.extended(
                 heroTag: const ValueKey(1),
+                foregroundColor: Colors.white,
+                label: const Row(
+                  children: [
+                    Icon(Icons.person),
+                    Padding(padding: EdgeInsets.all(3)),
+                    Text("Add Person"),
+                  ],
+                ),
                 onPressed: () async {
                   Map<String, dynamic>? value =
                       await showDialog<Map<String, dynamic>>(
                           context: context,
                           builder: (context) => const AddPersonModal());
                   if (value != null && context.mounted) {
-                    FirestoreService.serve<PeopleService>(
-                            context, FServices.people)
-                        ?.addRecord(value);
+                    ref.read(peopleProvider.notifier).add(value);
                   }
                 },
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                child: const Icon(Icons.add),
+                backgroundColor: const Color.fromARGB(255, 21, 34, 148),
               ),
             ),
           ],

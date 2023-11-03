@@ -6,16 +6,6 @@ import 'package:organizer/src/services/liturgical_calendar/day.dart';
 import 'package:organizer/src/services/liturgical_calendar/liturgical_calendar.dart';
 import 'package:organizer/src/widgets/util.dart';
 
-import '../widgets/cards.dart';
-import '../widgets/fastTable.dart';
-
-const dataRowNames = <String>[
-  "date",
-  "englishName",
-  "class",
-  "commemorations",
-];
-
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
 
@@ -31,6 +21,10 @@ class CalendarScreenState extends State<CalendarScreen> {
 
   // This is the data just considered as options.
   List<List<String>>? simpleData;
+
+  String colorToDiv(String color) {
+    return "<div style='height:20px;width:20px;border-radius:100%;background-color:$color</div>";
+  }
 
   @override
   void initState() {
@@ -62,6 +56,7 @@ class CalendarScreenState extends State<CalendarScreen> {
             option.englishName,
             option.feastClass,
             option.commemorations,
+            colorToDiv(option.color),
           ]
     ];
   }
@@ -111,7 +106,7 @@ class CalendarScreenState extends State<CalendarScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           List<String> lines = [];
-          lines.add("Date,Feast,Class,Commemoration");
+          lines.add("Date,Feast,Class,Commemoration,Color");
           for (var day in simpleData!) {
             List<String> line = [];
             line.addAll(day.map((e) => e.replaceAll(",", "&comma;")));
@@ -122,173 +117,72 @@ class CalendarScreenState extends State<CalendarScreen> {
         },
         child: const Icon(Icons.download),
       ),
-      body: SmoothListView(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              IconButton(
-                  onPressed: () {
-                    changeMonth(-1);
-                  },
-                  icon: const Icon(Icons.arrow_back)),
-              Text(
-                "${monthNames[month]} $year",
-                style: const TextStyle(fontSize: 42),
-              ),
-              IconButton(
-                  onPressed: () {
-                    changeMonth(1);
-                  },
-                  icon: const Icon(Icons.arrow_forward)),
-            ],
-          ),
-          FastDataTableWidget(
-            textScaler: 5,
-            rows: simpleData!,
-            onTap: (x, y) async {
-              final value = await showDialog(
-                  context: context,
-                  builder: (ctx) {
-                    return ChangeStringModalWidget(
-                        currentValue: simpleData![y][x]);
-                  });
-
-              if (value is String && context.mounted) {
-                setState(() {
-                  simpleData![y][x] = value;
-                });
-              }
-            },
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// class CalendarRowWidget extends StatelessWidget {
-//   static const dataRowNames = <String>[
-//     "date",
-//     "englishName",
-//     "class",
-//     "commemorations",
-//   ];
-//   final Map<String, String> item;
-//   final bool editable;
-//   final int childIndex;
-//   const CalendarRowWidget({
-//     super.key,
-//     required this.item,
-//     this.editable = true,
-//     this.childIndex = 0,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     Size size = MediaQuery.of(context).size;
-//     return Container(
-//       height: 40,
-//       width: double.infinity,
-//       margin: const EdgeInsets.symmetric(horizontal: 10),
-//       decoration: const BoxDecoration(
-//         border: Border.symmetric(
-//             // horizontal: BorderSide(width: 0.5),
-//             ),
-//       ),
-//       child: Row(children: [
-//         for (var rowName in dataRowNames)
-//           GestureDetector(
-//             onTap: () async {
-//               if (editable) {
-//                 final value = await showDialog(
-//                     context: context,
-//                     builder: (ctx) {
-//                       return ChangeStringModalWidget(
-//                           currentValue: item[rowName] ?? "ERROR");
-//                     });
-
-//                 if (value is String && context.mounted) {
-//                   CalendarScreenState.of(context)
-//                       ?.editData(childIndex, item, rowName, value);
-//                 }
-//               }
-//             },
-//             child: Container(
-//               width: (size.width - 22) / dataRowNames.length,
-//               height: double.infinity,
-//               padding: const EdgeInsets.all(10),
-//               decoration: BoxDecoration(
-//                 color: !editable
-//                     ? themePrimary
-//                     : (childIndex % 2 == 0)
-//                         ? Colors.white
-//                         : const Color.fromARGB(255, 213, 236, 255),
-//                 border: const Border.symmetric(
-//                   vertical: BorderSide(width: 1),
-//                 ),
-//               ),
-//               child: Text(
-//                 item[rowName] ?? "ERROR",
-//                 style: TextStyle(color: editable ? Colors.black : Colors.white),
-//               ),
-//             ),
-//           )
-//       ]),
-//     );
-//   }
-// }
-
-class ChangeStringModalWidget extends StatefulWidget {
-  final String currentValue;
-
-  const ChangeStringModalWidget({
-    super.key,
-    required this.currentValue,
-  });
-
-  static GlobalKey textKey = GlobalKey();
-
-  @override
-  State<ChangeStringModalWidget> createState() =>
-      _ChangeStringModalWidgetState();
-}
-
-class _ChangeStringModalWidgetState extends State<ChangeStringModalWidget> {
-  TextEditingController? controller;
-
-  @override
-  void initState() {
-    controller = TextEditingController(text: widget.currentValue);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    controller?.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ModalCard(
-        title: const Text("Edit Liturgical Calendar"),
-        child: ListView(
-          padding: const EdgeInsets.all(20),
+      body: LayoutBuilder(builder: (context, constraints) {
+        return SmoothListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              child: TextField(
-                controller: controller,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                IconButton(
+                    onPressed: () {
+                      changeMonth(-1);
+                    },
+                    icon: const Icon(Icons.arrow_back)),
+                Text(
+                  "${monthNames[month]} $year",
+                  style: const TextStyle(fontSize: 42),
+                ),
+                IconButton(
+                    onPressed: () {
+                      changeMonth(1);
+                    },
+                    icon: const Icon(Icons.arrow_forward)),
+              ],
             ),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context, controller?.value.text);
-                },
-                child: const Text("Submit"))
+            Row(
+              children: [
+                for (var value in [
+                  "Date",
+                  "Feast",
+                  "Class",
+                  "Commemoration",
+                  "Color"
+                ])
+                  Container(
+                    width: constraints.maxWidth / 5,
+                    height: 120,
+                    padding: const EdgeInsets.all(20),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      value,
+                      softWrap: true,
+                    ),
+                  ),
+              ],
+            ),
+            for (var row in simpleData!)
+              Row(
+                children: [
+                  for (var cell in row)
+                    Container(
+                      width: constraints.maxWidth / row.length,
+                      height: 120,
+                      padding: const EdgeInsets.all(20),
+                      alignment: Alignment.centerLeft,
+                      color: simpleData!.indexOf(row).isEven
+                          ? const Color.fromARGB(255, 220, 244, 255)
+                          : Colors.white,
+                      child: Text(
+                        cell,
+                        softWrap: true,
+                      ),
+                    ),
+                ],
+              ),
           ],
-        ));
+        );
+      }),
+    );
   }
 }

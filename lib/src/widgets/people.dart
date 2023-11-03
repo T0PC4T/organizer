@@ -1,8 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:organizer/src/services/firestore_service.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:organizer/src/services/providers.dart';
+import 'package:organizer/src/services/services.dart';
 
-import '../services/people_service.dart';
 import 'cards.dart';
+
+List<String> jobs(DocumentSnapshot doc) {
+  if (doc.dMap["jobs"] is List) {
+    return List<String>.from(doc.dMap["jobs"]);
+  }
+  return [];
+}
 
 enum Jobs {
   // weakly
@@ -15,8 +24,8 @@ enum Jobs {
   final String pretty;
 }
 
-class PeopleListing extends StatelessWidget {
-  final List<Map<String, dynamic>>? subsetPeopleData;
+class PeopleListing extends ConsumerWidget {
+  final List<DocumentSnapshot>? subsetPeopleData;
   final bool tappable;
   final bool editable;
   const PeopleListing({
@@ -27,15 +36,9 @@ class PeopleListing extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    PeopleService peopleService =
-        FirestoreService.serve(context, FServices.people)!;
-    List<Map<String, dynamic>>? peopleData =
-        subsetPeopleData ?? peopleService.dataList;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final peopleData = ref.watch(peopleProvider);
 
-    if (peopleData == null) {
-      return const CircularProgressIndicator();
-    }
     return ListView.builder(
       scrollDirection: Axis.vertical,
       itemCount: peopleData.length,
@@ -49,31 +52,36 @@ class PeopleListing extends StatelessWidget {
               Container(
                 width: 200,
                 padding: const EdgeInsets.all(8.0),
-                child: Text(person.name),
+                child: Text(
+                    '${person.dMap["lastName"]}, ${person.dMap["firstName"]}'),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("Year ${(person["year"]).toString()}"),
+                child: Text("Year ${(person.dMap["year"]).toString()}"),
               ),
               AddableBlockWidget(
                   editable: editable,
-                  blocks: person.jobs.map((e) => BlockRecord(e, e)),
+                  blocks: jobs(person).map((e) => BlockRecord(e, e)),
                   addCallback: () async {
                     final job = await showDialog<String>(
                         context: context,
                         builder: (context) => const JobsModal());
                     if (job != null) {
                       if (editable) {
-                        List<String> newJobs = person.jobs;
+                        List<String> newJobs = jobs(person);
                         newJobs.add(job);
-                        peopleService.updateRecord(person, {"jobs": newJobs});
+                        ref
+                            .read(peopleProvider.notifier)
+                            .update(person.id, {"jobs": newJobs});
                       }
                     }
                   },
                   deleteCallback: (b) {
-                    List<String> newJobs = person.jobs;
+                    List<String> newJobs = jobs(person);
                     newJobs.remove(b.value);
-                    peopleService.updateRecord(person, {"jobs": newJobs});
+                    ref
+                        .read(peopleProvider.notifier)
+                        .update(person.id, {"jobs": newJobs});
                   }),
               if (!tappable)
                 Expanded(
@@ -82,16 +90,22 @@ class PeopleListing extends StatelessWidget {
                     child: PopupMenuButton<String>(
                       onSelected: (value) {
                         if (value == "Delete") {
-                          peopleService.deleteRecord(person);
+                          try {
+                            ref.read(peopleProvider.notifier).delete(person.id);
+                          } catch (e) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content:
+                                    Text("ERROR: Failed to delete user $e")));
+                          }
                         }
                       },
                       itemBuilder: (BuildContext context) {
-                        return {'Delete'}.map((String choice) {
-                          return PopupMenuItem<String>(
-                            value: choice,
-                            child: Text(choice),
-                          );
-                        }).toList();
+                        return <PopupMenuEntry<String>>[
+                          const PopupMenuItem<String>(
+                            value: "Delete",
+                            child: Text('Delete'),
+                          )
+                        ];
                       },
                     ),
                   ),
@@ -148,26 +162,24 @@ class JobsModal extends StatelessWidget {
   }
 }
 
-class PeopleListingModal extends StatefulWidget {
+class PeopleListingModal extends ConsumerStatefulWidget {
   const PeopleListingModal({
     super.key,
   });
 
   @override
-  State<PeopleListingModal> createState() => _PeopleListingModalState();
+  PeopleListingModalState createState() => PeopleListingModalState();
 }
 
-class _PeopleListingModalState extends State<PeopleListingModal> {
+class PeopleListingModalState extends ConsumerState<PeopleListingModal> {
   String? filter;
 
-  List<Map<String, dynamic>> filteredPeople(BuildContext context) {
-    final peopleService =
-        FirestoreService.serve(context, FServices.people) as PeopleService;
-    final peopleData = peopleService.dataList ?? [];
+  List<DocumentSnapshot> filteredPeople(BuildContext context) {
+    final peopleData = ref.watch(peopleProvider);
     final localFilter = filter;
     if (localFilter != null && localFilter.isNotEmpty) {
       return peopleData
-          .where((element) => (element["lastName"] as String)
+          .where((element) => (element.dMap["lastName"] as String)
               .toLowerCase()
               .startsWith(localFilter.toLowerCase()))
           .toList();

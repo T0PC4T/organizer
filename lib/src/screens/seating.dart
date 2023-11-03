@@ -1,24 +1,25 @@
 import 'dart:html' as html;
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:organizer/src/services/providers.dart';
+import 'package:organizer/src/services/services.dart';
 
-import '../services/firestore_service.dart';
 import '../services/pdf_gen.dart';
-import '../services/people_service.dart';
 import '../services/seating_data.dart';
 import '../widgets/cards.dart';
 import '../widgets/people.dart';
 
-class SeatingPage extends StatelessWidget {
+class SeatingPage extends ConsumerWidget {
   static GlobalKey<SeatingListingState> seatKey =
       GlobalKey<SeatingListingState>();
   const SeatingPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final peopleService =
-        FirestoreService.serve(context, FServices.people) as PeopleService;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final people = ref.watch(peopleProvider);
     return Scaffold(
         appBar: AppBar(
           title: const Text('Seating'),
@@ -47,8 +48,7 @@ class SeatingPage extends StatelessWidget {
                         context: context,
                         builder: (context) => const RandomSeedModalWidget());
                     if (randomSeed != null) {
-                      seatKey.currentState
-                          ?.generate(randomSeed, peopleService.data!);
+                      seatKey.currentState?.generate(randomSeed, people);
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         backgroundColor: Colors.red,
@@ -140,20 +140,21 @@ class _RandomSeedModalWidgetState extends State<RandomSeedModalWidget> {
   }
 }
 
-class SeatingListing extends StatefulWidget {
+class SeatingListing extends ConsumerStatefulWidget {
   const SeatingListing({super.key});
 
   @override
-  State<SeatingListing> createState() => SeatingListingState();
+  SeatingListingState createState() => SeatingListingState();
 }
 
-class SeatingListingState extends State<SeatingListing> {
+class SeatingListingState extends ConsumerState<SeatingListing> {
   List<TableData> tableData;
-  SeatingListingState() : tableData = TableData.getTables();
+  SeatingListingState() : tableData = [];
 
   @override
   void initState() {
     super.initState();
+    tableData = TableData.getTables(ref.read(tableFilterProvider));
   }
 
   reset() {
@@ -165,18 +166,18 @@ class SeatingListingState extends State<SeatingListing> {
     });
   }
 
-  bool fitsFilter(TableData t, Map<String, dynamic> p) {
-    return (t.filter).contains(p["year"]);
+  bool fitsFilter(TableData t, DocumentSnapshot p) {
+    return (t.filter).contains(p.dMap["year"]);
   }
 
-  void generate(int randomSeed, Map<String, Map<String, dynamic>> peopleData) {
-    final localPeopleData = List<Map<String, dynamic>>.from(peopleData.values);
+  void generate(int randomSeed, List<DocumentSnapshot> peopleData) {
+    final localPeopleData = List<DocumentSnapshot>.from(peopleData);
     final scopedTableData = TableData.fromTableData(tableData);
     localPeopleData.shuffle(Random(randomSeed));
     localPeopleData.shuffle();
     List<String> alreadyAssigned = [];
 
-    // ? Remove people who have already been placed
+    // ? Remove people who have already been placed manually by user
     for (var table in scopedTableData) {
       for (var seat in table.seats) {
         if (table.seminarianSeat(seat)) {
@@ -188,19 +189,20 @@ class SeatingListingState extends State<SeatingListing> {
         .removeWhere((person) => alreadyAssigned.contains(person.name));
 
     // ? Remove people on waiter crew
-    localPeopleData
-        .removeWhere((person) => person["jobs"].contains(Jobs.waiter.name));
+    localPeopleData.removeWhere(
+        (person) => person.dMap["jobs"].contains(Jobs.waiter.name));
 
     // ? Remove people with supper crew
     final supperDishCrew = localPeopleData
-        .where((element) => element["jobs"].contains(Jobs.supperDishCrew.name))
+        .where((element) =>
+            element.dMap["jobs"].contains(Jobs.supperDishCrew.name))
         .toList();
 
     localPeopleData.removeWhere(
-        (element) => element["jobs"].contains(Jobs.supperDishCrew.name));
+        (element) => element.dMap["jobs"].contains(Jobs.supperDishCrew.name));
 
     while (localPeopleData.isNotEmpty || supperDishCrew.isNotEmpty) {
-      late Map<String, dynamic> curPerson;
+      late DocumentSnapshot curPerson;
       if (localPeopleData.isNotEmpty) {
         curPerson = localPeopleData.removeLast();
       } else {
@@ -217,7 +219,7 @@ class SeatingListingState extends State<SeatingListing> {
               table.addPerson(seat, curPerson.name);
 
               // Dish Crew Check
-              if (curPerson["jobs"].contains(Jobs.lunchDishCrew.name)) {
+              if (curPerson.dMap["jobs"].contains(Jobs.lunchDishCrew.name)) {
                 final i = supperDishCrew
                     .indexWhere((element) => fitsFilter(table, element));
                 if (i != -1) {
@@ -279,22 +281,25 @@ class SeatingListingState extends State<SeatingListing> {
 
                     if (response != null) {
                       if (response == 1) {
-                        final chosenPerson =
-                            await showDialog<Map<String, dynamic>>(
-                          context: context,
-                          builder: (innerContext) {
-                            return const PeopleListingModal();
-                          },
-                        );
-                        if (chosenPerson != null) {
+                        if (context.mounted) {
+                          final chosenPerson =
+                              await showDialog<DocumentSnapshot>(
+                            context: context,
+                            builder: (innerContext) {
+                              return const PeopleListingModal();
+                            },
+                          );
+
+                          if (chosenPerson != null) {
+                            setState(() {
+                              table.addPerson(seat, chosenPerson.name);
+                            });
+                          }
+                        } else if (response == 2) {
                           setState(() {
-                            table.addPerson(seat, chosenPerson.name);
+                            table.makeGuestSeat(seat);
                           });
                         }
-                      } else if (response == 2) {
-                        setState(() {
-                          table.makeGuestSeat(seat);
-                        });
                       }
                     }
                   },
@@ -358,8 +363,8 @@ class TableData {
     return List.from(d.map((e) => TableData(Map.from(e.data))));
   }
 
-  static List<TableData> getTables() {
-    return List.from(defaultTablesData.map((e) => TableData(Map.from(e))));
+  static List<TableData> getTables(tableFilterData) {
+    return List.from(tableFilterData.map((e) => TableData(Map.from(e))));
   }
 
   Iterable<String> get seats sync* {

@@ -22,7 +22,7 @@ class LoginWidget extends StatefulWidget {
 class _LoginWidgetState extends State<LoginWidget> {
   late GlobalKey<FormState> _formKey;
   Map<String, String>? data;
-
+  String? error;
   @override
   void initState() {
     _formKey = GlobalKey<FormState>();
@@ -98,6 +98,17 @@ class _LoginWidgetState extends State<LoginWidget> {
                     ),
                   ),
                 ),
+                if (error != null)
+                  Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Text(
+                        error!,
+                        style: const TextStyle(color: Colors.red),
+                      ),
+                    ),
+                  ),
               ],
             ),
           ),
@@ -106,11 +117,17 @@ class _LoginWidgetState extends State<LoginWidget> {
     );
   }
 
-  void submitLoginForm() {
+  void submitLoginForm() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState?.save();
-      FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: data!["email"]!, password: data!["password"]!);
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: data!["email"]!, password: data!["password"]!);
+      } on FirebaseAuthException catch (e) {
+        setState(() {
+          error = e.message;
+        });
+      }
     }
   }
 }

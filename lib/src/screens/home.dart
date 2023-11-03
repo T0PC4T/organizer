@@ -1,9 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:organizer/theme.dart';
-
-import '../services/firestore_service.dart';
-import '../services/user_service.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:organizer/src/services/providers.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -63,44 +62,42 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class UserWidget extends StatelessWidget {
+class UserWidget extends ConsumerWidget {
   const UserWidget({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final user =
-        (FirestoreService.serve(context, FServices.user) as UserService).data;
-    if (user != null) {
-      return Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        margin: const EdgeInsets.all(20),
-        child: ColoredBox(
-          color: const Color.fromARGB(255, 200, 230, 255),
-          child: FractionallySizedBox(
-            widthFactor: 0.5,
-            heightFactor: 0.9,
-            child: Column(children: [
-              const FractionallySizedBox(
-                widthFactor: 0.5,
-                child: FittedBox(
-                  child: Icon(
-                    Icons.person,
-                  ),
-                ),
-              ),
-              Text(
-                'Name: ${user["name"]}',
-                style: themeLarge,
-              ),
-              const Text(
-                "Last active: just now!",
-                style: themeLarge,
-              ),
-            ]),
-          ),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final AsyncValue<DocumentSnapshot<Map<String, dynamic>>> doc =
+        ref.watch(fbuserProvider);
+
+    final widg = switch (doc) {
+      AsyncData(:final value) => Text(
+          'Hi ${value["name"]}!',
         ),
-      );
-    }
-    return const Center(child: CircularProgressIndicator());
+      AsyncError() => const Text('Oops, something unexpected happened'),
+      _ => const CircularProgressIndicator(),
+    };
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      margin: const EdgeInsets.all(20),
+      elevation: 20,
+      child: SizedBox(
+        width: 400,
+        height: 600,
+        child: Column(children: [
+          const FractionallySizedBox(
+            widthFactor: 0.5,
+            child: FittedBox(
+              child: Icon(
+                Icons.person,
+              ),
+            ),
+          ),
+          FittedBox(
+            child: widg,
+          ),
+        ]),
+      ),
+    );
   }
 }

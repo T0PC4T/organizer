@@ -126,3 +126,7 @@ abstract class CacheService extends ListService {
     return Map<String, Map<String, dynamic>>.from(json.decode(d));
   }
 }
+
+extension DocExtension on DocumentSnapshot {
+  Map<String, dynamic> get dMap => data() as Map<String, dynamic>;
+}
