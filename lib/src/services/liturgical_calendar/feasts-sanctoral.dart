@@ -2614,7 +2614,7 @@ const List<
     latinName: "S. Caeciliae Virginis et Martyris",
     englishName: "St. Cecilia, Virgin and Martyr",
     feastClass: FeastClass.thirdClass,
-    color: FeastColor.white,
+    color: FeastColor.red,
     readingID: ""
   ),
   (
@@ -2622,7 +2622,7 @@ const List<
     latinName: "S. Clementis I Papae et Martyris",
     englishName: "St. Clement I, Pope and Martyr",
     feastClass: FeastClass.thirdClass,
-    color: FeastColor.white,
+    color: FeastColor.red,
     readingID: ""
   ),
   (
