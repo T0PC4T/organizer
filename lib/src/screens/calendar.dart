@@ -23,7 +23,7 @@ class CalendarScreenState extends State<CalendarScreen> {
   List<List<String>>? simpleData;
 
   String colorToDiv(String color) {
-    return "<div style='display:block;height:20px;width:20px;border:solid black 2px;background-color:$color;'></div>";
+    return "<div style='display:block;height:20px;width:20px;border:solid black 3px;background-color:$color;border-radius:10px'></div>";
   }
 
   @override
