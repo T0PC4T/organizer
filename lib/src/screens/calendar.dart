@@ -23,7 +23,7 @@ class CalendarScreenState extends State<CalendarScreen> {
   List<List<String>>? simpleData;
 
   String colorToDiv(String color) {
-    return "<div style='height:20px;width:20px;border-radius:100%;background-color:$color</div>";
+    return "<div style='display:block;height:20px;width:20px;border:solid black 2px;background-color:$color;'></div>";
   }
 
   @override
@@ -48,6 +48,7 @@ class CalendarScreenState extends State<CalendarScreen> {
 
   setDataFromCalendar() {
     data = calendar?.getMonthIterable(month).toList();
+
     simpleData = [
       for (var i = 0; i < data!.length; i++)
         for (var option in data![i])
@@ -109,7 +110,7 @@ class CalendarScreenState extends State<CalendarScreen> {
           lines.add("Date,Feast,Class,Commemoration,Color");
           for (var day in simpleData!) {
             List<String> line = [];
-            line.addAll(day.map((e) => e.replaceAll(",", "&comma;")));
+            line.addAll(day.map<String>((e) => e.replaceAll(",", "&comma;")));
             lines.add(line.join(","));
           }
           final csv = lines.join("\r\n");

@@ -2461,7 +2461,7 @@ const List<
     date: "11-09",
     latinName: "S. Theodori Martyris",
     englishName: "St. Theodore, Martyr",
-    feastClass: FeastClass.secondClass,
+    feastClass: FeastClass.thirdClass,
     color: FeastColor.red,
     readingID: ""
   ),

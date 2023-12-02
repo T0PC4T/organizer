@@ -336,7 +336,7 @@ const temporalFeasts = [
   ),
   (
     latinName: "In Vigilia Ascensionis",
-    englishName: "The Vigil of Ascention",
+    englishName: "The Vigil of Ascension",
     daysFromEaster: "38",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,

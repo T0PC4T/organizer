@@ -4,11 +4,16 @@ import 'dart:io';
 import 'day.dart';
 
 enum FeastColor {
-  white("White", "#EFEFB1"),
-  green("Green", "#13590D"),
-  purple("Purple", "#800080"),
-  black("Black", "#000000"),
-  red("Red", "#BF0000");
+  white("White", "LightYellow"),
+  green("Green", "ForestGreen"),
+  purple("Purple", "MediumOrchid"),
+  black("Black", "black"),
+  red("Red", "Crimson");
+  // white("White", "252, 252, 212"),
+  // green("Green", "19, 89, 13"),
+  // purple("Purple", "128, 0, 128"),
+  // black("Black", "0, 0, 0"),
+  // red("Red", "191, 0, 0");
 
   final String colorName;
   final String color;
