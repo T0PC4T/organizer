@@ -9,11 +9,6 @@ enum FeastColor {
   purple("Purple", "MediumOrchid"),
   black("Black", "black"),
   red("Red", "Crimson");
-  // white("White", "252, 252, 212"),
-  // green("Green", "19, 89, 13"),
-  // purple("Purple", "128, 0, 128"),
-  // black("Black", "0, 0, 0"),
-  // red("Red", "191, 0, 0");
 
   final String colorName;
   final String color;
@@ -131,6 +126,9 @@ bool isFeriaVotiveMassOrUSProper(String name) {
       name.startsWith("Sacratissimi Cordis") ||
       name.startsWith("Sancta Maria Sabbato") ||
       name.startsWith("(USA)") ||
+      name.contains("Januarii") ||
+      name.contains("Septuagesimae") ||
+      name.contains("Rogationibus") ||
       isMassForDead(name);
 }
 

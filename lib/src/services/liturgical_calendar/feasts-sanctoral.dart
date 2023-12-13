@@ -45,7 +45,7 @@ const List<
     date: "01-04",
     latinName: "(USA)Elisabeth Annae Seton, Viduae",
     englishName: "(USA) St. Elisabeth Ann Seton, Widow",
-    feastClass: FeastClass.fourthClass,
+    feastClass: FeastClass.thirdClass,
     color: FeastColor.white,
     readingID: ""
   ),
@@ -382,6 +382,14 @@ const List<
     readingID: ""
   ),
   (
+    date: "02-06",
+    latinName: "S. Dorotheae, Virginis et Martyris",
+    englishName: "St. Dorothy, Virgin & Martyr",
+    feastClass: FeastClass.fourthClass,
+    color: FeastColor.red,
+    readingID: ""
+  ),
+  (
     date: "02-07",
     latinName: "S. Romualdi Abbatis",
     englishName: "St. Romuald, Abbot",
@@ -494,6 +502,14 @@ const List<
     englishName: "St. Casimir, Confessor",
     feastClass: FeastClass.fourthClass,
     color: FeastColor.white,
+    readingID: ""
+  ),
+  (
+    date: "03-04",
+    latinName: "S. Lucius Papae et Martyris",
+    englishName: "St. Lucius, Pope & Martyr",
+    feastClass: FeastClass.fourthClass,
+    color: FeastColor.red,
     readingID: ""
   ),
   (
@@ -1285,7 +1301,7 @@ const List<
     date: "07-06",
     latinName: "S. Mariae Goretti, Virginis et Martyris",
     englishName: "St. Maria Goretti, Virgin & Martyr",
-    feastClass: FeastClass.thirdClass,
+    feastClass: FeastClass.fourthClass,
     color: FeastColor.red,
     readingID: ""
   ),
@@ -2720,6 +2736,14 @@ const List<
     feastClass: FeastClass.thirdClass,
     color: FeastColor.white,
     readingID: "St_Peter_Chrysologus"
+  ),
+  (
+    date: "12-04",
+    latinName: "S. Barbarae, Virgnis et Martyris",
+    englishName: "St. Barbara, Virgin & Martyr",
+    feastClass: FeastClass.fourthClass,
+    color: FeastColor.red,
+    readingID: ""
   ),
   (
     date: "12-05",

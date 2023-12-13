@@ -138,7 +138,6 @@ class Calendar {
           element.formatFeasts().values.first;
       if (jsonData.alternatives.isEmpty) {
         List<FeastDayData> a = [formatDataJSON(element.date, jsonData)];
-        print(a);
         yield a;
       } else {
         List<FeastData> comms = jsonData.commemorations;
@@ -236,7 +235,7 @@ class Calendar {
     Feast SGVPC = Feast(
         "S. Gabrielis a Virgine Pardolente Confessoris",
         "St. Gabriel of Our Lady of Sorrows, Confessor",
-        FeastClass.secondClass,
+        FeastClass.thirdClass,
         FeastColor.white,
         ""); //TODO: add readings
 
@@ -249,8 +248,7 @@ class Calendar {
     } else {
       addFeast(DateTime(year, 1, 7 - d + 1, 12), SSNJ);
     }
-
-    if (year % 4 == 0 && year % 100 == 0 && year % 400 == 0) {
+    if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) {
       addFeast(DateTime(year, 2, 25, 12), SMA);
       addFeast(DateTime(year, 2, 28, 12), SGVPC);
     } else {
@@ -269,6 +267,9 @@ class Calendar {
     d = dd.weekday % 7;
     if (d != 0) {
       dd = dd.add(Duration(days: 7 - d));
+      getDayAtDate(dd)
+          .feasts
+          .removeWhere((element) => element.englishName.contains("Christmas"));
       addFeast(dd, DION);
     }
 
@@ -297,8 +298,13 @@ class Calendar {
       var numDays = Duration(days: i);
       DateTime date = DateTime(year, 12, 17, 12).add(numDays);
       Feast FMA = Feast("Feria Maior Adventus", "Major Feria of Advent",
-          FeastClass.secondClass, FeastColor.purple, ""); //TODO: add readings
-      addFeast(date, FMA);
+          FeastClass.secondClass, FeastColor.purple, "");
+
+      if (!getDayAtDate(date)
+          .feasts
+          .any((element) => element.latinName.contains("Quattuor Temp"))) {
+        addFeast(date, FMA);
+      }
     }
 
     d = DateTime(year, 1, 6).weekday % 7;
@@ -401,6 +407,7 @@ class Calendar {
 
         addFeast(d, FQT);
         d = d.add(const Duration(days: 2));
+
         FQT = Feast(
             "Feria VI Quattuor Temporum Adventus",
             "Ember Friday of Advent",
@@ -460,6 +467,10 @@ class Calendar {
     }
 
     Map<String, (String, String)> sundaysPostEpiphaniam = {
+      "Dominica I Post Epiphaniam": (
+        "First Sunday after the Epiphany",
+        "1st_Sunday_after_Epiphany"
+      ),
       "Dominica II Post Epiphaniam": (
         "Second Sunday after the Epiphany",
         "2nd_Sunday_after_Epiphany"
@@ -506,33 +517,29 @@ class Calendar {
   }
 
   void addFirstFridays() {
-    Feast SCJC = Feast(
-        "Sacratissimi Cordis Jesu Christi",
-        "Sacred Heart of Jesus",
-        FeastClass.thirdClass,
-        FeastColor.white,
-        ""); //TODO: add readings
-    addCyclicFeast(SCJC, DateTime.friday);
+    Feast fSCJC = Feast("Sacratissimi Cordis Jesu Christi",
+        "Sacred Heart of Jesus", FeastClass.thirdClass, FeastColor.white, "");
+    addCyclicFeast(fSCJC, DateTime.friday);
   }
 
   void addFirstThursdays() {
-    Feast JCSAC = Feast(
+    Feast fJCSAC = Feast(
         "Jesu Christi Summi et Aeterni Sacerdoti",
         "Jesus Christ the High Priest",
         FeastClass.thirdClass,
         FeastColor.white,
         "Jesus_Christ_Supreme_and_Eternal_Priest");
-    addCyclicFeast(JCSAC, DateTime.thursday);
+    addCyclicFeast(fJCSAC, DateTime.thursday);
   }
 
   void addFirstSaturdays() {
-    Feast ICBMV = Feast(
+    Feast fICBMV = Feast(
         "Immaculati Cordis Beatae Mariae Virginis",
         "Immaculate Heart of Mary",
         FeastClass.thirdClass,
         FeastColor.white,
-        ""); //TODO: add readings
-    addCyclicFeast(ICBMV, DateTime.saturday);
+        "");
+    addCyclicFeast(fICBMV, DateTime.saturday);
   }
 
   void addCyclicFeast(Feast data, int dayOfTheWeek) {

@@ -40,7 +40,7 @@ class Day {
     isSeptuagesima = date.compareTo(easter) < 0 &&
         date.compareTo(easter.subtract(const Duration(days: 63))) > 0;
     isQuadragesima = date.compareTo(easter) < 0 &&
-        date.compareTo(easter.subtract(const Duration(days: 46))) > 0;
+        date.compareTo(easter.subtract(const Duration(days: 42))) > 0;
     isHolyWeek = date.compareTo(easter) < 0 &&
         date.compareTo(easter.subtract(const Duration(days: 7))) > 0;
     isPaschalTime = date.compareTo(easter) > 0 &&
@@ -109,33 +109,223 @@ class Day {
         )
       };
     }
-    return {getDateFormat(): finalFeastPolish(formatFeastData())};
+    return {getDateFormat(): finalFormat()};
   }
 
-  FeastWithCommemorationsData finalFeastPolish(
-      FeastWithCommemorationsData feastData) {
-    Feast mainFeast = Feast.fromFeastDataWithCommemorations(feastData);
+  FeastWithCommemorationsData finalFormat() {
+    if (feasts.isEmpty) {
+      throw "Empty feast ${date.day}";
+    }
+    if (feasts.length == 1 &&
+        isFeastDay() &&
+        !isFeriaVotiveMassOrUSProper(feasts.first.latinName)) {
+      FeastData feast = feasts.first.formatFeast();
+      return makeFeastWithCommemorations(feast, [], []);
+    }
 
+    if (containsFeastOfClass(FeastClass.firstClass)) {
+      return getIClassFeastDataWithCommemorations();
+    }
+
+    if (containsFeastOfTheLord()) {
+      return makeFeastWithCommemorations(
+          getFeastOfTheLord(), getFeastsOfClass(FeastClass.secondClass), []);
+    }
+    if (isSunday()) {
+      return getSundayFeastDataWithCommemorations();
+    }
+
+    if (containsFeastOfClass(FeastClass.secondClass) &&
+        (getFeastsOfClass(FeastClass.secondClass).length > 1 ||
+            !containsFeast("Rogationibus"))) {
+      print(date);
+      for (var element in feasts) {
+        print(element.englishName);
+      }
+      return getIIClassFeastDataWithCommemorations();
+    }
+
+    if (containsFeastOfClass(FeastClass.thirdClass)) {
+      return getIIIClassFeastDataWithCommemorations();
+    }
+
+    if (containsFeastOfClass(FeastClass.fourthClass)) {
+      return getIVClassFeastDataWithCommemorations();
+    }
+
+    return makeFeastWithCommemorations(
+        Feast("Feria", "Feria", FeastClass.fourthClass, FeastColor.green, "")
+            .formatFeast(),
+        [],
+        []);
+  }
+
+  Feast feastFromFeastData(FeastData feast) {
+    return Feast(
+        feast.latinName,
+        feast.englishName,
+        strToFeastClass(feast.feastClass),
+        strToFeastColor(feast.color),
+        feast.readingID);
+  }
+
+  FeastWithCommemorationsData getIVClassFeastDataWithCommemorations() {
+    Feast f = feasts.firstWhere(
+        (element) => element.englishName.contains("Feria"),
+        orElse: () => Feast(
+            "Feria", "Feria", FeastClass.fourthClass, FeastColor.green, ""));
+
+    FeastData feast = f.formatFeast();
+
+    List<FeastData> alts =
+        getFeastsOfClassExceptOne(FeastClass.fourthClass, f.latinName);
+    if (containsFeast("Rogationibus")) {
+      alts.addAll([
+        feasts
+            .firstWhere((element) => element.englishName.contains("Rogation"))
+            .formatFeast()
+      ]);
+    }
+    return makeFeastWithCommemorations(feast, [], alts);
+  }
+
+  FeastWithCommemorationsData getIIIClassFeastDataWithCommemorations() {
     List<FeastData> comms = [];
     List<FeastData> alts = [];
-    if (mainFeast.englishName.contains("Feria of Lent") ||
-        mainFeast.englishName.contains("Feira of Advent") ||
-        (mainFeast.feastClass == FeastClass.secondClass &&
-            isFeastOfTheLord(mainFeast))) {
+    FeastData feast;
+    var feria = feasts
+        .where((element) => element.latinName.contains("Feria Quadragesimae"));
+    if (feria.isNotEmpty) {
+      feast = feria.first.formatFeast();
+      alts = [];
+      comms = getFeastsOfClassExceptOne(FeastClass.thirdClass, feast.latinName);
+      comms.addAll(getFeastsOfClass(FeastClass.fourthClass));
+      if (containsFeast("Rogationibus")) {
+        alts.addAll([
+          feasts
+              .firstWhere((element) => element.englishName.contains("Rogation"))
+              .formatFeast()
+        ]);
+      }
+      return makeFeastWithCommemorations(feast, comms, alts);
+    } else {
+      feast = feasts
+          .firstWhere((element) => element.feastClass == FeastClass.thirdClass)
+          .formatFeast();
+      alts = getFeastsOfClassExceptOne(FeastClass.thirdClass, feast.latinName);
+    }
+    if (isFeriaVotiveMassOrUSProper(feast.latinName) &&
+        (alts.isEmpty ||
+            alts.every((element) =>
+                isFeriaVotiveMassOrUSProper(element.latinName) ||
+                element.feastClass == FeastClass.fourthClass.feastName))) {
+      var ff = getFeastsOfClass(FeastClass.fourthClass)
+          .where((element) =>
+              !isFeriaVotiveMassOrUSProper(element.latinName) ||
+              element.latinName.startsWith("Sancta Maria Sabbato"))
+          .toList();
+      if (!ff.any((e) => e.englishName.contains("Christmastide"))) {
+        ff.add(Feast(
+                "Feria", "Feria", FeastClass.fourthClass, FeastColor.green, "")
+            .formatFeast());
+      }
+      alts.addAll(ff);
+      comms = [];
+    } else {
+      comms = getFeastsOfClass(FeastClass.fourthClass)
+          .where((element) =>
+              !isFeriaVotiveMassOrUSProper(element.latinName) &&
+              !isProAliquibusLocis(element.latinName))
+          .toList();
+    }
+    comms.removeWhere(
+        (element) => element.englishName.contains("Christmastide"));
+
+    if (containsFeast("Rogationibus")) {
+      alts.addAll([
+        feasts
+            .firstWhere((element) => element.englishName.contains("Rogation"))
+            .formatFeast()
+      ]);
+    }
+    return makeFeastWithCommemorations(feast, comms, alts);
+  }
+
+  FeastWithCommemorationsData getIIClassFeastDataWithCommemorations() {
+    List<FeastData> comms = [];
+    List<FeastData> alts = [];
+    FeastData feast;
+    var emberDay =
+        feasts.where((element) => element.latinName.contains("Quattuor Temp"));
+    if (emberDay.isNotEmpty) {
+      feast = emberDay.first.formatFeast();
       alts = [];
     } else {
-      for (var c in feastData.alternatives) {
-        if (!alts.any((e) => e.latinName == c.latinName)) {
-          alts.add(c);
-        }
-      }
-      for (var c in feastData.commemorations) {
-        if (!comms.any((e) => e.latinName == c.latinName)) {
-          comms.add(c);
-        }
+      feast = feasts
+          .firstWhere((element) => element.feastClass == FeastClass.secondClass)
+          .formatFeast();
+      alts = getFeastsOfClassExceptOne(FeastClass.secondClass, feast.latinName);
+    }
+
+    comms = getFeastsOfClass(FeastClass.thirdClass);
+    comms.addAll(getFeastsOfClass(FeastClass.fourthClass));
+    comms.removeWhere(
+        (element) => element.englishName.contains("Christmastide"));
+    return makeFeastWithCommemorations(feast, comms, alts);
+  }
+
+  FeastWithCommemorationsData getSundayFeastDataWithCommemorations() {
+    List<FeastData> comms = [];
+    List<FeastData> alts = [];
+    FeastData feast = getSunday();
+    comms = getFeastsOfClassExceptOne(FeastClass.secondClass, "Dominica")
+        .where((element) => !element.englishName.startsWith("(USA)External"))
+        .toList();
+    comms.removeWhere(
+        (element) => element.englishName.contains("Christmastide"));
+    if (containsFeast("(USA)Externa")) {
+      alts = [
+        feasts
+            .where((element) => element.englishName.startsWith("(USA)External"))
+            .first
+            .formatFeast()
+      ];
+    }
+    return makeFeastWithCommemorations(feast, comms, alts);
+  }
+
+  FeastWithCommemorationsData getIClassFeastDataWithCommemorations() {
+    List<FeastData> comms = [];
+    var feast = getIClassFeast().formatFeast();
+    if (isSunday() && !isFeastOfTheLord(feastFromFeastData(feast))) {
+      FeastData f = getSunday();
+      if (f.latinName != feast.latinName) {
+        comms.add(f);
       }
     }
-    return makeFeastWithCommemorations(mainFeast.formatFeast(), comms, alts);
+    if (containsFeast("Feria Adventus") && !isSundayOfAdvent()) {
+      comms.add((
+        color: FeastColor.purple.color,
+        englishName: "Feria of Advent",
+        latinName: "Feria Adventus",
+        feastClass: FeastClass.thirdClass.name,
+        readingID: ""
+      ));
+    }
+    if (containsFeast("Feria Quadragesimae") &&
+        !isSundayOfLent() &&
+        !containsFeast("post Cineres")) {
+      comms.add((
+        color: FeastColor.purple.color,
+        englishName: "Feria of Lent",
+        latinName: "Feria Quadragesimae",
+        feastClass: FeastClass.thirdClass.name,
+        readingID: ""
+      ));
+    }
+    comms.removeWhere(
+        (element) => element.englishName.contains("Christmastide"));
+    return makeFeastWithCommemorations(feast, comms, []);
   }
 
   bool isFeastOfTheLord(Feast feast) {
@@ -176,130 +366,6 @@ class Day {
     return feasts
         .firstWhere((element) => element.latinName.contains("Dominica"))
         .formatFeast();
-  }
-
-  FeastWithCommemorationsData formatFeastData() {
-    if (feasts.length == 1 &&
-        isFeastDay() &&
-        !isFeriaVotiveMassOrUSProper(feasts.first.latinName)) {
-      FeastData feast = feasts.first.formatFeast();
-      return makeFeastWithCommemorations(feast, [], []);
-    }
-
-    List<FeastData> comms = [];
-    List<FeastData> alts = [];
-    if (containsFeastOfClass(FeastClass.firstClass)) {
-      var feast = getIClassFeast().formatFeast();
-      if (isSunday() &&
-          !isFeastOfTheLord(Feast(
-              feast.latinName,
-              feast.englishName,
-              strToFeastClass(feast.feastClass),
-              strToFeastColor(feast.color),
-              feast.readingID))) {
-        FeastData f = getSunday();
-        if (f.latinName != feast.latinName) {
-          comms.add(f);
-        }
-      }
-      if (containsFeast("Feria Adventus") && !isSundayOfAdvent()) {
-        comms.add((
-          color: FeastColor.purple.color,
-          englishName: "Feria of Advent",
-          latinName: "Feria Adventus",
-          feastClass: FeastClass.thirdClass.name,
-          readingID: ""
-        ));
-      }
-      if (containsFeast("Feria Quadragesimae") &&
-          !isSundayOfLent() &&
-          !containsFeast("post Cineres")) {
-        comms.add((
-          color: FeastColor.purple.color,
-          englishName: "Feria of Lent",
-          latinName: "Feria Quadragesimae",
-          feastClass: FeastClass.thirdClass.name,
-          readingID: ""
-        ));
-      }
-      return makeFeastWithCommemorations(feast, comms, []);
-    }
-    if (containsFeastOfTheLord()) {
-      return makeFeastWithCommemorations(
-          getFeastOfTheLord(), getFeastsOfClass(FeastClass.secondClass), []);
-    }
-    if (isSunday()) {
-      FeastData feast = getSunday();
-      comms = getFeastsOfClassExceptOne(FeastClass.secondClass, "Dominica")
-          .where((element) => !element.englishName.startsWith("(USA)External"))
-          .toList();
-      if (containsFeast("(USA)Externa")) {
-        alts = [
-          feasts
-              .where(
-                  (element) => element.englishName.startsWith("(USA)External"))
-              .first
-              .formatFeast()
-        ];
-      }
-      return makeFeastWithCommemorations(feast, comms, alts);
-    }
-
-    if (containsFeastOfClass(FeastClass.secondClass)) {
-      FeastData feast = feasts
-          .firstWhere((element) => element.feastClass == FeastClass.secondClass)
-          .formatFeast();
-      alts = getFeastsOfClassExceptOne(FeastClass.secondClass, feast.latinName);
-      comms = getFeastsOfClass(FeastClass.thirdClass);
-      return makeFeastWithCommemorations(feast, comms, alts);
-    }
-
-    if (containsFeastOfClass(FeastClass.thirdClass)) {
-      FeastData feast = feasts
-          .firstWhere((element) => element.feastClass == FeastClass.thirdClass)
-          .formatFeast();
-
-      alts = getFeastsOfClassExceptOne(FeastClass.thirdClass, feast.latinName);
-
-      if (isFeriaVotiveMassOrUSProper(feast.latinName) &&
-          (alts.isEmpty ||
-              alts.every((element) =>
-                  isFeriaVotiveMassOrUSProper(element.latinName) ||
-                  element.feastClass == FeastClass.fourthClass.feastName))) {
-        var ff = getFeastsOfClass(FeastClass.fourthClass)
-            .where((element) =>
-                !isFeriaVotiveMassOrUSProper(element.latinName) ||
-                element.latinName.startsWith("Sancta Maria Sabbato"))
-            .toList();
-        ff.add(Feast(
-                "Feria", "Feria", FeastClass.fourthClass, FeastColor.green, "")
-            .formatFeast());
-        alts.addAll(ff);
-        comms = [];
-      } else {
-        comms = getFeastsOfClass(FeastClass.fourthClass)
-            .where((element) =>
-                !isFeriaVotiveMassOrUSProper(element.latinName) &&
-                !isProAliquibusLocis(element.latinName))
-            .toList();
-      }
-      return makeFeastWithCommemorations(feast, comms, alts);
-    }
-    if (isFeria()) {
-      Feast f = feasts.firstWhere(
-          (element) => element.englishName.contains("Feria"),
-          orElse: () => Feast(
-              "Feria", "Feria", FeastClass.fourthClass, FeastColor.green, ""));
-
-      FeastData feast = f.formatFeast();
-      return makeFeastWithCommemorations(feast, [],
-          getFeastsOfClassExceptOne(FeastClass.fourthClass, f.latinName));
-    }
-    return makeFeastWithCommemorations(
-        Feast("Feria", "Feria", FeastClass.fourthClass, FeastColor.green, "")
-            .formatFeast(),
-        [],
-        []);
   }
 
   List<FeastData> getFeastsOfClass(FeastClass feastClass) {
