@@ -126,7 +126,7 @@ bool isFeriaVotiveMassOrUSProper(String name) {
       name.startsWith("Sacratissimi Cordis") ||
       name.startsWith("Sancta Maria Sabbato") ||
       name.startsWith("(USA)") ||
-      name.contains("Januarii") ||
+      name.endsWith("Januarii") ||
       name.contains("Septuagesimae") ||
       name.contains("Rogationibus") ||
       isMassForDead(name);

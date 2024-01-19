@@ -128,8 +128,11 @@ class Day {
     }
 
     if (containsFeastOfTheLord()) {
-      return makeFeastWithCommemorations(
-          getFeastOfTheLord(), getFeastsOfClass(FeastClass.secondClass), []);
+      List<FeastData> comms = getFeastsOfClass(FeastClass.thirdClass);
+      comms.addAll(getFeastsOfClass(FeastClass.fourthClass));
+      comms.addAll(getFeastsOfClassExceptOne(
+          FeastClass.secondClass, getFeastOfTheLord().latinName));
+      return makeFeastWithCommemorations(getFeastOfTheLord(), comms, []);
     }
     if (isSunday()) {
       return getSundayFeastDataWithCommemorations();
@@ -138,10 +141,6 @@ class Day {
     if (containsFeastOfClass(FeastClass.secondClass) &&
         (getFeastsOfClass(FeastClass.secondClass).length > 1 ||
             !containsFeast("Rogationibus"))) {
-      print(date);
-      for (var element in feasts) {
-        print(element.englishName);
-      }
       return getIIClassFeastDataWithCommemorations();
     }
 
@@ -199,7 +198,7 @@ class Day {
       feast = feria.first.formatFeast();
       alts = [];
       comms = getFeastsOfClassExceptOne(FeastClass.thirdClass, feast.latinName);
-      comms.addAll(getFeastsOfClass(FeastClass.fourthClass));
+      comms.addAll(getFeastsOfClassExceptOne(FeastClass.fourthClass, "Feria"));
       if (containsFeast("Rogationibus")) {
         alts.addAll([
           feasts
@@ -278,7 +277,7 @@ class Day {
     List<FeastData> comms = [];
     List<FeastData> alts = [];
     FeastData feast = getSunday();
-    comms = getFeastsOfClassExceptOne(FeastClass.secondClass, "Dominica")
+    comms = getFeastsOfClassExceptOne(FeastClass.secondClass, feast.latinName)
         .where((element) => !element.englishName.startsWith("(USA)External"))
         .toList();
     comms.removeWhere(
@@ -364,7 +363,9 @@ class Day {
 
   FeastData getSunday() {
     return feasts
-        .firstWhere((element) => element.latinName.contains("Dominica"))
+        .firstWhere((element) =>
+            element.latinName.contains("Dominica") ||
+            element.latinName.endsWith("Nominis Jesu"))
         .formatFeast();
   }
 

@@ -37,6 +37,10 @@ class Calendar {
 
   Day getDayIfFeastTransfered(Day originalDay, Feast feast) {
     //Trasfer of the Feast in case two First Class Feast occur on the same day
+    if (originalDay.date.weekday == DateTime.sunday &&
+        feast.latinName.contains("Dominica")) {
+      return originalDay;
+    }
     if (feast.feastClass != FeastClass.firstClass) {
       return originalDay;
     }

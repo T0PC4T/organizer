@@ -130,9 +130,13 @@ class CalendarScreenState extends State<CalendarScreen> {
                       changeMonth(-1);
                     },
                     icon: const Icon(Icons.arrow_back)),
-                Text(
-                  "${monthNames[month]} $year",
-                  style: const TextStyle(fontSize: 42),
+                Container(
+                  alignment: Alignment.center,
+                  width: 350,
+                  child: Text(
+                    "${monthNames[month]} $year",
+                    style: const TextStyle(fontSize: 42),
+                  ),
                 ),
                 IconButton(
                     onPressed: () {
