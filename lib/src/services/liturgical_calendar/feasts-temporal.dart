@@ -462,7 +462,7 @@ const temporalFeasts = [
   ),
   (
     latinName: "Dominica II Post Pentecosten",
-    englishName: "Second Sunday Post Pentecosten",
+    englishName: "Second after the Pentecost",
     daysFromEaster: "63",
     daysToEaster: "",
     feastClass: FeastClass.secondClass,
