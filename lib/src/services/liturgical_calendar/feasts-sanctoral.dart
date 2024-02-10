@@ -441,11 +441,11 @@ const List<
   ),
   (
     date: "02-12",
-    latinName: "Ss. Septem Fundatorum Ordinis Servorum B. M. V.",
+    latinName: "Ss. Septem Fundatorum Ordinis Servorum B. M. V. Confessorum",
     englishName:
         "Seven Holy Founders of the Servile Order of the BVM, Confessors",
     feastClass: FeastClass.thirdClass,
-    color: FeastColor.red,
+    color: FeastColor.white,
     readingID: ""
   ),
   (
